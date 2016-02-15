@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RegLoginViewController: UIViewController, ModalTransitionDelegate, GHWalkThroughViewDataSource {
+class RegLoginViewController: UIViewController, ModalTransitionDelegate {
 
     var toolBar: UIToolbar!
     var phoneNumberField: UITextField!
@@ -33,10 +33,7 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, GHWalkT
     }
     
     func setUpViews() {
-        let RMWalkThroughView = GHWalkThroughView(frame: self.view.bounds)
-         RMWalkThroughView.dataSource = self
-         RMWalkThroughView.walkThroughDirection = .Horizontal
-         RMWalkThroughView.showInView(self.view, animateDuration: 0.3)
+        
          toolBar = UIToolbar(frame: CGRectMake(0.0, self.view.bounds.size.height - 53.0, self.view.bounds.size.width, 112.0))
          let tbBG = UIImage(named: "tbBG")
           UIToolbar.appearance().setBackgroundImage(tbBG, forToolbarPosition: .Any, barMetrics: .Default)
@@ -91,27 +88,7 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, GHWalkT
         
     }
     
-    func numberOfPages() -> Int {
-        return 4
-    }
-    
-    func configurePage(cell: GHWalkThroughPageCell!, atIndex index: Int) {
-        cell.title = "郭寒"
-      //  cell.titleImage = UIImage(named: "Tech")
-        cell.desc = "一半是激素，一半是情怀。 -- Inverse"
-    }
-    
-    func bgImageforPage(index: Int) -> UIImage! {
-        if index == 0 {
-            return UIImage(named: "GuoHan")
-        }
-        if index == 1 {
-            return UIImage(named: "Tech")
-        }
-        
-        return UIImage(named: "630")
-    }
-    
+       
     func inputCaptcha() {
         
        BmobSMS.requestSMSCodeInBackgroundWithPhoneNumber(phoneNumberField.text, andTemplate: nil) { (number, error) -> Void in

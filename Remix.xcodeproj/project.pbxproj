@@ -125,6 +125,7 @@
 		18BCA03D1C6F827900DF3EC7 /* LabelFilteredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BCA03C1C6F827900DF3EC7 /* LabelFilteredViewController.swift */; };
 		18C9A1E71C67B99200A80A22 /* TTUITableViewZoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C9A1E61C67B99200A80A22 /* TTUITableViewZoomController.m */; };
 		18C9A1F71C687DA200A80A22 /* UIImageView+BetterFace.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C9A1F61C687DA200A80A22 /* UIImageView+BetterFace.m */; };
+		18D731B41C719B1800DECA1E /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D731B31C719B1800DECA1E /* GuideViewController.swift */; };
 		C65AC89D9691BD7F666EED10 /* Pods_Remix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B1D0C0C5F1570ADFFD72F7 /* Pods_Remix.framework */; };
 /* End PBXBuildFile section */
 
@@ -317,6 +318,7 @@
 		18C9A1F31C687CB900A80A22 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		18C9A1F51C687DA200A80A22 /* UIImageView+BetterFace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+BetterFace.h"; sourceTree = "<group>"; };
 		18C9A1F61C687DA200A80A22 /* UIImageView+BetterFace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+BetterFace.m"; sourceTree = "<group>"; };
+		18D731B31C719B1800DECA1E /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		29B1D0C0C5F1570ADFFD72F7 /* Pods_Remix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Remix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		935D89E2C8FE64DFD0F2D2DC /* Pods-Remix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Remix.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Remix/Pods-Remix.debug.xcconfig"; sourceTree = "<group>"; };
 		E7316228DE2D22A22A1955AE /* Pods-Remix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Remix.release.xcconfig"; path = "Pods/Target Support Files/Pods-Remix/Pods-Remix.release.xcconfig"; sourceTree = "<group>"; };
@@ -533,6 +535,7 @@
 				189782511C63C7EF00458515 /* Main.storyboard */,
 				18BCA0351C6EE29F00DF3EC7 /* RMWebViewController.swift */,
 				1898CA4A1C6900B8009D3261 /* RegLoginViewController.swift */,
+				18D731B31C719B1800DECA1E /* GuideViewController.swift */,
 				18BCA03B1C6F822400DF3EC7 /* SearchResultVC */,
 				18BCA02B1C6E484900DF3EC7 /* LocationVC */,
 				1898CA411C68DFC3009D3261 /* GalleryVC */,
@@ -882,7 +885,12 @@
 				TargetAttributes = {
 					189782491C63C7EF00458515 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 6U43YN8M8A;
+						DevelopmentTeam = 8332JF295Y;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					1897825D1C63C7EF00458515 = {
 						CreatedOnToolsVersion = 7.2;
@@ -1130,6 +1138,7 @@
 				1898CA8C1C69B599009D3261 /* PopTipTransitionAnimation.swift in Sources */,
 				18BCA02F1C6E48D400DF3EC7 /* LocationFullCoverCell.swift in Sources */,
 				1898CA861C69B599009D3261 /* DefaultPushTransitionAnimation.swift in Sources */,
+				18D731B41C719B1800DECA1E /* GuideViewController.swift in Sources */,
 				181F2B311C6A2D8D00FC237D /* RxWebViewNavigationViewController.m in Sources */,
 				1857BDFA1C65B78700A51248 /* CTFilteredViewController.swift in Sources */,
 				1898CA801C69B599009D3261 /* TRNavgationTransitionDelegate.swift in Sources */,
@@ -1289,6 +1298,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Remix",
@@ -1303,8 +1313,9 @@
 					"$(PROJECT_DIR)/UMSocial_Sdk_5.0",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.fongtinyik.Remix;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fongtinyik.remix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Remix/Remix-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1317,6 +1328,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Remix",
@@ -1331,8 +1343,9 @@
 					"$(PROJECT_DIR)/UMSocial_Sdk_5.0",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.fongtinyik.Remix;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fongtinyik.remix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Remix/Remix-Bridging-Header.h";
 			};
 			name = Release;

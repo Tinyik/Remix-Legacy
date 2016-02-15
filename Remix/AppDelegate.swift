@@ -10,6 +10,7 @@ import UIKit
 
 @UIApplicationMain
 
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
@@ -24,14 +25,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Bmob.registerWithAppKey("08329e2e3a8d3cdde96bf91d7459e8ab")
         
         MobClick.startWithAppkey("56ba8fa2e0f55a1071000931", reportPolicy: BATCH, channelId: nil)
+        
         if BmobUser.getCurrentUser() == nil {
-            let storyboard = self.window?.rootViewController?.storyboard
-            let rootVC = storyboard?.instantiateViewControllerWithIdentifier("RegLoginVC") as! RegLoginViewController
-            self.window?.rootViewController = rootVC
-            self.window?.makeKeyAndVisible()
+            
+            let infoDictionary = NSBundle.mainBundle().infoDictionary
+            let currentAppVersion = infoDictionary!["CFBundleShortVersionString"] as! String
+            
+            
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            let appVersion = userDefaults.stringForKey("appVersion")
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            
+            if appVersion == nil || appVersion != currentAppVersion {
+                
+                userDefaults.setValue(currentAppVersion, forKey: "appVersion")
+                
+                let guideViewController = storyboard.instantiateViewControllerWithIdentifier("GuideViewController") as! GuideViewController
+                self.window?.rootViewController = guideViewController
+               
+            }else{
+               
+                let rootVC = storyboard.instantiateViewControllerWithIdentifier("RegLoginVC") as! RegLoginViewController
+                self.window?.rootViewController = rootVC
+                
+            }
+
+           self.window?.makeKeyAndVisible()
+            
+        }else{
             
         }
+        
+        
         return true
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        let currentInstallation = BmobInstallation.currentInstallation()
+        currentInstallation.setDeviceTokenFromData(deviceToken)
+        currentInstallation.saveInBackground()
     }
 
     func applicationWillResignActive(application: UIApplication) {

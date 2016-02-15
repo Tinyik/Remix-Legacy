@@ -10,6 +10,7 @@ import UIKit
 import SafariServices
 
 let themeColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
+var isHomepageFirstLaunching: Bool!
 
 class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelegate, UISearchBarDelegate {
     
@@ -28,6 +29,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     var currentUser = BmobUser.getCurrentUser()
     
 
+    func updateLaunchedTimes() {
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let appVersion = userDefaults.integerForKey("LaunchedTimes")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -523,6 +528,9 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         }
         
         if tableView == self.tableView {
+            if is == true {
+              askToEnableNotifications()
+            }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
             var query = BmobQuery(className: "Activity")
             let objectId = activities[indexPath.section][indexPath.row].objectId
@@ -538,8 +546,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
            let webView = RxWebViewController(url: NSURL(string: activities[indexPath.section][indexPath.row].objectForKey("URL") as! String)!)
             self.navigationController?.pushViewController(webView, animated: true)
         }
+            
+      
        
-    }
+        }
     }
     
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
@@ -548,6 +558,43 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         self.navigationController?.pushViewController(searchResultVC, animated: true)
         
         return false
+    }
+    
+    func askToEnableNotifications() {
+        if UIApplication.sharedApplication().enabledRemoteNotificationTypes() == .None {
+            
+        
+        let alert = UIAlertController(title: "推送设置", message: "Remix需要你允许推送消息才能及时传递魔都学生圈的最新消息。想要现在允许推送消息吗？(●'◡'●)ﾉ♥", preferredStyle: .Alert)
+        let buttonOK = UIAlertAction(title: "好的", style: .Cancel) { (action) -> Void in
+            self.promptToEnableNotifications()
+        }
+            let buttonCancel = UIAlertAction(title: "稍后在说", style: .Default){ (action) -> Void in
+                let instruction = UIAlertController(title: "如何开启消息通知", message: "好的！如果希望接受Remix的消息通知，请进入 设置->通知->Remix->允许通知。", preferredStyle: .Alert)
+                let ok = UIAlertAction(title: "好的", style: .Cancel, handler: nil)
+                instruction.addAction(ok)
+                self.presentViewController(instruction, animated: true, completion: nil)
+            }
+
+        alert.addAction(buttonOK)
+        alert.addAction(buttonCancel)
+        self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func promptToEnableNotifications() {
+        if Float(UIDevice.currentDevice().systemVersion) >= 8.0 {
+            let categories = UIMutableUserNotificationCategory()
+            categories.identifier = "com.fongtinyik.remix"
+            let notifSettings = UIUserNotificationSettings(forTypes: [UIUserNotificationType.Badge, UIUserNotificationType.Sound, UIUserNotificationType.Alert], categories: [categories] )
+            UIApplication.sharedApplication().registerUserNotificationSettings(notifSettings)
+            UIApplication.sharedApplication().registerForRemoteNotifications() }
+            
+        else{
+            
+            let remoteTypes: UIRemoteNotificationType = [.Badge, .Sound, .Alert]
+            UIApplication.sharedApplication().registerForRemoteNotificationTypes(remoteTypes)
+        }
+
     }
     
 }
