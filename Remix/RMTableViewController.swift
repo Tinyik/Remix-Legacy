@@ -528,9 +528,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         }
         
         if tableView == self.tableView {
-            if is == true {
-              askToEnableNotifications()
-            }
+            // FIXME: Determine whether to ask to enable notif
+//            if is == true {
+//              askToEnableNotifications()
+         //   }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
             var query = BmobQuery(className: "Activity")
             let objectId = activities[indexPath.section][indexPath.row].objectId
