@@ -34,20 +34,30 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate {
     
     func setUpViews() {
         
-         toolBar = UIToolbar(frame: CGRectMake(0.0, self.view.bounds.size.height - 53.0, self.view.bounds.size.width, 112.0))
+        let mainViewHeight = self.view.bounds.size.height
+        let mainViewWidth = self.view.bounds.size.width
+        
+         toolBar = UIToolbar(frame: CGRectMake(0.0, mainViewHeight - 53.0, mainViewWidth, 112.0))
          let tbBG = UIImage(named: "tbBG")
           UIToolbar.appearance().setBackgroundImage(tbBG, forToolbarPosition: .Any, barMetrics: .Default)
           
       
         toolBar.autoresizingMask = [.FlexibleTopMargin, .FlexibleWidth]
         self.view.addSubview(toolBar)
-        phoneNumberField = UITextField(frame: CGRectMake(10.0, 6.0, 297, 40.0))
+        
+        
+        let rightButtonWidth: CGFloat = 58
+        let phoneNumberFieldWidth: CGFloat = 297
+        
+        phoneNumberField = UITextField(frame: CGRectMake(10.0, 6.0, phoneNumberFieldWidth, 40.0))
         phoneNumberField.backgroundColor = UIColor(patternImage: UIImage(named: "PhoneBG")!)
         phoneNumberField.attributedPlaceholder = NSAttributedString(string: "输入手机号", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
         phoneNumberField.textAlignment = .Center
         phoneNumberField.textColor = .whiteColor()
         phoneNumberField.autoresizingMask = .FlexibleWidth
         toolBar.addSubview(phoneNumberField)
+        
+        
         captchaField = UITextField(frame: CGRectMake(10.0, 53.0, 178, 40.0))
         captchaField.backgroundColor = UIColor(patternImage: UIImage(named: "CodeBG")!)
         captchaField.attributedPlaceholder = NSAttributedString(string: "输入验证码", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
@@ -60,14 +70,18 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate {
         nextStepButton.autoresizingMask = .FlexibleLeftMargin
         nextStepButton.setTitle("下一步", forState: .Normal)
         nextStepButton.alpha = 0.6
-        nextStepButton.frame = CGRectMake(toolBar.bounds.size.width - 68.0, 6.0, 58.0, 29.0)
+        nextStepButton.frame = CGRectMake(toolBar.bounds.size.width - rightButtonWidth, 0, rightButtonWidth, 52)
         nextStepButton.addTarget(self, action: "inputCaptcha", forControlEvents: .TouchUpInside)
+//        nextStepButton.backgroundColor = UIColor.redColor()
         toolBar.addSubview(nextStepButton)
+        
+        
         let vericodeButton = UIButton(type: .System)
         vericodeButton.autoresizingMask = .FlexibleLeftMargin
         vericodeButton.setTitle("验证", forState: .Normal)
-        vericodeButton.frame = CGRectMake(toolBar.bounds.size.width - 68.0, 46.0, 58.0, 29.0)
+        vericodeButton.frame = CGRectMake(toolBar.bounds.size.width - rightButtonWidth, 53, rightButtonWidth, 42)
         vericodeButton.addTarget(self, action: "verifyCaptcha", forControlEvents: .TouchUpInside)
+//        vericodeButton.backgroundColor = UIColor.redColor()
         toolBar.addSubview(vericodeButton)
         
         
