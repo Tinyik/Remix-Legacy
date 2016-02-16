@@ -9,17 +9,14 @@
 import UIKit
 import SafariServices
 
-protocol LabelViewDelegate {
-    func filterQueryWithLabelName(name: String)
-    
-}
 
 class SearchResultViewController: UITableViewController, UIGestureRecognizerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, MGSwipeTableCellDelegate {
     
     var labelName = ""
-    var delegate: LabelViewDelegate!
+    var delegate: ActivityFilterDelegate!
     
     var labelImageURLs: [NSURL] = []
+    var labelImageURL: NSURL!
     var labelNames: [String] = []
     var activities: [BmobObject] = []
     var coverImgURLs: [NSURL] = []
@@ -321,8 +318,9 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         trendingLabelsCollectionView.deselectItemAtIndexPath(indexPath, animated: false)
         self.labelName = labelNames[indexPath.row]
+        self.labelImageURL = labelImageURLs[indexPath.row]
         collectionView.deselectItemAtIndexPath(indexPath, animated: true)
-        self.performSegueWithIdentifier("showLabelFilteredView", sender: nil)
+        self.performSegueWithIdentifier("showLabelFilteredVC", sender: nil)
         
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -354,17 +352,18 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
         fetchSearchResults()
     }
     
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        
-//        if segue.identifier == "showLabelFilteredView" {
-//            if let fVC = segue.destinationViewController as? LabelFilteredViewController {
-//                
-//                self.delegate = fVC
-//                self.delegate.filterQueryWithLabelName(labelName)
-//                
-//                
-//            }
-//        }
-//    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "showLabelFilteredVC" {
+            if let fVC = segue.destinationViewController as? LabelFilteredViewController {
+                
+                self.delegate = fVC
+                self.delegate.filterQueryWithCategoryOrLabelName(labelName)
+                self.delegate.setParallaxHeaderImage(labelImageURL)
+                
+                
+            }
+        }
+    }
 
 }

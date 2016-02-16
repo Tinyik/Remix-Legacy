@@ -8,15 +8,15 @@
 
 import UIKit
 
-protocol CategoryViewDelegate {
-    func filterQueryWithCategoryName(name: String)
+protocol ActivityFilterDelegate {
+    func filterQueryWithCategoryOrLabelName(name: String)
     func setParallaxHeaderImage(headerImageURL: NSURL)
 }
 
 class CategoryViewController: UITableViewController {
     
     var categoryName = ""
-    var delegate: CategoryViewDelegate!
+    var delegate: ActivityFilterDelegate!
     var filteredParallaxImageURL: NSURL!
     
 
@@ -172,7 +172,7 @@ class CategoryViewController: UITableViewController {
             if let fVC = segue.destinationViewController as? CTFilteredViewController {
                
                 self.delegate = fVC
-                self.delegate.filterQueryWithCategoryName(categoryName)
+                self.delegate.filterQueryWithCategoryOrLabelName(categoryName)
                 self.delegate.setParallaxHeaderImage(filteredParallaxImageURL)
 
             }

@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-class CTFilteredViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CategoryViewDelegate, UIGestureRecognizerDelegate, MGSwipeTableCellDelegate {
+class CTFilteredViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ActivityFilterDelegate, UIGestureRecognizerDelegate, MGSwipeTableCellDelegate {
   
     @IBOutlet weak var tableView: UITableView!
     
@@ -122,7 +122,7 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
     
     // Delegate Methods
     
-    func filterQueryWithCategoryName(name: String) {
+    func filterQueryWithCategoryOrLabelName(name: String) {
         filterName = name
     }
     
