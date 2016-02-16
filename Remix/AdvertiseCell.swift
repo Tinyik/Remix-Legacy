@@ -15,7 +15,8 @@ class AdvertiseCell: UITableViewCell {
     var adTargetURL: NSURL!
     
     override func awakeFromNib() {
-      
+      adImageView.contentMode = .ScaleAspectFill
+      adImageView.clipsToBounds = true
     }
 
 }
