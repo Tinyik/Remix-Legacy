@@ -1130,7 +1130,7 @@
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wHD-iT-wyt">
                                                     <rect key="frame" x="21" y="8" width="72" height="72"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="C264A776-37CF-42AA-A229-9DCF274CE12F" translatesAutoresizingMaskIntoConstraints="NO" id="LJd-Qz-k1t">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1CD10F09-44D4-472F-91B5-F84A19611C12" translatesAutoresizingMaskIntoConstraints="NO" id="LJd-Qz-k1t">
                                                             <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
                                                         </imageView>
                                                     </subviews>
@@ -1668,7 +1668,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="C264A776-37CF-42AA-A229-9DCF274CE12F" width="640" height="853">
+        <image name="1CD10F09-44D4-472F-91B5-F84A19611C12" width="640" height="853">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

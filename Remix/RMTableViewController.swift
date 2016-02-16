@@ -237,7 +237,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             return 150
         }
         if activities.count > indexPath.row && activities.count > indexPath.section {
-        if let isFeatured = activities[indexPath.section][indexPath.row].objectForKey("Featured") as? Bool  {
+        if let isFeatured = activities[indexPath.section][indexPath.row].objectForKey("isFeatured") as? Bool  {
             if isFeatured == true {
             return 375
             }
@@ -342,7 +342,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             })
             return cell
         }else {
-            if (activities[indexPath.section][indexPath.row].objectForKey("Featured") as! Bool) == true {
+            if (activities[indexPath.section][indexPath.row].objectForKey("isFeatured") as! Bool) == true {
                 
                 let cell = tableView.dequeueReusableCellWithIdentifier("fullCellReuseIdentifier", forIndexPath: indexPath) as! RMFullCoverCell
                 cell.delegate = self

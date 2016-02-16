@@ -272,7 +272,7 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
     
      func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if activities.count > indexPath.row && activities.count > indexPath.section {
-            if let isFeatured = activities[indexPath.section][indexPath.row].objectForKey("Featured") as? Bool  {
+            if let isFeatured = activities[indexPath.section][indexPath.row].objectForKey("isFeatured") as? Bool  {
                 if isFeatured == true {
                     return 375
                 }
@@ -290,7 +290,7 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
     }
     
      func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if (activities[indexPath.section][indexPath.row].objectForKey("Featured") as! Bool) == true {
+        if (activities[indexPath.section][indexPath.row].objectForKey("isFeatured") as! Bool) == true {
             let cell = tableView.dequeueReusableCellWithIdentifier("fullCellReuseIdentifier", forIndexPath: indexPath) as! RMFullCoverCell
             cell.delegate = self
             cell.titleLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Title") as! String

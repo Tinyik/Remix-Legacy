@@ -111,7 +111,7 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
         return activities.count
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if (activities[indexPath.row].objectForKey("Featured") as! Bool) == true {
+        if (activities[indexPath.row].objectForKey("isFeatured") as! Bool) == true {
             let cell = tableView.dequeueReusableCellWithIdentifier("fullCellReuseIdentifier", forIndexPath: indexPath) as! RMFullCoverCell
             cell.delegate = self
             cell.titleLabel.text = activities[indexPath.row].objectForKey("Title") as! String
@@ -269,7 +269,7 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if activities.count > indexPath.row  {
-            if let isFeatured = activities[indexPath.row].objectForKey("Featured") as? Bool  {
+            if let isFeatured = activities[indexPath.row].objectForKey("isFeatured") as? Bool  {
                 if isFeatured == true {
                     return 375
                 }
