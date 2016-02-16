@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -1188,32 +1189,60 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="158"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Tech" translatesAutoresizingMaskIntoConstraints="NO" id="knq-Ma-3Gk">
-                                    <rect key="frame" x="200" y="30" width="163" height="94"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LikedActivities" translatesAutoresizingMaskIntoConstraints="NO" id="zC6-ol-wsS">
+                                    <rect key="frame" x="10" y="30" width="172.5" height="94"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="94" id="ugd-K2-GwN"/>
+                                    </constraints>
                                 </imageView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LikedActivities" translatesAutoresizingMaskIntoConstraints="NO" id="zC6-ol-wsS">
-                                    <rect key="frame" x="10" y="30" width="163" height="94"/>
-                                </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="往期活动" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SmS-gw-dk9">
-                                    <rect key="frame" x="248" y="72" width="80" height="21"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="喜欢" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UN6-8x-fj2">
+                                    <rect key="frame" x="10" y="30" width="172.5" height="94"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="94" id="KII-ym-AGp"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="喜欢" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UN6-8x-fj2">
-                                    <rect key="frame" x="74" y="72" width="80" height="21"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tech" translatesAutoresizingMaskIntoConstraints="NO" id="knq-Ma-3Gk">
+                                    <rect key="frame" x="192" y="30" width="172.5" height="94"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="94" id="MUe-7t-sDG"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="往期活动" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SmS-gw-dk9">
+                                    <rect key="frame" x="187.5" y="30" width="177.5" height="94"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="94" id="GR2-4J-VCt"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="活动分类" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kiw-dd-vdU">
-                                    <rect key="frame" x="103" y="136" width="168" height="21"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="活动分类" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kiw-dd-vdU">
+                                    <rect key="frame" x="159" y="136" width="56" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" red="0.40924873740000001" green="0.40924873740000001" blue="0.40924873740000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="kiw-dd-vdU" firstAttribute="centerX" secondItem="Z6n-oD-M3a" secondAttribute="centerX" id="0gN-zg-vaL"/>
+                                <constraint firstAttribute="trailing" secondItem="knq-Ma-3Gk" secondAttribute="trailing" constant="10" id="1bC-69-lQX"/>
+                                <constraint firstAttribute="centerX" secondItem="zC6-ol-wsS" secondAttribute="trailing" constant="5" id="73c-dl-N4r"/>
+                                <constraint firstItem="SmS-gw-dk9" firstAttribute="leading" secondItem="Z6n-oD-M3a" secondAttribute="centerX" id="8Re-a7-f3H"/>
+                                <constraint firstItem="zC6-ol-wsS" firstAttribute="top" secondItem="Z6n-oD-M3a" secondAttribute="top" constant="30" id="BSR-9E-pzw"/>
+                                <constraint firstAttribute="bottom" secondItem="kiw-dd-vdU" secondAttribute="bottom" constant="5" id="FCY-oc-Acg"/>
+                                <constraint firstItem="knq-Ma-3Gk" firstAttribute="top" secondItem="Z6n-oD-M3a" secondAttribute="top" constant="30" id="PFe-OP-p77"/>
+                                <constraint firstAttribute="trailing" secondItem="SmS-gw-dk9" secondAttribute="trailing" constant="10" id="UHI-Px-Vrf"/>
+                                <constraint firstItem="UN6-8x-fj2" firstAttribute="leading" secondItem="Z6n-oD-M3a" secondAttribute="leading" constant="10" id="Xru-v8-tHQ"/>
+                                <constraint firstItem="SmS-gw-dk9" firstAttribute="top" secondItem="Z6n-oD-M3a" secondAttribute="top" constant="30" id="da3-pG-imE"/>
+                                <constraint firstItem="UN6-8x-fj2" firstAttribute="top" secondItem="Z6n-oD-M3a" secondAttribute="top" constant="30" id="fOx-B3-bxP"/>
+                                <constraint firstItem="zC6-ol-wsS" firstAttribute="leading" secondItem="Z6n-oD-M3a" secondAttribute="leading" constant="10" id="ihL-Pe-gIJ"/>
+                                <constraint firstItem="knq-Ma-3Gk" firstAttribute="leading" secondItem="Z6n-oD-M3a" secondAttribute="centerX" constant="5" id="nPK-Fl-D8b"/>
+                                <constraint firstAttribute="centerX" secondItem="UN6-8x-fj2" secondAttribute="trailing" constant="5" id="okB-0v-A7P"/>
+                            </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" rowHeight="138" id="PKW-wy-xL1" customClass="CTTableViewCell" customModule="Remix" customModuleProvider="target">
@@ -1223,16 +1252,24 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="137.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qPr-6Y-ZBb">
-                                            <rect key="frame" x="10" y="9" width="355" height="123.5"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qPr-6Y-ZBb">
+                                            <rect key="frame" x="10" y="5" width="355" height="127.5"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="科技" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZY-RO-GTl">
-                                            <rect key="frame" x="162" y="59" width="51" height="32"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="科技" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZY-RO-GTl">
+                                            <rect key="frame" x="164.5" y="55" width="46" height="27.5"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="qZY-RO-GTl" firstAttribute="centerX" secondItem="BfU-Eq-lbx" secondAttribute="centerX" id="H5c-FM-qPd"/>
+                                        <constraint firstAttribute="trailing" secondItem="qPr-6Y-ZBb" secondAttribute="trailing" constant="10" id="PaQ-ma-zwb"/>
+                                        <constraint firstItem="qPr-6Y-ZBb" firstAttribute="top" secondItem="BfU-Eq-lbx" secondAttribute="top" constant="5" id="gQZ-wZ-MHK"/>
+                                        <constraint firstAttribute="bottom" secondItem="qPr-6Y-ZBb" secondAttribute="bottom" constant="5" id="iX6-iq-9oB"/>
+                                        <constraint firstItem="qPr-6Y-ZBb" firstAttribute="leading" secondItem="BfU-Eq-lbx" secondAttribute="leading" constant="10" id="pTG-MC-8LM"/>
+                                        <constraint firstItem="qZY-RO-GTl" firstAttribute="centerY" secondItem="BfU-Eq-lbx" secondAttribute="centerY" id="yHI-BS-rut"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="coverImageView" destination="qPr-6Y-ZBb" id="xNK-ie-xP3"/>
@@ -1297,7 +1334,7 @@
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wHD-iT-wyt">
                                                     <rect key="frame" x="21" y="8" width="72" height="72"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1837E856-6175-4A76-B2BC-6CA5EFFF29EC" translatesAutoresizingMaskIntoConstraints="NO" id="LJd-Qz-k1t">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="A34E6C0B-FECD-40AA-B14B-DB36C3087627" translatesAutoresizingMaskIntoConstraints="NO" id="LJd-Qz-k1t">
                                                             <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
                                                         </imageView>
                                                     </subviews>
@@ -1999,7 +2036,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="1837E856-6175-4A76-B2BC-6CA5EFFF29EC" width="640" height="853">
+        <image name="A34E6C0B-FECD-40AA-B14B-DB36C3087627" width="640" height="853">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
