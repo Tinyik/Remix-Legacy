@@ -1255,16 +1255,24 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qPr-6Y-ZBb">
                                             <rect key="frame" x="10" y="5" width="355" height="127.5"/>
                                         </imageView>
+                                        <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lwZ-ab-Wl8">
+                                            <rect key="frame" x="10" y="5" width="355" height="127.5"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="科技" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZY-RO-GTl">
-                                            <rect key="frame" x="164.5" y="55" width="46" height="27.5"/>
+                                            <rect key="frame" x="164" y="55" width="46" height="27.5"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="lwZ-ab-Wl8" firstAttribute="leading" secondItem="BfU-Eq-lbx" secondAttribute="leading" constant="10" id="Ah1-sv-8te"/>
                                         <constraint firstItem="qZY-RO-GTl" firstAttribute="centerX" secondItem="BfU-Eq-lbx" secondAttribute="centerX" id="H5c-FM-qPd"/>
+                                        <constraint firstAttribute="bottom" secondItem="lwZ-ab-Wl8" secondAttribute="bottom" constant="5" id="MAV-MX-OUd"/>
+                                        <constraint firstItem="lwZ-ab-Wl8" firstAttribute="top" secondItem="BfU-Eq-lbx" secondAttribute="top" constant="5" id="PGt-aj-Dnu"/>
                                         <constraint firstAttribute="trailing" secondItem="qPr-6Y-ZBb" secondAttribute="trailing" constant="10" id="PaQ-ma-zwb"/>
+                                        <constraint firstAttribute="trailing" secondItem="lwZ-ab-Wl8" secondAttribute="trailing" constant="10" id="SR2-n9-1wq"/>
                                         <constraint firstItem="qPr-6Y-ZBb" firstAttribute="top" secondItem="BfU-Eq-lbx" secondAttribute="top" constant="5" id="gQZ-wZ-MHK"/>
                                         <constraint firstAttribute="bottom" secondItem="qPr-6Y-ZBb" secondAttribute="bottom" constant="5" id="iX6-iq-9oB"/>
                                         <constraint firstItem="qPr-6Y-ZBb" firstAttribute="leading" secondItem="BfU-Eq-lbx" secondAttribute="leading" constant="10" id="pTG-MC-8LM"/>
@@ -1273,6 +1281,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="coverImageView" destination="qPr-6Y-ZBb" id="xNK-ie-xP3"/>
+                                    <outlet property="imageMask" destination="lwZ-ab-Wl8" id="5iO-Ou-85N"/>
                                     <outlet property="titleLabel" destination="qZY-RO-GTl" id="Qby-SM-yBu"/>
                                 </connections>
                             </tableViewCell>
@@ -1334,7 +1343,7 @@
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wHD-iT-wyt">
                                                     <rect key="frame" x="21" y="8" width="72" height="72"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="A34E6C0B-FECD-40AA-B14B-DB36C3087627" translatesAutoresizingMaskIntoConstraints="NO" id="LJd-Qz-k1t">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ACD2DFA4-0CCC-4ED4-9360-8438A2D7BC2E" translatesAutoresizingMaskIntoConstraints="NO" id="LJd-Qz-k1t">
                                                             <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
                                                         </imageView>
                                                     </subviews>
@@ -2036,7 +2045,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="A34E6C0B-FECD-40AA-B14B-DB36C3087627" width="640" height="853">
+        <image name="ACD2DFA4-0CCC-4ED4-9360-8438A2D7BC2E" width="640" height="853">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
