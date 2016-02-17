@@ -1515,7 +1515,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wHD-iT-wyt">
                                                     <rect key="frame" x="21" y="8" width="72" height="72"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="E08E640F-5368-480C-A4FA-08D53897E345" translatesAutoresizingMaskIntoConstraints="NO" id="LJd-Qz-k1t">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="6956EFCC-F702-4DE8-B44F-8C013DE65973" translatesAutoresizingMaskIntoConstraints="NO" id="LJd-Qz-k1t">
                                                             <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
                                                         </imageView>
                                                     </subviews>
@@ -1650,7 +1650,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="139" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="D7c-Ig-t2o">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="139" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="D7c-Ig-t2o">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1773,6 +1773,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="D7c-Ig-t2o" secondAttribute="trailing" id="Par-g1-Cdz"/>
+                            <constraint firstItem="eQr-wo-cY3" firstAttribute="top" secondItem="D7c-Ig-t2o" secondAttribute="bottom" id="akx-mM-BMc"/>
+                            <constraint firstItem="D7c-Ig-t2o" firstAttribute="top" secondItem="Fsu-D4-BOF" secondAttribute="top" id="cn8-tl-Ntv"/>
+                            <constraint firstItem="D7c-Ig-t2o" firstAttribute="leading" secondItem="Fsu-D4-BOF" secondAttribute="leading" id="t1c-xO-2yj"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3bM-lt-4Og"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -2314,8 +2320,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Community" width="252" height="252"/>
-        <image name="E08E640F-5368-480C-A4FA-08D53897E345" width="640" height="853">
+        <image name="6956EFCC-F702-4DE8-B44F-8C013DE65973" width="640" height="853">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -29684,6 +29689,7 @@ DQAZDBwAGQwgABkMJwAZDC8AGQw8ABkMQQAZDEMAGQxFABkMSgAZDFIAGQxVABkMWgAZDGIAGQxlABkM
 dwAZDHoAGQx/AAAAAAAABAEAAAAAAAAAPgAAAAAAAAAAAAAAAAAZDIE
 </mutableData>
         </image>
+        <image name="Community" width="252" height="252"/>
         <image name="Fire" width="1729" height="1729"/>
         <image name="LikedActivities" width="892" height="548"/>
         <image name="Location" width="215" height="215"/>
