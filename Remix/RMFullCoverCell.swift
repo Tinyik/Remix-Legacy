@@ -39,11 +39,14 @@ class RMFullCoverCell: MGSwipeTableCell {
     override func awakeFromNib() {
         fullImageView.contentMode = .ScaleAspectFill
         fullImageView.clipsToBounds = true
-        var maskView = UIView(frame: fullImageView.frame)
-        maskView.backgroundColor = .blackColor()
-        maskView.alpha = 0.5
+        
+        // Using IB instead
+//        var maskView = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height))
+//        maskView.backgroundColor = .blackColor()
+//        maskView.alpha = 0.5
+//        fullImageView.addSubview(maskView)
+        
         orgLogo.layer.masksToBounds = true
         orgLogo.layer.cornerRadius = orgLogo.frame.size.height/2
-        fullImageView.addSubview(maskView)
     }
 }
