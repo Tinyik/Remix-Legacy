@@ -16,16 +16,14 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBOutlet weak var firstTableView: UITableView!
     
-    @IBOutlet weak var thirdTableView: UITableView!
     @IBOutlet weak var containerScrollView: UIScrollView!
     
-    @IBOutlet weak var secondTableView: UITableView!
     
     var tr_presentTransition: TRViewControllerTransitionDelegate?
     let currentUser = BmobUser.getCurrentUser()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+     
         self.navigationController?.navigationBar.translucent = false
         let closeButton = UIButton(frame: CGRectMake(0,0,27,27))
         closeButton.setImage(UIImage(named: "close"), forState: .Normal)
@@ -55,11 +53,9 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
 
         
         containerScrollView.userInteractionEnabled = true
-        containerScrollView.contentSize = CGSizeMake(UIScreen.mainScreen().bounds.width, 1870)
+        containerScrollView.contentSize = CGSizeMake(UIScreen.mainScreen().bounds.width, 1100)
         firstTableView.scrollEnabled = false
-        secondTableView.scrollEnabled = false
         firstTableView.separatorInset = UIEdgeInsetsZero
-        secondTableView.separatorInset = UIEdgeInsetsZero
       
     }
     
@@ -84,7 +80,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        if tableView == firstTableView {
+        if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("detailedIdentifier") as! DetailedSettingsCell
             if indexPath.row == 0 {
            
@@ -102,8 +98,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         }
     
-        if tableView == secondTableView {
-     let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier2") as! SettingsCell
+        if indexPath.section == 1 {
+     let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") as! SettingsCell
         switch indexPath.row {
         case 0: cell.label.text = "告诉朋友"
         case 1: cell.label.text = "反馈"
@@ -115,7 +111,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
     
-            let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier3") as! SettingsCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") as! SettingsCell
             switch indexPath.row {
             case 0: cell.label.text = "清除缓存"
             case 1: cell.label.text = "退出登录"
@@ -131,15 +127,30 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 65
     }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return nil
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 3
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == secondTableView {
+        if section == 1 {
             return 3
         }
        return 2
 }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        return 10
+    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if tableView == secondTableView {
+        if indexPath.section == 1 {
             switch indexPath.row {
             case 0: break
             case 1: if MFMailComposeViewController.canSendMail() {
@@ -167,7 +178,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             default: break
             }
         }
-        if tableView == thirdTableView {
+        if indexPath.section == 2 {
             switch indexPath.row {
             case 0: SDImageCache.sharedImageCache().clearDisk()
                     let alertController = UIAlertController(title: nil, message: "缓存清理成功", preferredStyle: .Alert)
@@ -183,6 +194,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             }
         }
     }
+    
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }

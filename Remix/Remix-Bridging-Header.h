@@ -17,3 +17,4 @@
 #import "UMSocial.h"
 #import "GHWalkThroughView.h"
 #import <MWPhotoBrowser/MWPhotoBrowser.h>
+#import "UMSocialWechatHandler.h"

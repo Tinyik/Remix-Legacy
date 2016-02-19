@@ -319,7 +319,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         return true
     }
     
-
+   
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -422,8 +422,19 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         if direction == .RightToLeft {
           
             let shareButton = MGSwipeButton(title: "Share", backgroundColor: UIColor(white: 0.95, alpha: 1), callback: { (sender) -> Bool in
+                let indexPath = self.tableView.indexPathForCell(cell)
+                let activity = self.activities[indexPath!.section][indexPath!.row]
+                 let coverImageURL = self.coverImgURLs[indexPath!.section][indexPath!.row]
+                let shareText = "Remix活动推荐: " + (activity.objectForKey("Title") as! String)
+               let manager = SDWebImageManager()
+                manager.downloadImageWithURL(coverImageURL, options: .RetryFailed, progress: nil, completed: { (coverImage, error, cache, finished, url) -> Void in
+                    if error == nil {
+                        let url = activity.objectForKey("URL") as! String
+                        let handler = UMSocialWechatHandler.setWXAppId("wx6e2c22b24588e0e1", appSecret: "e085edb726c5b92bf443f1e3da3f838e", url: url)
+                        UMSocialSnsService.presentSnsIconSheetView(self, appKey: "56ba8fa2e0f55a1071000931", shareText: shareText, shareImage: coverImage, shareToSnsNames: [UMShareToWechatSession,UMShareToWechatTimeline, UMShareToQQ, UMShareToQzone, UMShareToTwitter], delegate: nil)
+                    }
+                })
                 
-                UMSocialSnsService.presentSnsIconSheetView(self, appKey: "56ba8fa2e0f55a1071000931", shareText: "Testin", shareImage: UIImage(named: "Tech"), shareToSnsNames: [UMShareToWechatSession, UMShareToQQ, UMShareToQzone, UMShareToTwitter], delegate: nil)
                 return true
             })
             
