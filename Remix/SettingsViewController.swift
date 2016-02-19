@@ -37,6 +37,9 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         let visualEffectView = UIVisualEffectView(effect: blurEffect)
         visualEffectView.frame = blurredAvatarView.frame
         blurredAvatarView.addSubview(visualEffectView)
+        firstTableView.scrollEnabled = true
+        firstTableView.separatorInset = UIEdgeInsetsZero
+        
 //        let avatarURL = NSURL(string:(BmobUser.getCurrentUser().objectForKey("Avatar") as! BmobFile).url)
 //        let manager = SDWebImageManager()
 //        manager.downloadImageWithURL(avatarURL, options: SDWebImageOptions.RetryFailed, progress: nil) { (avatar, error, cacheType, finished, url) -> Void in
@@ -48,11 +51,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
 //            
 //            
 //        }
-    
 
-        
-        firstTableView.scrollEnabled = false
-        firstTableView.separatorInset = UIEdgeInsetsZero
       
     }
     
