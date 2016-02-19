@@ -16,7 +16,6 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBOutlet weak var firstTableView: UITableView!
     
-    @IBOutlet weak var containerScrollView: UIScrollView!
     
     
     var tr_presentTransition: TRViewControllerTransitionDelegate?
@@ -38,6 +37,9 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         let visualEffectView = UIVisualEffectView(effect: blurEffect)
         visualEffectView.frame = blurredAvatarView.frame
         blurredAvatarView.addSubview(visualEffectView)
+        firstTableView.scrollEnabled = true
+        firstTableView.separatorInset = UIEdgeInsetsZero
+        
 //        let avatarURL = NSURL(string:(BmobUser.getCurrentUser().objectForKey("Avatar") as! BmobFile).url)
 //        let manager = SDWebImageManager()
 //        manager.downloadImageWithURL(avatarURL, options: SDWebImageOptions.RetryFailed, progress: nil) { (avatar, error, cacheType, finished, url) -> Void in
@@ -49,13 +51,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
 //            
 //            
 //        }
-    
 
-        
-        containerScrollView.userInteractionEnabled = true
-        containerScrollView.contentSize = CGSizeMake(UIScreen.mainScreen().bounds.width, 1100)
-        firstTableView.scrollEnabled = false
-        firstTableView.separatorInset = UIEdgeInsetsZero
       
     }
     

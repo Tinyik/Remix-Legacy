@@ -18,6 +18,7 @@
 		1841F8781C7733A60046D57F /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F8721C7733A60046D57F /* libWeChatSDK.a */; };
 		1841F87A1C7739020046D57F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F8791C7739020046D57F /* libiconv.tbd */; };
 		1841F87C1C7739150046D57F /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F87B1C7739150046D57F /* libstdc++.tbd */; };
+		1841F87E1C774F890046D57F /* OrgIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F87D1C774F890046D57F /* OrgIntroViewController.swift */; };
 		184857141C63E5BC004E516A /* CTTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184857131C63E5BC004E516A /* CTTableViewCell.swift */; };
 		184857181C63EB26004E516A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 184857171C63EB26004E516A /* CoreLocation.framework */; };
 		1848571A1C63EB30004E516A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 184857191C63EB30004E516A /* Security.framework */; };
@@ -169,6 +170,7 @@
 		1841F8761C7733A60046D57F /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		1841F8791C7739020046D57F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		1841F87B1C7739150046D57F /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		1841F87D1C774F890046D57F /* OrgIntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgIntroViewController.swift; sourceTree = "<group>"; };
 		184857131C63E5BC004E516A /* CTTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTTableViewCell.swift; sourceTree = "<group>"; };
 		184857171C63EB26004E516A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		184857191C63EB30004E516A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -745,6 +747,7 @@
 				18A4438F1C64EEAC00FEB149 /* OrgCell.swift */,
 				18A443911C64F5BB00FEB149 /* OrgsViewController.swift */,
 				18B317C31C6B183000336A92 /* OrgFilteredViewController.swift */,
+				1841F87D1C774F890046D57F /* OrgIntroViewController.swift */,
 			);
 			name = Organizations;
 			sourceTree = "<group>";
@@ -1099,6 +1102,7 @@
 				185489A91C67485F00A8E5C1 /* SDWebImageDownloaderOperation.m in Sources */,
 				1898CA881C69B599009D3261 /* FadeTransitionAnimation.swift in Sources */,
 				1899E9BF1C66F75600ADC2AC /* RMFullCoverCell.swift in Sources */,
+				1841F87E1C774F890046D57F /* OrgIntroViewController.swift in Sources */,
 				1898CA891C69B599009D3261 /* IBanTangTransitionAnimation.swift in Sources */,
 				18C9A1F71C687DA200A80A22 /* UIImageView+BetterFace.m in Sources */,
 				185489B01C67485F00A8E5C1 /* UIImageView+HighlightedWebCache.m in Sources */,
