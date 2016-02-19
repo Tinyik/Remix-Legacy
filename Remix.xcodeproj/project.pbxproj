@@ -32,7 +32,6 @@
 		1848572C1C63EB93004E516A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1848572B1C63EB93004E516A /* AVFoundation.framework */; };
 		1848572E1C63EB99004E516A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1848572D1C63EB99004E516A /* MediaPlayer.framework */; };
 		184857301C63EC01004E516A /* BmobSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1848572F1C63EC01004E516A /* BmobSDK.framework */; };
-		184857341C645724004E516A /* RMActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184857331C645724004E516A /* RMActivity.swift */; };
 		1854897C1C67288200A8E5C1 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1854897B1C67288200A8E5C1 /* ImageIO.framework */; };
 		185489A31C67485F00A8E5C1 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 185489831C67485F00A8E5C1 /* MKAnnotationView+WebCache.m */; };
 		185489A41C67485F00A8E5C1 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 185489851C67485F00A8E5C1 /* NSData+ImageContentType.m */; };
@@ -184,7 +183,6 @@
 		1848572B1C63EB93004E516A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		1848572D1C63EB99004E516A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		1848572F1C63EC01004E516A /* BmobSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BmobSDK.framework; sourceTree = "<group>"; };
-		184857331C645724004E516A /* RMActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMActivity.swift; sourceTree = "<group>"; };
 		1854897B1C67288200A8E5C1 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		185489821C67485F00A8E5C1 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		185489831C67485F00A8E5C1 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
@@ -756,7 +754,6 @@
 			children = (
 				1897824D1C63C7EF00458515 /* AppDelegate.swift */,
 				189782871C63E0D600458515 /* RMNavigationController.swift */,
-				184857331C645724004E516A /* RMActivity.swift */,
 				189782561C63C7EF00458515 /* LaunchScreen.storyboard */,
 				189782591C63C7EF00458515 /* Info.plist */,
 			);
@@ -1141,7 +1138,6 @@
 				181F2B2E1C6A2D8D00FC237D /* NJKWebViewProgress.m in Sources */,
 				1898CA931C69B599009D3261 /* TransitionTreasury.swift in Sources */,
 				187AE32E1C65ECBB00B255FF /* SettingsViewController.swift in Sources */,
-				184857341C645724004E516A /* RMActivity.swift in Sources */,
 				1899E9BC1C663E3B00ADC2AC /* MGSwipeButton.m in Sources */,
 				1898CA811C69B599009D3261 /* UINavigationController+TRPushPop.swift in Sources */,
 				185489A81C67485F00A8E5C1 /* SDWebImageDownloader.m in Sources */,
