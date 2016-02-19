@@ -28,11 +28,16 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         super.viewDidLoad()
         
         fetchCloudData()
+        let moreInfo = UIButton(type: .InfoDark)
+        moreInfo.tintColor = .blackColor()
+        moreInfo.addTarget(self, action: "showOrgIntroView", forControlEvents: .TouchUpInside)
         let backButton = UIButton(frame: CGRectMake(0,0,30,30))
         backButton.setImage(UIImage(named: "back"), forState: .Normal)
         backButton.addTarget(self, action: "popCurrentVC", forControlEvents: .TouchUpInside)
         let backItem = UIBarButtonItem(customView: backButton)
+        let moreInfoItem = UIBarButtonItem(customView: moreInfo)
         self.navigationItem.leftBarButtonItem = backItem
+        self.navigationItem.rightBarButtonItem = moreInfoItem
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         setParallaxHeaderImage()
         self.navigationController?.navigationBar.translucent = false
@@ -422,8 +427,17 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         //        self.tableView.tableHeaderView = header
     }
     
+    func showOrgIntroView() {
+        self.performSegueWithIdentifier("showOrgIntro", sender: nil)
+    }
     
-    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showOrgIntro" {
+            if let introView = segue.destinationViewController as? OrgIntroViewController {
+                introView.orgName = self.orgName
+            }
+        }
+    }
     
     
 }

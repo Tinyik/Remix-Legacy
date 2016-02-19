@@ -16,7 +16,6 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBOutlet weak var firstTableView: UITableView!
     
-    @IBOutlet weak var containerScrollView: UIScrollView!
     
     
     var tr_presentTransition: TRViewControllerTransitionDelegate?
@@ -52,8 +51,6 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
 
         
-        containerScrollView.userInteractionEnabled = true
-        containerScrollView.contentSize = CGSizeMake(UIScreen.mainScreen().bounds.width, 1100)
         firstTableView.scrollEnabled = false
         firstTableView.separatorInset = UIEdgeInsetsZero
       
