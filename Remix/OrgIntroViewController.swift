@@ -10,6 +10,7 @@ import UIKit
 
 class OrgIntroViewController: UIViewController {
 
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var firstLabel: UILabel!
     @IBOutlet weak var firstTextView: UITextView!
@@ -21,6 +22,8 @@ class OrgIntroViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        scrollView.contentSize = CGSizeMake(375, 1500)
+        scrollView.userInteractionEnabled = true
         mainImageView.contentMode = .ScaleAspectFill
         mainImageView.clipsToBounds = true
         secondImageView.contentMode = .ScaleAspectFill
@@ -40,14 +43,21 @@ class OrgIntroViewController: UIViewController {
                 if let title1 = organization.objectForKey("IntroTitle1") as? String {
                     self.firstLabel.text = title1
                 }
-                if let title1 = organization.objectForKey("IntroTitle2") as? String {
-                    self.secondLabel.text = title1
+                if let title2 = organization.objectForKey("IntroTitle2") as? String {
+                    self.secondLabel.text = title2
+                    let attributedString = NSAttributedString(string: title2)
+                    let paragraphStyle = NSParagraphStyle()
+                    paragraphStyle.lineSpacing = 30
+                    let dic = [NSParagraphStyleAttributeName: paragraphStyle, ]
                 }
                 if let para1 = organization.objectForKey("IntroParagraph1") as? String {
                     self.firstTextView.text = para1
+                    
+                    
                 }
                 if let para2 = organization.objectForKey("IntroParagraph2") as? String {
-                    self.secondLabel.text = para2
+                    self.secondTextView.text = para2
+                   
                 }
             }
         }
