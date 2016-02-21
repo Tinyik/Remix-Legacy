@@ -27,6 +27,8 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
     @IBOutlet weak var trendingLabelsCollectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.separatorStyle = .None
+        self.tableView.showsVerticalScrollIndicator = false
         searchBar.searchBarStyle = .Minimal
         searchBar.delegate = self
         trendingLabelsCollectionView.delegate = self
@@ -105,6 +107,11 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        if activities.count != 0 {
+            self.tableView.separatorStyle = .SingleLine
+        }else{
+            self.tableView.separatorStyle = .None
+        }
         return activities.count
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

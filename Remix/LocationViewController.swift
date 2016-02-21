@@ -17,7 +17,7 @@ class LocationViewController: UITableViewController, UIGestureRecognizerDelegate
         
         override func viewDidLoad() {
             super.viewDidLoad()
-            print("loo")
+            setUpParallaxHeaderView()
             self.tableView.separatorStyle = .None
             let backButton = UIButton(frame: CGRectMake(0,0,30,30))
             backButton.setImage(UIImage(named: "back"), forState: .Normal)
@@ -58,7 +58,13 @@ class LocationViewController: UITableViewController, UIGestureRecognizerDelegate
             }
             
         }
+    
+    func setUpParallaxHeaderView() {
+        let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(UIImage(named: "LocationHeader"), forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, 175)) as! ParallaxHeaderView
+        self.tableView.tableHeaderView = headerView
+        headerView.headerTitleLabel.text = "好去处"
         
+    }
     
         func popCurrentVC() {
             self.navigationController?.popViewControllerAnimated(true)
@@ -123,7 +129,19 @@ class LocationViewController: UITableViewController, UIGestureRecognizerDelegate
             
             
         }
+    
+    override func viewDidAppear(animated: Bool) {
+        (self.tableView.tableHeaderView as! ParallaxHeaderView).refreshBlurViewForNewImage()
+        super.viewDidAppear(animated)
+    }
+    
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        let header: ParallaxHeaderView = tableView.tableHeaderView as! ParallaxHeaderView
+        header.layoutHeaderViewForScrollViewOffset(scrollView.contentOffset)
         
+       
+    }
+
         
     
 

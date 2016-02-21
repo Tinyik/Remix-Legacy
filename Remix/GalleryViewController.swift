@@ -31,11 +31,17 @@ class GalleryViewController: UITableViewController, UIGestureRecognizerDelegate 
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         self.navigationController?.navigationBar.translucent = false
         fetchCloudData()
+        setUpParallaxHeaderView()
             
           }
 
-
-    // MARK: - Table view data sourcey
+    func setUpParallaxHeaderView() {
+        let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(UIImage(named: "Gallery"), forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, 175)) as! ParallaxHeaderView
+        self.tableView.tableHeaderView = headerView
+        headerView.headerTitleLabel.text = "往期活动"
+        
+    }
+    // MARK: - Table view data source
     
     func fetchCloudData() {
         var query = BmobQuery(className: "Gallery")
@@ -170,6 +176,18 @@ class GalleryViewController: UITableViewController, UIGestureRecognizerDelegate 
                 
             }
             
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        (self.tableView.tableHeaderView as! ParallaxHeaderView).refreshBlurViewForNewImage()
+        super.viewDidAppear(animated)
+    }
+    
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        let header: ParallaxHeaderView = tableView.tableHeaderView as! ParallaxHeaderView
+        header.layoutHeaderViewForScrollViewOffset(scrollView.contentOffset)
+        
         
     }
     

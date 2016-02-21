@@ -1511,7 +1511,7 @@
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tech" translatesAutoresizingMaskIntoConstraints="NO" id="knq-Ma-3Gk">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gallery" translatesAutoresizingMaskIntoConstraints="NO" id="knq-Ma-3Gk">
                                     <rect key="frame" x="192" y="30" width="172.5" height="94"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="94" id="MUe-7t-sDG"/>
@@ -2753,6 +2753,7 @@
     <resources>
         <image name="Community" width="252" height="252"/>
         <image name="Fire" width="1729" height="1729"/>
+        <image name="Gallery" width="856" height="504"/>
         <image name="LikedActivities" width="892" height="548"/>
         <image name="Location" width="215" height="215"/>
         <image name="LoginBG" width="726" height="1298"/>

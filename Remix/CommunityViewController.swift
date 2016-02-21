@@ -11,13 +11,14 @@ import UIKit
 class CommunityViewController: CTFilteredViewController {
 
     
-    var likedHeaderImage = UIImage(named: "Tech")
+    var likedHeaderImage = UIImage(named: "CommunityHeader")
     
     
     override func setUpParallaxHeaderView() {
         let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(likedHeaderImage, forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, 175)) as! ParallaxHeaderView
         self.tableView.tableHeaderView = headerView
-        headerView.headerTitleLabel.text = "Community Recommended"
+        headerView.headerTitleLabel.text = "社区推荐"
+        headerView.headerTitleLabel.textColor = .grayColor()
     }
     
     override func fetchCloudData() {
