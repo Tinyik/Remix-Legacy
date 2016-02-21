@@ -322,6 +322,10 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
         return labelNames.count
     }
     
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        searchBar.resignFirstResponder()
+    }
+    
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
@@ -336,6 +340,7 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         trendingLabelsCollectionView.deselectItemAtIndexPath(indexPath, animated: false)
+        searchBar.resignFirstResponder()
         self.labelName = labelNames[indexPath.row]
         self.labelImageURL = labelImageURLs[indexPath.row]
         collectionView.deselectItemAtIndexPath(indexPath, animated: true)
@@ -344,7 +349,7 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        
+        searchBar.resignFirstResponder()
         if tableView == self.tableView {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             var query = BmobQuery(className: "Activity")

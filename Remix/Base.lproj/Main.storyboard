@@ -1700,6 +1700,42 @@
             </objects>
             <point key="canvasLocation" x="1966.5" y="342.5"/>
         </scene>
+        <!--Terms And Conditions View Controller-->
+        <scene sceneID="Xe1-N3-Uit">
+            <objects>
+                <viewController storyboardIdentifier="TermsVC" id="jkO-zi-nKN" customClass="TermsAndConditionsViewController" customModule="Remix" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0Lw-2h-Q38"/>
+                        <viewControllerLayoutGuide type="bottom" id="eAA-FZ-Rgf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7RW-gC-aiC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Terms and Conditions" translatesAutoresizingMaskIntoConstraints="NO" id="snp-EE-kbe">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="336"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.64437288851351349" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.16295770202020199" green="0.16295770202020199" blue="0.16295770202020199" alpha="0.59926625844594594" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="snp-EE-kbe" firstAttribute="top" secondItem="7RW-gC-aiC" secondAttribute="top" id="2mL-EN-D0X"/>
+                            <constraint firstAttribute="trailing" secondItem="snp-EE-kbe" secondAttribute="trailing" id="XkD-pS-NmX"/>
+                            <constraint firstItem="eAA-FZ-Rgf" firstAttribute="top" secondItem="snp-EE-kbe" secondAttribute="bottom" constant="264" id="qNH-tp-PoB"/>
+                            <constraint firstItem="snp-EE-kbe" firstAttribute="leading" secondItem="7RW-gC-aiC" secondAttribute="leading" id="uEd-ZP-XrS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="snp-EE-kbe" id="uau-hR-grh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XSF-3M-t74" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1257" y="98"/>
+        </scene>
         <!--Reg Login View Controller-->
         <scene sceneID="8oU-Mw-2it">
             <objects>
@@ -1729,17 +1765,56 @@
                                     <constraint firstAttribute="width" constant="196" id="tty-lE-8cE"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="一键登录/注册" backgroundImage="LoginButton">
+                                <state key="normal" title="登录/注册" backgroundImage="LoginButton">
                                     <color key="titleColor" red="0.89812184343434343" green="0.89812184343434343" blue="0.89812184343434343" alpha="0.64228779560810811" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="startInput" destination="JID-3R-AeH" eventType="touchUpInside" id="EQ4-dt-dap"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OUv-td-S8e">
+                                <rect key="frame" x="68" y="509" width="238" height="30"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="注册即代表你同意">
+                                            <attributes>
+                                                <color key="NSColor" red="0.34860255432028225" green="0.35401415796647612" blue="0.3779198232323232" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="13" name="PingFangSC-Regular"/>
+                                                <font key="NSOriginalFont" size="13" name="HelveticaNeue"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="Remix">
+                                            <attributes>
+                                                <color key="NSColor" red="0.34860255432028225" green="0.35401415796647612" blue="0.3779198232323232" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                                <font key="NSOriginalFont" size="13" name="HelveticaNeue"/>
+                                                <integer key="NSUnderline" value="1"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="用户协议">
+                                            <attributes>
+                                                <color key="NSColor" red="0.34860255432028225" green="0.35401415796647612" blue="0.3779198232323232" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="13" name="PingFangSC-Regular"/>
+                                                <font key="NSOriginalFont" size="13" name="PingFangSC-Regular"/>
+                                                <integer key="NSUnderline" value="1"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="showRemixConditions" destination="JID-3R-AeH" eventType="touchUpInside" id="x42-Px-2tj"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="sqK-pC-wxo" secondAttribute="trailing" id="L84-x2-SIM"/>
                             <constraint firstItem="sqK-pC-wxo" firstAttribute="leading" secondItem="mn2-9y-17U" secondAttribute="leading" id="L8f-OL-P4f"/>
+                            <constraint firstItem="sqK-pC-wxo" firstAttribute="leading" secondItem="OUv-td-S8e" secondAttribute="trailing" constant="-306" id="OQQ-yK-OMl"/>
+                            <constraint firstItem="OUv-td-S8e" firstAttribute="centerX" secondItem="00e-wd-Rqc" secondAttribute="centerX" id="PTq-da-u8o"/>
                             <constraint firstItem="MhI-KI-e1U" firstAttribute="centerX" secondItem="mn2-9y-17U" secondAttribute="centerX" id="XJv-f1-seu"/>
                             <constraint firstItem="MhI-KI-e1U" firstAttribute="top" secondItem="sbO-Ov-uQo" secondAttribute="bottom" constant="183" id="ae6-Zo-5uU"/>
+                            <constraint firstItem="OUv-td-S8e" firstAttribute="top" secondItem="sqK-pC-wxo" secondAttribute="bottom" constant="-158" id="dAD-Ru-Ywr"/>
                             <constraint firstItem="00e-wd-Rqc" firstAttribute="top" secondItem="MhI-KI-e1U" secondAttribute="bottom" constant="139" id="fHj-7H-MbV"/>
                             <constraint firstItem="2oP-Ga-4vH" firstAttribute="top" secondItem="sqK-pC-wxo" secondAttribute="bottom" id="gLL-qw-0y6"/>
                             <constraint firstItem="sqK-pC-wxo" firstAttribute="top" secondItem="mn2-9y-17U" secondAttribute="top" id="jBN-bD-Jui"/>

@@ -145,6 +145,16 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         return 10
     }
     
+  
+    
+    func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        if section == 2{
+            return "    Remix 1.0.1, by Tianyi Fang. \n    Visit fongtinyik.tumblr.com for more info."
+        }
+        
+        return nil
+    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if indexPath.section == 0 {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		180199541C79C14700A6C7E4 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180199531C79C14700A6C7E4 /* TrendingViewController.swift */; };
+		180199561C79E25F00A6C7E4 /* TermsAndConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180199551C79E25F00A6C7E4 /* TermsAndConditionsViewController.swift */; };
 		181F2B1F1C69DB8A00FC237D /* LikedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181F2B1E1C69DB8A00FC237D /* LikedViewController.swift */; };
 		181F2B2C1C6A2D8D00FC237D /* backItemImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 181F2B211C6A2D8D00FC237D /* backItemImage@2x.png */; };
 		181F2B2D1C6A2D8D00FC237D /* backItemImage_hl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 181F2B221C6A2D8D00FC237D /* backItemImage_hl@2x.png */; };
@@ -153,6 +154,7 @@
 
 /* Begin PBXFileReference section */
 		180199531C79C14700A6C7E4 /* TrendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingViewController.swift; sourceTree = "<group>"; };
+		180199551C79E25F00A6C7E4 /* TermsAndConditionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewController.swift; sourceTree = "<group>"; };
 		181F2B1E1C69DB8A00FC237D /* LikedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikedViewController.swift; sourceTree = "<group>"; };
 		181F2B211C6A2D8D00FC237D /* backItemImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backItemImage@2x.png"; sourceTree = "<group>"; };
 		181F2B221C6A2D8D00FC237D /* backItemImage_hl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backItemImage_hl@2x.png"; sourceTree = "<group>"; };
@@ -567,6 +569,7 @@
 				189782511C63C7EF00458515 /* Main.storyboard */,
 				18BCA0351C6EE29F00DF3EC7 /* RMWebViewController.swift */,
 				1898CA4A1C6900B8009D3261 /* RegLoginViewController.swift */,
+				180199551C79E25F00A6C7E4 /* TermsAndConditionsViewController.swift */,
 				180199531C79C14700A6C7E4 /* TrendingViewController.swift */,
 				18D731B31C719B1800DECA1E /* GuideViewController.swift */,
 				18BCA03B1C6F822400DF3EC7 /* SearchResultVC */,
@@ -1169,6 +1172,7 @@
 				185489A61C67485F00A8E5C1 /* SDWebImageCompat.m in Sources */,
 				18BCA0311C6E48ED00DF3EC7 /* LocationTableViewCell.swift in Sources */,
 				1898CA841C69B599009D3261 /* UITabBarController+TRTransition.swift in Sources */,
+				180199561C79E25F00A6C7E4 /* TermsAndConditionsViewController.swift in Sources */,
 				1897824E1C63C7EF00458515 /* AppDelegate.swift in Sources */,
 				181F2B301C6A2D8D00FC237D /* RxWebViewController.m in Sources */,
 				1898CA8C1C69B599009D3261 /* PopTipTransitionAnimation.swift in Sources */,

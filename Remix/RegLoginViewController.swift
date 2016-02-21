@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RegLoginViewController: UIViewController, ModalTransitionDelegate {
+class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextFieldDelegate {
 
     var toolBar: UIToolbar!
     var phoneNumberField: UITextField!
@@ -23,10 +23,15 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate {
     
     var  nextStepButton = UIButton(type: .System)
     
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()
-        
+        captchaField.delegate = self
+        phoneNumberField.delegate = self
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide", name: UIKeyboardWillHideNotification, object: nil)
        
         // Do any additional setup after loading the view.
@@ -50,6 +55,7 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate {
         let phoneNumberFieldWidth: CGFloat = 297
         
         phoneNumberField = UITextField(frame: CGRectMake(10.0, 6.0, phoneNumberFieldWidth, 40.0))
+        phoneNumberField.returnKeyType = .Send
         phoneNumberField.backgroundColor = UIColor(patternImage: UIImage(named: "PhoneBG")!)
         phoneNumberField.attributedPlaceholder = NSAttributedString(string: "输入手机号", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
         phoneNumberField.textAlignment = .Center
@@ -57,8 +63,8 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate {
         phoneNumberField.autoresizingMask = .FlexibleWidth
         toolBar.addSubview(phoneNumberField)
         
-        
         captchaField = UITextField(frame: CGRectMake(10.0, 53.0, 178, 40.0))
+        captchaField.returnKeyType = .Done
         captchaField.backgroundColor = UIColor(patternImage: UIImage(named: "CodeBG")!)
         captchaField.attributedPlaceholder = NSAttributedString(string: "输入验证码", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
         captchaField.textAlignment = .Center
@@ -69,19 +75,19 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate {
        
         nextStepButton.autoresizingMask = .FlexibleLeftMargin
         nextStepButton.setTitle("下一步", forState: .Normal)
+        nextStepButton.setTitleColor(.whiteColor(), forState: .Normal)
         nextStepButton.alpha = 0.6
         nextStepButton.frame = CGRectMake(toolBar.bounds.size.width - rightButtonWidth, 0, rightButtonWidth, 52)
         nextStepButton.addTarget(self, action: "inputCaptcha", forControlEvents: .TouchUpInside)
-//        nextStepButton.backgroundColor = UIColor.redColor()
         toolBar.addSubview(nextStepButton)
         
         
         let vericodeButton = UIButton(type: .System)
         vericodeButton.autoresizingMask = .FlexibleLeftMargin
-        vericodeButton.setTitle("验证", forState: .Normal)
+        vericodeButton.setTitle("完成", forState: .Normal)
+        vericodeButton.setTitleColor(.whiteColor(), forState: .Normal)
         vericodeButton.frame = CGRectMake(toolBar.bounds.size.width - rightButtonWidth, 53, rightButtonWidth, 42)
         vericodeButton.addTarget(self, action: "verifyCaptcha", forControlEvents: .TouchUpInside)
-//        vericodeButton.backgroundColor = UIColor.redColor()
         toolBar.addSubview(vericodeButton)
         
         
@@ -102,23 +108,38 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate {
         
     }
     
-       
+    @IBAction func startInput() {
+        phoneNumberField.becomeFirstResponder()
+    }
+    @IBAction func showRemixConditions() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let termsVC = storyBoard.instantiateViewControllerWithIdentifier("TermsVC")
+        self.tr_presentViewController(termsVC, method: TRPresentTransitionMethod.PopTip(visibleHeight: 400))
+    }
+    
     func inputCaptcha() {
-        
        BmobSMS.requestSMSCodeInBackgroundWithPhoneNumber(phoneNumberField.text, andTemplate: nil) { (number, error) -> Void in
-          print(number)
-        
+        if error == nil {
+            self.nextStepButton.userInteractionEnabled = false
+            self.phoneNumberField.resignFirstResponder()
+            self.captchaField.becomeFirstResponder()
+            self.timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateCountDown", userInfo: nil, repeats: true)
+            self.timer.fire()
+            if self.isCaptchaFieldPresenting == false {
+                self.isCaptchaFieldPresenting = true
+                UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 3, options: .CurveEaseInOut, animations: { () -> Void in
+                    self.toolBar.frame.origin.y -= 45
+                    }, completion: nil)
+            }
+
+        }else{
+            let alert = UIAlertController(title: nil, message: "诶？手机号格式好像有错误😣", preferredStyle: .Alert)
+            let okButton = UIAlertAction(title: "重试", style: .Cancel, handler: nil)
+            alert.addAction(okButton)
+            self.presentViewController(alert, animated: true, completion: nil)
+
         }
-        nextStepButton.userInteractionEnabled = false
-        phoneNumberField.resignFirstResponder()
-        captchaField.becomeFirstResponder()
-        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateCountDown", userInfo: nil, repeats: true)
-        timer.fire()
-        if isCaptchaFieldPresenting == false {
-            isCaptchaFieldPresenting = true
-            UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 3, options: .CurveEaseInOut, animations: { () -> Void in
-                self.toolBar.frame.origin.y -= 45
-                }, completion: nil)
+        
         }
         
     }
@@ -131,6 +152,7 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate {
             nextStepButton.setTitle("下一步", forState: .Normal)
             nextStepButton.userInteractionEnabled = true
             timer.invalidate()
+            countDown = 60
         }
     }
     
@@ -145,21 +167,33 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate {
                 self.tr_presentViewController(mainNaviController, method: TRPresentTransitionMethod.Fade)
                 
             }else{
-                let alert = UIAlertController(title: nil, message: "验证码输入有误！", preferredStyle: .Alert)
-                let okButton = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+                let alert = UIAlertController(title: nil, message: "验证码似乎不正确哦😣", preferredStyle: .Alert)
+                let okButton = UIAlertAction(title: "重试", style: .Cancel, handler: nil)
                 alert.addAction(okButton)
-                self.presentViewController(alert, animated: false, completion: nil)
+                self.presentViewController(alert, animated: true, completion: nil)
                 
-                
-               
-          
             }
         }
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField == phoneNumberField {
+            inputCaptcha()
+        }
+        
+        if textField == captchaField {
+            verifyCaptcha()
+        }
+        
+        return true
+    }
+    
     func keyboardWillHide() {
-        isCaptchaFieldPresenting = false
-        toolBar.frame.origin.y = self.view.bounds.size.height - 45.0
+        if isCaptchaFieldPresenting == false {
+            toolBar.frame.origin.y = self.view.bounds.size.height - 45.0
+        }else{
+             toolBar.frame.origin.y = self.view.bounds.size.height - 90.0
+        }
     }
 
    

@@ -84,10 +84,10 @@ class CategoryViewController: UITableViewController {
         showLiked.clipsToBounds = true
         showLiked.contentMode = .ScaleAspectFill
         showLiked.layer.cornerRadius = 8
-        let likedMaskView = UIView(frame: showLiked.bounds)
+        let likedMaskView = UIView(frame: CGRectMake(0,0,500,500))
         likedMaskView.backgroundColor = .blackColor()
         likedMaskView.alpha = 0.3
-        let galleryMaskView = UIView(frame: showGallery.bounds)
+        let galleryMaskView = UIView(frame: CGRectMake(0,0,500,500))
         galleryMaskView.backgroundColor = .blackColor()
         galleryMaskView.alpha = 0.3
         showLiked.addSubview(likedMaskView)
