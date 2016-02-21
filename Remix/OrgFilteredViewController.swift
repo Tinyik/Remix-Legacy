@@ -82,7 +82,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
                     let imageURL = NSURL(string:coverImg.url)!
                     
                     let dateString = activity.objectForKey("Date") as! String
-                    let monthName = dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0]
+                    let monthName = dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2]
                     
                     
                     if self.isMonthAdded(monthName) == false {
@@ -93,7 +93,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
                         
                         if let index = self.activities.indexOf({
                             
-                            ($0[0].objectForKey("Date") as! String).componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] == monthName})
+                            ($0[0].objectForKey("Date") as! String).componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2] == monthName})
                         {
                             self.activities[index].append(activity as! BmobObject)
                             self.coverImgURLs[index].append(imageURL)

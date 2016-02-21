@@ -54,8 +54,7 @@ class GalleryViewController: UITableViewController, UIGestureRecognizerDelegate 
       
                     
                     let dateString = gallery.objectForKey("Date") as! String
-                    let monthName = dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0]
-                    
+                    let monthName = dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2]
                     if self.isMonthAdded(monthName) == false {
                         self.monthNameStrings.append(monthName)
                         self.galleryObjects.append([gallery as! BmobObject])
@@ -64,7 +63,7 @@ class GalleryViewController: UITableViewController, UIGestureRecognizerDelegate 
                         
                         if let index = self.galleryObjects.indexOf({
                             
-                            ($0[0].objectForKey("Date") as! String).componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] == monthName})
+                            ($0[0].objectForKey("Date") as! String).componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2] == monthName})
                         {
                             self.galleryObjects[index].append(gallery as! BmobObject)
                             self.photoURLArray[index].append(imageURLs)
