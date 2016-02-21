@@ -54,12 +54,9 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
         button1.setBackgroundImage(UIImage(named: "button1_normal"), forState: .Normal)
         button3.setBackgroundImage(UIImage(named: "button3_normal"), forState: .Normal)
         button2.setBackgroundImage(UIImage(named: "button2_normal"), forState: .Normal)
-        
-        
-        
-        button1.frame = CGRectMake(0, 10, 22, 20)
-        button2.frame = CGRectMake(70, 10, 22, 20)
-        button3.frame = CGRectMake(140, 10, 20, 20)
+        button1.frame = CGRectMake(0, 10, 28, 26)
+        button2.frame = CGRectMake(70, 10, 28, 26)
+        button3.frame = CGRectMake(140, 10, 26, 26)
         view.addSubview(button1)
         view.addSubview(button2)
         view.addSubview(button3)
