@@ -12,12 +12,15 @@ import SafariServices
 let themeColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
 var isHomepageFirstLaunching: Bool!
 
+var hasPromptedToEnableNotif: Bool!
+
 class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var headerScrollView: UIScrollView!
     @IBOutlet weak var adTableView: UITableView!
     
+    var shouldAskToEnableNotif = true
     var coverImgURLs: [[NSURL]] = []
     var activities: [[BmobObject]] = []
     var monthNameStrings: [String] = []
@@ -27,15 +30,32 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     var bannerAds: [BmobObject]!
     var randomAdIndex = Int()
     var currentUser = BmobUser.getCurrentUser()
+    var launchedTimes: Int!
     
 
     func updateLaunchedTimes() {
         let userDefaults = NSUserDefaults.standardUserDefaults()
-        let appVersion = userDefaults.integerForKey("LaunchedTimes")
+        hasPromptedToEnableNotif = userDefaults.boolForKey("hasPromptedToEnableNotif")
+        if hasPromptedToEnableNotif == nil {
+            hasPromptedToEnableNotif = false
+        }
+        launchedTimes = userDefaults.integerForKey("LaunchedTimes")
+        if launchedTimes == nil {
+            userDefaults.setObject(0, forKey: "LaunchedTimes")
+        }else{
+            launchedTimes = userDefaults.integerForKey("LaunchedTimes")
+            launchedTimes = launchedTimes! + 1
+            userDefaults.setObject(launchedTimes, forKey: "LaunchedTimes")
+        }
+        print(launchedTimes)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateLaunchedTimes()
+        if launchedTimes % 10 == 0 {
+            askToEnableNotifications()
+        }
         cellZoomAnimationDuration = 0.4
         cellZoomXScaleFactor = 1.1
         cellZoomYScaleFactor = 1.1
@@ -105,6 +125,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         let categoryVC = storyBoard.instantiateViewControllerWithIdentifier("CategoryVC")
         let navigationController = UINavigationController(rootViewController: categoryVC)
         self.navigationController?.presentViewController(navigationController, animated: false, completion: nil)
+        if launchedTimes! == 1 && shouldAskToEnableNotif {
+            askToEnableNotifications()
+            shouldAskToEnableNotif = false
+        }
         
     }
     
@@ -113,7 +137,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         let orgsVC = storyBoard.instantiateViewControllerWithIdentifier("OrgsVC")
         let navigationController = UINavigationController(rootViewController: orgsVC)
         self.navigationController?.presentViewController(navigationController, animated: false, completion: nil)
-        
+        if launchedTimes! == 1 && shouldAskToEnableNotif {
+            askToEnableNotifications()
+            shouldAskToEnableNotif = false
+        }
     }
 
     
@@ -219,7 +246,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     }
     
     func handlePromoSelection(sender: UIGestureRecognizer) {
-      
+        if launchedTimes! == 1 && shouldAskToEnableNotif {
+            askToEnableNotifications()
+            shouldAskToEnableNotif = false
+        }
         if #available(iOS 9.0, *) {
             let safariView = SFSafariViewController(URL: adTargetURLs[(sender.view?.tag)!], entersReaderIfAvailable: true)
             safariView.view.tintColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
@@ -515,7 +545,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     
   
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        if launchedTimes! == 1 && shouldAskToEnableNotif {
+            askToEnableNotifications()
+            shouldAskToEnableNotif = false
+        }
         if tableView == adTableView {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             var query = BmobQuery(className: "BannerPromotion")
@@ -539,10 +572,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         }
         
         if tableView == self.tableView {
-            // FIXME: Determine whether to ask to enable notif
-//            if is == true {
-//              askToEnableNotifications()
-         //   }
+            
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
             var query = BmobQuery(className: "Activity")
             let objectId = activities[indexPath.section][indexPath.row].objectId
@@ -573,40 +603,39 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     }
     
     func askToEnableNotifications() {
-        if UIApplication.sharedApplication().enabledRemoteNotificationTypes() == .None {
+        if UIApplication.sharedApplication().isRegisteredForRemoteNotifications() == false {
             
-        
         let alert = UIAlertController(title: "推送设置", message: "Remix需要你允许推送消息才能及时传递魔都学生圈的最新消息。想要现在允许推送消息吗？(●'◡'●)ﾉ♥", preferredStyle: .Alert)
-        let buttonOK = UIAlertAction(title: "好的", style: .Cancel) { (action) -> Void in
+        let buttonOK = UIAlertAction(title: "好的", style: .Default) { (action) -> Void in
             self.promptToEnableNotifications()
         }
-            let buttonCancel = UIAlertAction(title: "稍后在说", style: .Default){ (action) -> Void in
-                let instruction = UIAlertController(title: "如何开启消息通知", message: "好的！如果希望接受Remix的消息通知，请进入 设置->通知->Remix->允许通知。", preferredStyle: .Alert)
-                let ok = UIAlertAction(title: "好的", style: .Cancel, handler: nil)
-                instruction.addAction(ok)
-                self.presentViewController(instruction, animated: true, completion: nil)
-            }
-
-        alert.addAction(buttonOK)
+        let buttonCancel = UIAlertAction(title: "稍后再问", style: .Default, handler: nil)
         alert.addAction(buttonCancel)
+        alert.addAction(buttonOK)
         self.presentViewController(alert, animated: true, completion: nil)
         }
     }
     
     func promptToEnableNotifications() {
-        if Float(UIDevice.currentDevice().systemVersion) >= 8.0 {
+        
+        if hasPromptedToEnableNotif == false {
             let categories = UIMutableUserNotificationCategory()
             categories.identifier = "com.fongtinyik.remix"
             let notifSettings = UIUserNotificationSettings(forTypes: [UIUserNotificationType.Badge, UIUserNotificationType.Sound, UIUserNotificationType.Alert], categories: [categories] )
             UIApplication.sharedApplication().registerUserNotificationSettings(notifSettings)
-            UIApplication.sharedApplication().registerForRemoteNotifications() }
-            
-        else{
-            
-            let remoteTypes: UIRemoteNotificationType = [.Badge, .Sound, .Alert]
-            UIApplication.sharedApplication().registerForRemoteNotificationTypes(remoteTypes)
+            UIApplication.sharedApplication().registerForRemoteNotifications()
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            userDefaults.setObject(true, forKey: "hasPromptedToEnableNotif")
+            hasPromptedToEnableNotif = true
+        
+        }else{
+             
+                let instruction = UIAlertController(title: "如何开启消息通知", message: "请进入 设置->通知->Remix->允许通知 来开启Remix推送消息。", preferredStyle: .Alert)
+                let ok = UIAlertAction(title: "好的", style: .Default, handler: nil)
+                instruction.addAction(ok)
+                self.presentViewController(instruction, animated: true, completion: nil)
+           
         }
-
     }
    
     
