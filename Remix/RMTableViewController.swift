@@ -219,7 +219,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     }
     
     func handlePromoSelection(sender: UIGestureRecognizer) {
-       print("sdfd")
+      
         if #available(iOS 9.0, *) {
             let safariView = SFSafariViewController(URL: adTargetURLs[(sender.view?.tag)!], entersReaderIfAvailable: true)
             safariView.view.tintColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
@@ -236,7 +236,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         if tableView == adTableView {
             return 150
         }
-        if activities.count > indexPath.row && activities.count > indexPath.section {
+        if activities.count > 0 {
         if let isFeatured = activities[indexPath.section][indexPath.row].objectForKey("isFeatured") as? Bool  {
             if isFeatured == true {
             return 375

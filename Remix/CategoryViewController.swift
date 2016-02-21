@@ -25,10 +25,10 @@ class CategoryViewController: UITableViewController {
     var cloudCoverTitles: [String] = []
     
     @IBOutlet weak var showGallery: UIImageView!
-    @IBOutlet weak var showStarred: UIImageView!
     @IBOutlet weak var showLiked: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setUpViews()
         fetchCloudData()
         self.navigationController?.navigationBar.translucent = false
@@ -84,6 +84,14 @@ class CategoryViewController: UITableViewController {
         showLiked.clipsToBounds = true
         showLiked.contentMode = .ScaleAspectFill
         showLiked.layer.cornerRadius = 8
+        let likedMaskView = UIView(frame: showLiked.bounds)
+        likedMaskView.backgroundColor = .blackColor()
+        likedMaskView.alpha = 0.3
+        let galleryMaskView = UIView(frame: showGallery.bounds)
+        galleryMaskView.backgroundColor = .blackColor()
+        galleryMaskView.alpha = 0.3
+        showLiked.addSubview(likedMaskView)
+        showGallery.addSubview(galleryMaskView)
         
     }
     

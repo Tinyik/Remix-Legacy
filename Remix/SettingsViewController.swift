@@ -8,6 +8,7 @@
 
 import UIKit
 import MessageUI
+import SafariServices
 
 class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate, ModalTransitionDelegate {
    
@@ -146,9 +147,35 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        if indexPath.section == 0 {
+            switch indexPath.row {
+            case 0:if #available(iOS 9.0, *) {
+                let safariView = SFSafariViewController(URL: NSURL(string: "http://jsform.com/f/v5pfam")!)
+                safariView.view.tintColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
+                self.navigationController?.presentViewController(safariView, animated: true, completion: nil)
+            } else {
+                let webView = RxWebViewController(url: NSURL(string: "http://jsform.com/f/v5pfam")!)
+                self.navigationController?.pushViewController(webView, animated: true)
+                }
+                
+            case 1:if #available(iOS 9.0, *) {
+                let safariView = SFSafariViewController(URL: NSURL(string: "http://jsform.com/f/j49bk8")!)
+                safariView.view.tintColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
+                self.navigationController?.presentViewController(safariView, animated: true, completion: nil)
+            } else {
+                let webView = RxWebViewController(url: NSURL(string: "http://jsform.com/f/j49bk8")!)
+                self.navigationController?.pushViewController(webView, animated: true)
+                }
+                
+            default: break
+            }
+        }
         if indexPath.section == 1 {
             switch indexPath.row {
-            case 0: break
+            //FIXME: Remix Official Website
+            case 0:  let url = "http://fongtinyik.tumblr.com"
+            let handler = UMSocialWechatHandler.setWXAppId("wx6e2c22b24588e0e1", appSecret: "e085edb726c5b92bf443f1e3da3f838e", url: url)
+            UMSocialSnsService.presentSnsIconSheetView(self, appKey: "56ba8fa2e0f55a1071000931", shareText: "马上下载Remix来发现魔都最in学生活动与地点(●'◡'●)ﾉ♥", shareImage: UIImage(named: "Icon"), shareToSnsNames: [UMShareToWechatSession,UMShareToWechatTimeline, UMShareToQQ, UMShareToQzone, UMShareToTwitter], delegate: nil)
             case 1: if MFMailComposeViewController.canSendMail() {
                     let composer = MFMailComposeViewController()
                     composer.mailComposeDelegate = self

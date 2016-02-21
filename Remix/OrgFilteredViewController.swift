@@ -26,9 +26,9 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         fetchCloudData()
         let moreInfo = UIButton(type: .InfoDark)
+        moreInfo.setTitle("简介", forState: .Normal)
         moreInfo.tintColor = .blackColor()
         moreInfo.addTarget(self, action: "showOrgIntroView", forControlEvents: .TouchUpInside)
         let backButton = UIButton(frame: CGRectMake(0,0,30,30))
@@ -143,7 +143,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
                                 self.headerImage = image
                                 self.setUpParallaxHeaderView()
                             }else{
-                                self.headerImage = UIImage(named: "Tech")
+                                self.headerImage = UIImage(named: "Logo")
                                 self.setUpParallaxHeaderView()
                             }
                         }
@@ -156,7 +156,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
                                     self.headerImage = image
                                     self.setUpParallaxHeaderView()
                                 }else{
-                                    self.headerImage = UIImage(named: "Tech")
+                                    self.headerImage = UIImage(named: "Logo")
                                     self.setUpParallaxHeaderView()
                                 }
                             }
@@ -165,7 +165,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
                 
                 }
             }else{
-                self.headerImage = UIImage(named: "Tech")
+                self.headerImage = UIImage(named: "Logo")
                 self.setUpParallaxHeaderView()
             }
         
@@ -320,7 +320,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if activities.count > indexPath.row && activities.count > indexPath.section {
+        if activities.count > 0 {
             if let isFeatured = activities[indexPath.section][indexPath.row].objectForKey("isFeatured") as? Bool  {
                 if isFeatured == true {
                     return 375

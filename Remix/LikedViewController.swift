@@ -10,7 +10,7 @@ import UIKit
 
 class LikedViewController: CTFilteredViewController {
 
-    var likedHeaderImage = UIImage(named: "Tech")
+    var likedHeaderImage = UIImage(named: "LikedActivities")
  
     
     override func setUpParallaxHeaderView() {

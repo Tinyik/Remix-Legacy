@@ -277,7 +277,7 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
 
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if activities.count > indexPath.row  {
+        if activities.count > 0  {
             if let isFeatured = activities[indexPath.row].objectForKey("isFeatured") as? Bool  {
                 if isFeatured == true {
                     return 375

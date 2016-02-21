@@ -284,7 +284,7 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
     }
     
      func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if activities.count > indexPath.row && activities.count > indexPath.section {
+        if activities.count > 0 {
             if let isFeatured = activities[indexPath.section][indexPath.row].objectForKey("isFeatured") as? Bool  {
                 if isFeatured == true {
                     return 375
