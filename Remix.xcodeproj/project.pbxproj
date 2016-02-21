@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		180199541C79C14700A6C7E4 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180199531C79C14700A6C7E4 /* TrendingViewController.swift */; };
 		181F2B1F1C69DB8A00FC237D /* LikedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181F2B1E1C69DB8A00FC237D /* LikedViewController.swift */; };
 		181F2B2C1C6A2D8D00FC237D /* backItemImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 181F2B211C6A2D8D00FC237D /* backItemImage@2x.png */; };
 		181F2B2D1C6A2D8D00FC237D /* backItemImage_hl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 181F2B221C6A2D8D00FC237D /* backItemImage_hl@2x.png */; };
@@ -151,6 +152,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		180199531C79C14700A6C7E4 /* TrendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingViewController.swift; sourceTree = "<group>"; };
 		181F2B1E1C69DB8A00FC237D /* LikedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikedViewController.swift; sourceTree = "<group>"; };
 		181F2B211C6A2D8D00FC237D /* backItemImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backItemImage@2x.png"; sourceTree = "<group>"; };
 		181F2B221C6A2D8D00FC237D /* backItemImage_hl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backItemImage_hl@2x.png"; sourceTree = "<group>"; };
@@ -565,6 +567,7 @@
 				189782511C63C7EF00458515 /* Main.storyboard */,
 				18BCA0351C6EE29F00DF3EC7 /* RMWebViewController.swift */,
 				1898CA4A1C6900B8009D3261 /* RegLoginViewController.swift */,
+				180199531C79C14700A6C7E4 /* TrendingViewController.swift */,
 				18D731B31C719B1800DECA1E /* GuideViewController.swift */,
 				18BCA03B1C6F822400DF3EC7 /* SearchResultVC */,
 				18BCA02B1C6E484900DF3EC7 /* LocationVC */,
@@ -1093,6 +1096,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				189782881C63E0D600458515 /* RMNavigationController.swift in Sources */,
+				180199541C79C14700A6C7E4 /* TrendingViewController.swift in Sources */,
 				1898CA941C69B599009D3261 /* TRStatusBarStyle.swift in Sources */,
 				185489AB1C67485F00A8E5C1 /* SDWebImagePrefetcher.m in Sources */,
 				1899E9C91C670FFB00ADC2AC /* GalleryTableViewCell.swift in Sources */,
