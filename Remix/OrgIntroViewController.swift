@@ -130,6 +130,10 @@ class OrgIntroViewController: UIViewController, UIGestureRecognizerDelegate, MWP
         self.presentViewController(composer, animated: true, completion: nil)
     }
     
+    func popCurrentVC() {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+
     
     func numberOfPhotosInPhotoBrowser(photoBrowser: MWPhotoBrowser!) -> UInt {
         return UInt(photos.count)
