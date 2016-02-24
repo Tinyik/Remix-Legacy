@@ -52,11 +52,13 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
         
         
         let rightButtonWidth: CGFloat = 58
-        let phoneNumberFieldWidth: CGFloat = 297
+        let phoneNumberFieldWidth: CGFloat = mainViewWidth - rightButtonWidth - 20
         
         phoneNumberField = UITextField(frame: CGRectMake(10.0, 6.0, phoneNumberFieldWidth, 40.0))
         phoneNumberField.returnKeyType = .Send
-        phoneNumberField.backgroundColor = UIColor(patternImage: UIImage(named: "PhoneBG")!)
+//        phoneNumberField.backgroundColor = UIColor(patternImage: UIImage(named: "PhoneBG")!)
+        phoneNumberField.backgroundColor = UIColor(white: 0, alpha: 0.45)
+        phoneNumberField.layer.cornerRadius = 20
         phoneNumberField.attributedPlaceholder = NSAttributedString(string: "输入手机号", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
         phoneNumberField.textAlignment = .Center
         phoneNumberField.textColor = .whiteColor()
@@ -65,7 +67,9 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
         
         captchaField = UITextField(frame: CGRectMake(10.0, 53.0, 178, 40.0))
         captchaField.returnKeyType = .Done
-        captchaField.backgroundColor = UIColor(patternImage: UIImage(named: "CodeBG")!)
+//        captchaField.backgroundColor = UIColor(patternImage: UIImage(named: "CodeBG")!)
+        captchaField.backgroundColor = UIColor(white: 0, alpha: 0.45)
+        captchaField.layer.cornerRadius = 20
         captchaField.attributedPlaceholder = NSAttributedString(string: "输入验证码", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
         captchaField.textAlignment = .Center
         captchaField.textColor = .whiteColor()
@@ -79,6 +83,7 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
         nextStepButton.alpha = 0.6
         nextStepButton.frame = CGRectMake(toolBar.bounds.size.width - rightButtonWidth, 0, rightButtonWidth, 52)
         nextStepButton.addTarget(self, action: "inputCaptcha", forControlEvents: .TouchUpInside)
+//        nextStepButton.backgroundColor = UIColor.redColor()
         toolBar.addSubview(nextStepButton)
         
         
