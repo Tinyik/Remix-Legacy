@@ -1713,8 +1713,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Terms and Conditions" translatesAutoresizingMaskIntoConstraints="NO" id="snp-EE-kbe">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="336"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="400"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.64437288851351349" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="400" id="f68-vI-gkN"/>
+                                </constraints>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1722,9 +1725,8 @@
                         </subviews>
                         <color key="backgroundColor" red="0.16295770202020199" green="0.16295770202020199" blue="0.16295770202020199" alpha="0.59926625844594594" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="snp-EE-kbe" firstAttribute="top" secondItem="7RW-gC-aiC" secondAttribute="top" id="2mL-EN-D0X"/>
                             <constraint firstAttribute="trailing" secondItem="snp-EE-kbe" secondAttribute="trailing" id="XkD-pS-NmX"/>
-                            <constraint firstItem="eAA-FZ-Rgf" firstAttribute="top" secondItem="snp-EE-kbe" secondAttribute="bottom" constant="264" id="qNH-tp-PoB"/>
+                            <constraint firstItem="snp-EE-kbe" firstAttribute="top" secondItem="0Lw-2h-Q38" secondAttribute="bottom" id="Ygf-hP-6ag"/>
                             <constraint firstItem="snp-EE-kbe" firstAttribute="leading" secondItem="7RW-gC-aiC" secondAttribute="leading" id="uEd-ZP-XrS"/>
                         </constraints>
                     </view>
