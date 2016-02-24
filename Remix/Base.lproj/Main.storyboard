@@ -1775,7 +1775,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OUv-td-S8e">
-                                <rect key="frame" x="68" y="509" width="238" height="30"/>
+                                <rect key="frame" x="91" y="509" width="193" height="30"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
                                         <fragment content="注册即代表你同意">
@@ -1810,15 +1810,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="OUv-td-S8e" firstAttribute="centerX" secondItem="mn2-9y-17U" secondAttribute="centerX" id="3Nh-cy-Cjp"/>
                             <constraint firstAttribute="trailing" secondItem="sqK-pC-wxo" secondAttribute="trailing" id="L84-x2-SIM"/>
                             <constraint firstItem="sqK-pC-wxo" firstAttribute="leading" secondItem="mn2-9y-17U" secondAttribute="leading" id="L8f-OL-P4f"/>
-                            <constraint firstItem="sqK-pC-wxo" firstAttribute="leading" secondItem="OUv-td-S8e" secondAttribute="trailing" constant="-306" id="OQQ-yK-OMl"/>
-                            <constraint firstItem="OUv-td-S8e" firstAttribute="centerX" secondItem="00e-wd-Rqc" secondAttribute="centerX" id="PTq-da-u8o"/>
+                            <constraint firstItem="OUv-td-S8e" firstAttribute="top" secondItem="00e-wd-Rqc" secondAttribute="bottom" constant="8" id="W5m-bX-DUc"/>
                             <constraint firstItem="MhI-KI-e1U" firstAttribute="centerX" secondItem="mn2-9y-17U" secondAttribute="centerX" id="XJv-f1-seu"/>
                             <constraint firstItem="MhI-KI-e1U" firstAttribute="top" secondItem="sbO-Ov-uQo" secondAttribute="bottom" constant="183" id="ae6-Zo-5uU"/>
-                            <constraint firstItem="OUv-td-S8e" firstAttribute="top" secondItem="sqK-pC-wxo" secondAttribute="bottom" constant="-158" id="dAD-Ru-Ywr"/>
-                            <constraint firstItem="00e-wd-Rqc" firstAttribute="top" secondItem="MhI-KI-e1U" secondAttribute="bottom" constant="139" id="fHj-7H-MbV"/>
                             <constraint firstItem="2oP-Ga-4vH" firstAttribute="top" secondItem="sqK-pC-wxo" secondAttribute="bottom" id="gLL-qw-0y6"/>
+                            <constraint firstItem="2oP-Ga-4vH" firstAttribute="top" secondItem="00e-wd-Rqc" secondAttribute="bottom" constant="166" id="geg-GP-a5Q"/>
                             <constraint firstItem="sqK-pC-wxo" firstAttribute="top" secondItem="mn2-9y-17U" secondAttribute="top" id="jBN-bD-Jui"/>
                             <constraint firstItem="00e-wd-Rqc" firstAttribute="centerX" secondItem="mn2-9y-17U" secondAttribute="centerX" id="sQJ-2B-3fj"/>
                         </constraints>
