@@ -8,13 +8,14 @@
 
 import UIKit
 import SafariServices
+import PassKit
 
 let themeColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
 var isHomepageFirstLaunching: Bool!
 
 var hasPromptedToEnableNotif: Bool!
 
-class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelegate, UISearchBarDelegate {
+class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelegate, UISearchBarDelegate, PKPaymentAuthorizationViewControllerDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var headerScrollView: UIScrollView!
@@ -473,6 +474,45 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 
                 return true
             })
+            let registerButton = MGSwipeButton(title: "Register", backgroundColor: UIColor(white: 0.95, alpha: 1), callback: { (sender) -> Bool in
+                
+                    let indexPath = self.tableView.indexPathForCell(cell)
+                    let activity = self.activities[indexPath!.section][indexPath!.row]
+                    if let price = activity.objectForKey("Price") as? Double {
+                        if price != 0 {
+                            if PKPaymentAuthorizationViewController.canMakePayments() {
+                                let payment = PKPaymentRequest()
+                                let item = PKPaymentSummaryItem(label: "活动报名", amount: NSDecimalNumber(double: price))
+                                payment.paymentSummaryItems = [item]
+                                payment.currencyCode = "CNY"
+                                payment.countryCode = "CN"
+                                payment.merchantIdentifier = "merchant.com.fongtinyik.remix"
+                                if #available(iOS 9.0, *) {
+                                    payment.merchantCapabilities = [.Capability3DS, .CapabilityCredit, .CapabilityDebit, .CapabilityEMV]
+                                } else {
+                                    // Fallback on earlier versions
+                                }
+                                if #available(iOS 9.2, *) {
+                                    payment.supportedNetworks = [PKPaymentNetworkChinaUnionPay]
+                                } else {
+                                    // Fallback on earlier versions
+                                }
+                                
+                                let payVC = PKPaymentAuthorizationViewController(paymentRequest: payment)
+                                payVC.delegate = self
+                                self.presentViewController(payVC, animated: true, completion: nil)
+
+                            }
+                        }else{
+                            print("FAILED")
+                        }
+                    }else{
+                        print("FAILURE")
+                }
+                
+                
+                return true
+            })
             
             let likeButton = MGSwipeButton(title: likeButtonTitle, backgroundColor: UIColor(white: 0.9, alpha: 1), callback: { (sender) -> Bool in
                 if let _cell = sender as? RMTableViewCell {
@@ -539,7 +579,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 return true
             })
             shareButton.setTitleColor(.blackColor(), forState: .Normal)
-            return [shareButton, likeButton] }else{
+            return [shareButton, registerButton, likeButton] }else{
             return  nil
         }
             
@@ -644,6 +684,13 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         }
     }
    
+    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: (PKPaymentAuthorizationStatus) -> Void) {
+        completion(PKPaymentAuthorizationStatus.Success)
+    }
+    
+    func paymentAuthorizationViewControllerDidFinish(controller: PKPaymentAuthorizationViewController) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
     
 }
    

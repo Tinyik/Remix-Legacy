@@ -16,6 +16,7 @@
 		181F2B2F1C6A2D8D00FC237D /* NJKWebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181F2B271C6A2D8D00FC237D /* NJKWebViewProgressView.m */; };
 		181F2B301C6A2D8D00FC237D /* RxWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181F2B291C6A2D8D00FC237D /* RxWebViewController.m */; };
 		181F2B311C6A2D8D00FC237D /* RxWebViewNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181F2B2B1C6A2D8D00FC237D /* RxWebViewNavigationViewController.m */; };
+		182454411C7F833800CF0CC6 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 182454401C7F833800CF0CC6 /* PassKit.framework */; };
 		1841F8771C7733A60046D57F /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F8711C7733A60046D57F /* libSocialWechat.a */; };
 		1841F8781C7733A60046D57F /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F8721C7733A60046D57F /* libWeChatSDK.a */; };
 		1841F87A1C7739020046D57F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F8791C7739020046D57F /* libiconv.tbd */; };
@@ -166,6 +167,8 @@
 		181F2B291C6A2D8D00FC237D /* RxWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxWebViewController.m; sourceTree = "<group>"; };
 		181F2B2A1C6A2D8D00FC237D /* RxWebViewNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxWebViewNavigationViewController.h; sourceTree = "<group>"; };
 		181F2B2B1C6A2D8D00FC237D /* RxWebViewNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxWebViewNavigationViewController.m; sourceTree = "<group>"; };
+		1824543F1C7F827600CF0CC6 /* Remix.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Remix.entitlements; sourceTree = "<group>"; };
+		182454401C7F833800CF0CC6 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
 		1841F8711C7733A60046D57F /* libSocialWechat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialWechat.a; sourceTree = "<group>"; };
 		1841F8721C7733A60046D57F /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		1841F8731C7733A60046D57F /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
@@ -345,6 +348,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				182454411C7F833800CF0CC6 /* PassKit.framework in Frameworks */,
 				1841F87C1C7739150046D57F /* libstdc++.tbd in Frameworks */,
 				1841F87A1C7739020046D57F /* libiconv.tbd in Frameworks */,
 				18B317C71C6B46D300336A92 /* QuartzCore.framework in Frameworks */,
@@ -565,6 +569,7 @@
 		1897824C1C63C7EF00458515 /* Remix */ = {
 			isa = PBXGroup;
 			children = (
+				1824543F1C7F827600CF0CC6 /* Remix.entitlements */,
 				1899E9B61C663E1500ADC2AC /* Extern Classes */,
 				189782511C63C7EF00458515 /* Main.storyboard */,
 				18BCA0351C6EE29F00DF3EC7 /* RMWebViewController.swift */,
@@ -833,6 +838,7 @@
 		CCC49B28BC1297BAC2F5C421 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				182454401C7F833800CF0CC6 /* PassKit.framework */,
 				1841F87B1C7739150046D57F /* libstdc++.tbd */,
 				1841F8791C7739020046D57F /* libiconv.tbd */,
 				29B1D0C0C5F1570ADFFD72F7 /* Pods_Remix.framework */,
@@ -925,6 +931,9 @@
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 8332JF295Y;
 						SystemCapabilities = {
+							com.apple.OMC = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -1337,6 +1346,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Remix/Remix.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1368,6 +1378,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Remix/Remix.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
