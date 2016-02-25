@@ -20,9 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
        // hack_uiimageview_bf()
         let image = UIImage(named: "back")
-    
+       
         Bmob.registerWithAppKey("08329e2e3a8d3cdde96bf91d7459e8ab")
-        
+      //  BmobPaySDK.registerWithAppKey("08329e2e3a8d3cdde96bf91d7459e8ab")
         MobClick.startWithAppkey("56ba8fa2e0f55a1071000931", reportPolicy: BATCH, channelId: nil)
         
         if BmobUser.getCurrentUser() == nil {
@@ -88,6 +88,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        if url.host == "safepay" {
+            print("skldjlk")
+            AlipaySDK.defaultService().processOrderWithPaymentResult(url, standbyCallback: { (resultDic) -> Void in
+              
+            })
+            
+        }
+        
+        return true
+    }
 }
 

@@ -17,6 +17,11 @@
 		181F2B301C6A2D8D00FC237D /* RxWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181F2B291C6A2D8D00FC237D /* RxWebViewController.m */; };
 		181F2B311C6A2D8D00FC237D /* RxWebViewNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181F2B2B1C6A2D8D00FC237D /* RxWebViewNavigationViewController.m */; };
 		182454411C7F833800CF0CC6 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 182454401C7F833800CF0CC6 /* PassKit.framework */; };
+		1824544B1C7F96F500CF0CC6 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 182454481C7F96F500CF0CC6 /* AlipaySDK.bundle */; };
+		1824544C1C7F96F500CF0CC6 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 182454491C7F96F500CF0CC6 /* AlipaySDK.framework */; };
+		1824544D1C7F96F500CF0CC6 /* BmobPay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1824544A1C7F96F500CF0CC6 /* BmobPay.framework */; };
+		1824544E1C7F977A00CF0CC6 /* AlipaySDK.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 182454481C7F96F500CF0CC6 /* AlipaySDK.bundle */; };
+		182454501C7FA16C00CF0CC6 /* VersionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824544F1C7FA16C00CF0CC6 /* VersionCheck.swift */; };
 		1841F8771C7733A60046D57F /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F8711C7733A60046D57F /* libSocialWechat.a */; };
 		1841F8781C7733A60046D57F /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F8721C7733A60046D57F /* libWeChatSDK.a */; };
 		1841F87A1C7739020046D57F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F8791C7739020046D57F /* libiconv.tbd */; };
@@ -169,6 +174,10 @@
 		181F2B2B1C6A2D8D00FC237D /* RxWebViewNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxWebViewNavigationViewController.m; sourceTree = "<group>"; };
 		1824543F1C7F827600CF0CC6 /* Remix.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Remix.entitlements; sourceTree = "<group>"; };
 		182454401C7F833800CF0CC6 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
+		182454481C7F96F500CF0CC6 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		182454491C7F96F500CF0CC6 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		1824544A1C7F96F500CF0CC6 /* BmobPay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BmobPay.framework; sourceTree = "<group>"; };
+		1824544F1C7FA16C00CF0CC6 /* VersionCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionCheck.swift; sourceTree = "<group>"; };
 		1841F8711C7733A60046D57F /* libSocialWechat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialWechat.a; sourceTree = "<group>"; };
 		1841F8721C7733A60046D57F /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		1841F8731C7733A60046D57F /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
@@ -348,6 +357,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1824544E1C7F977A00CF0CC6 /* AlipaySDK.bundle in Frameworks */,
 				182454411C7F833800CF0CC6 /* PassKit.framework in Frameworks */,
 				1841F87C1C7739150046D57F /* libstdc++.tbd in Frameworks */,
 				1841F87A1C7739020046D57F /* libiconv.tbd in Frameworks */,
@@ -358,6 +368,7 @@
 				1848572A1C63EB88004E516A /* libsqlite3.tbd in Frameworks */,
 				184857281C63EB7E004E516A /* libicucore.tbd in Frameworks */,
 				184857261C63EB73004E516A /* libz.1.2.5.tbd in Frameworks */,
+				1824544D1C7F96F500CF0CC6 /* BmobPay.framework in Frameworks */,
 				184857241C63EB68004E516A /* SystemConfiguration.framework in Frameworks */,
 				1841F8771C7733A60046D57F /* libSocialWechat.a in Frameworks */,
 				184857301C63EC01004E516A /* BmobSDK.framework in Frameworks */,
@@ -365,6 +376,7 @@
 				187745701C6AC572000427C7 /* libMobClickLibrary.a in Frameworks */,
 				184857201C63EB50004E516A /* CFNetwork.framework in Frameworks */,
 				1877458E1C6ACB1D000427C7 /* libUMSocial_Sdk_5.0.a in Frameworks */,
+				1824544C1C7F96F500CF0CC6 /* AlipaySDK.framework in Frameworks */,
 				1841F8781C7733A60046D57F /* libWeChatSDK.a in Frameworks */,
 				1848571E1C63EB47004E516A /* MobileCoreServices.framework in Frameworks */,
 				1848571C1C63EB37004E516A /* CoreGraphics.framework in Frameworks */,
@@ -484,6 +496,9 @@
 				184857251C63EB73004E516A /* libz.1.2.5.tbd */,
 				1877456D1C6AC572000427C7 /* libMobClickLibrary.a */,
 				1877456E1C6AC572000427C7 /* MobClick.h */,
+				182454481C7F96F500CF0CC6 /* AlipaySDK.bundle */,
+				182454491C7F96F500CF0CC6 /* AlipaySDK.framework */,
+				1824544A1C7F96F500CF0CC6 /* BmobPay.framework */,
 				1877456F1C6AC572000427C7 /* MobClickSocialAnalytics.h */,
 				1848572F1C63EC01004E516A /* BmobSDK.framework */,
 				184857231C63EB68004E516A /* SystemConfiguration.framework */,
@@ -573,6 +588,7 @@
 				1899E9B61C663E1500ADC2AC /* Extern Classes */,
 				189782511C63C7EF00458515 /* Main.storyboard */,
 				18BCA0351C6EE29F00DF3EC7 /* RMWebViewController.swift */,
+				1824544F1C7FA16C00CF0CC6 /* VersionCheck.swift */,
 				1898CA4A1C6900B8009D3261 /* RegLoginViewController.swift */,
 				180199551C79E25F00A6C7E4 /* TermsAndConditionsViewController.swift */,
 				180199531C79C14700A6C7E4 /* TrendingViewController.swift */,
@@ -985,6 +1001,7 @@
 				1877458D1C6ACB1D000427C7 /* UMSocialLocalizable.strings in Resources */,
 				187745951C6ACB1D000427C7 /* UMSnsAccountViewController.xib in Resources */,
 				187745971C6ACB1D000427C7 /* UMSocialSDKResourcesNew.bundle in Resources */,
+				1824544B1C7F96F500CF0CC6 /* AlipaySDK.bundle in Resources */,
 				189782581C63C7EF00458515 /* LaunchScreen.storyboard in Resources */,
 				187745941C6ACB1D000427C7 /* UMSLoginViewController.xib in Resources */,
 				187745911C6ACB1D000427C7 /* UMSCommentInputControlleriPad.xib in Resources */,
@@ -1108,6 +1125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				189782881C63E0D600458515 /* RMNavigationController.swift in Sources */,
+				182454501C7FA16C00CF0CC6 /* VersionCheck.swift in Sources */,
 				180199541C79C14700A6C7E4 /* TrendingViewController.swift in Sources */,
 				1898CA941C69B599009D3261 /* TRStatusBarStyle.swift in Sources */,
 				185489AB1C67485F00A8E5C1 /* SDWebImagePrefetcher.m in Sources */,
@@ -1349,6 +1367,7 @@
 				CODE_SIGN_ENTITLEMENTS = Remix/Remix.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Remix",
@@ -1381,6 +1400,7 @@
 				CODE_SIGN_ENTITLEMENTS = Remix/Remix.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Remix",

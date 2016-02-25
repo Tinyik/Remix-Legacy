@@ -80,21 +80,24 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("detailedIdentifier") as! DetailedSettingsCell
-            if indexPath.row == 0 {
+            if indexPath.row == 1 {
            
                 cell.titleLabel.text = "向我们推荐活动"
                 cell.detailsLabel.text = "你的推荐将出现在 首页-社区推荐 中"
               
                 return cell
-            }else {
-                
+            }else if indexPath.row == 0 {
+                let cell2 = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") as! SettingsCell
+                cell2.label.text = "我参加的活动"
+                return cell2
+            }else{
                 cell.titleLabel.text = "向我们推荐魔都好去处"
                 cell.detailsLabel.text = "你的推荐将出现在 首页-好去处 中"
                 return cell
             }
             
         
-        }
+    }
     
         if indexPath.section == 1 {
      let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") as! SettingsCell
@@ -135,7 +138,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 1 {
+        if section == 1 || section == 0 {
             return 3
         }
        return 2
@@ -160,7 +163,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if indexPath.section == 0 {
             switch indexPath.row {
-            case 0:if #available(iOS 9.0, *) {
+            case 1:if #available(iOS 9.0, *) {
                 let safariView = SFSafariViewController(URL: NSURL(string: "http://jsform.com/f/v5pfam")!)
                 safariView.view.tintColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
                 self.navigationController?.presentViewController(safariView, animated: true, completion: nil)
@@ -169,7 +172,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
                 self.navigationController?.pushViewController(webView, animated: true)
                 }
                 
-            case 1:if #available(iOS 9.0, *) {
+            case 2:if #available(iOS 9.0, *) {
                 let safariView = SFSafariViewController(URL: NSURL(string: "http://jsform.com/f/j49bk8")!)
                 safariView.view.tintColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
                 self.navigationController?.presentViewController(safariView, animated: true, completion: nil)

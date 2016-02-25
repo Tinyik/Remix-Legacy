@@ -15,7 +15,7 @@ var isHomepageFirstLaunching: Bool!
 
 var hasPromptedToEnableNotif: Bool!
 
-class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelegate, UISearchBarDelegate, PKPaymentAuthorizationViewControllerDelegate {
+class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelegate, UISearchBarDelegate, PKPaymentAuthorizationViewControllerDelegate, BmobPayDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var headerScrollView: UIScrollView!
@@ -474,40 +474,46 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 
                 return true
             })
-            let registerButton = MGSwipeButton(title: "Register", backgroundColor: UIColor(white: 0.95, alpha: 1), callback: { (sender) -> Bool in
+            let registerButton = MGSwipeButton(title: "报名", backgroundColor: UIColor(white: 0.95, alpha: 1), callback: { (sender) -> Bool in
                 
                     let indexPath = self.tableView.indexPathForCell(cell)
                     let activity = self.activities[indexPath!.section][indexPath!.row]
+                    let orgName = activity.objectForKey("Org") as? String
                     if let price = activity.objectForKey("Price") as? Double {
                         if price != 0 {
+                           if IOSVersion.SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO("9.2") {
+                                
+                            
                             if PKPaymentAuthorizationViewController.canMakePayments() {
                                 let payment = PKPaymentRequest()
-                                let item = PKPaymentSummaryItem(label: "活动报名", amount: NSDecimalNumber(double: price))
+                                let item = PKPaymentSummaryItem(label: orgName!, amount: NSDecimalNumber(double: price))
                                 payment.paymentSummaryItems = [item]
                                 payment.currencyCode = "CNY"
                                 payment.countryCode = "CN"
                                 payment.merchantIdentifier = "merchant.com.fongtinyik.remix"
                                 if #available(iOS 9.0, *) {
                                     payment.merchantCapabilities = [.Capability3DS, .CapabilityCredit, .CapabilityDebit, .CapabilityEMV]
-                                } else {
-                                    // Fallback on earlier versions
                                 }
                                 if #available(iOS 9.2, *) {
                                     payment.supportedNetworks = [PKPaymentNetworkChinaUnionPay]
-                                } else {
-                                    // Fallback on earlier versions
                                 }
-                                
                                 let payVC = PKPaymentAuthorizationViewController(paymentRequest: payment)
                                 payVC.delegate = self
                                 self.presentViewController(payVC, animated: true, completion: nil)
 
+                                }
+                            }else{
+                                let bPay = BmobPay()
+                                bPay.delegate = self
+                                bPay.price = NSNumber(double: price)
+                                bPay.productName = orgName! + "活动报名费"
+                                bPay.body = "Test"
+                                bPay.appScheme = "BmobPay"
+                                bPay.payInBackground()
+                                
                             }
-                        }else{
-                            print("FAILED")
-                        }
-                    }else{
-                        print("FAILURE")
+                            
+                    }
                 }
                 
                 
@@ -579,6 +585,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 return true
             })
             shareButton.setTitleColor(.blackColor(), forState: .Normal)
+            registerButton.setTitleColor(.blackColor(), forState: .Normal)
             return [shareButton, registerButton, likeButton] }else{
             return  nil
         }
@@ -690,6 +697,22 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     
     func paymentAuthorizationViewControllerDidFinish(controller: PKPaymentAuthorizationViewController) {
         controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func paySuccess() {
+        let alert = UIAlertController(title: "支付状态", message: "支付成功！", preferredStyle: .Alert)
+        let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+        alert.addAction(action)
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func payFailWithErrorCode(errorCode: Int32) {
+        print(errorCode)
+        print("PAYFAILED")
+        let alert = UIAlertController(title: "支付状态", message: "支付失败。", preferredStyle: .Alert)
+        let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+        alert.addAction(action)
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
 }

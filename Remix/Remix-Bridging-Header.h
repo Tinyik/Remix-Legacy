@@ -3,6 +3,8 @@
 //
 
 #import <BmobSDK/Bmob.h>
+#import <BmobPay/BmobPay.h>
+#import <AliPaySDK/AliPaySDK.h>
 #import "UIImageView+WebCache.h"
 #import "MGSwipeButton.h"
 #import "MGSwipeTableCell.h"
@@ -18,3 +20,4 @@
 #import "GHWalkThroughView.h"
 #import <MWPhotoBrowser/MWPhotoBrowser.h>
 #import "UMSocialWechatHandler.h"
+
