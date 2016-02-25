@@ -30,6 +30,7 @@ class GalleryViewController: UITableViewController, UIGestureRecognizerDelegate 
         self.navigationItem.leftBarButtonItem = backItem
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         self.navigationController?.navigationBar.translucent = false
+        self.title = "往期活动"
         fetchCloudData()
         setUpParallaxHeaderView()
             
@@ -44,7 +45,7 @@ class GalleryViewController: UITableViewController, UIGestureRecognizerDelegate 
     // MARK: - Table view data source
     
     func fetchCloudData() {
-        var query = BmobQuery(className: "Gallery")
+        let query = BmobQuery(className: "Gallery")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.findObjectsInBackgroundWithBlock { (galleryObjects, error) -> Void in
             if galleryObjects.count > 0 {
@@ -145,18 +146,19 @@ class GalleryViewController: UITableViewController, UIGestureRecognizerDelegate 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("galleryTVCIdentifier") as! GalleryTableViewCell
         cell.photoURLs = photoURLArray[indexPath.section][indexPath.row]
-        cell.titleLabel.text = galleryObjects[indexPath.section][indexPath.row].objectForKey("Title") as! String
-        cell.desLabel.text = galleryObjects[indexPath.section][indexPath.row].objectForKey("Description") as! String
+        cell.titleLabel.text = galleryObjects[indexPath.section][indexPath.row].objectForKey("Title") as? String
+        cell.desLabel.text = galleryObjects[indexPath.section][indexPath.row].objectForKey("Description") as? String
         cell.parentViewController = self
-        cell.orgLabel.text = galleryObjects[indexPath.section][indexPath.row].objectForKey("Org") as! String
-        cell.timeLabel.text = galleryObjects[indexPath.section][indexPath.row].objectForKey("Date") as! String
+        cell.orgLabel.text = galleryObjects[indexPath.section][indexPath.row].objectForKey("Org") as? String
+        cell.timeLabel.text = galleryObjects[indexPath.section][indexPath.row].objectForKey("Date") as? String
+        cell.galleryView.reloadData()
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         // FIXME: 非空判断
-        var query = BmobQuery(className: "Gallery")
+        let query = BmobQuery(className: "Gallery")
         let objectId = galleryObjects[indexPath.section][indexPath.row].objectId
         query.getObjectInBackgroundWithId(objectId) { (galleryObject, error) -> Void in
             galleryObject.incrementKey("PageView", byAmount: 1)

@@ -13,6 +13,10 @@ class CommunityViewController: CTFilteredViewController {
     
     var likedHeaderImage = UIImage(named: "CommunityHeader")
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.title = "社区推荐"
+    }
     
     override func setUpParallaxHeaderView() {
         let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(likedHeaderImage, forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, 175)) as! ParallaxHeaderView

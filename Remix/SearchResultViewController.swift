@@ -49,7 +49,7 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
     
     func fetchTrendingLabels() {
         
-        var query = BmobQuery(className: "TrendingLabel")
+        let query = BmobQuery(className: "TrendingLabel")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.findObjectsInBackgroundWithBlock { (labels, error) -> Void in
             if labels.count > 0{
@@ -69,7 +69,7 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
     func fetchSearchResults() {
         activities = []
         coverImgURLs = []
-        var query = BmobQuery(className: "Activity")
+        let query = BmobQuery(className: "Activity")
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
             if activities.count > 0 {
                 for activity in activities {
@@ -118,15 +118,14 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
         if (activities[indexPath.row].objectForKey("isFeatured") as! Bool) == true {
             let cell = tableView.dequeueReusableCellWithIdentifier("fullCellReuseIdentifier", forIndexPath: indexPath) as! RMFullCoverCell
             cell.delegate = self
-            cell.titleLabel.text = activities[indexPath.row].objectForKey("Title") as! String
-            cell.orgLabel.text = activities[indexPath.row].objectForKey("Org") as! String
-            cell.timeLabel.text = activities[indexPath.row].objectForKey("Date") as! String
+            cell.titleLabel.text = activities[indexPath.row].objectForKey("Title") as? String
+            cell.orgLabel.text = activities[indexPath.row].objectForKey("Org") as? String
+            cell.timeLabel.text = activities[indexPath.row].objectForKey("Date") as? String
             cell.likesNumberLabel.text = String(activities[indexPath.row].objectForKey("LikesNumber") as! Int)
             cell.fullImageView.sd_setImageWithURL(coverImgURLs[indexPath.row])
             let _objId = activities[indexPath.row].objectId
             cell.objectId = _objId
             let query = BmobQuery(className: "Organization")
-            query.whereKey("isVisibleToUsers", equalTo: true)
             query.whereKey("Name", equalTo: cell.orgLabel.text)
             query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
                 if error == nil {
@@ -147,16 +146,15 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
         
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! RMTableViewCell
         cell.delegate = self
-        cell.titleLabel.text = activities[indexPath.row].objectForKey("Title") as! String
-        cell.desLabel.text = activities[indexPath.row].objectForKey("Description") as! String
-        cell.orgLabel.text = activities[indexPath.row].objectForKey("Org") as! String
-        cell.timeLabel.text = activities[indexPath.row].objectForKey("Date") as! String
+        cell.titleLabel.text = activities[indexPath.row].objectForKey("Title") as? String
+        cell.desLabel.text = activities[indexPath.row].objectForKey("Description") as? String
+        cell.orgLabel.text = activities[indexPath.row].objectForKey("Org") as? String
+        cell.timeLabel.text = activities[indexPath.row].objectForKey("Date") as? String
         cell.likesNumberLabel.text = String(activities[indexPath.row].objectForKey("LikesNumber") as! Int)
         cell.themeImg.sd_setImageWithURL(coverImgURLs[indexPath.row])
         let _objId = activities[indexPath.row].objectId
         cell.objectId = _objId
         let query = BmobQuery(className: "Organization")
-        query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("Name", equalTo: cell.orgLabel.text)
         query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
             if error == nil {

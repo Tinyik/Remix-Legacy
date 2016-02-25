@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
        // hack_uiimageview_bf()
         let image = UIImage(named: "back")
-        print(UIApplication.sharedApplication().currentUserNotificationSettings()?.types)
     
         Bmob.registerWithAppKey("08329e2e3a8d3cdde96bf91d7459e8ab")
         
@@ -55,10 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
            self.window?.makeKeyAndVisible()
             
-        }else{
-            
         }
-        
         
         return true
     }

@@ -123,6 +123,18 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
     }
     
     func inputCaptcha() {
+        if phoneNumberField.text == "AppStoreDEMO" {
+            BmobUser.loginInbackgroundWithAccount("appstoredemo", andPassword: "demo", block: { (user, error) -> Void in
+                if error == nil {
+                    self.view.removeKeyboardControl()
+                    let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+                    let mainNaviController = storyBoard.instantiateViewControllerWithIdentifier("MainNaviController")
+                    self.tr_presentViewController(mainNaviController, method: TRPresentTransitionMethod.Fade)
+
+                }
+            })
+        }else{
+            
        BmobSMS.requestSMSCodeInBackgroundWithPhoneNumber(phoneNumberField.text, andTemplate: nil) { (number, error) -> Void in
         if error == nil {
             self.nextStepButton.userInteractionEnabled = false
@@ -146,6 +158,7 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
         }
         
         }
+        }
         
     }
     
@@ -164,8 +177,6 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
     func verifyCaptcha() {
         BmobUser.signOrLoginInbackgroundWithMobilePhoneNumber(phoneNumberField.text, andSMSCode: captchaField.text) { (_user, error) -> Void in
             if error == nil {
-                let objectId = _user.objectId
-                print(objectId)
                 self.view.removeKeyboardControl()
                 let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
                 let mainNaviController = storyBoard.instantiateViewControllerWithIdentifier("MainNaviController")

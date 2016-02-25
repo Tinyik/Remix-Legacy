@@ -12,6 +12,10 @@ class LikedViewController: CTFilteredViewController {
 
     var likedHeaderImage = UIImage(named: "LikedActivities")
  
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.title = "我喜欢的活动"
+    }
     
     override func setUpParallaxHeaderView() {
         let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(likedHeaderImage, forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, 175)) as! ParallaxHeaderView
@@ -49,7 +53,7 @@ class LikedViewController: CTFilteredViewController {
                     
                     if self.isMonthAdded(monthName) == false {
                         self.monthNameStrings.append(monthName)
-                        self.activities.append([activity as! BmobObject])
+                        self.activities.append([activity as BmobObject])
                         self.coverImgURLs.append([imageURL])
                     } else {
                         
@@ -57,7 +61,7 @@ class LikedViewController: CTFilteredViewController {
                             
                             ($0[0].objectForKey("Date") as! String).componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2] == monthName})
                         {
-                            self.activities[index].append(activity as! BmobObject)
+                            self.activities[index].append(activity as BmobObject)
                             self.coverImgURLs[index].append(imageURL)
                         }
                         

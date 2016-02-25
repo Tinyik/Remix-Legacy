@@ -20,7 +20,7 @@ override func fetchCloudData() {
         activities = []
         
         
-        var query = BmobQuery(className: "Activity")
+        let query = BmobQuery(className: "Activity")
         query.whereKey("Labels", containedIn: [filterName])
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("isVisibleOnMainList", equalTo: true)

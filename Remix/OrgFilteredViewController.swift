@@ -39,6 +39,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         self.navigationItem.leftBarButtonItem = backItem
         self.navigationItem.rightBarButtonItem = moreInfoItem
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        self.title = orgName
         setParallaxHeaderImage()
         self.navigationController?.navigationBar.translucent = false
         
@@ -70,7 +71,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         activities = []
         
         
-        var query = BmobQuery(className: "Activity")
+        let query = BmobQuery(className: "Activity")
         query.whereKey("Org", equalTo: orgName)
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("isVisibleOnMainList", equalTo: true)
@@ -342,15 +343,14 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         if (activities[indexPath.section][indexPath.row].objectForKey("isFeatured") as! Bool) == true {
             let cell = tableView.dequeueReusableCellWithIdentifier("fullCellReuseIdentifier", forIndexPath: indexPath) as! RMFullCoverCell
             cell.delegate = self
-            cell.titleLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Title") as! String
-            cell.orgLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Org") as! String
-            cell.timeLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Date") as! String
+            cell.titleLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Title") as? String
+            cell.orgLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Org") as? String
+            cell.timeLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Date") as? String
             cell.likesNumberLabel.text = String(activities[indexPath.section][indexPath.row].objectForKey("LikesNumber") as! Int)
             cell.fullImageView.sd_setImageWithURL(coverImgURLs[indexPath.section][indexPath.row])
             let _objId = activities[indexPath.section][indexPath.row].objectId
             cell.objectId = _objId
             let query = BmobQuery(className: "Organization")
-            query.whereKey("isVisibleToUsers", equalTo: true)
             query.whereKey("Name", equalTo: cell.orgLabel.text)
             query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
                 if error == nil {
@@ -371,16 +371,15 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! RMTableViewCell
         cell.delegate = self
-        cell.titleLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Title") as! String
-        cell.desLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Description") as! String
-        cell.orgLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Org") as! String
-        cell.timeLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Date") as! String
+        cell.titleLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Title") as? String
+        cell.desLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Description") as? String
+        cell.orgLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Org") as? String
+        cell.timeLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Date") as? String
         cell.likesNumberLabel.text = String(activities[indexPath.section][indexPath.row].objectForKey("LikesNumber") as! Int)
         cell.themeImg.sd_setImageWithURL(coverImgURLs[indexPath.section][indexPath.row])
         let _objId = activities[indexPath.section][indexPath.row].objectId
         cell.objectId = _objId
         let query = BmobQuery(className: "Organization")
-        query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("Name", equalTo: cell.orgLabel.text)
         query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
             if error == nil {
@@ -402,7 +401,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        var query = BmobQuery(className: "Activity")
+        let query = BmobQuery(className: "Activity")
         let objectId = activities[indexPath.section][indexPath.row].objectId
         query.getObjectInBackgroundWithId(objectId) { (activity, error) -> Void in
             activity.incrementKey("PageView", byAmount: 1)

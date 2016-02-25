@@ -25,6 +25,7 @@ class LocationViewController: UITableViewController, UIGestureRecognizerDelegate
             self.navigationItem.leftBarButtonItem = backItem
             self.navigationController?.interactivePopGestureRecognizer?.delegate = self
             self.navigationController?.navigationBar.translucent = false
+            self.title = "好去处"
             fetchCloudData()
         }
         
@@ -32,7 +33,8 @@ class LocationViewController: UITableViewController, UIGestureRecognizerDelegate
         // MARK: - Table view data sourcey
         
         func fetchCloudData() {
-            var query = BmobQuery(className: "Location")
+         
+            let query = BmobQuery(className: "Location")
             query.whereKey("isVisibleToUsers", equalTo: true)
             query.findObjectsInBackgroundWithBlock { (locationObjects, error) -> Void in
                 if locationObjects.count > 0 {
@@ -42,15 +44,18 @@ class LocationViewController: UITableViewController, UIGestureRecognizerDelegate
                             
                             if let imageFile = location.objectForKey(key) as? BmobFile {
                                 let imageURL = NSURL(string: imageFile.url)!
+
                                 imageURLs.append(imageURL)
                             }
                         }
 
                         self.photoURLArray.append(imageURLs)
                         self.locationObjects.append(location as! BmobObject)
-                         self.tableView.reloadData()
+                        
                        
                     }
+                    print(self.photoURLArray)
+                    self.tableView.reloadData()
                 }
                 
                
@@ -66,7 +71,7 @@ class LocationViewController: UITableViewController, UIGestureRecognizerDelegate
         
         override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             
-            
+        
             return locationObjects.count
         }
         
@@ -75,24 +80,36 @@ class LocationViewController: UITableViewController, UIGestureRecognizerDelegate
             return 1
         }
     
-  
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if locationObjects[indexPath.row].objectForKey("isFeatured") as! Bool == false{
+            return 509
+        }else{
+            return 375
+        }
+    }
         
         
         override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
             if locationObjects[indexPath.row].objectForKey("isFeatured") as! Bool == false {
                 let cell = tableView.dequeueReusableCellWithIdentifier("locationTVCIdentifier") as! LocationTableViewCell
                 cell.photoURLs = photoURLArray[indexPath.row]
+                print("ARRAY")
+                print(photoURLArray[indexPath.row])
+                print("ARRAY")
+             //   print(photoURLArray[indexPath.row][0])
                 cell.parentViewController = self
                 cell.titleLabel.text = locationObjects[indexPath.row].objectForKey("Title") as! String
-                cell.desLabel.text = locationObjects[indexPath.row].objectForKey("Description") as! String
-                cell.orgLabel.text = locationObjects[indexPath.row].objectForKey("Org") as! String
-                cell.locationLabel.text = locationObjects[indexPath.row].objectForKey("Location") as! String
+                cell.desLabel.text = locationObjects[indexPath.row].objectForKey("Description") as? String
+                cell.orgLabel.text = locationObjects[indexPath.row].objectForKey("Org") as? String
+                cell.locationLabel.text = locationObjects[indexPath.row].objectForKey("Location") as? String
+                cell.locationPhotoView.reloadData()
                 return cell
             }else {
                 let cell = tableView.dequeueReusableCellWithIdentifier("locationFullCell") as! LocationFullCoverCell
-                cell.desLabel.text = locationObjects[indexPath.row].objectForKey("Description") as! String
-                cell.orgLabel.text = locationObjects[indexPath.row].objectForKey("Org") as! String
-                cell.locationLabel.text = locationObjects[indexPath.row].objectForKey("Location") as! String
+                cell.desLabel.text = locationObjects[indexPath.row].objectForKey("Description") as? String
+                cell.orgLabel.text = locationObjects[indexPath.row].objectForKey("Org") as? String
+                cell.locationLabel.text = locationObjects[indexPath.row].objectForKey("Location") as? String
                 cell.coverImgView.sd_setImageWithURL(photoURLArray[indexPath.row][0])
                 return cell
             }
@@ -101,7 +118,7 @@ class LocationViewController: UITableViewController, UIGestureRecognizerDelegate
         override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             
             // FIXME: 非空判断
-            var query = BmobQuery(className: "Location")
+            let query = BmobQuery(className: "Location")
             let objectId = locationObjects[indexPath.row].objectId
             query.getObjectInBackgroundWithId(objectId) { (locationObject, error) -> Void in
                 locationObject.incrementKey("PageView", byAmount: 1)
