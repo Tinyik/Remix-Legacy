@@ -151,6 +151,7 @@ class GalleryViewController: UITableViewController, UIGestureRecognizerDelegate 
         cell.parentViewController = self
         cell.orgLabel.text = galleryObjects[indexPath.section][indexPath.row].objectForKey("Org") as! String
         cell.timeLabel.text = galleryObjects[indexPath.section][indexPath.row].objectForKey("Date") as! String
+        cell.galleryView.reloadData()
         return cell
     }
     
