@@ -1267,8 +1267,8 @@
                                     <constraint firstAttribute="width" constant="172" id="eN5-l6-gf4"/>
                                 </constraints>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="V2C-rL-ol6">
-                                <rect key="frame" x="0.0" y="121" width="375" height="500"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="V2C-rL-ol6">
+                                <rect key="frame" x="0.0" y="125" width="375" height="875"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="reuseIdentifier" rowHeight="65" id="qDs-vN-ycj" customClass="SettingsCell" customModule="Remix" customModuleProvider="target">
@@ -1325,6 +1325,8 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="V2C-rL-ol6" firstAttribute="top" secondItem="diF-cL-AEg" secondAttribute="bottom" id="8iu-pz-t2U"/>
+                            <constraint firstItem="Fa8-7p-yRB" firstAttribute="top" secondItem="V2C-rL-ol6" secondAttribute="bottom" id="LJg-nb-knw"/>
                             <constraint firstItem="V2C-rL-ol6" firstAttribute="leading" secondItem="OIb-ed-f6p" secondAttribute="leading" id="MIJ-Sm-LDl"/>
                             <constraint firstItem="diF-cL-AEg" firstAttribute="leading" secondItem="OIb-ed-f6p" secondAttribute="leading" id="Nen-y7-lci"/>
                             <constraint firstItem="H7q-P9-X3m" firstAttribute="centerX" secondItem="OIb-ed-f6p" secondAttribute="centerX" id="OHE-Ci-hVM"/>

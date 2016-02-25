@@ -37,6 +37,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         let blurEffect = UIBlurEffect(style: .Dark)
         let visualEffectView = UIVisualEffectView(effect: blurEffect)
         visualEffectView.frame = blurredAvatarView.frame
+        visualEffectView.frame.size.width = view.frame.size.width
         blurredAvatarView.addSubview(visualEffectView)
         firstTableView.scrollEnabled = true
         firstTableView.separatorInset = UIEdgeInsetsZero
