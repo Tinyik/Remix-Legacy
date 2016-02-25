@@ -83,10 +83,15 @@ class LocationViewController: UITableViewController, UIGestureRecognizerDelegate
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if locationObjects[indexPath.row].objectForKey("isFeatured") as! Bool == false{
-            return 509
-        }else{
+            return UITableViewAutomaticDimension
+        }
+        else{
             return 375
         }
+    }
+    
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 530
     }
         
         

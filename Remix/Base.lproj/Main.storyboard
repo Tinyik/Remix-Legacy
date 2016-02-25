@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -2095,23 +2096,23 @@
         <scene sceneID="AoO-yO-h71">
             <objects>
                 <tableViewController id="7xD-DQ-S5C" customClass="LocationViewController" customModule="Remix" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="516" sectionHeaderHeight="28" sectionFooterHeight="28" id="AwK-ea-4ld">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="530" sectionHeaderHeight="28" sectionFooterHeight="28" id="AwK-ea-4ld">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="locationTVCIdentifier" rowHeight="509" id="kWm-ri-2EW" customClass="LocationTableViewCell" customModule="Remix" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="375" height="509"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="locationTVCIdentifier" rowHeight="530" id="kWm-ri-2EW" customClass="LocationTableViewCell" customModule="Remix" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="375" height="530"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kWm-ri-2EW" id="kwe-kA-vjT">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="508.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="529.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Bru-l4-uqq">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="380"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="380" id="ply-lf-M3g"/>
+                                                <constraint firstAttribute="width" secondItem="Bru-l4-uqq" secondAttribute="height" id="SCo-cl-g05"/>
                                             </constraints>
                                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="3" minimumInteritemSpacing="3" id="NkK-al-rEf">
                                                 <size key="itemSize" width="148" height="139"/>
@@ -2146,19 +2147,13 @@
                                             </cells>
                                         </collectionView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="如何抵抗上海35年来最冷寒冬？" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LLz-LR-t7G">
-                                            <rect key="frame" x="20" y="390" width="335" height="24"/>
+                                            <rect key="frame" x="20" y="395" width="335" height="24"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="看展过程中导师介绍了达利不同阶段的故事，其中包括达利与情人的过往。导师提到达利是位炫妻狂魔" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ifg-gD-rWg">
-                                            <rect key="frame" x="20" y="434" width="335" height="33.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" red="0.47468828909999999" green="0.47468828909999999" blue="0.47468828909999999" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJT-1O-jYl">
-                                            <rect key="frame" x="0.0" y="499" width="375" height="10"/>
+                                            <rect key="frame" x="0.0" y="519" width="375" height="10"/>
                                             <color key="backgroundColor" red="0.95054056190000003" green="0.95054056190000003" blue="0.95054056190000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="10" id="UR0-LN-tVo"/>
@@ -2168,7 +2163,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BookyGreen" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82i-9i-QL6">
-                                            <rect key="frame" x="20" y="474" width="69.5" height="21"/>
+                                            <rect key="frame" x="20" y="479" width="69.5" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="Q6r-dp-ipW"/>
                                             </constraints>
@@ -2177,7 +2172,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DVC-9X-Brn">
-                                            <rect key="frame" x="306" y="475" width="48.5" height="21"/>
+                                            <rect key="frame" x="306" y="480" width="48.5" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="MAH-Un-o5k"/>
                                             </constraints>
@@ -2185,11 +2180,17 @@
                                             <color key="textColor" red="0.57621133209999997" green="0.57621133209999997" blue="0.57621133209999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="看展过程中导师介绍了达利不同阶段的故事，其中包括达利与情人的过往。导师提到达利是位炫妻狂魔" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ifg-gD-rWg">
+                                            <rect key="frame" x="20" y="439" width="335" height="33.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.47468828909999999" green="0.47468828909999999" blue="0.47468828909999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="Ifg-gD-rWg" firstAttribute="top" secondItem="LLz-LR-t7G" secondAttribute="bottom" constant="20" id="3du-mf-bCe"/>
                                         <constraint firstAttribute="trailing" secondItem="LLz-LR-t7G" secondAttribute="trailing" constant="20" id="8AN-so-Esg"/>
-                                        <constraint firstItem="LLz-LR-t7G" firstAttribute="top" secondItem="Bru-l4-uqq" secondAttribute="bottom" constant="10" id="GbS-n6-tkt"/>
+                                        <constraint firstItem="LLz-LR-t7G" firstAttribute="top" secondItem="Bru-l4-uqq" secondAttribute="bottom" constant="20" id="GbS-n6-tkt"/>
                                         <constraint firstItem="82i-9i-QL6" firstAttribute="top" secondItem="Ifg-gD-rWg" secondAttribute="bottom" constant="6.5" id="HIj-7Z-N3O"/>
                                         <constraint firstAttribute="trailing" secondItem="Ifg-gD-rWg" secondAttribute="trailing" constant="20" id="Jsv-bD-Elb"/>
                                         <constraint firstItem="DVC-9X-Brn" firstAttribute="top" secondItem="Ifg-gD-rWg" secondAttribute="bottom" constant="7.5" id="Kxk-9B-kfE"/>
@@ -2197,6 +2198,7 @@
                                         <constraint firstItem="fJT-1O-jYl" firstAttribute="leading" secondItem="kwe-kA-vjT" secondAttribute="leading" id="LqW-Q5-yPH"/>
                                         <constraint firstItem="Ifg-gD-rWg" firstAttribute="leading" secondItem="kwe-kA-vjT" secondAttribute="leading" constant="20" id="Voe-MV-4G0"/>
                                         <constraint firstAttribute="bottom" secondItem="fJT-1O-jYl" secondAttribute="bottom" id="bbu-4A-jra"/>
+                                        <constraint firstItem="fJT-1O-jYl" firstAttribute="top" secondItem="DVC-9X-Brn" secondAttribute="bottom" constant="18" id="n7w-8S-NnT"/>
                                         <constraint firstAttribute="trailing" secondItem="fJT-1O-jYl" secondAttribute="trailing" id="p1d-j0-0HC"/>
                                         <constraint firstItem="82i-9i-QL6" firstAttribute="leading" secondItem="kwe-kA-vjT" secondAttribute="leading" constant="20" id="qLx-Km-fWq"/>
                                         <constraint firstItem="Bru-l4-uqq" firstAttribute="leading" secondItem="kwe-kA-vjT" secondAttribute="leading" id="qoQ-RY-IWj"/>
@@ -2214,7 +2216,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="locationFullCell" rowHeight="375" id="qZH-Yv-zPE" customClass="LocationFullCoverCell" customModule="Remix" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="601" width="375" height="375"/>
+                                <rect key="frame" x="0.0" y="622" width="375" height="375"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qZH-Yv-zPE" id="FT3-th-x44">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="374.5"/>
