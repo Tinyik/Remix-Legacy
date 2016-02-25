@@ -28,6 +28,13 @@ class TermsAndConditionsViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        textView.layoutIfNeeded()
+        textView.setContentOffset(CGPointZero, animated: false)
+    }
 
     override func prefersStatusBarHidden() -> Bool {
         return true

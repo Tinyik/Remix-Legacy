@@ -10,6 +10,10 @@ import UIKit
 
 class TrendingViewController: CTFilteredViewController {
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.title = "热门活动"
+    }
     
     override func setUpParallaxHeaderView() {
         let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(UIImage(named: "TrendingHeader"), forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, 175)) as! ParallaxHeaderView

@@ -126,7 +126,6 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
             let _objId = activities[indexPath.row].objectId
             cell.objectId = _objId
             let query = BmobQuery(className: "Organization")
-            query.whereKey("isVisibleToUsers", equalTo: true)
             query.whereKey("Name", equalTo: cell.orgLabel.text)
             query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
                 if error == nil {
@@ -156,7 +155,6 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
         let _objId = activities[indexPath.row].objectId
         cell.objectId = _objId
         let query = BmobQuery(className: "Organization")
-        query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("Name", equalTo: cell.orgLabel.text)
         query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
             if error == nil {

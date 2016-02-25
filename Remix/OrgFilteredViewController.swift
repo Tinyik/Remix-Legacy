@@ -39,6 +39,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         self.navigationItem.leftBarButtonItem = backItem
         self.navigationItem.rightBarButtonItem = moreInfoItem
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        self.title = orgName
         setParallaxHeaderImage()
         self.navigationController?.navigationBar.translucent = false
         
@@ -350,7 +351,6 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
             let _objId = activities[indexPath.section][indexPath.row].objectId
             cell.objectId = _objId
             let query = BmobQuery(className: "Organization")
-            query.whereKey("isVisibleToUsers", equalTo: true)
             query.whereKey("Name", equalTo: cell.orgLabel.text)
             query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
                 if error == nil {
@@ -380,7 +380,6 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         let _objId = activities[indexPath.section][indexPath.row].objectId
         cell.objectId = _objId
         let query = BmobQuery(className: "Organization")
-        query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("Name", equalTo: cell.orgLabel.text)
         query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
             if error == nil {

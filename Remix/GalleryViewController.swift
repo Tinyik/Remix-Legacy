@@ -30,6 +30,7 @@ class GalleryViewController: UITableViewController, UIGestureRecognizerDelegate 
         self.navigationItem.leftBarButtonItem = backItem
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         self.navigationController?.navigationBar.translucent = false
+        self.title = "往期活动"
         fetchCloudData()
         setUpParallaxHeaderView()
             

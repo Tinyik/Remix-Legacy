@@ -108,7 +108,7 @@ class OrgIntroViewController: UIViewController, UIGestureRecognizerDelegate, MWP
         self.navigationItem.leftBarButtonItem = backItem
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         self.navigationController?.navigationBar.translucent = false
-
+        self.title = orgName + "简介"
         scrollView.contentSize = CGSizeMake(375, 1400)
         scrollView.userInteractionEnabled = true
         mainImageView.contentMode = .ScaleAspectFill
@@ -133,7 +133,6 @@ class OrgIntroViewController: UIViewController, UIGestureRecognizerDelegate, MWP
     func popCurrentVC() {
         self.navigationController?.popViewControllerAnimated(true)
     }
-
     
     func numberOfPhotosInPhotoBrowser(photoBrowser: MWPhotoBrowser!) -> UInt {
         return UInt(photos.count)

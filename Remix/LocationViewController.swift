@@ -25,6 +25,7 @@ class LocationViewController: UITableViewController, UIGestureRecognizerDelegate
             self.navigationItem.leftBarButtonItem = backItem
             self.navigationController?.interactivePopGestureRecognizer?.delegate = self
             self.navigationController?.navigationBar.translucent = false
+            self.title = "好去处"
             fetchCloudData()
         }
         
@@ -75,7 +76,13 @@ class LocationViewController: UITableViewController, UIGestureRecognizerDelegate
             return 1
         }
     
-  
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if locationObjects[indexPath.row].objectForKey("isFeatured") as! Bool == false{
+            return 509
+        }else{
+            return 375
+        }
+    }
         
         
         override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

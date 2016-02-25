@@ -121,6 +121,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     
     
     func presentSecondVC() {
+        if launchedTimes! == 1 && shouldAskToEnableNotif {
+            askToEnableNotifications()
+            shouldAskToEnableNotif = false
+        }
         let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let categoryVC = storyBoard.instantiateViewControllerWithIdentifier("CategoryVC")
         let navigationController = UINavigationController(rootViewController: categoryVC)
@@ -133,6 +137,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     }
     
     func presentThirdVC() {
+        if launchedTimes! == 1 && shouldAskToEnableNotif {
+            askToEnableNotifications()
+            shouldAskToEnableNotif = false
+        }
         let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let orgsVC = storyBoard.instantiateViewControllerWithIdentifier("OrgsVC")
         let navigationController = UINavigationController(rootViewController: orgsVC)
@@ -384,7 +392,6 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 let _objId = activities[indexPath.section][indexPath.row].objectId
                 cell.objectId = _objId
                 let query = BmobQuery(className: "Organization")
-                query.whereKey("isVisibleToUsers", equalTo: true)
                 query.whereKey("Name", equalTo: cell.orgLabel.text)
                 query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
                     if error == nil {
@@ -414,7 +421,6 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         let _objId = activities[indexPath.section][indexPath.row].objectId
         cell.objectId = _objId
             let query = BmobQuery(className: "Organization")
-            query.whereKey("isVisibleToUsers", equalTo: true)
             query.whereKey("Name", equalTo: cell.orgLabel.text)
             query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
                 if error == nil {
