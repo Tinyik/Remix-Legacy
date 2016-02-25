@@ -346,7 +346,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
             cell.titleLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Title") as? String
             cell.orgLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Org") as? String
             cell.timeLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Date") as? String
-            cell.likesNumberLabel.text = String(activities[indexPath.section][indexPath.row].objectForKey("LikesNumber") as? Int)
+            cell.likesNumberLabel.text = String(activities[indexPath.section][indexPath.row].objectForKey("LikesNumber") as! Int)
             cell.fullImageView.sd_setImageWithURL(coverImgURLs[indexPath.section][indexPath.row])
             let _objId = activities[indexPath.section][indexPath.row].objectId
             cell.objectId = _objId
@@ -375,7 +375,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         cell.desLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Description") as? String
         cell.orgLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Org") as? String
         cell.timeLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Date") as? String
-        cell.likesNumberLabel.text = String(activities[indexPath.section][indexPath.row].objectForKey("LikesNumber") as? Int)
+        cell.likesNumberLabel.text = String(activities[indexPath.section][indexPath.row].objectForKey("LikesNumber") as! Int)
         cell.themeImg.sd_setImageWithURL(coverImgURLs[indexPath.section][indexPath.row])
         let _objId = activities[indexPath.section][indexPath.row].objectId
         cell.objectId = _objId

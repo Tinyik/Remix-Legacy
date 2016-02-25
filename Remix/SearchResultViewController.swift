@@ -121,7 +121,7 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
             cell.titleLabel.text = activities[indexPath.row].objectForKey("Title") as? String
             cell.orgLabel.text = activities[indexPath.row].objectForKey("Org") as? String
             cell.timeLabel.text = activities[indexPath.row].objectForKey("Date") as? String
-            cell.likesNumberLabel.text = String(activities[indexPath.row].objectForKey("LikesNumber") as? Int)
+            cell.likesNumberLabel.text = String(activities[indexPath.row].objectForKey("LikesNumber") as! Int)
             cell.fullImageView.sd_setImageWithURL(coverImgURLs[indexPath.row])
             let _objId = activities[indexPath.row].objectId
             cell.objectId = _objId
@@ -150,7 +150,7 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
         cell.desLabel.text = activities[indexPath.row].objectForKey("Description") as? String
         cell.orgLabel.text = activities[indexPath.row].objectForKey("Org") as? String
         cell.timeLabel.text = activities[indexPath.row].objectForKey("Date") as? String
-        cell.likesNumberLabel.text = String(activities[indexPath.row].objectForKey("LikesNumber") as? Int)
+        cell.likesNumberLabel.text = String(activities[indexPath.row].objectForKey("LikesNumber") as! Int)
         cell.themeImg.sd_setImageWithURL(coverImgURLs[indexPath.row])
         let _objId = activities[indexPath.row].objectId
         cell.objectId = _objId
