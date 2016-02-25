@@ -2220,28 +2220,49 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="374.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cyl-8Z-n7q">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cyl-8Z-n7q">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BookyGreen" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dh0-bD-tjk">
-                                            <rect key="frame" x="13" y="345" width="84" height="21"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4lT-sg-umd">
+                                            <rect key="frame" x="0.0" y="0.5" width="375" height="374.5"/>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29653776978417268" colorSpace="calibratedRGB"/>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BookyGreen" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dh0-bD-tjk">
+                                            <rect key="frame" x="20" y="338" width="74.5" height="16"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ltK-Hf-IZg">
-                                            <rect key="frame" x="172" y="345" width="189" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ltK-Hf-IZg">
+                                            <rect key="frame" x="303" y="338" width="52" height="16"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="看展过程中导师介绍了达利不同阶段的故事，其中包括达利与情人的过往。导师提到达利是位炫妻狂魔" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axO-rh-FtD">
-                                            <rect key="frame" x="12" y="279.5" width="353" height="80.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="看展过程中导师介绍了达利不同阶段的故事，其中包括达利与情人的过往。导师提到达利是位炫妻狂魔" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axO-rh-FtD">
+                                            <rect key="frame" x="20" y="284" width="335" height="33.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="Cyl-8Z-n7q" secondAttribute="trailing" id="4jq-cR-KP3"/>
+                                        <constraint firstAttribute="trailing" secondItem="ltK-Hf-IZg" secondAttribute="trailing" constant="20" id="H4L-t3-HFy"/>
+                                        <constraint firstItem="axO-rh-FtD" firstAttribute="leading" secondItem="FT3-th-x44" secondAttribute="leading" constant="20" id="Kya-DE-7QK"/>
+                                        <constraint firstAttribute="bottom" secondItem="ltK-Hf-IZg" secondAttribute="bottom" constant="20" id="Rok-ty-iJ7"/>
+                                        <constraint firstItem="Cyl-8Z-n7q" firstAttribute="leading" secondItem="FT3-th-x44" secondAttribute="leading" id="VGK-0a-ZOk"/>
+                                        <constraint firstItem="4lT-sg-umd" firstAttribute="top" secondItem="FT3-th-x44" secondAttribute="top" id="VuI-Nu-hAj"/>
+                                        <constraint firstAttribute="trailing" secondItem="axO-rh-FtD" secondAttribute="trailing" constant="20" id="WYR-vI-7lb"/>
+                                        <constraint firstAttribute="trailing" secondItem="4lT-sg-umd" secondAttribute="trailing" id="al5-NO-KeF"/>
+                                        <constraint firstItem="Cyl-8Z-n7q" firstAttribute="top" secondItem="FT3-th-x44" secondAttribute="top" id="bVO-Jy-pNd"/>
+                                        <constraint firstItem="dh0-bD-tjk" firstAttribute="leading" secondItem="FT3-th-x44" secondAttribute="leading" constant="20" id="bqo-KR-Qal"/>
+                                        <constraint firstAttribute="bottom" secondItem="4lT-sg-umd" secondAttribute="bottom" id="fR3-2L-AWf"/>
+                                        <constraint firstAttribute="bottom" secondItem="Cyl-8Z-n7q" secondAttribute="bottom" id="l5B-io-YaW"/>
+                                        <constraint firstAttribute="bottom" secondItem="dh0-bD-tjk" secondAttribute="bottom" constant="20" id="mbc-hf-2yM"/>
+                                        <constraint firstItem="ltK-Hf-IZg" firstAttribute="top" secondItem="axO-rh-FtD" secondAttribute="bottom" constant="20" id="nuC-cS-MOX"/>
+                                        <constraint firstItem="4lT-sg-umd" firstAttribute="leading" secondItem="FT3-th-x44" secondAttribute="leading" id="oE2-dU-doP"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="coverImgView" destination="Cyl-8Z-n7q" id="fJW-So-rZF"/>

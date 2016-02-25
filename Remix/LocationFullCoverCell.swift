@@ -21,10 +21,12 @@ class LocationFullCoverCell: UITableViewCell {
         super.awakeFromNib()
         coverImgView.contentMode = .ScaleAspectFill
         coverImgView.clipsToBounds = true
-        let maskView = UIView(frame: coverImgView.frame)
-        maskView.backgroundColor = .blackColor()
-        maskView.alpha = 0.3
-        coverImgView.addSubview(maskView)
+        
+        // Moved to IB
+//        let maskView = UIView(frame: coverImgView.frame)
+//        maskView.backgroundColor = .blackColor()
+//        maskView.alpha = 0.3
+//        coverImgView.addSubview(maskView)
     }
 
  
