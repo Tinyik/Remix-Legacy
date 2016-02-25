@@ -96,7 +96,7 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
         logoURLs = []
         names = []
         
-        var query = BmobQuery(className: "Organization")
+        let query = BmobQuery(className: "Organization")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.findObjectsInBackgroundWithBlock { (organizations, error) -> Void in
             for org in organizations {

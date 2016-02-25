@@ -153,7 +153,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
 
     
     func fetchCloudAdvertisement() {
-        var query = BmobQuery(className: "HeaderPromotion")
+        let query = BmobQuery(className: "HeaderPromotion")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.findObjectsInBackgroundWithBlock { (ads, error) -> Void in
             var adImageURLs: [NSURL] = []
@@ -195,7 +195,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         activities = []
         
         
-        var query = BmobQuery(className: "Activity")
+        let query = BmobQuery(className: "Activity")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("isVisibleOnMainList", equalTo: true)
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
@@ -384,10 +384,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 
                 let cell = tableView.dequeueReusableCellWithIdentifier("fullCellReuseIdentifier", forIndexPath: indexPath) as! RMFullCoverCell
                 cell.delegate = self
-                cell.titleLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Title") as! String
-                cell.orgLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Org") as! String
-                cell.timeLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Date") as! String
-                cell.likesNumberLabel.text = String(activities[indexPath.section][indexPath.row].objectForKey("LikesNumber") as! Int)
+                cell.titleLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Title") as? String
+                cell.orgLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Org") as? String
+                cell.timeLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Date") as? String
+                cell.likesNumberLabel.text = String(activities[indexPath.section][indexPath.row].objectForKey("LikesNumber") as? Int)
                   cell.fullImageView.sd_setImageWithURL(coverImgURLs[indexPath.section][indexPath.row])
                 let _objId = activities[indexPath.section][indexPath.row].objectId
                 cell.objectId = _objId
@@ -412,11 +412,11 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! RMTableViewCell
         cell.delegate = self
-        cell.titleLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Title") as! String
-        cell.desLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Description") as! String
-        cell.orgLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Org") as! String
-        cell.timeLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Date") as! String
-        cell.likesNumberLabel.text = String(activities[indexPath.section][indexPath.row].objectForKey("LikesNumber") as! Int)
+        cell.titleLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Title") as? String
+        cell.desLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Description") as? String
+        cell.orgLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Org") as? String
+        cell.timeLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Date") as? String
+        cell.likesNumberLabel.text = String(activities[indexPath.section][indexPath.row].objectForKey("LikesNumber") as? Int)
         cell.themeImg.sd_setImageWithURL(coverImgURLs[indexPath.section][indexPath.row])
         let _objId = activities[indexPath.section][indexPath.row].objectId
         cell.objectId = _objId
@@ -557,7 +557,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         }
         if tableView == adTableView {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            var query = BmobQuery(className: "BannerPromotion")
+            let query = BmobQuery(className: "BannerPromotion")
             let objectId = bannerAds[randomAdIndex].objectId
             query.getObjectInBackgroundWithId(objectId) { (ad, error) -> Void in
                 ad.incrementKey("PageView", byAmount: 1)
@@ -580,7 +580,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         if tableView == self.tableView {
             
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            var query = BmobQuery(className: "Activity")
+            let query = BmobQuery(className: "Activity")
             let objectId = activities[indexPath.section][indexPath.row].objectId
             query.getObjectInBackgroundWithId(objectId) { (activity, error) -> Void in
                 activity.incrementKey("PageView", byAmount: 1)

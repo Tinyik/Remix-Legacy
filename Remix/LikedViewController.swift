@@ -53,7 +53,7 @@ class LikedViewController: CTFilteredViewController {
                     
                     if self.isMonthAdded(monthName) == false {
                         self.monthNameStrings.append(monthName)
-                        self.activities.append([activity as! BmobObject])
+                        self.activities.append([activity as BmobObject])
                         self.coverImgURLs.append([imageURL])
                     } else {
                         
@@ -61,7 +61,7 @@ class LikedViewController: CTFilteredViewController {
                             
                             ($0[0].objectForKey("Date") as! String).componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2] == monthName})
                         {
-                            self.activities[index].append(activity as! BmobObject)
+                            self.activities[index].append(activity as BmobObject)
                             self.coverImgURLs[index].append(imageURL)
                         }
                         

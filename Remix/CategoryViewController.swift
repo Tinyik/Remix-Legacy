@@ -159,7 +159,7 @@ class CategoryViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var query = BmobQuery(className: "Category")
+        let query = BmobQuery(className: "Category")
         query.whereKey("Name", equalTo: cloudCoverTitles[indexPath.row])
         query.findObjectsInBackgroundWithBlock { (categories, error) -> Void in
             if error == nil {
