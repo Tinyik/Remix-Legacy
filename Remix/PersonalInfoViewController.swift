@@ -69,6 +69,9 @@ class PersonalInfoViewController: UITableViewController, UIGestureRecognizerDele
         if let legalName = currentUser.objectForKey("LegalName") as? String {
             cell.detailLabel.text = legalName
             cell.currentValue = legalName
+            if legalName == "" {
+                cell.detailLabel.text = "必填"
+            }
         }else{
             cell.detailLabel.text = "必填"
             }
@@ -79,6 +82,9 @@ class PersonalInfoViewController: UITableViewController, UIGestureRecognizerDele
         if let school = currentUser.objectForKey("School") as? String {
             cell.detailLabel.text = school
             cell.currentValue = school
+            if school == "" {
+                cell.detailLabel.text = "必填"
+            }
         }else{
             cell.detailLabel.text = "必填"
             }
@@ -90,6 +96,9 @@ class PersonalInfoViewController: UITableViewController, UIGestureRecognizerDele
         if let userName = currentUser.objectForKey("username") as? String {
             cell.detailLabel.text = userName
             cell.currentValue = userName
+            if userName == "" {
+                cell.detailLabel.text = "必填"
+            }
         }else{
             cell.detailLabel.text = "必填"
             }
@@ -101,6 +110,9 @@ class PersonalInfoViewController: UITableViewController, UIGestureRecognizerDele
         if let email = currentUser.objectForKey("email") as? String {
             cell.detailLabel.text = email
             cell.currentValue = email
+            if email == "" {
+                cell.detailLabel.text = "必填"
+            }
         }else{
             cell.detailLabel.text = "必填"
             }
@@ -117,6 +129,9 @@ class PersonalInfoViewController: UITableViewController, UIGestureRecognizerDele
             if let weibo = currentUser.objectForKey("Weibo") as? String {
                 cell.detailLabel.text = weibo
                 cell.currentValue = weibo
+                if weibo == "" {
+                    cell.detailLabel.text = "未设置"
+                }
             }else{
                 cell.detailLabel.text = "未设置"
                 }
@@ -127,6 +142,9 @@ class PersonalInfoViewController: UITableViewController, UIGestureRecognizerDele
             if let wechat = currentUser.objectForKey("Wechat") as? String {
                 cell.detailLabel.text = wechat
                 cell.currentValue = wechat
+                if wechat == "" {
+                    cell.detailLabel.text = "建议填写"
+                }
             }else{
                 cell.detailLabel.text = "建议填写"
                 }

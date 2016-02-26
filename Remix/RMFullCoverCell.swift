@@ -10,6 +10,12 @@ import UIKit
 
 class RMFullCoverCell: MGSwipeTableCell {
    
+    
+    @IBOutlet weak var payButton: UIButton!
+    
+    @IBOutlet weak var priceTag: UILabel!
+    
+    
     @IBOutlet weak var fullImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
@@ -20,6 +26,7 @@ class RMFullCoverCell: MGSwipeTableCell {
     
     @IBOutlet weak var orgLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
+    var parentViewController: RMTableViewController!
     var likeButtonTitle = ""
     var likeImage = UIImage(named: "Like")
     var objectId = ""
@@ -49,4 +56,9 @@ class RMFullCoverCell: MGSwipeTableCell {
         orgLogo.layer.masksToBounds = true
         orgLogo.layer.cornerRadius = orgLogo.frame.size.height/2
     }
+    
+    @IBAction func payForActivity(sender: UIButton) {
+        parentViewController.registerForActivity(self)
+    }
+
 }

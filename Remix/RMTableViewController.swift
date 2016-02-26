@@ -20,10 +20,12 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var headerScrollView: UIScrollView!
     @IBOutlet weak var adTableView: UITableView!
+    @IBOutlet weak var floatingScrollView: UIScrollView!
     
     var shouldAskToEnableNotif = true
     var coverImgURLs: [[NSURL]] = []
     var activities: [[BmobObject]] = []
+    var floatingActivities: [BmobObject] = []
     var monthNameStrings: [String] = []
     var dateLabel: UILabel!
     var likedActivitiesIds: [String] = []
@@ -71,6 +73,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         self.refreshControl = refreshCtrl
         setUpViews()
         fetchCloudData()
+        fetchFloatingActivities()
         fetchCloudAdvertisement()
         
           }
@@ -175,7 +178,50 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             shouldAskToEnableNotif = false
         }
     }
+    
+    func fetchFloatingActivities() {
+        let query = BmobQuery(className: "FloatingActivity")
+        query.whereKey("isVisibleToUsers", equalTo: true)
+        query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
+            var imageURLs: [NSURL] = []
+            for activity in activities {
+                let imageURL = NSURL(string: (activity.objectForKey("CoverImg") as! BmobFile).url)
+                imageURLs.append(imageURL!)
+                self.floatingActivities.append(activity as! BmobObject)
+            }
+            let elementWidth: CGFloat = 170 + 15
+            self.floatingScrollView.contentSize = CGSizeMake(elementWidth*CGFloat(activities.count), self.floatingScrollView.frame.height)
+            self.floatingScrollView.userInteractionEnabled = true
+            for var i = 0; i < activities.count; ++i {
+                let fView = FloatingActivityView.loadFromNibNamed("FloatingActivityView") as! FloatingActivityView
+                fView.tag = i
+                fView.frame = CGRectMake(elementWidth*CGFloat(i), 0, elementWidth, 185)
+                fView.imageView.sd_setImageWithURL(imageURLs[i])
+                let tap = UITapGestureRecognizer(target: self, action: "handleFloatingViewSelection:")
+                fView.addGestureRecognizer(tap)
+                fView.titleLabel.text = self.floatingActivities[i].objectForKey("Title") as! String
+                if let price = self.floatingActivities[i].objectForKey("Price") as? Double {
+                    if price != 0 {
+                        let priceNumberFont = UIFont.systemFontOfSize(17)
+                        let attrDic1 = [NSFontAttributeName:priceNumberFont]
+                        let priceString = NSMutableAttributedString(string: String(price), attributes: attrDic1)
+                        let currencyFont = UIFont.systemFontOfSize(13)
+                        let attrDic2 = [NSFontAttributeName:currencyFont]
+                        let currencyString = NSMutableAttributedString(string: "元", attributes: attrDic2)
+                        priceString.appendAttributedString(currencyString)
+                        fView.priceTag.attributedText = priceString
+                        fView.payButton.hidden = false
+                    }else{
+                        fView.priceTag.text = "免费"
+                        fView.payButton.hidden = true
+                    }
 
+                }
+                self.floatingScrollView.addSubview(fView)
+            }
+            
+        }
+    }
     
     func fetchCloudAdvertisement() {
         let query = BmobQuery(className: "HeaderPromotion")
@@ -269,6 +315,28 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
          self.refreshControl?.endRefreshing()
     }
     
+    
+    func checkPersonalInfoIntegrity() -> Bool {
+        currentUser = BmobUser.getCurrentUser()
+        if currentUser.objectForKey("LegalName") == nil || currentUser.objectForKey("LegalName") as! String == "" {
+            return false
+        }
+        
+        if currentUser.objectForKey("School") == nil || currentUser.objectForKey("School") as! String == ""{
+            return false
+        }
+        
+        if currentUser.objectForKey("username") == nil || currentUser.objectForKey("username") as! String == ""{
+            return false
+        }
+        
+        if currentUser.objectForKey("email") == nil || currentUser.objectForKey("email") as! String == ""{
+            return false
+        }
+        
+        return true
+    }
+    
     func isMonthAdded(monthName: String) -> Bool {
         
         for _date in monthNameStrings {
@@ -277,6 +345,23 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             }
         }
         return false
+    }
+    
+    func handleFloatingViewSelection(sender: UIGestureRecognizer) {
+        if launchedTimes! == 1 && shouldAskToEnableNotif {
+            askToEnableNotifications()
+            shouldAskToEnableNotif = false
+        }
+        let targetURL = NSURL(string: floatingActivities[(sender.view?.tag)!].objectForKey("URL") as! String)
+        if #available(iOS 9.0, *) {
+            
+            let safariView = SFSafariViewController(URL: targetURL!, entersReaderIfAvailable: true)
+            safariView.view.tintColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
+            self.navigationController?.presentViewController(safariView, animated: true, completion: nil)
+        } else {
+            let webView = RxWebViewController(url: targetURL)
+            self.navigationController?.pushViewController(webView, animated: true)
+        }
     }
     
     func handlePromoSelection(sender: UIGestureRecognizer) {
@@ -410,6 +495,23 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 
                 let cell = tableView.dequeueReusableCellWithIdentifier("fullCellReuseIdentifier", forIndexPath: indexPath) as! RMFullCoverCell
                 cell.delegate = self
+                cell.parentViewController = self
+                if let price = activities[indexPath.section][indexPath.row].objectForKey("Price") as? Double {
+                    if price != 0 {
+                        let priceNumberFont = UIFont.systemFontOfSize(19)
+                        let attrDic1 = [NSFontAttributeName:priceNumberFont]
+                        let priceString = NSMutableAttributedString(string: String(price), attributes: attrDic1)
+                        let currencyFont = UIFont.systemFontOfSize(13)
+                        let attrDic2 = [NSFontAttributeName:currencyFont]
+                        let currencyString = NSMutableAttributedString(string: "元/人", attributes: attrDic2)
+                        priceString.appendAttributedString(currencyString)
+                        cell.priceTag.attributedText = priceString
+                        cell.payButton.hidden = false
+                    }else{
+                        cell.priceTag.text = "免费"
+                        cell.payButton.hidden = true
+                    }
+                }
                 cell.titleLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Title") as? String
                 cell.orgLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Org") as? String
                 cell.timeLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Date") as? String
@@ -599,33 +701,34 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     
     func registerForActivity(cell: MGSwipeTableCell) {
         
-        let indexPath = self.tableView.indexPathForCell(cell)
-        let activity = self.activities[indexPath!.section][indexPath!.row]
-        let orgName = activity.objectForKey("Org") as? String
-        if let price = activity.objectForKey("Price") as? Double {
-            if price != 0 {
-//                if IOSVersion.SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO("9.2") {
-//                    
-//                    
-//                    if PKPaymentAuthorizationViewController.canMakePayments() {
-//                        let payment = PKPaymentRequest()
-//                        let item = PKPaymentSummaryItem(label: orgName!, amount: NSDecimalNumber(double: price))
-//                        payment.paymentSummaryItems = [item]
-//                        payment.currencyCode = "CNY"
-//                        payment.countryCode = "CN"
-//                        payment.merchantIdentifier = "merchant.com.fongtinyik.remix"
-//                        if #available(iOS 9.0, *) {
-//                            payment.merchantCapabilities = [.Capability3DS, .CapabilityCredit, .CapabilityDebit, .CapabilityEMV]
-//                        }
-//                        if #available(iOS 9.2, *) {
-//                            payment.supportedNetworks = [PKPaymentNetworkChinaUnionPay]
-//                        }
-//                        let payVC = PKPaymentAuthorizationViewController(paymentRequest: payment)
-//                        payVC.delegate = self
-//                        self.presentViewController(payVC, animated: true, completion: nil)
-//                        
-//                    }
-//                }else{
+        if checkPersonalInfoIntegrity() {
+            let indexPath = self.tableView.indexPathForCell(cell)
+            let activity = self.activities[indexPath!.section][indexPath!.row]
+            let orgName = activity.objectForKey("Org") as? String
+            if let price = activity.objectForKey("Price") as? Double {
+                if price != 0 {
+                    //                if IOSVersion.SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO("9.2") {
+                    //
+                    //
+                    //                    if PKPaymentAuthorizationViewController.canMakePayments() {
+                    //                        let payment = PKPaymentRequest()
+                    //                        let item = PKPaymentSummaryItem(label: orgName!, amount: NSDecimalNumber(double: price))
+                    //                        payment.paymentSummaryItems = [item]
+                    //                        payment.currencyCode = "CNY"
+                    //                        payment.countryCode = "CN"
+                    //                        payment.merchantIdentifier = "merchant.com.fongtinyik.remix"
+                    //                        if #available(iOS 9.0, *) {
+                    //                            payment.merchantCapabilities = [.Capability3DS, .CapabilityCredit, .CapabilityDebit, .CapabilityEMV]
+                    //                        }
+                    //                        if #available(iOS 9.2, *) {
+                    //                            payment.supportedNetworks = [PKPaymentNetworkChinaUnionPay]
+                    //                        }
+                    //                        let payVC = PKPaymentAuthorizationViewController(paymentRequest: payment)
+                    //                        payVC.delegate = self
+                    //                        self.presentViewController(payVC, animated: true, completion: nil)
+                    //
+                    //                    }
+                    //                }else{
                     let bPay = BmobPay()
                     bPay.delegate = self
                     bPay.price = NSNumber(double: price)
@@ -634,11 +737,21 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                     bPay.appScheme = "BmobPay"
                     bPay.payInBackground()
                     
-//                }
-                
+                    //                }
+                    
+                }
             }
-        }
 
+        }else{
+            let alert = UIAlertController(title: "完善信息", message: "请先进入账户设置完善个人信息后再继续报名参加活动。", preferredStyle: .Alert)
+            let action = UIAlertAction(title: "去设置", style: .Default, handler: { (action) -> Void in
+                self.presentSettingsVC()
+            })
+            let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+            alert.addAction(action)
+            alert.addAction(cancel)
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
     }
     
   

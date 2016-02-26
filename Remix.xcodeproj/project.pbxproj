@@ -141,6 +141,8 @@
 		18E2392C1C8029D300363655 /* PersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2392B1C8029D300363655 /* PersonalInfoViewController.swift */; };
 		18E2392E1C802A1800363655 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2392D1C802A1800363655 /* InfoCell.swift */; };
 		18E239301C80392800363655 /* SettingsInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2392F1C80392800363655 /* SettingsInputViewController.swift */; };
+		18E239321C805E1600363655 /* FloatingActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E239311C805E1600363655 /* FloatingActivityView.swift */; };
+		18E239341C805E2D00363655 /* FloatingActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E239331C805E2D00363655 /* FloatingActivityView.xib */; };
 		C65AC89D9691BD7F666EED10 /* Pods_Remix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B1D0C0C5F1570ADFFD72F7 /* Pods_Remix.framework */; };
 /* End PBXBuildFile section */
 
@@ -353,6 +355,8 @@
 		18E2392B1C8029D300363655 /* PersonalInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalInfoViewController.swift; sourceTree = "<group>"; };
 		18E2392D1C802A1800363655 /* InfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
 		18E2392F1C80392800363655 /* SettingsInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsInputViewController.swift; sourceTree = "<group>"; };
+		18E239311C805E1600363655 /* FloatingActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingActivityView.swift; sourceTree = "<group>"; };
+		18E239331C805E2D00363655 /* FloatingActivityView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FloatingActivityView.xib; sourceTree = "<group>"; };
 		29B1D0C0C5F1570ADFFD72F7 /* Pods_Remix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Remix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		935D89E2C8FE64DFD0F2D2DC /* Pods-Remix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Remix.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Remix/Pods-Remix.debug.xcconfig"; sourceTree = "<group>"; };
 		E7316228DE2D22A22A1955AE /* Pods-Remix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Remix.release.xcconfig"; path = "Pods/Target Support Files/Pods-Remix/Pods-Remix.release.xcconfig"; sourceTree = "<group>"; };
@@ -595,6 +599,8 @@
 				189782511C63C7EF00458515 /* Main.storyboard */,
 				18BCA0351C6EE29F00DF3EC7 /* RMWebViewController.swift */,
 				1824544F1C7FA16C00CF0CC6 /* VersionCheck.swift */,
+				18E239311C805E1600363655 /* FloatingActivityView.swift */,
+				18E239331C805E2D00363655 /* FloatingActivityView.xib */,
 				1898CA4A1C6900B8009D3261 /* RegLoginViewController.swift */,
 				180199551C79E25F00A6C7E4 /* TermsAndConditionsViewController.swift */,
 				180199531C79C14700A6C7E4 /* TrendingViewController.swift */,
@@ -1015,6 +1021,7 @@
 				187745941C6ACB1D000427C7 /* UMSLoginViewController.xib in Resources */,
 				187745911C6ACB1D000427C7 /* UMSCommentInputControlleriPad.xib in Resources */,
 				187AE3321C66128C00B255FF /* Assets.xcassets in Resources */,
+				18E239341C805E2D00363655 /* FloatingActivityView.xib in Resources */,
 				189782531C63C7EF00458515 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1194,6 +1201,7 @@
 				184857141C63E5BC004E516A /* CTTableViewCell.swift in Sources */,
 				18E2392E1C802A1800363655 /* InfoCell.swift in Sources */,
 				1898CA8A1C69B599009D3261 /* OMINTransitionAnimation.swift in Sources */,
+				18E239321C805E1600363655 /* FloatingActivityView.swift in Sources */,
 				18BCA03D1C6F827900DF3EC7 /* LabelFilteredViewController.swift in Sources */,
 				1897827E1C63C8F500458515 /* RMTableViewCell.swift in Sources */,
 				18BCA0331C6E490A00DF3EC7 /* LocationPhotoCell.swift in Sources */,
