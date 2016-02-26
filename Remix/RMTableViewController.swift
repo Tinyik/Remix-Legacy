@@ -79,7 +79,6 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     func setUpViews() {
         adTableView.separatorStyle = .None
         searchBar.searchBarStyle = .Minimal
-        
         self.tableView.separatorColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.4)
         let view = UIView(frame: CGRectMake((self.navigationController?.navigationBar.frame.size.width)!/2 - 80,0, 160, 35))
         let moreButton = UIButton(frame: CGRectMake(0,0,25,25))
@@ -119,8 +118,8 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         pageControl.numberOfPages = adTargetURLs.count
         pageControl.currentPage = 0
         pageControl.tintColor = UIColor.blackColor()
-        pageControl.pageIndicatorTintColor = UIColor(white: 0.2, alpha: 0.8)
-        pageControl.currentPageIndicatorTintColor = UIColor(white: 0.9, alpha: 0.8)
+        pageControl.pageIndicatorTintColor = UIColor(white: 0.4, alpha: 0.8)
+        pageControl.currentPageIndicatorTintColor = UIColor.whiteColor()
         self.view.addSubview(pageControl)
         
     }
@@ -450,7 +449,9 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                     let currencyString = NSMutableAttributedString(string: "元/人", attributes: attrDic2)
                     priceString.appendAttributedString(currencyString)
                     cell.priceTag.attributedText = priceString
+                    cell.payButton.hidden = false
                 }else{
+                    cell.priceTag.text = "免费"
                     cell.payButton.hidden = true
                 }
             }

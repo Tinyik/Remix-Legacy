@@ -17,13 +17,14 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBOutlet weak var firstTableView: UITableView!
     
+    @IBOutlet weak var userNameLabel: UILabel!
     
     
     var tr_presentTransition: TRViewControllerTransitionDelegate?
     let currentUser = BmobUser.getCurrentUser()
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+        userNameLabel.text = currentUser.objectForKey("username") as? String
         self.navigationController?.navigationBar.translucent = false
         let closeButton = UIButton(frame: CGRectMake(0,0,27,27))
         closeButton.setImage(UIImage(named: "close"), forState: .Normal)
@@ -41,7 +42,6 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         blurredAvatarView.addSubview(visualEffectView)
         firstTableView.scrollEnabled = true
         firstTableView.separatorInset = UIEdgeInsetsZero
-        
 //        let avatarURL = NSURL(string:(BmobUser.getCurrentUser().objectForKey("Avatar") as! BmobFile).url)
 //        let manager = SDWebImageManager()
 //        manager.downloadImageWithURL(avatarURL, options: SDWebImageOptions.RetryFailed, progress: nil) { (avatar, error, cacheType, finished, url) -> Void in

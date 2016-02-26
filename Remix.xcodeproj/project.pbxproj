@@ -138,6 +138,8 @@
 		18C9A1E71C67B99200A80A22 /* TTUITableViewZoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C9A1E61C67B99200A80A22 /* TTUITableViewZoomController.m */; };
 		18C9A1F71C687DA200A80A22 /* UIImageView+BetterFace.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C9A1F61C687DA200A80A22 /* UIImageView+BetterFace.m */; };
 		18D731B41C719B1800DECA1E /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D731B31C719B1800DECA1E /* GuideViewController.swift */; };
+		18E2392C1C8029D300363655 /* PersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2392B1C8029D300363655 /* PersonalInfoViewController.swift */; };
+		18E2392E1C802A1800363655 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2392D1C802A1800363655 /* InfoCell.swift */; };
 		C65AC89D9691BD7F666EED10 /* Pods_Remix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B1D0C0C5F1570ADFFD72F7 /* Pods_Remix.framework */; };
 /* End PBXBuildFile section */
 
@@ -347,6 +349,8 @@
 		18C9A1F51C687DA200A80A22 /* UIImageView+BetterFace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+BetterFace.h"; sourceTree = "<group>"; };
 		18C9A1F61C687DA200A80A22 /* UIImageView+BetterFace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+BetterFace.m"; sourceTree = "<group>"; };
 		18D731B31C719B1800DECA1E /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
+		18E2392B1C8029D300363655 /* PersonalInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalInfoViewController.swift; sourceTree = "<group>"; };
+		18E2392D1C802A1800363655 /* InfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
 		29B1D0C0C5F1570ADFFD72F7 /* Pods_Remix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Remix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		935D89E2C8FE64DFD0F2D2DC /* Pods-Remix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Remix.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Remix/Pods-Remix.debug.xcconfig"; sourceTree = "<group>"; };
 		E7316228DE2D22A22A1955AE /* Pods-Remix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Remix.release.xcconfig"; path = "Pods/Target Support Files/Pods-Remix/Pods-Remix.release.xcconfig"; sourceTree = "<group>"; };
@@ -751,6 +755,8 @@
 			isa = PBXGroup;
 			children = (
 				187AE32D1C65ECBB00B255FF /* SettingsViewController.swift */,
+				18E2392B1C8029D300363655 /* PersonalInfoViewController.swift */,
+				18E2392D1C802A1800363655 /* InfoCell.swift */,
 				187AE32F1C65F69200B255FF /* SettingsCell.swift */,
 				1877459E1C6AF492000427C7 /* DetailedSettingsCell.swift */,
 			);
@@ -1132,6 +1138,7 @@
 				1899E9C91C670FFB00ADC2AC /* GalleryTableViewCell.swift in Sources */,
 				185489AF1C67485F00A8E5C1 /* UIImage+WebP.m in Sources */,
 				185489B11C67485F00A8E5C1 /* UIImageView+WebCache.m in Sources */,
+				18E2392C1C8029D300363655 /* PersonalInfoViewController.swift in Sources */,
 				1898CA4B1C6900B8009D3261 /* RegLoginViewController.swift in Sources */,
 				185489A91C67485F00A8E5C1 /* SDWebImageDownloaderOperation.m in Sources */,
 				1898CA881C69B599009D3261 /* FadeTransitionAnimation.swift in Sources */,
@@ -1182,6 +1189,7 @@
 				18B317C41C6B183000336A92 /* OrgFilteredViewController.swift in Sources */,
 				185489AD1C67485F00A8E5C1 /* UIImage+GIF.m in Sources */,
 				184857141C63E5BC004E516A /* CTTableViewCell.swift in Sources */,
+				18E2392E1C802A1800363655 /* InfoCell.swift in Sources */,
 				1898CA8A1C69B599009D3261 /* OMINTransitionAnimation.swift in Sources */,
 				18BCA03D1C6F827900DF3EC7 /* LabelFilteredViewController.swift in Sources */,
 				1897827E1C63C8F500458515 /* RMTableViewCell.swift in Sources */,
