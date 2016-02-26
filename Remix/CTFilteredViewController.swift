@@ -310,7 +310,7 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
             cell.orgLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Org") as? String
             cell.timeLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Date") as? String
             cell.likesNumberLabel.text = String(activities[indexPath.section][indexPath.row].objectForKey("LikesNumber") as! Int)
-            cell.fullImageView.sd_setImageWithURL(coverImgURLs[indexPath.section][indexPath.row])
+            cell.fullImageView.sd_setImageWithURL(coverImgURLs[indexPath.section][indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
             let _objId = activities[indexPath.section][indexPath.row].objectId
             cell.objectId = _objId
             let query = BmobQuery(className: "Organization")
@@ -319,7 +319,7 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
                 if error == nil {
                     for org in organizations {
                         let url = NSURL(string: (org.objectForKey("Logo") as! BmobFile).url)
-                        cell.orgLogo.sd_setImageWithURL(url)
+                        cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                     }
                 }
             })
@@ -339,7 +339,7 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
         cell.orgLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Org") as? String
         cell.timeLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Date") as? String
         cell.likesNumberLabel.text = String(activities[indexPath.section][indexPath.row].objectForKey("LikesNumber") as! Int)
-        cell.themeImg.sd_setImageWithURL(coverImgURLs[indexPath.section][indexPath.row])
+        cell.themeImg.sd_setImageWithURL(coverImgURLs[indexPath.section][indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
         let _objId = activities[indexPath.section][indexPath.row].objectId
         cell.objectId = _objId
         let query = BmobQuery(className: "Organization")
@@ -348,7 +348,7 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
             if error == nil {
                 for org in organizations {
                     let url = NSURL(string: (org.objectForKey("Logo") as! BmobFile).url)
-                    cell.orgLogo.sd_setImageWithURL(url)
+                    cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                 }
             }
         })

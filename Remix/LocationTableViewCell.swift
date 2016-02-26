@@ -72,7 +72,7 @@ class LocationTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColl
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = locationPhotoView.dequeueReusableCellWithReuseIdentifier("locationCVCReuseIdentifier", forIndexPath: indexPath) as! LocationPhotoCell
         
-        cell.photoView.sd_setImageWithURL(photoURLs[indexPath.row])
+        cell.photoView.sd_setImageWithURL(photoURLs[indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
         return cell
     }
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {

@@ -146,8 +146,7 @@ class CategoryViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! CTTableViewCell
-        
-        cell.coverImageView.sd_setImageWithURL(coverImageURLs[indexPath.row])
+        cell.coverImageView.sd_setImageWithURL(coverImageURLs[indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
         cell.titleLabel.text = coverTitles[indexPath.row]
         
         return cell

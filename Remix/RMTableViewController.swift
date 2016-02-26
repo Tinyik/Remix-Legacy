@@ -196,7 +196,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 let fView = FloatingActivityView.loadFromNibNamed("FloatingActivityView") as! FloatingActivityView
                 fView.tag = i
                 fView.frame = CGRectMake(elementWidth*CGFloat(i), 0, elementWidth, 185)
-                fView.imageView.sd_setImageWithURL(imageURLs[i])
+                fView.imageView.sd_setImageWithURL(imageURLs[i], placeholderImage: UIImage(named: "SDPlaceholder"))
                 let tap = UITapGestureRecognizer(target: self, action: "handleFloatingViewSelection:")
                 fView.addGestureRecognizer(tap)
                 fView.titleLabel.text = self.floatingActivities[i].objectForKey("Title") as! String
@@ -249,7 +249,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 headerImageView.userInteractionEnabled = true
                 let tap = UITapGestureRecognizer(target: self, action: "handlePromoSelection:")
                 headerImageView.addGestureRecognizer(tap)
-                headerImageView.sd_setImageWithURL(adImageURLs[i])
+                headerImageView.sd_setImageWithURL(adImageURLs[i], placeholderImage: UIImage(named: "SDPlaceholder"))
                 self.headerScrollView.addSubview(headerImageView)
                 
             }
@@ -485,7 +485,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                      self.randomAdIndex = Int(arc4random_uniform(UInt32(self.bannerAds.count)))
                     let adImageURL = NSURL(string:(self.bannerAds[self.randomAdIndex].objectForKey("AdImage") as! BmobFile).url)
     
-                    cell.adImageView.sd_setImageWithURL(adImageURL)
+                    cell.adImageView.sd_setImageWithURL(adImageURL, placeholderImage: UIImage(named: "SDPlaceholder"))
                     
                 }
             })
@@ -516,7 +516,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 cell.orgLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Org") as? String
                 cell.timeLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Date") as? String
                 cell.likesNumberLabel.text = String(activities[indexPath.section][indexPath.row].objectForKey("LikesNumber") as! Int)
-                  cell.fullImageView.sd_setImageWithURL(coverImgURLs[indexPath.section][indexPath.row])
+                  cell.fullImageView.sd_setImageWithURL(coverImgURLs[indexPath.section][indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
                 let _objId = activities[indexPath.section][indexPath.row].objectId
                 cell.objectId = _objId
                 let query = BmobQuery(className: "Organization")
@@ -525,7 +525,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                     if error == nil {
                         for org in organizations {
                             let url = NSURL(string: (org.objectForKey("Logo") as! BmobFile).url)
-                            cell.orgLogo.sd_setImageWithURL(url)
+                            cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                         }
                     }
                 })
@@ -562,7 +562,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         cell.orgLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Org") as? String
         cell.timeLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Date") as? String
         cell.likesNumberLabel.text = String(activities[indexPath.section][indexPath.row].objectForKey("LikesNumber") as! Int)
-        cell.themeImg.sd_setImageWithURL(coverImgURLs[indexPath.section][indexPath.row])
+        cell.themeImg.sd_setImageWithURL(coverImgURLs[indexPath.section][indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
         let _objId = activities[indexPath.section][indexPath.row].objectId
         cell.objectId = _objId
             let query = BmobQuery(className: "Organization")
@@ -571,7 +571,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 if error == nil {
                     for org in organizations {
                         let url = NSURL(string: (org.objectForKey("Logo") as! BmobFile).url)
-                        cell.orgLogo.sd_setImageWithURL(url)
+                        cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                     }
                 }
             })

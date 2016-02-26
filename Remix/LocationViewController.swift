@@ -115,7 +115,7 @@ class LocationViewController: UITableViewController, UIGestureRecognizerDelegate
                 cell.desLabel.text = locationObjects[indexPath.row].objectForKey("Description") as? String
                 cell.orgLabel.text = locationObjects[indexPath.row].objectForKey("Org") as? String
                 cell.locationLabel.text = locationObjects[indexPath.row].objectForKey("Location") as? String
-                cell.coverImgView.sd_setImageWithURL(photoURLArray[indexPath.row][0])
+                cell.coverImgView.sd_setImageWithURL(photoURLArray[indexPath.row][0], placeholderImage: UIImage(named: "SDPlaceholder"))
                 return cell
             }
         }

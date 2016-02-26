@@ -73,7 +73,7 @@ class GalleryTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLayout,
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = galleryView.dequeueReusableCellWithReuseIdentifier("galleryCVCReuseIdentifier", forIndexPath: indexPath) as! GalleryCell
-        cell.photoView.sd_setImageWithURL(photoURLs[indexPath.row])
+        cell.photoView.sd_setImageWithURL(photoURLs[indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
          
         return cell
     }

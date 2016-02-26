@@ -122,7 +122,7 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
             cell.orgLabel.text = activities[indexPath.row].objectForKey("Org") as? String
             cell.timeLabel.text = activities[indexPath.row].objectForKey("Date") as? String
             cell.likesNumberLabel.text = String(activities[indexPath.row].objectForKey("LikesNumber") as! Int)
-            cell.fullImageView.sd_setImageWithURL(coverImgURLs[indexPath.row])
+            cell.fullImageView.sd_setImageWithURL(coverImgURLs[indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
             let _objId = activities[indexPath.row].objectId
             cell.objectId = _objId
             let query = BmobQuery(className: "Organization")
@@ -131,7 +131,7 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
                 if error == nil {
                     for org in organizations {
                         let url = NSURL(string: (org.objectForKey("Logo") as! BmobFile).url)
-                        cell.orgLogo.sd_setImageWithURL(url)
+                        cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                     }
                 }
             })
@@ -151,7 +151,7 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
         cell.orgLabel.text = activities[indexPath.row].objectForKey("Org") as? String
         cell.timeLabel.text = activities[indexPath.row].objectForKey("Date") as? String
         cell.likesNumberLabel.text = String(activities[indexPath.row].objectForKey("LikesNumber") as! Int)
-        cell.themeImg.sd_setImageWithURL(coverImgURLs[indexPath.row])
+        cell.themeImg.sd_setImageWithURL(coverImgURLs[indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
         let _objId = activities[indexPath.row].objectId
         cell.objectId = _objId
         let query = BmobQuery(className: "Organization")
@@ -160,7 +160,7 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
             if error == nil {
                 for org in organizations {
                     let url = NSURL(string: (org.objectForKey("Logo") as! BmobFile).url)
-                    cell.orgLogo.sd_setImageWithURL(url)
+                    cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                 }
             }
         })
@@ -328,7 +328,7 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = trendingLabelsCollectionView.dequeueReusableCellWithReuseIdentifier("reuseIdentifier", forIndexPath: indexPath) as! TrendingLabelCell
-        cell.imageView.sd_setImageWithURL(labelImageURLs[indexPath.row])
+        cell.imageView.sd_setImageWithURL(labelImageURLs[indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
         cell.nameLabel.text = labelNames[indexPath.row]
         
         

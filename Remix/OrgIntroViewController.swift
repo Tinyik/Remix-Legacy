@@ -38,11 +38,11 @@ class OrgIntroViewController: UIViewController, UIGestureRecognizerDelegate, MWP
                 }
                 if let image1 = organization.objectForKey("IntroImage1") as? BmobFile {
                     let url = NSURL(string: image1.url)
-                    self.mainImageView.sd_setImageWithURL(url)
+                    self.mainImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                 }
                 if let image2 = organization.objectForKey("IntroImage2") as? BmobFile {
                     let url = NSURL(string: image2.url)
-                    self.secondImageView.sd_setImageWithURL(url)
+                    self.secondImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                 }
                 if let title1 = organization.objectForKey("IntroTitle1") as? String {
                     self.firstLabel.text = title1
