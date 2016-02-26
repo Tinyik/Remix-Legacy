@@ -40,6 +40,7 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
         self.navigationItem.leftBarButtonItem = backItem
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         self.navigationController?.navigationBar.translucent = false
+        self.title = "搜索"
        fetchTrendingLabels()
     }
 

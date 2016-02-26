@@ -27,17 +27,14 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchCloudData()
-        let moreInfo = UIButton(type: .InfoDark)
-        moreInfo.setTitle("简介", forState: .Normal)
-        moreInfo.tintColor = .blackColor()
-        moreInfo.addTarget(self, action: "showOrgIntroView", forControlEvents: .TouchUpInside)
+
         let backButton = UIButton(frame: CGRectMake(0,0,30,30))
         backButton.setImage(UIImage(named: "back"), forState: .Normal)
         backButton.addTarget(self, action: "popCurrentVC", forControlEvents: .TouchUpInside)
         let backItem = UIBarButtonItem(customView: backButton)
-        let moreInfoItem = UIBarButtonItem(customView: moreInfo)
         self.navigationItem.leftBarButtonItem = backItem
-        self.navigationItem.rightBarButtonItem = moreInfoItem
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "关于我们", style: .Plain, target: self, action: "showOrgIntroView")
+        self.navigationItem.rightBarButtonItem?.tintColor = .blackColor()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         self.title = orgName
         setParallaxHeaderImage()
@@ -47,14 +44,17 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func setUpParallaxHeaderView() {
-        let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(headerImage, forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, 250)) as! ParallaxHeaderView
+        let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(headerImage, forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.width*0.667)) as! ParallaxHeaderView
         self.tableView.tableHeaderView = headerView
 //        headerView.headerTitleLabel.text = orgName
         
     }
     
     override func viewDidAppear(animated: Bool) {
-        (tableView.tableHeaderView as! ParallaxHeaderView).refreshBlurViewForNewImage()
+        if let headerView = tableView.tableHeaderView as? ParallaxHeaderView {
+            headerView.refreshBlurViewForNewImage()
+        }
+        
         super.viewDidAppear(animated)
     }
     

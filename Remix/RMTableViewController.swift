@@ -189,13 +189,13 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 imageURLs.append(imageURL!)
                 self.floatingActivities.append(activity as! BmobObject)
             }
-            let elementWidth: CGFloat = 170 + 15
-            self.floatingScrollView.contentSize = CGSizeMake(elementWidth*CGFloat(activities.count) + 15, self.floatingScrollView.frame.height)
+            let elementWidth: CGFloat = 170 + 12
+            self.floatingScrollView.contentSize = CGSizeMake(elementWidth*CGFloat(activities.count) + 12, self.floatingScrollView.frame.height)
             self.floatingScrollView.userInteractionEnabled = true
             for var i = 0; i < activities.count; ++i {
                 let fView = FloatingActivityView.loadFromNibNamed("FloatingActivityView") as! FloatingActivityView
                 fView.tag = i
-                fView.frame = CGRectMake(15 + elementWidth*CGFloat(i), 0, elementWidth, 185)
+                fView.frame = CGRectMake(5 + elementWidth*CGFloat(i), 0, elementWidth, 185)
                 fView.imageView.sd_setImageWithURL(imageURLs[i], placeholderImage: UIImage(named: "SDPlaceholder"))
                 let tap = UITapGestureRecognizer(target: self, action: "handleFloatingViewSelection:")
                 fView.addGestureRecognizer(tap)
@@ -682,10 +682,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                     self.currentUser.updateInBackground()
                 }
                 if let _cell = cell as? RMTableViewCell {
-                    cell.rightButtons[1].setTitle(_cell.likeButtonTitle, forState: .Normal)
+                    cell.rightButtons[2].setTitle(_cell.likeButtonTitle, forState: .Normal)
                 }
                 if let _cell = cell as? RMFullCoverCell {
-                    cell.rightButtons[1].setTitle(_cell.likeButtonTitle, forState: .Normal)
+                    cell.rightButtons[2].setTitle(_cell.likeButtonTitle, forState: .Normal)
                 }
                 return true
             })

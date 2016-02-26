@@ -44,6 +44,8 @@ class SettingsInputViewController: UIViewController, SettingInputViewDelegate, U
         backButton.addTarget(self, action: "popCurrentVC", forControlEvents: .TouchUpInside)
         let backItem = UIBarButtonItem(customView: backButton)
         self.navigationItem.leftBarButtonItem = backItem
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "保存", style: .Plain, target: self, action: "safeEditedInformation")
+        self.navigationItem.rightBarButtonItem?.tintColor = .blackColor()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         self.navigationController?.navigationBar.translucent = false
         self.title = editingKey
