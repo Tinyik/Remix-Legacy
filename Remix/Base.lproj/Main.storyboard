@@ -2884,20 +2884,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFo-1p-Gz1">
-                                <rect key="frame" x="10" y="69" width="345" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" red="0.46754655934343436" green="0.46754655934343436" blue="0.46754655934343436" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" background="TextFieldBG" translatesAutoresizingMaskIntoConstraints="NO" id="G8N-aP-SbP">
-                                <rect key="frame" x="10" y="28" width="345" height="40"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" background="TextFieldBG" translatesAutoresizingMaskIntoConstraints="NO" id="G8N-aP-SbP">
+                                <rect key="frame" x="16" y="40" width="343" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="wmc-Mf-1Yd"/>
+                                </constraints>
                                 <color key="textColor" red="0.27667297979797978" green="0.27667297979797978" blue="0.27667297979797978" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFo-1p-Gz1">
+                                <rect key="frame" x="16" y="92" width="343" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.46754655934343436" green="0.46754655934343436" blue="0.46754655934343436" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="G8N-aP-SbP" firstAttribute="top" secondItem="O5T-gX-3wz" secondAttribute="bottom" constant="20" id="Dgy-bn-cHo"/>
+                            <constraint firstItem="JFo-1p-Gz1" firstAttribute="top" secondItem="G8N-aP-SbP" secondAttribute="bottom" constant="12" id="T06-yb-f0H"/>
+                            <constraint firstItem="JFo-1p-Gz1" firstAttribute="trailing" secondItem="oar-Ni-Sa9" secondAttribute="trailingMargin" id="UfT-tA-djy"/>
+                            <constraint firstItem="JFo-1p-Gz1" firstAttribute="leading" secondItem="oar-Ni-Sa9" secondAttribute="leadingMargin" id="cFg-cg-ori"/>
+                            <constraint firstItem="G8N-aP-SbP" firstAttribute="trailing" secondItem="oar-Ni-Sa9" secondAttribute="trailingMargin" id="flf-Tq-ey1"/>
+                            <constraint firstItem="G8N-aP-SbP" firstAttribute="leading" secondItem="oar-Ni-Sa9" secondAttribute="leadingMargin" id="xkj-zE-Ea0"/>
+                        </constraints>
                         <connections>
                             <action selector="backGroundTap:" destination="gcr-cw-VaL" eventType="touchUpInside" id="pwE-Qf-2Ka"/>
                         </connections>
