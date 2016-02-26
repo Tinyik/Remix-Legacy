@@ -32,6 +32,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     var randomAdIndex = Int()
     var currentUser = BmobUser.getCurrentUser()
     var launchedTimes: Int!
+    var pageControl = UIPageControl(frame: CGRectMake(80, 240, 200, 50))
     
 
     func updateLaunchedTimes() {
@@ -64,6 +65,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         self.tableView.delegate = self
         self.tableView.dataSource = self
         searchBar.delegate = self
+        headerScrollView.delegate = self
         let refreshCtrl = UIRefreshControl()
         refreshCtrl.addTarget(self, action: "refresh", forControlEvents: .ValueChanged)
         self.refreshControl = refreshCtrl
@@ -75,7 +77,6 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     
     
     func setUpViews() {
-    
         adTableView.separatorStyle = .None
         searchBar.searchBarStyle = .Minimal
         
@@ -110,6 +111,30 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         view.addSubview(button3)
         button2.addTarget(self, action: "presentSecondVC", forControlEvents: .TouchUpInside)
         button3.addTarget(self, action: "presentThirdVC", forControlEvents: .TouchUpInside)
+    }
+    
+    func configurePageControl() {
+       
+        pageControl.addTarget(self, action: Selector("changePage:"), forControlEvents: UIControlEvents.ValueChanged)
+        pageControl.numberOfPages = adTargetURLs.count
+        pageControl.currentPage = 0
+        pageControl.tintColor = UIColor.blackColor()
+        pageControl.pageIndicatorTintColor = UIColor(white: 0.2, alpha: 0.8)
+        pageControl.currentPageIndicatorTintColor = UIColor(white: 0.9, alpha: 0.8)
+        self.view.addSubview(pageControl)
+        
+    }
+    
+    func changePage(sender: AnyObject) -> () {
+        let x = CGFloat(pageControl.currentPage) * headerScrollView.frame.size.width
+        headerScrollView.setContentOffset(CGPointMake(x, 0), animated: true)
+    }
+    
+    override func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        if scrollView == headerScrollView {
+        let pageNumber = round(scrollView.contentOffset.x / scrollView.frame.size.width)
+        pageControl.currentPage = Int(pageNumber)
+        }
     }
     
     func presentSettingsVC() {
@@ -181,10 +206,11 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 headerImageView.addGestureRecognizer(tap)
                 headerImageView.sd_setImageWithURL(adImageURLs[i])
                 self.headerScrollView.addSubview(headerImageView)
+                
             }
         
-        
-     
+        self.configurePageControl()
+        self.pageControl.frame.origin.x = UIScreen.mainScreen().bounds.size.width/2 - self.pageControl.frame.size.width/2
         }
     
     }
@@ -282,7 +308,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             }
         }
         }
-        return 138
+        return 166
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -413,6 +439,21 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! RMTableViewCell
         cell.delegate = self
+        cell.parentViewController = self
+            if let price = activities[indexPath.section][indexPath.row].objectForKey("Price") as? Double {
+                if price != 0 {
+                    let priceNumberFont = UIFont.systemFontOfSize(19)
+                    let attrDic1 = [NSFontAttributeName:priceNumberFont]
+                    let priceString = NSMutableAttributedString(string: String(price), attributes: attrDic1)
+                    let currencyFont = UIFont.systemFontOfSize(13)
+                    let attrDic2 = [NSFontAttributeName:currencyFont]
+                    let currencyString = NSMutableAttributedString(string: "元/人", attributes: attrDic2)
+                    priceString.appendAttributedString(currencyString)
+                    cell.priceTag.attributedText = priceString
+                }else{
+                    cell.payButton.hidden = true
+                }
+            }
         cell.titleLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Title") as? String
         cell.desLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Description") as? String
         cell.orgLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Org") as? String
@@ -447,7 +488,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             swipeSettings.transition = .Border
             expansionSettings.fillOnTrigger = false
             expansionSettings.threshold = 1.5
-            expansionSettings.buttonIndex = 1
+            expansionSettings.buttonIndex = 2
         var likeButtonTitle: String!
         if let _cell = cell as? RMTableViewCell {
             likeButtonTitle = _cell.likeButtonTitle
@@ -474,48 +515,9 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 
                 return true
             })
-            let registerButton = MGSwipeButton(title: "报名", backgroundColor: UIColor(white: 0.95, alpha: 1), callback: { (sender) -> Bool in
+            let registerButton = MGSwipeButton(title: "报名", backgroundColor: UIColor(white: 0.925, alpha: 1), callback: { (sender) -> Bool in
                 
-                    let indexPath = self.tableView.indexPathForCell(cell)
-                    let activity = self.activities[indexPath!.section][indexPath!.row]
-                    let orgName = activity.objectForKey("Org") as? String
-                    if let price = activity.objectForKey("Price") as? Double {
-                        if price != 0 {
-                           if IOSVersion.SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO("9.2") {
-                                
-                            
-                            if PKPaymentAuthorizationViewController.canMakePayments() {
-                                let payment = PKPaymentRequest()
-                                let item = PKPaymentSummaryItem(label: orgName!, amount: NSDecimalNumber(double: price))
-                                payment.paymentSummaryItems = [item]
-                                payment.currencyCode = "CNY"
-                                payment.countryCode = "CN"
-                                payment.merchantIdentifier = "merchant.com.fongtinyik.remix"
-                                if #available(iOS 9.0, *) {
-                                    payment.merchantCapabilities = [.Capability3DS, .CapabilityCredit, .CapabilityDebit, .CapabilityEMV]
-                                }
-                                if #available(iOS 9.2, *) {
-                                    payment.supportedNetworks = [PKPaymentNetworkChinaUnionPay]
-                                }
-                                let payVC = PKPaymentAuthorizationViewController(paymentRequest: payment)
-                                payVC.delegate = self
-                                self.presentViewController(payVC, animated: true, completion: nil)
-
-                                }
-                            }else{
-                                let bPay = BmobPay()
-                                bPay.delegate = self
-                                bPay.price = NSNumber(double: price)
-                                bPay.productName = orgName! + "活动报名费"
-                                bPay.body = "Test"
-                                bPay.appScheme = "BmobPay"
-                                bPay.payInBackground()
-                                
-                            }
-                            
-                    }
-                }
-                
+                self.registerForActivity(cell)
                 
                 return true
             })
@@ -594,7 +596,49 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     }
     
     
-    
+    func registerForActivity(cell: MGSwipeTableCell) {
+        
+        let indexPath = self.tableView.indexPathForCell(cell)
+        let activity = self.activities[indexPath!.section][indexPath!.row]
+        let orgName = activity.objectForKey("Org") as? String
+        if let price = activity.objectForKey("Price") as? Double {
+            if price != 0 {
+//                if IOSVersion.SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO("9.2") {
+//                    
+//                    
+//                    if PKPaymentAuthorizationViewController.canMakePayments() {
+//                        let payment = PKPaymentRequest()
+//                        let item = PKPaymentSummaryItem(label: orgName!, amount: NSDecimalNumber(double: price))
+//                        payment.paymentSummaryItems = [item]
+//                        payment.currencyCode = "CNY"
+//                        payment.countryCode = "CN"
+//                        payment.merchantIdentifier = "merchant.com.fongtinyik.remix"
+//                        if #available(iOS 9.0, *) {
+//                            payment.merchantCapabilities = [.Capability3DS, .CapabilityCredit, .CapabilityDebit, .CapabilityEMV]
+//                        }
+//                        if #available(iOS 9.2, *) {
+//                            payment.supportedNetworks = [PKPaymentNetworkChinaUnionPay]
+//                        }
+//                        let payVC = PKPaymentAuthorizationViewController(paymentRequest: payment)
+//                        payVC.delegate = self
+//                        self.presentViewController(payVC, animated: true, completion: nil)
+//                        
+//                    }
+//                }else{
+                    let bPay = BmobPay()
+                    bPay.delegate = self
+                    bPay.price = NSNumber(double: price)
+                    bPay.productName = orgName! + "活动报名费"
+                    bPay.body = "Test"
+                    bPay.appScheme = "BmobPay"
+                    bPay.payInBackground()
+                    
+//                }
+                
+            }
+        }
+
+    }
     
   
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -698,6 +742,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     func paymentAuthorizationViewControllerDidFinish(controller: PKPaymentAuthorizationViewController) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
+    
     
     func paySuccess() {
         let alert = UIAlertController(title: "支付状态", message: "支付成功！", preferredStyle: .Alert)

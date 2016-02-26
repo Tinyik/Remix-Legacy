@@ -25,10 +25,6 @@ class LocationTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColl
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        for photoURL in photoURLs {
-            print(photoURLs.count)
-            photos.append(MWPhoto(URL: photoURL)!)
-        }
         locationPhotoView.delegate = self
         locationPhotoView.dataSource = self
         locationPhotoView.scrollEnabled = false
@@ -80,7 +76,10 @@ class LocationTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColl
         return cell
     }
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
+        for photoURL in photoURLs {
+            print(photoURLs.count)
+            photos.append(MWPhoto(URL: photoURL)!)
+        }
         let browser = MWPhotoBrowser(delegate: self)
         browser.setCurrentPhotoIndex(UInt(indexPath.row))
         self.parentViewController.navigationController?.pushViewController(browser, animated: true)
