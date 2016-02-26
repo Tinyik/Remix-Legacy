@@ -2749,25 +2749,50 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="vKn-Bo-OkE"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <segue destination="gcr-cw-VaL" kind="push" identifier="ShowInputView" id="C9g-Qb-h8b"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NsK-tO-U7S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1855.5" y="-383.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings Input View Controller-->
         <scene sceneID="0hB-XU-if7">
             <objects>
-                <viewController id="gcr-cw-VaL" sceneMemberID="viewController">
+                <viewController id="gcr-cw-VaL" customClass="SettingsInputViewController" customModule="Remix" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="O5T-gX-3wz"/>
                         <viewControllerLayoutGuide type="bottom" id="Pff-Zt-uoM"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="oar-Ni-Sa9">
+                    <view key="view" contentMode="scaleToFill" id="oar-Ni-Sa9" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFo-1p-Gz1">
+                                <rect key="frame" x="10" y="69" width="345" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.46754655934343436" green="0.46754655934343436" blue="0.46754655934343436" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" background="TextFieldBG" translatesAutoresizingMaskIntoConstraints="NO" id="G8N-aP-SbP">
+                                <rect key="frame" x="10" y="28" width="345" height="40"/>
+                                <color key="textColor" red="0.27667297979797978" green="0.27667297979797978" blue="0.27667297979797978" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="backGroundTap:" destination="gcr-cw-VaL" eventType="touchUpInside" id="pwE-Qf-2Ka"/>
+                        </connections>
                     </view>
+                    <navigationItem key="navigationItem" id="TBo-lD-aEU"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="explanationLabel" destination="JFo-1p-Gz1" id="Wgs-5y-sbA"/>
+                        <outlet property="inputField" destination="G8N-aP-SbP" id="1HI-fr-CRJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kKB-AF-VNQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3246,6 +3271,7 @@
         <image name="LoginButton" width="393" height="99"/>
         <image name="Logo" width="381" height="187"/>
         <image name="Placeholder" width="108" height="96"/>
+        <image name="TextFieldBG" width="326" height="45"/>
         <image name="Trending" width="252" height="252"/>
         <image name="Unlike" width="110" height="90"/>
     </resources>

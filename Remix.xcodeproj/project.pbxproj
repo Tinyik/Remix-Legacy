@@ -140,6 +140,7 @@
 		18D731B41C719B1800DECA1E /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D731B31C719B1800DECA1E /* GuideViewController.swift */; };
 		18E2392C1C8029D300363655 /* PersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2392B1C8029D300363655 /* PersonalInfoViewController.swift */; };
 		18E2392E1C802A1800363655 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2392D1C802A1800363655 /* InfoCell.swift */; };
+		18E239301C80392800363655 /* SettingsInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2392F1C80392800363655 /* SettingsInputViewController.swift */; };
 		C65AC89D9691BD7F666EED10 /* Pods_Remix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B1D0C0C5F1570ADFFD72F7 /* Pods_Remix.framework */; };
 /* End PBXBuildFile section */
 
@@ -351,6 +352,7 @@
 		18D731B31C719B1800DECA1E /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		18E2392B1C8029D300363655 /* PersonalInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalInfoViewController.swift; sourceTree = "<group>"; };
 		18E2392D1C802A1800363655 /* InfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
+		18E2392F1C80392800363655 /* SettingsInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsInputViewController.swift; sourceTree = "<group>"; };
 		29B1D0C0C5F1570ADFFD72F7 /* Pods_Remix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Remix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		935D89E2C8FE64DFD0F2D2DC /* Pods-Remix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Remix.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Remix/Pods-Remix.debug.xcconfig"; sourceTree = "<group>"; };
 		E7316228DE2D22A22A1955AE /* Pods-Remix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Remix.release.xcconfig"; path = "Pods/Target Support Files/Pods-Remix/Pods-Remix.release.xcconfig"; sourceTree = "<group>"; };
@@ -756,6 +758,7 @@
 			children = (
 				187AE32D1C65ECBB00B255FF /* SettingsViewController.swift */,
 				18E2392B1C8029D300363655 /* PersonalInfoViewController.swift */,
+				18E2392F1C80392800363655 /* SettingsInputViewController.swift */,
 				18E2392D1C802A1800363655 /* InfoCell.swift */,
 				187AE32F1C65F69200B255FF /* SettingsCell.swift */,
 				1877459E1C6AF492000427C7 /* DetailedSettingsCell.swift */,
@@ -1209,6 +1212,7 @@
 				1898CA841C69B599009D3261 /* UITabBarController+TRTransition.swift in Sources */,
 				180199561C79E25F00A6C7E4 /* TermsAndConditionsViewController.swift in Sources */,
 				1897824E1C63C7EF00458515 /* AppDelegate.swift in Sources */,
+				18E239301C80392800363655 /* SettingsInputViewController.swift in Sources */,
 				181F2B301C6A2D8D00FC237D /* RxWebViewController.m in Sources */,
 				1898CA8C1C69B599009D3261 /* PopTipTransitionAnimation.swift in Sources */,
 				18BCA02F1C6E48D400DF3EC7 /* LocationFullCoverCell.swift in Sources */,

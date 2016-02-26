@@ -12,7 +12,10 @@ class InfoCell: UITableViewCell {
 
      @IBOutlet weak var titleLabel: UILabel!
      @IBOutlet weak var detailLabel: UILabel!
-    
+    var editingPropertyKey: String!
+    var placeHolder: String!
+    var explanationText: String!
+    var currentValue = ""
 
     override func awakeFromNib() {
         super.awakeFromNib()

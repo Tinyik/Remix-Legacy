@@ -11,6 +11,8 @@ import UIKit
 class PersonalInfoViewController: UITableViewController, UIGestureRecognizerDelegate {
     var currentUser = BmobUser.getCurrentUser()
     
+    var delegate: SettingInputViewDelegate!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let backButton = UIButton(frame: CGRectMake(0,0,30,30))
@@ -22,6 +24,12 @@ class PersonalInfoViewController: UITableViewController, UIGestureRecognizerDele
         self.navigationController?.navigationBar.translucent = false
         self.title = "账户设置"
        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        print("WILLAPPEAR")
+        currentUser = BmobUser.getCurrentUser()
+        self.tableView.reloadData()
     }
     
     func popCurrentVC() {
@@ -54,26 +62,45 @@ class PersonalInfoViewController: UITableViewController, UIGestureRecognizerDele
         if indexPath.section == 0 {
         switch indexPath.row {
         case 0: cell.titleLabel.text = "姓名"
+        cell.editingPropertyKey = "LegalName"
+        cell.placeHolder = "姓名"
+        cell.explanationText = "姓名将被活动主办方用于进行签到与联络。"
+
         if let legalName = currentUser.objectForKey("LegalName") as? String {
             cell.detailLabel.text = legalName
+            cell.currentValue = legalName
         }else{
             cell.detailLabel.text = "必填"
             }
         case 1: cell.titleLabel.text = "学校或单位"
+                cell.editingPropertyKey = "School"
+                cell.placeHolder = "学校或单位"
+                cell.explanationText = "学校信息将被活动主办方用于统计参与者数据和进行资源配置。"
         if let school = currentUser.objectForKey("School") as? String {
             cell.detailLabel.text = school
+            cell.currentValue = school
         }else{
             cell.detailLabel.text = "必填"
             }
         case 2: cell.titleLabel.text = "昵称"
+        cell.editingPropertyKey = "username"
+        cell.placeHolder = "Remix昵称"
+        cell.explanationText = "昵称将是Remix中他人识别你的标志。"
+
         if let userName = currentUser.objectForKey("username") as? String {
             cell.detailLabel.text = userName
+            cell.currentValue = userName
         }else{
             cell.detailLabel.text = "必填"
             }
         case 3: cell.titleLabel.text = "邮箱"
+        cell.editingPropertyKey = "email"
+        cell.placeHolder = "常用邮箱"
+        cell.explanationText = "邮箱地址信息将被活动主办方用于联络与信息更新。"
+
         if let email = currentUser.objectForKey("email") as? String {
             cell.detailLabel.text = email
+            cell.currentValue = email
         }else{
             cell.detailLabel.text = "必填"
             }
@@ -84,14 +111,22 @@ class PersonalInfoViewController: UITableViewController, UIGestureRecognizerDele
         if indexPath.section == 1 {
             switch indexPath.row {
             case 0: cell.titleLabel.text = "新浪微博"
+            cell.editingPropertyKey = "Weibo"
+            cell.placeHolder = "微博用户名"
+            cell.explanationText = ""
             if let weibo = currentUser.objectForKey("Weibo") as? String {
                 cell.detailLabel.text = weibo
+                cell.currentValue = weibo
             }else{
                 cell.detailLabel.text = "未设置"
                 }
             case 1: cell.titleLabel.text = "微信"
+            cell.editingPropertyKey = "Wechat"
+            cell.placeHolder = "微信号"
+            cell.explanationText = "微信号将被活动主办方用于联络。"
             if let wechat = currentUser.objectForKey("Wechat") as? String {
                 cell.detailLabel.text = wechat
+                cell.currentValue = wechat
             }else{
                 cell.detailLabel.text = "建议填写"
                 }
@@ -120,49 +155,21 @@ class PersonalInfoViewController: UITableViewController, UIGestureRecognizerDele
         
         return nil
     }
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+   
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        performSegueWithIdentifier("ShowInputView", sender: tableView.cellForRowAtIndexPath(indexPath))
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "ShowInputView" {
+            if let inputView = segue.destinationViewController as? SettingsInputViewController {
+                self.delegate = inputView
+                self.delegate.setEditingPropertyKey((sender as! InfoCell).editingPropertyKey!)
+                self.delegate.setExplanationLabelText((sender as! InfoCell).explanationText!)
+                self.delegate.setInputFieldPlaceHolder((sender as! InfoCell).placeHolder!)
+                self.delegate.setInputFieldText((sender as! InfoCell).currentValue)
+            }
+        }
     }
-    */
-
 }

@@ -21,10 +21,9 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     var tr_presentTransition: TRViewControllerTransitionDelegate?
-    let currentUser = BmobUser.getCurrentUser()
+    var currentUser = BmobUser.getCurrentUser()
     override func viewDidLoad() {
         super.viewDidLoad()
-        userNameLabel.text = currentUser.objectForKey("username") as? String
         self.navigationController?.navigationBar.translucent = false
         let closeButton = UIButton(frame: CGRectMake(0,0,27,27))
         closeButton.setImage(UIImage(named: "close"), forState: .Normal)
@@ -57,7 +56,10 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
       
     }
     
-   
+    override func viewWillAppear(animated: Bool) {
+        currentUser = BmobUser.getCurrentUser()
+        userNameLabel.text = currentUser.objectForKey("username") as? String
+    }
     
 //    func imageSelected(image: UIImage!) {
 //        let avatarData = UIImagePNGRepresentation(image)
