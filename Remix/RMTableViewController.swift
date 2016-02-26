@@ -190,12 +190,12 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 self.floatingActivities.append(activity as! BmobObject)
             }
             let elementWidth: CGFloat = 170 + 15
-            self.floatingScrollView.contentSize = CGSizeMake(elementWidth*CGFloat(activities.count), self.floatingScrollView.frame.height)
+            self.floatingScrollView.contentSize = CGSizeMake(elementWidth*CGFloat(activities.count) + 15, self.floatingScrollView.frame.height)
             self.floatingScrollView.userInteractionEnabled = true
             for var i = 0; i < activities.count; ++i {
                 let fView = FloatingActivityView.loadFromNibNamed("FloatingActivityView") as! FloatingActivityView
                 fView.tag = i
-                fView.frame = CGRectMake(elementWidth*CGFloat(i), 0, elementWidth, 185)
+                fView.frame = CGRectMake(15 + elementWidth*CGFloat(i), 0, elementWidth, 185)
                 fView.imageView.sd_setImageWithURL(imageURLs[i], placeholderImage: UIImage(named: "SDPlaceholder"))
                 let tap = UITapGestureRecognizer(target: self, action: "handleFloatingViewSelection:")
                 fView.addGestureRecognizer(tap)
@@ -355,7 +355,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         let targetURL = NSURL(string: floatingActivities[(sender.view?.tag)!].objectForKey("URL") as! String)
         if #available(iOS 9.0, *) {
             
-            let safariView = SFSafariViewController(URL: targetURL!, entersReaderIfAvailable: true)
+            let safariView = SFSafariViewController(URL: targetURL!, entersReaderIfAvailable: false)
             safariView.view.tintColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
             self.navigationController?.presentViewController(safariView, animated: true, completion: nil)
         } else {
@@ -370,7 +370,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             shouldAskToEnableNotif = false
         }
         if #available(iOS 9.0, *) {
-            let safariView = SFSafariViewController(URL: adTargetURLs[(sender.view?.tag)!], entersReaderIfAvailable: true)
+            let safariView = SFSafariViewController(URL: adTargetURLs[(sender.view?.tag)!], entersReaderIfAvailable: false)
             safariView.view.tintColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
             self.navigationController?.presentViewController(safariView, animated: true, completion: nil)
         } else {
@@ -771,7 +771,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             let adTargetURL = NSURL(string:(self.bannerAds[Int(self.randomAdIndex)].objectForKey("URL") as! String))
             if #available(iOS 9.0, *) {
                 
-                let safariView = SFSafariViewController(URL: adTargetURL!, entersReaderIfAvailable: true)
+                let safariView = SFSafariViewController(URL: adTargetURL!, entersReaderIfAvailable: false)
                 safariView.view.tintColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
                 self.navigationController?.presentViewController(safariView, animated: true, completion: nil)
             } else {
@@ -792,7 +792,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 activity.updateInBackground()
             }
         if #available(iOS 9.0, *) {
-            let safariView = SFSafariViewController(URL: NSURL(string: activities[indexPath.section][indexPath.row].objectForKey("URL") as! String)!, entersReaderIfAvailable: true)
+            let safariView = SFSafariViewController(URL: NSURL(string: activities[indexPath.section][indexPath.row].objectForKey("URL") as! String)!, entersReaderIfAvailable: false)
             safariView.view.tintColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
             self.navigationController?.presentViewController(safariView, animated: true, completion: nil)
         } else {

@@ -167,7 +167,7 @@ class GalleryViewController: UITableViewController, UIGestureRecognizerDelegate 
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             if #available(iOS 9.0, *) {
   
-                let safariView = SFSafariViewController(URL: NSURL(string: galleryObjects[indexPath.section][indexPath.row].objectForKey("URL") as! String)!, entersReaderIfAvailable: true)
+                let safariView = SFSafariViewController(URL: NSURL(string: galleryObjects[indexPath.section][indexPath.row].objectForKey("URL") as! String)!, entersReaderIfAvailable: false)
                 safariView.view.tintColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
                 self.navigationController?.presentViewController(safariView, animated: true, completion: nil)
                 

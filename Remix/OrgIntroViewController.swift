@@ -23,8 +23,8 @@ class OrgIntroViewController: UIViewController, UIGestureRecognizerDelegate, MWP
     var photos: [MWPhoto] = []
     var orgName = "Remix"
     var emailRecipient = ["fongtinyik@gmail.com"]
-    
-    
+    var phoneNumber: String = "18149770476"
+    var contactName: String = "房天益"
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
@@ -35,6 +35,12 @@ class OrgIntroViewController: UIViewController, UIGestureRecognizerDelegate, MWP
             for organization in organizations {
                 if let _recipient = organization.objectForKey("Emails") as? NSArray {
                 self.emailRecipient = _recipient as! [String]
+                }
+                if let _contact = organization.objectForKey("Contact") as? String {
+                    self.phoneNumber = _contact
+                }
+                if let _contactName = organization.objectForKey("ContactName") as? String {
+                    self.contactName = _contactName
                 }
                 if let image1 = organization.objectForKey("IntroImage1") as? BmobFile {
                     let url = NSURL(string: image1.url)
@@ -128,6 +134,17 @@ class OrgIntroViewController: UIViewController, UIGestureRecognizerDelegate, MWP
         composer.mailComposeDelegate = self
         composer.setToRecipients(emailRecipient)
         self.presentViewController(composer, animated: true, completion: nil)
+    }
+    
+    @IBAction func dialPhone() {
+        let alert = UIAlertController(title: "Remix拨号确认", message: "确认拨打 " + contactName + "  " + phoneNumber + " ?", preferredStyle: .ActionSheet)
+        let action = UIAlertAction(title: "确认", style: .Default) { (action) -> Void in
+            UIApplication.sharedApplication().openURL(NSURL(string: "tel://" + self.phoneNumber)!)
+        }
+        let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+        alert.addAction(action)
+        alert.addAction(cancel)
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     func popCurrentVC() {
