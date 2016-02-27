@@ -8,9 +8,10 @@
 
 import UIKit
 import SafariServices
+import PassKit
 
 
-class SearchResultViewController: UITableViewController, UIGestureRecognizerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, MGSwipeTableCellDelegate {
+class SearchResultViewController: UITableViewController, UIGestureRecognizerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, MGSwipeTableCellDelegate, PKPaymentAuthorizationViewControllerDelegate, BmobPayDelegate {
     
     var labelName = ""
     var delegate: ActivityFilterDelegate!
@@ -100,7 +101,39 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
         
     }
     // MARK: - Table view data source
+    
+    func checkPersonalInfoIntegrity() -> Bool {
+        currentUser = BmobUser.getCurrentUser()
+        if currentUser.objectForKey("LegalName") == nil || currentUser.objectForKey("LegalName") as! String == "" {
+            return false
+        }
+        
+        if currentUser.objectForKey("School") == nil || currentUser.objectForKey("School") as! String == ""{
+            return false
+        }
+        
+        if currentUser.objectForKey("username") == nil || currentUser.objectForKey("username") as! String == ""{
+            return false
+        }
+        
+        if currentUser.objectForKey("email") == nil || currentUser.objectForKey("email") as! String == ""{
+            return false
+        }
+        
+        return true
+    }
+    
+    
+    func presentSettingsVC() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let settingsVC = storyBoard.instantiateViewControllerWithIdentifier("SettingsVC")
+        let navigationController = UINavigationController(rootViewController: settingsVC)
+        self.navigationController?.presentViewController(navigationController, animated: true, completion: nil)
+        
+    }
 
+
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -119,6 +152,24 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
         if (activities[indexPath.row].objectForKey("isFeatured") as! Bool) == true {
             let cell = tableView.dequeueReusableCellWithIdentifier("fullCellReuseIdentifier", forIndexPath: indexPath) as! RMFullCoverCell
             cell.delegate = self
+            cell.parentViewController = self
+            if let price = activities[indexPath.row].objectForKey("Price") as? Double {
+                if price != 0 {
+                    let priceNumberFont = UIFont.systemFontOfSize(19)
+                    let attrDic1 = [NSFontAttributeName:priceNumberFont]
+                    let priceString = NSMutableAttributedString(string: String(price), attributes: attrDic1)
+                    let currencyFont = UIFont.systemFontOfSize(13)
+                    let attrDic2 = [NSFontAttributeName:currencyFont]
+                    let currencyString = NSMutableAttributedString(string: "元/人", attributes: attrDic2)
+                    priceString.appendAttributedString(currencyString)
+                    cell.priceTag.attributedText = priceString
+                    cell.payButton.hidden = false
+                }else{
+                    cell.priceTag.text = "免费"
+                    cell.payButton.hidden = true
+                }
+            }
+
             cell.titleLabel.text = activities[indexPath.row].objectForKey("Title") as? String
             cell.orgLabel.text = activities[indexPath.row].objectForKey("Org") as? String
             cell.timeLabel.text = activities[indexPath.row].objectForKey("Date") as? String
@@ -147,6 +198,24 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
         
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! RMTableViewCell
         cell.delegate = self
+        cell.parentViewController = self
+        if let price = activities[indexPath.row].objectForKey("Price") as? Double {
+            if price != 0 {
+                let priceNumberFont = UIFont.systemFontOfSize(19)
+                let attrDic1 = [NSFontAttributeName:priceNumberFont]
+                let priceString = NSMutableAttributedString(string: String(price), attributes: attrDic1)
+                let currencyFont = UIFont.systemFontOfSize(13)
+                let attrDic2 = [NSFontAttributeName:currencyFont]
+                let currencyString = NSMutableAttributedString(string: "元/人", attributes: attrDic2)
+                priceString.appendAttributedString(currencyString)
+                cell.priceTag.attributedText = priceString
+                cell.payButton.hidden = false
+            }else{
+                cell.priceTag.text = "免费"
+                cell.payButton.hidden = true
+            }
+        }
+
         cell.titleLabel.text = activities[indexPath.row].objectForKey("Title") as? String
         cell.desLabel.text = activities[indexPath.row].objectForKey("Description") as? String
         cell.orgLabel.text = activities[indexPath.row].objectForKey("Org") as? String
@@ -179,7 +248,7 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
         swipeSettings.transition = .Border
         expansionSettings.fillOnTrigger = false
         expansionSettings.threshold = 1.5
-        expansionSettings.buttonIndex = 1
+        expansionSettings.buttonIndex = 2
         var likeButtonTitle: String!
         if let _cell = cell as? RMTableViewCell {
             likeButtonTitle = _cell.likeButtonTitle
@@ -191,7 +260,6 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
         if direction == .RightToLeft {
             
             let shareButton = MGSwipeButton(title: "Share", backgroundColor: UIColor(white: 0.95, alpha: 1), callback: { (sender) -> Bool in
-                
                 let indexPath = self.tableView.indexPathForCell(cell)
                 let activity = self.activities[indexPath!.row]
                 let coverImageURL = self.coverImgURLs[indexPath!.row]
@@ -204,6 +272,12 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
                         UMSocialSnsService.presentSnsIconSheetView(self, appKey: "56ba8fa2e0f55a1071000931", shareText: shareText, shareImage: coverImage, shareToSnsNames: [UMShareToWechatSession,UMShareToWechatTimeline, UMShareToQQ, UMShareToQzone, UMShareToTwitter], delegate: nil)
                     }
                 })
+                
+                return true
+            })
+            let registerButton = MGSwipeButton(title: "报名", backgroundColor: UIColor(white: 0.925, alpha: 1), callback: { (sender) -> Bool in
+                
+                self.registerForActivity(cell)
                 
                 return true
             })
@@ -265,15 +339,16 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
                     self.currentUser.updateInBackground()
                 }
                 if let _cell = cell as? RMTableViewCell {
-                    cell.rightButtons[1].setTitle(_cell.likeButtonTitle, forState: .Normal)
+                    cell.rightButtons[2].setTitle(_cell.likeButtonTitle, forState: .Normal)
                 }
                 if let _cell = cell as? RMFullCoverCell {
-                    cell.rightButtons[1].setTitle(_cell.likeButtonTitle, forState: .Normal)
+                    cell.rightButtons[2].setTitle(_cell.likeButtonTitle, forState: .Normal)
                 }
                 return true
             })
             shareButton.setTitleColor(.blackColor(), forState: .Normal)
-            return [shareButton, likeButton] }else{
+            registerButton.setTitleColor(.blackColor(), forState: .Normal)
+            return [shareButton, registerButton, likeButton] }else{
             return  nil
         }
         
@@ -290,7 +365,7 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
                 }
             }
         }
-        return 138
+        return 166
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -388,5 +463,87 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
             }
         }
     }
+    
+    func registerForActivity(cell: MGSwipeTableCell) {
+        
+        if checkPersonalInfoIntegrity() {
+            let indexPath = self.tableView.indexPathForCell(cell)
+            let activity = self.activities[indexPath!.row]
+            let orgName = activity.objectForKey("Org") as? String
+            if let price = activity.objectForKey("Price") as? Double {
+                if price != 0 {
+                    //                if IOSVersion.SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO("9.2") {
+                    //
+                    //
+                    //                    if PKPaymentAuthorizationViewController.canMakePayments() {
+                    //                        let payment = PKPaymentRequest()
+                    //                        let item = PKPaymentSummaryItem(label: orgName!, amount: NSDecimalNumber(double: price))
+                    //                        payment.paymentSummaryItems = [item]
+                    //                        payment.currencyCode = "CNY"
+                    //                        payment.countryCode = "CN"
+                    //                        payment.merchantIdentifier = "merchant.com.fongtinyik.remix"
+                    //                        if #available(iOS 9.0, *) {
+                    //                            payment.merchantCapabilities = [.Capability3DS, .CapabilityCredit, .CapabilityDebit, .CapabilityEMV]
+                    //                        }
+                    //                        if #available(iOS 9.2, *) {
+                    //                            payment.supportedNetworks = [PKPaymentNetworkChinaUnionPay]
+                    //                        }
+                    //                        let payVC = PKPaymentAuthorizationViewController(paymentRequest: payment)
+                    //                        payVC.delegate = self
+                    //                        self.presentViewController(payVC, animated: true, completion: nil)
+                    //
+                    //                    }
+                    //                }else{
+                    let bPay = BmobPay()
+                    bPay.delegate = self
+                    bPay.price = NSNumber(double: price)
+                    bPay.productName = orgName! + "活动报名费"
+                    bPay.body = "Test"
+                    bPay.appScheme = "BmobPay"
+                    bPay.payInBackground()
+                    
+                    //                }
+                    
+                }
+            }
+            
+        }else{
+            let alert = UIAlertController(title: "完善信息", message: "请先进入账户设置完善个人信息后再继续报名参加活动。", preferredStyle: .Alert)
+            let action = UIAlertAction(title: "去设置", style: .Default, handler: { (action) -> Void in
+                self.presentSettingsVC()
+            })
+            let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+            alert.addAction(action)
+            alert.addAction(cancel)
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    
+    
+    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: (PKPaymentAuthorizationStatus) -> Void) {
+        completion(PKPaymentAuthorizationStatus.Success)
+    }
+    
+    func paymentAuthorizationViewControllerDidFinish(controller: PKPaymentAuthorizationViewController) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    func paySuccess() {
+        let alert = UIAlertController(title: "支付状态", message: "支付成功！", preferredStyle: .Alert)
+        let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+        alert.addAction(action)
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func payFailWithErrorCode(errorCode: Int32) {
+        print(errorCode)
+        print("PAYFAILED")
+        let alert = UIAlertController(title: "支付状态", message: "支付失败。", preferredStyle: .Alert)
+        let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+        alert.addAction(action)
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+
 
 }

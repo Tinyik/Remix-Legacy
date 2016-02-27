@@ -26,7 +26,7 @@ class RMTableViewCell: MGSwipeTableCell {
     @IBOutlet weak var orgLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
-    var parentViewController: RMTableViewController!
+    var parentViewController: UIViewController!
     var likeImage = UIImage(named: "Like")
     var objectId = ""
     var likeButtonTitle = ""
@@ -51,7 +51,18 @@ class RMTableViewCell: MGSwipeTableCell {
            }
     
     @IBAction func payForActivity(sender: UIButton) {
-        parentViewController.registerForActivity(self)
+        if let pVC = parentViewController as? RMTableViewController {
+            pVC.registerForActivity(self)
+        }
+        if let pVC = parentViewController as? CTFilteredViewController {
+            pVC.registerForActivity(self)
+        }
+        if let pVC = parentViewController as? OrgFilteredViewController {
+            pVC.registerForActivity(self)
+        }
+        if let pVC = parentViewController as? SearchResultViewController {
+            pVC.registerForActivity(self)
+        }
     }
     
  

@@ -8,8 +8,9 @@
 
 import UIKit
 import SafariServices
+import PassKit
 
-class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, MGSwipeTableCellDelegate, OrganizationViewDelegate {
+class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, MGSwipeTableCellDelegate, OrganizationViewDelegate, PKPaymentAuthorizationViewControllerDelegate, BmobPayDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -22,6 +23,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
     
     var orgName: String = "BookyGreen"
     var headerImage: UIImage!
+    var headerImageLoaded = false
     
     
     override func viewDidLoad() {
@@ -37,6 +39,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         self.navigationItem.rightBarButtonItem?.tintColor = .blackColor()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         self.title = orgName
+        setUpParallaxHeaderView()
         setParallaxHeaderImage()
         self.navigationController?.navigationBar.translucent = false
         
@@ -44,8 +47,14 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func setUpParallaxHeaderView() {
+        if headerImageLoaded == true {
         let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(headerImage, forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.width*0.667)) as! ParallaxHeaderView
         self.tableView.tableHeaderView = headerView
+        }else{
+            let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(UIImage(named: "SDPlaceholder"), forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.width*0.667)) as! ParallaxHeaderView
+            self.tableView.tableHeaderView = headerView
+        }
+        
 //        headerView.headerTitleLabel.text = orgName
         
     }
@@ -113,6 +122,28 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         
     }
     
+    func checkPersonalInfoIntegrity() -> Bool {
+        currentUser = BmobUser.getCurrentUser()
+        if currentUser.objectForKey("LegalName") == nil || currentUser.objectForKey("LegalName") as! String == "" {
+            return false
+        }
+        
+        if currentUser.objectForKey("School") == nil || currentUser.objectForKey("School") as! String == ""{
+            return false
+        }
+        
+        if currentUser.objectForKey("username") == nil || currentUser.objectForKey("username") as! String == ""{
+            return false
+        }
+        
+        if currentUser.objectForKey("email") == nil || currentUser.objectForKey("email") as! String == ""{
+            return false
+        }
+        
+        return true
+    }
+
+    
     func isMonthAdded(monthName: String) -> Bool {
         
         for _date in monthNameStrings {
@@ -142,6 +173,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
                         manager.downloadImageWithURL(url, options: .RetryFailed, progress: nil) { (image, error, cachetype, finished, url) -> Void in
                             if error == nil{
                                 self.headerImage = image
+                                self.headerImageLoaded = true
                                 self.setUpParallaxHeaderView()
                             }else{
                                 self.headerImage = UIImage(named: "Logo")
@@ -155,6 +187,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
                             manager.downloadImageWithURL(url, options: .RetryFailed, progress: nil) { (image, error, cachetype, finished, url) -> Void in
                                 if error == nil{
                                     self.headerImage = image
+                                    self.headerImageLoaded = true
                                     self.setUpParallaxHeaderView()
                                 }else{
                                     self.headerImage = UIImage(named: "Logo")
@@ -181,7 +214,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         swipeSettings.transition = .Border
         expansionSettings.fillOnTrigger = false
         expansionSettings.threshold = 1.5
-        expansionSettings.buttonIndex = 1
+        expansionSettings.buttonIndex = 2
         var likeButtonTitle: String!
         if let _cell = cell as? RMTableViewCell {
             likeButtonTitle = _cell.likeButtonTitle
@@ -192,9 +225,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         
         if direction == .RightToLeft {
             
-            
             let shareButton = MGSwipeButton(title: "Share", backgroundColor: UIColor(white: 0.95, alpha: 1), callback: { (sender) -> Bool in
-                
                 let indexPath = self.tableView.indexPathForCell(cell)
                 let activity = self.activities[indexPath!.section][indexPath!.row]
                 let coverImageURL = self.coverImgURLs[indexPath!.section][indexPath!.row]
@@ -210,6 +241,12 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
                 
                 return true
             })
+            let registerButton = MGSwipeButton(title: "报名", backgroundColor: UIColor(white: 0.925, alpha: 1), callback: { (sender) -> Bool in
+                
+                self.registerForActivity(cell)
+                
+                return true
+            })
             
             let likeButton = MGSwipeButton(title: likeButtonTitle, backgroundColor: UIColor(white: 0.9, alpha: 1), callback: { (sender) -> Bool in
                 if let _cell = sender as? RMTableViewCell {
@@ -222,6 +259,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
                             activity.incrementKey("LikesNumber", byAmount: 1)
                             activity.updateInBackground()
                         })
+                        print(self.likedActivitiesIds)
                     }else{
                         if let index = self.likedActivitiesIds.indexOf(_cell.objectId) {
                             self.likedActivitiesIds.removeAtIndex(index)
@@ -231,6 +269,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
                                 activity.decrementKey("LikesNumber", byAmount: 1)
                                 activity.updateInBackground()
                             })
+                            print(self.likedActivitiesIds)
                         }
                     }
                     self.currentUser.setObject(self.likedActivitiesIds, forKey: "LikedActivities")
@@ -248,6 +287,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
                             activity.incrementKey("LikesNumber", byAmount: 1)
                             activity.updateInBackground()
                         })
+                        
                     }else{
                         if let index = self.likedActivitiesIds.indexOf(_cell.objectId) {
                             self.likedActivitiesIds.removeAtIndex(index)
@@ -257,27 +297,39 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
                                 activity.decrementKey("LikesNumber", byAmount: 1)
                                 activity.updateInBackground()
                             })
+                            
+                            
                         }
                     }
                     self.currentUser.setObject(self.likedActivitiesIds, forKey: "LikedActivities")
                     self.currentUser.updateInBackground()
                 }
                 if let _cell = cell as? RMTableViewCell {
-                    cell.rightButtons[1].setTitle(_cell.likeButtonTitle, forState: .Normal)
+                    cell.rightButtons[2].setTitle(_cell.likeButtonTitle, forState: .Normal)
                 }
                 if let _cell = cell as? RMFullCoverCell {
-                    cell.rightButtons[1].setTitle(_cell.likeButtonTitle, forState: .Normal)
+                    cell.rightButtons[2].setTitle(_cell.likeButtonTitle, forState: .Normal)
                 }
                 return true
             })
-            
             shareButton.setTitleColor(.blackColor(), forState: .Normal)
-            return [shareButton, likeButton] }else{
+            registerButton.setTitleColor(.blackColor(), forState: .Normal)
+            return [shareButton, registerButton, likeButton] }else{
             return  nil
         }
         
         
     }
+    
+    
+    func presentSettingsVC() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let settingsVC = storyBoard.instantiateViewControllerWithIdentifier("SettingsVC")
+        let navigationController = UINavigationController(rootViewController: settingsVC)
+        self.navigationController?.presentViewController(navigationController, animated: true, completion: nil)
+        
+    }
+
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -328,7 +380,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
                 }
             }
         }
-        return 138
+        return 166
     }
     
     
@@ -343,6 +395,24 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         if (activities[indexPath.section][indexPath.row].objectForKey("isFeatured") as! Bool) == true {
             let cell = tableView.dequeueReusableCellWithIdentifier("fullCellReuseIdentifier", forIndexPath: indexPath) as! RMFullCoverCell
             cell.delegate = self
+            cell.parentViewController = self
+            if let price = activities[indexPath.section][indexPath.row].objectForKey("Price") as? Double {
+                if price != 0 {
+                    let priceNumberFont = UIFont.systemFontOfSize(19)
+                    let attrDic1 = [NSFontAttributeName:priceNumberFont]
+                    let priceString = NSMutableAttributedString(string: String(price), attributes: attrDic1)
+                    let currencyFont = UIFont.systemFontOfSize(13)
+                    let attrDic2 = [NSFontAttributeName:currencyFont]
+                    let currencyString = NSMutableAttributedString(string: "元/人", attributes: attrDic2)
+                    priceString.appendAttributedString(currencyString)
+                    cell.priceTag.attributedText = priceString
+                    cell.payButton.hidden = false
+                }else{
+                    cell.priceTag.text = "免费"
+                    cell.payButton.hidden = true
+                }
+            }
+
             cell.titleLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Title") as? String
             cell.orgLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Org") as? String
             cell.timeLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Date") as? String
@@ -371,6 +441,24 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! RMTableViewCell
         cell.delegate = self
+        cell.parentViewController = self
+        if let price = activities[indexPath.section][indexPath.row].objectForKey("Price") as? Double {
+            if price != 0 {
+                let priceNumberFont = UIFont.systemFontOfSize(19)
+                let attrDic1 = [NSFontAttributeName:priceNumberFont]
+                let priceString = NSMutableAttributedString(string: String(price), attributes: attrDic1)
+                let currencyFont = UIFont.systemFontOfSize(13)
+                let attrDic2 = [NSFontAttributeName:currencyFont]
+                let currencyString = NSMutableAttributedString(string: "元/人", attributes: attrDic2)
+                priceString.appendAttributedString(currencyString)
+                cell.priceTag.attributedText = priceString
+                cell.payButton.hidden = false
+            }else{
+                cell.priceTag.text = "免费"
+                cell.payButton.hidden = true
+            }
+        }
+
         cell.titleLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Title") as? String
         cell.desLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Description") as? String
         cell.orgLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Org") as? String
@@ -437,6 +525,88 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
             }
         }
     }
+    
+    func registerForActivity(cell: MGSwipeTableCell) {
+        
+        if checkPersonalInfoIntegrity() {
+            let indexPath = self.tableView.indexPathForCell(cell)
+            let activity = self.activities[indexPath!.section][indexPath!.row]
+            let orgName = activity.objectForKey("Org") as? String
+            if let price = activity.objectForKey("Price") as? Double {
+                if price != 0 {
+                    //                if IOSVersion.SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO("9.2") {
+                    //
+                    //
+                    //                    if PKPaymentAuthorizationViewController.canMakePayments() {
+                    //                        let payment = PKPaymentRequest()
+                    //                        let item = PKPaymentSummaryItem(label: orgName!, amount: NSDecimalNumber(double: price))
+                    //                        payment.paymentSummaryItems = [item]
+                    //                        payment.currencyCode = "CNY"
+                    //                        payment.countryCode = "CN"
+                    //                        payment.merchantIdentifier = "merchant.com.fongtinyik.remix"
+                    //                        if #available(iOS 9.0, *) {
+                    //                            payment.merchantCapabilities = [.Capability3DS, .CapabilityCredit, .CapabilityDebit, .CapabilityEMV]
+                    //                        }
+                    //                        if #available(iOS 9.2, *) {
+                    //                            payment.supportedNetworks = [PKPaymentNetworkChinaUnionPay]
+                    //                        }
+                    //                        let payVC = PKPaymentAuthorizationViewController(paymentRequest: payment)
+                    //                        payVC.delegate = self
+                    //                        self.presentViewController(payVC, animated: true, completion: nil)
+                    //
+                    //                    }
+                    //                }else{
+                    let bPay = BmobPay()
+                    bPay.delegate = self
+                    bPay.price = NSNumber(double: price)
+                    bPay.productName = orgName! + "活动报名费"
+                    bPay.body = "Test"
+                    bPay.appScheme = "BmobPay"
+                    bPay.payInBackground()
+                    
+                    //                }
+                    
+                }
+            }
+            
+        }else{
+            let alert = UIAlertController(title: "完善信息", message: "请先进入账户设置完善个人信息后再继续报名参加活动。", preferredStyle: .Alert)
+            let action = UIAlertAction(title: "去设置", style: .Default, handler: { (action) -> Void in
+                self.presentSettingsVC()
+            })
+            let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+            alert.addAction(action)
+            alert.addAction(cancel)
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    
+    
+    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: (PKPaymentAuthorizationStatus) -> Void) {
+        completion(PKPaymentAuthorizationStatus.Success)
+    }
+    
+    func paymentAuthorizationViewControllerDidFinish(controller: PKPaymentAuthorizationViewController) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    func paySuccess() {
+        let alert = UIAlertController(title: "支付状态", message: "支付成功！", preferredStyle: .Alert)
+        let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+        alert.addAction(action)
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func payFailWithErrorCode(errorCode: Int32) {
+        print(errorCode)
+        print("PAYFAILED")
+        let alert = UIAlertController(title: "支付状态", message: "支付失败。", preferredStyle: .Alert)
+        let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+        alert.addAction(action)
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+
     
     
 }
