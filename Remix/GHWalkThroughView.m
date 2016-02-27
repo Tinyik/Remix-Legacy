@@ -132,7 +132,8 @@
     
     //Set defersCurrentPageDisplay to YES to prevent page control jerking when switching pages with page control. This prevents page control from instant change of page indication.
     self.pageControl.defersCurrentPageDisplay = YES;
-    
+    self.pageControl.currentPageIndicatorTintColor = [[UIColor alloc] initWithWhite:0.2 alpha:0.8];
+    self.pageControl.pageIndicatorTintColor = [UIColor whiteColor];
     self.pageControl.autoresizingMask =  UIViewAutoresizingFlexibleWidth;
     [self.pageControl addTarget:self action:@selector(showPanelAtPageControl:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:self.pageControl];
@@ -140,11 +141,11 @@
     
     self.skipButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    self.skipButton.frame = CGRectMake(self.bounds.size.width - 80, self.pageControl.frame.origin.y - ((30 - self.pageControl.frame.size.height)/2), 80, 30);
+    self.skipButton.frame = CGRectMake(self.bounds.size.width - 80, 20, 80, 30);
     
     self.skipButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-    [self.skipButton setTitle:@"Skip" forState:UIControlStateNormal];
-    [self.skipButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.skipButton setTitle:@"Done" forState:UIControlStateNormal];
+    [self.skipButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.skipButton addTarget:self action:@selector(skipIntroduction) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.skipButton];
     [self bringSubviewToFront:self.skipButton]; 

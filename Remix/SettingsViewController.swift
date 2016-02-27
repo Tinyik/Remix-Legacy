@@ -80,6 +80,9 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -120,7 +123,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") as! SettingsCell
             switch indexPath.row {
             case 0: cell.label.text = "清除缓存"
-            case 1: cell.label.text = "退出登录"
+            case 1: cell.label.text = "显示使用指南"
+            case 2: cell.label.text = "退出登录"
 
             default: break
             }
@@ -143,10 +147,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 1 || section == 0 {
-            return 3
-        }
-       return 2
+       return 3
 }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -158,7 +159,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if section == 2{
-            return "    Remix 1.0.1, by Tianyi Fang. \n    Visit fongtinyik.tumblr.com for more info."
+            return "    Remix 1.0, by Tianyi Fang. \n    Visit fongtinyik.tumblr.com for more info."
         }
         
         return nil
@@ -211,7 +212,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
                 let composer = MFMailComposeViewController()
                 composer.mailComposeDelegate = self
                 let subjectString = NSString(format: "Remix平台组织入驻申请")
-                let bodyString = NSString(format: "简介:\n\n\n\n\n\n-----\n组织成立时间: \n组织名称:\n微信公众号ID:\n负责任联系方式:\n组织性质及分类:\n-----")
+                let bodyString = NSString(format: "简介:\n\n\n\n\n\n-----\n组织成立时间: \n组织名称:\n微信公众号ID:\n负责人联系方式:\n组织性质及分类:\n-----")
                 composer.setMessageBody(bodyString as String, isHTML: false)
                 composer.setSubject(subjectString as String)
                 composer.setToRecipients(["fongtinyik@gmail.com", "remixapp@163.com"])
@@ -227,7 +228,10 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
                     let actionButton = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
                     alertController.addAction(actionButton)
                     self.presentViewController(alertController, animated: true, completion: nil)
-            case 1: BmobUser.logout()
+            case 1:  let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                     let guideViewController = storyboard.instantiateViewControllerWithIdentifier("GuideViewController") as! GuideViewController
+                     self.presentViewController(guideViewController, animated: true, completion: nil)
+            case 2: BmobUser.logout()
             let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
             let regLoginController = storyBoard.instantiateViewControllerWithIdentifier("RegLoginVC")
             self.tr_presentViewController(regLoginController, method: TRPresentTransitionMethod.Fade)

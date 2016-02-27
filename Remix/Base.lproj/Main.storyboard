@@ -2713,7 +2713,7 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                                             </textView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GU9-RN-XAR">
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GU9-RN-XAR">
                                                 <rect key="frame" x="20" y="687" width="158" height="46"/>
                                                 <color key="backgroundColor" red="0.054901960780000002" green="0.058823529409999999" blue="0.066666666669999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -2728,7 +2728,7 @@
                                                     <action selector="contactUs" destination="4pN-pa-WXu" eventType="touchUpInside" id="p7G-Xn-ech"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3oW-ln-NQX">
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3oW-ln-NQX">
                                                 <rect key="frame" x="195" y="687" width="160" height="46"/>
                                                 <color key="backgroundColor" red="0.89411764709999997" green="0.077240766040000006" blue="0.044332756969999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -2743,8 +2743,8 @@
                                                     <action selector="dialPhone" destination="4pN-pa-WXu" eventType="touchUpInside" id="cMk-Tf-RVA"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="war-5I-hHf">
-                                                <rect key="frame" x="20" y="632" width="335" height="35"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="war-5I-hHf">
+                                                <rect key="frame" x="20" y="627" width="335" height="46"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <state key="normal" title="进入Remix图库">
@@ -2770,7 +2770,7 @@
                                             <constraint firstItem="CU0-QX-8lG" firstAttribute="top" secondItem="Wl1-xM-vdr" secondAttribute="bottom" constant="20" id="Wxc-3l-6Ae"/>
                                             <constraint firstAttribute="trailing" secondItem="pvq-fx-ye4" secondAttribute="trailing" id="dZ7-in-AHg"/>
                                             <constraint firstAttribute="trailing" secondItem="gmi-Xg-iAo" secondAttribute="trailing" constant="20" id="f3a-g4-ghp"/>
-                                            <constraint firstItem="GU9-RN-XAR" firstAttribute="top" secondItem="war-5I-hHf" secondAttribute="bottom" constant="20" id="f5i-yO-8Wm"/>
+                                            <constraint firstItem="GU9-RN-XAR" firstAttribute="top" secondItem="war-5I-hHf" secondAttribute="bottom" constant="14" id="f5i-yO-8Wm"/>
                                             <constraint firstItem="gmi-Xg-iAo" firstAttribute="top" secondItem="CU0-QX-8lG" secondAttribute="bottom" constant="10" id="h9I-Mc-Z0N"/>
                                             <constraint firstItem="gmi-Xg-iAo" firstAttribute="leading" secondItem="xpE-wy-sP2" secondAttribute="leading" constant="20" id="iM2-KT-cIi"/>
                                             <constraint firstAttribute="trailing" secondItem="3oW-ln-NQX" secondAttribute="trailing" constant="20" id="kWT-wO-Aj7"/>
@@ -2781,8 +2781,8 @@
                                             <constraint firstItem="pvq-fx-ye4" firstAttribute="leading" secondItem="xpE-wy-sP2" secondAttribute="leading" id="plt-HH-Avv"/>
                                             <constraint firstItem="6Xg-qE-21V" firstAttribute="leading" secondItem="xpE-wy-sP2" secondAttribute="leading" constant="20" id="pnM-M8-dNj"/>
                                             <constraint firstItem="kPc-ME-mVH" firstAttribute="top" secondItem="6Xg-qE-21V" secondAttribute="bottom" constant="10" id="rZz-IV-GOz"/>
-                                            <constraint firstItem="war-5I-hHf" firstAttribute="top" secondItem="gmi-Xg-iAo" secondAttribute="bottom" constant="50" id="sSo-nY-wup"/>
-                                            <constraint firstItem="3oW-ln-NQX" firstAttribute="top" secondItem="war-5I-hHf" secondAttribute="bottom" constant="20" id="wrQ-oa-OgX"/>
+                                            <constraint firstItem="war-5I-hHf" firstAttribute="top" secondItem="gmi-Xg-iAo" secondAttribute="bottom" constant="44.5" id="sSo-nY-wup"/>
+                                            <constraint firstItem="3oW-ln-NQX" firstAttribute="top" secondItem="war-5I-hHf" secondAttribute="bottom" constant="14" id="wrQ-oa-OgX"/>
                                         </constraints>
                                     </view>
                                 </subviews>

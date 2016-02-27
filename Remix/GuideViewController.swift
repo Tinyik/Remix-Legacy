@@ -20,31 +20,47 @@ class GuideViewController: UIViewController, GHWalkThroughViewDataSource, GHWalk
             }
 
     func numberOfPages() -> Int {
-        return 4
+        return 5
     }
     
     func configurePage(cell: GHWalkThroughPageCell!, atIndex index: Int) {
-        cell.title = "郭寒"
+        cell.title = ""
         //  cell.titleImage = UIImage(named: "Tech")
-        cell.desc = "一半是激素，一半是情怀。 -- Inverse"
+        cell.desc = ""
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
     
     func bgImageforPage(index: Int) -> UIImage! {
         if index == 0 {
-            return UIImage(named: "GuoHan")
+            return UIImage(named: "as1")
         }
         if index == 1 {
-            return UIImage(named: "Tech")
+            return UIImage(named: "as2")
         }
-        
-        return UIImage(named: "630")
+        if index == 2 {
+            return UIImage(named: "as3")
+        }
+        if index == 3 {
+            return UIImage(named: "as4")
+        }
+        if index == 4 {
+            return UIImage(named: "as5")
+        }
+        return nil
     }
 
     func walkthroughDidDismissView(walkthroughView: GHWalkThroughView!) {
          let storyboard = UIStoryboard(name: "Main", bundle: nil)
     print("Dismiss")
+        if BmobUser.getCurrentUser() == nil {
         let rootVC = storyboard.instantiateViewControllerWithIdentifier("RegLoginVC") as! RegLoginViewController
         self.presentViewController(rootVC, animated: false, completion: nil)
+        }else{
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
 
     }
 
