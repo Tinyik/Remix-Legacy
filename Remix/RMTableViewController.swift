@@ -189,17 +189,21 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 imageURLs.append(imageURL!)
                 self.floatingActivities.append(activity as! BmobObject)
             }
+
             let elementWidth: CGFloat = 170 + 12
             self.floatingScrollView.contentSize = CGSizeMake(elementWidth*CGFloat(activities.count) + 12, self.floatingScrollView.frame.height)
             self.floatingScrollView.userInteractionEnabled = true
+            
             for var i = 0; i < activities.count; ++i {
                 let fView = FloatingActivityView.loadFromNibNamed("FloatingActivityView") as! FloatingActivityView
                 fView.tag = i
+
                 fView.frame = CGRectMake(5 + elementWidth*CGFloat(i), 0, elementWidth, 185)
                 fView.imageView.sd_setImageWithURL(imageURLs[i], placeholderImage: UIImage(named: "SDPlaceholder"))
                 let tap = UITapGestureRecognizer(target: self, action: "handleFloatingViewSelection:")
                 fView.addGestureRecognizer(tap)
                 fView.titleLabel.text = self.floatingActivities[i].objectForKey("Title") as! String
+                
                 if let price = self.floatingActivities[i].objectForKey("Price") as? Double {
                     if price != 0 {
                         let priceNumberFont = UIFont.systemFontOfSize(17)
