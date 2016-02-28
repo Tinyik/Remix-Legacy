@@ -56,6 +56,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         
+        let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let vc1 = storyBoard.instantiateViewControllerWithIdentifier("MainVC")
+        let vc2 = storyBoard.instantiateViewControllerWithIdentifier("CategoryVC")
+        let vc3 = storyBoard.instantiateViewControllerWithIdentifier("OrgsVC")
+        let pageController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
+        naviController = RKSwipeBetweenViewControllers(rootViewController: pageController)
+        naviController.viewControllerArray.addObjectsFromArray([vc1, vc2, vc3])
+        naviController.buttonText = ["活动", "分类", "组织"]
+        self.window?.rootViewController = naviController
+
+        
         return true
     }
     

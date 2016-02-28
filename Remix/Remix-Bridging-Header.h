@@ -4,6 +4,7 @@
 
 #import <BmobSDK/Bmob.h>
 #import <BmobPay/BmobPay.h>
+#import "RKSwipeBetweenViewControllers.h"
 #import <AliPaySDK/AliPaySDK.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "MGSwipeButton.h"

@@ -16,6 +16,7 @@ class CommunityViewController: CTFilteredViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "社区推荐"
+        
     }
     
     override func setUpParallaxHeaderView() {

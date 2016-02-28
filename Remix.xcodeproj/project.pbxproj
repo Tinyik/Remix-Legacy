@@ -121,6 +121,7 @@
 		18BCA03D1C6F827900DF3EC7 /* LabelFilteredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BCA03C1C6F827900DF3EC7 /* LabelFilteredViewController.swift */; };
 		18C79D7A1C8215BD004AAA44 /* ActivityOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C79D791C8215BD004AAA44 /* ActivityOrderCell.swift */; };
 		18C79D7D1C8215FF004AAA44 /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C79D7C1C8215FF004AAA44 /* OrdersViewController.swift */; };
+		18C79D801C83221A004AAA44 /* RKSwipeBetweenViewControllers.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C79D7F1C83221A004AAA44 /* RKSwipeBetweenViewControllers.m */; };
 		18C9A1E71C67B99200A80A22 /* TTUITableViewZoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C9A1E61C67B99200A80A22 /* TTUITableViewZoomController.m */; };
 		18C9A1F71C687DA200A80A22 /* UIImageView+BetterFace.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C9A1F61C687DA200A80A22 /* UIImageView+BetterFace.m */; };
 		18D731B41C719B1800DECA1E /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D731B31C719B1800DECA1E /* GuideViewController.swift */; };
@@ -299,6 +300,8 @@
 		18BCA03C1C6F827900DF3EC7 /* LabelFilteredViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelFilteredViewController.swift; sourceTree = "<group>"; };
 		18C79D791C8215BD004AAA44 /* ActivityOrderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityOrderCell.swift; sourceTree = "<group>"; };
 		18C79D7C1C8215FF004AAA44 /* OrdersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
+		18C79D7E1C83221A004AAA44 /* RKSwipeBetweenViewControllers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKSwipeBetweenViewControllers.h; sourceTree = "<group>"; };
+		18C79D7F1C83221A004AAA44 /* RKSwipeBetweenViewControllers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKSwipeBetweenViewControllers.m; sourceTree = "<group>"; };
 		18C9A1E51C67B99200A80A22 /* TTUITableViewZoomController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTUITableViewZoomController.h; sourceTree = "<group>"; };
 		18C9A1E61C67B99200A80A22 /* TTUITableViewZoomController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTUITableViewZoomController.m; sourceTree = "<group>"; };
 		18C9A1EF1C687CA000A80A22 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
@@ -649,6 +652,7 @@
 			isa = PBXGroup;
 			children = (
 				18B317C51C6B243900336A92 /* DeviceInformation.swift */,
+				18C79D811C83275F004AAA44 /* SwipeBetweenVC */,
 				18B317C21C6B06F100336A92 /* WalkThrough */,
 				181F2B201C6A2D8D00FC237D /* RxWebViewController */,
 				1898CA611C69B599009D3261 /* TransitionTreasury */,
@@ -759,6 +763,15 @@
 				18C79D7C1C8215FF004AAA44 /* OrdersViewController.swift */,
 			);
 			name = OrdersVC;
+			sourceTree = "<group>";
+		};
+		18C79D811C83275F004AAA44 /* SwipeBetweenVC */ = {
+			isa = PBXGroup;
+			children = (
+				18C79D7E1C83221A004AAA44 /* RKSwipeBetweenViewControllers.h */,
+				18C79D7F1C83221A004AAA44 /* RKSwipeBetweenViewControllers.m */,
+			);
+			name = SwipeBetweenVC;
 			sourceTree = "<group>";
 		};
 		18C9A1E81C68794D00A80A22 /* ZoomCell */ = {
@@ -1107,6 +1120,7 @@
 				1899E9BD1C663E3B00ADC2AC /* MGSwipeTableCell.m in Sources */,
 				1898CA8B1C69B599009D3261 /* PageTransitionAnimation.swift in Sources */,
 				181F2B2E1C6A2D8D00FC237D /* NJKWebViewProgress.m in Sources */,
+				18C79D801C83221A004AAA44 /* RKSwipeBetweenViewControllers.m in Sources */,
 				1898CA931C69B599009D3261 /* TransitionTreasury.swift in Sources */,
 				187AE32E1C65ECBB00B255FF /* SettingsViewController.swift in Sources */,
 				1899E9BC1C663E3B00ADC2AC /* MGSwipeButton.m in Sources */,

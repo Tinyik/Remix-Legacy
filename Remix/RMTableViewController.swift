@@ -11,7 +11,8 @@ import SafariServices
 import PassKit
 import SDWebImage
 
-let themeColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
+var naviController: RKSwipeBetweenViewControllers!
+
 var isHomepageFirstLaunching: Bool!
 
 var hasPromptedToEnableNotif: Bool!
@@ -87,36 +88,8 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         adTableView.separatorStyle = .None
         searchBar.searchBarStyle = .Minimal
         self.tableView.separatorColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.4)
-        let view = UIView(frame: CGRectMake((self.navigationController?.navigationBar.frame.size.width)!/2 - 80,0, 160, 35))
-        let moreButton = UIButton(frame: CGRectMake(0,0,25,25))
-        moreButton.setImage(UIImage(named: "more"), forState: .Normal)
-        moreButton.addTarget(self, action: "presentSettingsVC", forControlEvents: .TouchUpInside)
-        let backItem = UIBarButtonItem(customView: moreButton)
-        self.navigationItem.rightBarButtonItem = backItem
         self.navigationController?.navigationBar.translucent = false
-        self.navigationItem.titleView = view
         self.navigationItem.hidesBackButton = true
-        let button1 = UIButton()
-        let button2 = UIButton()
-        let button3 = UIButton()
-        button1.selected = true
-        button1.setBackgroundImage(UIImage(named: "button1"), forState: .Selected)
-        button3.setBackgroundImage(UIImage(named: "button3"), forState: .Selected)
-        button2.setBackgroundImage(UIImage(named: "button2"), forState: .Selected)
-        button1.setBackgroundImage(UIImage(named: "button1_normal"), forState: .Normal)
-        button3.setBackgroundImage(UIImage(named: "button3_normal"), forState: .Normal)
-        button2.setBackgroundImage(UIImage(named: "button2_normal"), forState: .Normal)
-        
-        
-        
-        button1.frame = CGRectMake(0, 10, 28, 26)
-        button2.frame = CGRectMake(70, 10, 28, 26)
-        button3.frame = CGRectMake(140, 10, 26, 26)
-        view.addSubview(button1)
-        view.addSubview(button2)
-        view.addSubview(button3)
-        button2.addTarget(self, action: "presentSecondVC", forControlEvents: .TouchUpInside)
-        button3.addTarget(self, action: "presentThirdVC", forControlEvents: .TouchUpInside)
     }
     
     func configurePageControl() {
@@ -152,37 +125,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     }
     
     
-    func presentSecondVC() {
-        if launchedTimes! == 1 && shouldAskToEnableNotif {
-            askToEnableNotifications()
-            shouldAskToEnableNotif = false
-        }
-        let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let categoryVC = storyBoard.instantiateViewControllerWithIdentifier("CategoryVC")
-        let navigationController = UINavigationController(rootViewController: categoryVC)
-        self.navigationController?.presentViewController(navigationController, animated: false, completion: nil)
-        if launchedTimes! == 1 && shouldAskToEnableNotif {
-            askToEnableNotifications()
-            shouldAskToEnableNotif = false
-        }
         
-    }
-    
-    func presentThirdVC() {
-        if launchedTimes! == 1 && shouldAskToEnableNotif {
-            askToEnableNotifications()
-            shouldAskToEnableNotif = false
-        }
-        let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let orgsVC = storyBoard.instantiateViewControllerWithIdentifier("OrgsVC")
-        let navigationController = UINavigationController(rootViewController: orgsVC)
-        self.navigationController?.presentViewController(navigationController, animated: false, completion: nil)
-        if launchedTimes! == 1 && shouldAskToEnableNotif {
-            askToEnableNotifications()
-            shouldAskToEnableNotif = false
-        }
-    }
-    
     func fetchFloatingActivities() {
         let query = BmobQuery(className: "FloatingActivity")
         query.whereKey("isVisibleToUsers", equalTo: true)
