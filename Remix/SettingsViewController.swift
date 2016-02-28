@@ -9,6 +9,7 @@
 import UIKit
 import MessageUI
 import SafariServices
+import SDWebImage
 
 class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate, ModalTransitionDelegate {
    
@@ -80,9 +81,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    override func prefersStatusBarHidden() -> Bool {
-        return true
-    }
+   
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -169,6 +168,9 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if indexPath.section == 0 {
             switch indexPath.row {
+            case 0 : let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+                let ordersVC = storyBoard.instantiateViewControllerWithIdentifier("OrdersVC")
+                self.navigationController?.pushViewController(ordersVC, animated: true)
             case 1:if #available(iOS 9.0, *) {
                 let safariView = SFSafariViewController(URL: NSURL(string: "http://jsform.com/f/v5pfam")!)
                 safariView.view.tintColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)

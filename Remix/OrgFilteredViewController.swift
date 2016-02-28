@@ -9,6 +9,7 @@
 import UIKit
 import SafariServices
 import PassKit
+import SDWebImage
 
 class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, MGSwipeTableCellDelegate, OrganizationViewDelegate, PKPaymentAuthorizationViewControllerDelegate, BmobPayDelegate {
     

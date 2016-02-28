@@ -9,6 +9,7 @@
 import UIKit
 import SafariServices
 import PassKit
+import SDWebImage
 
 class CTFilteredViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ActivityFilterDelegate, UIGestureRecognizerDelegate, MGSwipeTableCellDelegate, PKPaymentAuthorizationViewControllerDelegate, BmobPayDelegate {
   

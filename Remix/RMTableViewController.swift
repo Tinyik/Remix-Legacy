@@ -9,6 +9,7 @@
 import UIKit
 import SafariServices
 import PassKit
+import SDWebImage
 
 let themeColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
 var isHomepageFirstLaunching: Bool!
@@ -36,6 +37,9 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     var launchedTimes: Int!
     var pageControl = UIPageControl(frame: CGRectMake(80, 240, 200, 50))
     
+    var ongoingTransactionId: String!
+    var ongoingTransactionPrice: Double!
+    var ongoingTransactionRemarks = "No comments."
 
     func updateLaunchedTimes() {
         let userDefaults = NSUserDefaults.standardUserDefaults()
@@ -624,7 +628,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             })
             let registerButton = MGSwipeButton(title: "报名", backgroundColor: UIColor(white: 0.925, alpha: 1), callback: { (sender) -> Bool in
                 
-                self.registerForActivity(cell)
+                self.prepareForActivityRegistration(cell)
                 
                 return true
             })
@@ -702,61 +706,125 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
 
     }
     
+    func prepareForActivityRegistration(cell: MGSwipeTableCell) {
+        let indexPath = self.tableView.indexPathForCell(cell)
+        let activity = self.activities[indexPath!.section][indexPath!.row]
+        if let _isRegOpen = activity.objectForKey("isRegistrationOpen") as? Bool {
+            if _isRegOpen == true {
+                if checkPersonalInfoIntegrity() {
+                    
+                    
+                    if let _needInfo = activity.objectForKey("isRequireRemarks") as? Bool {
+                        if _needInfo == true {
+                            let prompt = activity.objectForKey("AdditionalPrompt") as? String
+                            let alert = UIAlertController(title: "附加信息", message: "除了你的基本信息外，此活动需要以下附加的报名信息: \n" + prompt!, preferredStyle: .Alert)
+                            let action = UIAlertAction(title: "继续报名", style: .Default, handler: { (action) -> Void in
+                                self.ongoingTransactionRemarks = alert.textFields![0].text!
+                                self.registerForActivity(cell)
+                            })
+                            let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+                            alert.addTextFieldWithConfigurationHandler({ (textField) -> Void in
+                                textField.placeholder = "请输入附加报名信息"
+                                
+                            })
+                            alert.addAction(action)
+                            alert.addAction(cancel)
+                            self.presentViewController(alert, animated: true, completion: nil)
+                            
+                        }else{
+                            registerForActivity(cell)
+                        }
+                    }else{
+                        registerForActivity(cell)
+                    }
+                    
+                    
+                }else{
+                    let alert = UIAlertController(title: "完善信息", message: "请先进入账户设置完善个人信息后再继续报名参加活动。", preferredStyle: .Alert)
+                    let action = UIAlertAction(title: "去设置", style: .Default, handler: { (action) -> Void in
+                        self.presentSettingsVC()
+                    })
+                    let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+                    alert.addAction(action)
+                    alert.addAction(cancel)
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+
+            }else{
+                let alert = UIAlertController(title: "提示", message: "这个活动太火爆啦！参与活动人数已满(Ｔ▽Ｔ)再看看别的活动吧~下次记得早早下手哦。", preferredStyle: .Alert)
+                let action = UIAlertAction(title: "好吧", style: .Default, handler: nil)
+                alert.addAction(action)
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+        }else{
+            let alert = UIAlertController(title: "提示", message: "这个活动太火爆啦！参与活动人数已满(Ｔ▽Ｔ)再看看别的活动吧~下次记得早早下手哦。", preferredStyle: .Alert)
+            let action = UIAlertAction(title: "好吧", style: .Default, handler: nil)
+            alert.addAction(action)
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        
+    }
+    
     
     func registerForActivity(cell: MGSwipeTableCell) {
         
-        if checkPersonalInfoIntegrity() {
+        
             let indexPath = self.tableView.indexPathForCell(cell)
             let activity = self.activities[indexPath!.section][indexPath!.row]
             let orgName = activity.objectForKey("Org") as? String
+        
             if let price = activity.objectForKey("Price") as? Double {
                 if price != 0 {
-                    //                if IOSVersion.SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO("9.2") {
-                    //
-                    //
-                    //                    if PKPaymentAuthorizationViewController.canMakePayments() {
-                    //                        let payment = PKPaymentRequest()
-                    //                        let item = PKPaymentSummaryItem(label: orgName!, amount: NSDecimalNumber(double: price))
-                    //                        payment.paymentSummaryItems = [item]
-                    //                        payment.currencyCode = "CNY"
-                    //                        payment.countryCode = "CN"
-                    //                        payment.merchantIdentifier = "merchant.com.fongtinyik.remix"
-                    //                        if #available(iOS 9.0, *) {
-                    //                            payment.merchantCapabilities = [.Capability3DS, .CapabilityCredit, .CapabilityDebit, .CapabilityEMV]
-                    //                        }
-                    //                        if #available(iOS 9.2, *) {
-                    //                            payment.supportedNetworks = [PKPaymentNetworkChinaUnionPay]
-                    //                        }
-                    //                        let payVC = PKPaymentAuthorizationViewController(paymentRequest: payment)
-                    //                        payVC.delegate = self
-                    //                        self.presentViewController(payVC, animated: true, completion: nil)
-                    //
-                    //                    }
-                    //                }else{
+                    ongoingTransactionId = activity.objectId
+                    ongoingTransactionPrice = price
                     let bPay = BmobPay()
                     bPay.delegate = self
                     bPay.price = NSNumber(double: price)
                     bPay.productName = orgName! + "活动报名费"
-                    bPay.body = "Test"
+                    bPay.body = (activity.objectForKey("ItemName") as! String) + "用户姓名" + (currentUser.objectForKey("LegalName") as! String)
                     bPay.appScheme = "BmobPay"
-                    bPay.payInBackground()
+                    bPay.payInBackgroundWithBlock({ (isSuccessful, error) -> Void in
+                        if isSuccessful == false {
+                            let alert = UIAlertController(title: "支付状态", message: "支付失败！请检查网络连接。", preferredStyle: .Alert)
+                            let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+                            alert.addAction(action)
+                            self.presentViewController(alert, animated: true, completion: nil)
+                        }
+                    })
                     
                     //                }
                     
+                }else{
+                    ongoingTransactionId = activity.objectId
+                    ongoingTransactionPrice = 0
+                    let alert = UIAlertController(title: "Remix报名确认", message: "确定要报名参加这个活动吗？(●'◡'●)ﾉ♥", preferredStyle: .Alert)
+                    let action = UIAlertAction(title: "确认", style: .Default, handler: { (action) -> Void in
+                        self.paySuccess()
+                    })
+                    let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+                    alert.addAction(action)
+                    alert.addAction(cancel)
+                    self.presentViewController(alert, animated: true, completion: nil)
                 }
-            }
 
-        }else{
-            let alert = UIAlertController(title: "完善信息", message: "请先进入账户设置完善个人信息后再继续报名参加活动。", preferredStyle: .Alert)
-            let action = UIAlertAction(title: "去设置", style: .Default, handler: { (action) -> Void in
-                self.presentSettingsVC()
-            })
-            let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
-            alert.addAction(action)
-            alert.addAction(cancel)
-            self.presentViewController(alert, animated: true, completion: nil)
+                
+            }else{
+                ongoingTransactionId = activity.objectId
+                ongoingTransactionPrice = 0
+               let alert = UIAlertController(title: "Remix报名确认", message: "确定要报名参加这个活动吗？(●'◡'●)ﾉ♥", preferredStyle: .Alert)
+                let action = UIAlertAction(title: "确认", style: .Default, handler: { (action) -> Void in
+                    self.paySuccess()
+                })
+                let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+                alert.addAction(action)
+                alert.addAction(cancel)
+                self.presentViewController(alert, animated: true, completion: nil)
         }
-    }
+    
+    
+}
+    
+    
     
   
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -863,15 +931,38 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     
     
     func paySuccess() {
-        let alert = UIAlertController(title: "支付状态", message: "支付成功！", preferredStyle: .Alert)
-        let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
-        alert.addAction(action)
-        self.presentViewController(alert, animated: true, completion: nil)
+        let newOrder = BmobObject(className: "Orders")
+        newOrder.setObject(ongoingTransactionId, forKey: "ParentActivityObjectId")
+        newOrder.setObject(ongoingTransactionPrice, forKey: "Amount")
+        newOrder.setObject(currentUser.objectId, forKey: "CustomerObjectId")
+        newOrder.setObject(ongoingTransactionRemarks, forKey: "Remarks")
+        newOrder.setObject(true, forKey: "isVisibleToUsers")
+        newOrder.saveInBackgroundWithResultBlock { (isSuccessful, error) -> Void in
+            if isSuccessful {
+                let alert = UIAlertController(title: "支付状态", message: "报名成功！Remix已经把你的基本信息发送给了活动主办方。请进入 \"我参加的活动\" 查看", preferredStyle: .Alert)
+                let cancel = UIAlertAction(title: "继续逛逛", style: .Cancel, handler: nil)
+                let action = UIAlertAction(title: "立即查看", style: .Default) { (action) -> Void in
+                    self.presentSettingsVC()
+                }
+                alert.addAction(action)
+                alert.addAction(cancel)
+                self.presentViewController(alert, animated: true, completion: nil)
+            }else {
+                let alert = UIAlertController(title: "支付状态", message: "Something is wrong. 这是一个极小概率的错误。不过别担心，如果已经被扣款, 请联系Remix客服让我们为你解决。（181-4977-0476）", preferredStyle: .Alert)
+                let cancel = UIAlertAction(title: "稍后在说", style: .Cancel, handler: nil)
+                let action = UIAlertAction(title: "立即拨打", style: .Default) { (action) -> Void in
+                    UIApplication.sharedApplication().openURL(NSURL(string: "tel://18149770476")!)
+                }
+                alert.addAction(action)
+                alert.addAction(cancel)
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+        }
+        
     }
     
     func payFailWithErrorCode(errorCode: Int32) {
-        print(errorCode)
-        print("PAYFAILED")
+       
         let alert = UIAlertController(title: "支付状态", message: "支付失败。", preferredStyle: .Alert)
         let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
         alert.addAction(action)

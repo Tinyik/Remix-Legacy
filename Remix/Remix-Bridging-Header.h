@@ -5,7 +5,7 @@
 #import <BmobSDK/Bmob.h>
 #import <BmobPay/BmobPay.h>
 #import <AliPaySDK/AliPaySDK.h>
-#import "UIImageView+WebCache.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "MGSwipeButton.h"
 #import "MGSwipeTableCell.h"
 #import "TTUITableViewZoomController.h"

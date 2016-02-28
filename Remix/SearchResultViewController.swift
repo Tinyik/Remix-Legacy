@@ -9,6 +9,7 @@
 import UIKit
 import SafariServices
 import PassKit
+import SDWebImage
 
 
 class SearchResultViewController: UITableViewController, UIGestureRecognizerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, MGSwipeTableCellDelegate, PKPaymentAuthorizationViewControllerDelegate, BmobPayDelegate {
