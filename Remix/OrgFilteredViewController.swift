@@ -37,7 +37,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         let backItem = UIBarButtonItem(customView: backButton)
         self.navigationItem.leftBarButtonItem = backItem
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "关于我们", style: .Plain, target: self, action: "showOrgIntroView")
-        self.navigationItem.rightBarButtonItem?.tintColor = .blackColor()
+        self.navigationItem.rightBarButtonItem?.tintColor = .whiteColor()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         self.title = orgName
         setUpParallaxHeaderView()

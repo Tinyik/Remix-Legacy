@@ -37,7 +37,7 @@ class OrdersViewController: UITableViewController, UIGestureRecognizerDelegate {
 
     
     func popCurrentVC() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     func fetchCloudData() {

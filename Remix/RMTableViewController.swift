@@ -83,6 +83,9 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         
           }
     
+    override func viewWillAppear(animated: Bool) {
+        
+    }
     
     func setUpViews() {
         adTableView.separatorStyle = .None

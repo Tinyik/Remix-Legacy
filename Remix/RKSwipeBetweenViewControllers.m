@@ -9,6 +9,7 @@
 
 #import "RKSwipeBetweenViewControllers.h"
 #import "Remix-Swift.h"
+
 //%%% customizeable button attributes
 CGFloat X_BUFFER = 0.0; //%%% the number of pixels on either side of the segment
 CGFloat Y_BUFFER = 44.0; //%%% number of pixels on top of the segment
@@ -187,18 +188,25 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
         [button setTitle:[buttonText objectAtIndex:i] forState:UIControlStateNormal]; //%%%buttontitle
     }
     UIButton *showSettings = [[UIButton alloc] initWithFrame:CGRectMake(self.navigationBar.frame.size.width-50, 12, 25, 25)];
+    [showSettings addTarget:self action:@selector(presentSettingsVCFromNaviController) forControlEvents:UIControlEventTouchUpInside];
     [showSettings setBackgroundImage:[UIImage imageNamed:@"Settings"] forState:UIControlStateNormal];
     UIImageView *barLogoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TitleLogo"]];
     barLogoView.frame = CGRectMake(self.navigationBar.frame.size.width/2-40, 10, 70, 26);
-    
+    UIButton *showAdd = [[UIButton alloc] initWithFrame:CGRectMake(5, 12, 25, 25)];
+    [showAdd addTarget:self action:@selector(presentSettingsVCFromNaviController) forControlEvents:UIControlEventTouchUpInside];
+    [showAdd setBackgroundImage:[UIImage imageNamed:@"Add"] forState:UIControlStateNormal];
    // barLogoView.center = self.navigationBar.center;
     [navigationView addSubview:barLogoView];
     [navigationView addSubview:showSettings];
-    
+    [navigationView addSubview:showAdd];
     pageController.navigationController.navigationBar.topItem.titleView = navigationView;
     
     
     [self setupSelector];
+}
+
+- (void)presentSettingsVCFromNaviController {
+    [pageController presentSettingsVC];
 }
 
 
