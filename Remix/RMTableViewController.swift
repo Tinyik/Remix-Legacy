@@ -12,6 +12,7 @@ import PassKit
 import SDWebImage
 
 var naviController: RKSwipeBetweenViewControllers!
+let DEVICE_SCREEN_WIDTH = UIScreen.mainScreen().bounds.width
 
 var isHomepageFirstLaunching: Bool!
 
@@ -31,6 +32,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     var monthNameStrings: [String] = []
     var dateLabel: UILabel!
     var likedActivitiesIds: [String] = []
+    var registeredActivitiesIds: [String] = []
     var adTargetURLs: [NSURL] = []
     var bannerAds: [BmobObject]!
     var randomAdIndex = Int()
@@ -85,6 +87,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     
     override func viewWillAppear(animated: Bool) {
         
+        fetchOrdersInformation()
     }
     
     func setUpViews() {
@@ -125,6 +128,19 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         let navigationController = UINavigationController(rootViewController: settingsVC)
         self.navigationController?.presentViewController(navigationController, animated: true, completion: nil)
 
+    }
+    
+    func fetchOrdersInformation() {
+        let query = BmobQuery(className: "Orders")
+        query.whereKey("CustomerObjectId", equalTo: currentUser.objectId)
+        query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
+            if error == nil {
+                for order in orders {
+                    print(order.objectId)
+                    self.registeredActivitiesIds.append(order.objectForKey("ParentActivityObjectId") as! String)
+                }
+            }
+        }
     }
     
     
@@ -337,16 +353,16 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         if tableView == adTableView {
-            return 150
+            return DEVICE_SCREEN_WIDTH*0.4
         }
         if activities.count > 0 {
         if let isFeatured = activities[indexPath.section][indexPath.row].objectForKey("isFeatured") as? Bool  {
             if isFeatured == true {
-            return 375
+            return DEVICE_SCREEN_WIDTH
             }
         }
         }
-        return 166
+        return DEVICE_SCREEN_WIDTH*0.4426
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -572,6 +588,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 
                 return true
             })
+            
             let registerButton = MGSwipeButton(title: "报名", backgroundColor: UIColor(white: 0.925, alpha: 1), callback: { (sender) -> Bool in
                 
                 self.prepareForActivityRegistration(cell)
@@ -655,58 +672,71 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     func prepareForActivityRegistration(cell: MGSwipeTableCell) {
         let indexPath = self.tableView.indexPathForCell(cell)
         let activity = self.activities[indexPath!.section][indexPath!.row]
-        if let _isRegOpen = activity.objectForKey("isRegistrationOpen") as? Bool {
-            if _isRegOpen == true {
-                if checkPersonalInfoIntegrity() {
-                    
-                    
-                    if let _needInfo = activity.objectForKey("isRequireRemarks") as? Bool {
-                        if _needInfo == true {
-                            let prompt = activity.objectForKey("AdditionalPrompt") as? String
-                            let alert = UIAlertController(title: "附加信息", message: "除了你的基本信息外，此活动需要以下附加的报名信息: \n" + prompt!, preferredStyle: .Alert)
-                            let action = UIAlertAction(title: "继续报名", style: .Default, handler: { (action) -> Void in
-                                self.ongoingTransactionRemarks = alert.textFields![0].text!
-                                self.registerForActivity(cell)
-                            })
-                            let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
-                            alert.addTextFieldWithConfigurationHandler({ (textField) -> Void in
-                                textField.placeholder = "请输入附加报名信息"
+        if registeredActivitiesIds.contains(activity.objectId) {
+            let alert = UIAlertController(title: "报名提示", message: "你已报名了这个活动，请进入我的订单查看。", preferredStyle: .Alert)
+            let action = UIAlertAction(title: "立即查看", style: .Default, handler: { (action) -> Void in
+                self.presentSettingsVC()
+            })
+            let cancel = UIAlertAction(title: "继续逛逛", style: .Cancel, handler: nil)
+            alert.addAction(action)
+            alert.addAction(cancel)
+            self.presentViewController(alert, animated: true, completion: nil)
+
+        }else{
+            if let _isRegOpen = activity.objectForKey("isRegistrationOpen") as? Bool {
+                if _isRegOpen == true {
+                    if checkPersonalInfoIntegrity() {
+                        
+                        
+                        if let _needInfo = activity.objectForKey("isRequireRemarks") as? Bool {
+                            if _needInfo == true {
+                                let prompt = activity.objectForKey("AdditionalPrompt") as? String
+                                let alert = UIAlertController(title: "附加信息", message: "除了你的基本信息外，此活动需要以下附加的报名信息: \n" + prompt!, preferredStyle: .Alert)
+                                let action = UIAlertAction(title: "继续报名", style: .Default, handler: { (action) -> Void in
+                                    self.ongoingTransactionRemarks = alert.textFields![0].text!
+                                    self.registerForActivity(cell)
+                                })
+                                let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+                                alert.addTextFieldWithConfigurationHandler({ (textField) -> Void in
+                                    textField.placeholder = "请输入附加报名信息"
+                                    
+                                })
+                                alert.addAction(action)
+                                alert.addAction(cancel)
+                                self.presentViewController(alert, animated: true, completion: nil)
                                 
-                            })
-                            alert.addAction(action)
-                            alert.addAction(cancel)
-                            self.presentViewController(alert, animated: true, completion: nil)
-                            
+                            }else{
+                                registerForActivity(cell)
+                            }
                         }else{
                             registerForActivity(cell)
                         }
+                        
+                        
                     }else{
-                        registerForActivity(cell)
+                        let alert = UIAlertController(title: "完善信息", message: "请先进入账户设置完善个人信息后再继续报名参加活动。", preferredStyle: .Alert)
+                        let action = UIAlertAction(title: "去设置", style: .Default, handler: { (action) -> Void in
+                            self.presentSettingsVC()
+                        })
+                        let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+                        alert.addAction(action)
+                        alert.addAction(cancel)
+                        self.presentViewController(alert, animated: true, completion: nil)
                     }
                     
-                    
                 }else{
-                    let alert = UIAlertController(title: "完善信息", message: "请先进入账户设置完善个人信息后再继续报名参加活动。", preferredStyle: .Alert)
-                    let action = UIAlertAction(title: "去设置", style: .Default, handler: { (action) -> Void in
-                        self.presentSettingsVC()
-                    })
-                    let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+                    let alert = UIAlertController(title: "提示", message: "这个活动太火爆啦！参与活动人数已满(Ｔ▽Ｔ)再看看别的活动吧~下次记得早早下手哦。", preferredStyle: .Alert)
+                    let action = UIAlertAction(title: "好吧", style: .Default, handler: nil)
                     alert.addAction(action)
-                    alert.addAction(cancel)
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
-
             }else{
                 let alert = UIAlertController(title: "提示", message: "这个活动太火爆啦！参与活动人数已满(Ｔ▽Ｔ)再看看别的活动吧~下次记得早早下手哦。", preferredStyle: .Alert)
                 let action = UIAlertAction(title: "好吧", style: .Default, handler: nil)
                 alert.addAction(action)
                 self.presentViewController(alert, animated: true, completion: nil)
             }
-        }else{
-            let alert = UIAlertController(title: "提示", message: "这个活动太火爆啦！参与活动人数已满(Ｔ▽Ｔ)再看看别的活动吧~下次记得早早下手哦。", preferredStyle: .Alert)
-            let action = UIAlertAction(title: "好吧", style: .Default, handler: nil)
-            alert.addAction(action)
-            self.presentViewController(alert, animated: true, completion: nil)
+
         }
         
     }
@@ -885,6 +915,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         newOrder.setObject(true, forKey: "isVisibleToUsers")
         newOrder.saveInBackgroundWithResultBlock { (isSuccessful, error) -> Void in
             if isSuccessful {
+                self.fetchOrdersInformation()
                 let alert = UIAlertController(title: "支付状态", message: "报名成功！Remix已经把你的基本信息发送给了活动主办方。请进入 \"我参加的活动\" 查看", preferredStyle: .Alert)
                 let cancel = UIAlertAction(title: "继续逛逛", style: .Cancel, handler: nil)
                 let action = UIAlertAction(title: "立即查看", style: .Default) { (action) -> Void in

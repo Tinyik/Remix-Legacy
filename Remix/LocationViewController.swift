@@ -86,7 +86,7 @@ class LocationViewController: UITableViewController, UIGestureRecognizerDelegate
             return UITableViewAutomaticDimension
         }
         else{
-            return 375
+            return DEVICE_SCREEN_WIDTH
         }
     }
     

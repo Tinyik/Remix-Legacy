@@ -66,27 +66,27 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
     self.hasAppearedFlag = NO;
 }
 
-- (void)updateIndicatorButtonsStateForVCDismissal {
-    printf("UPDATING");
-    
-        if (self.viewControllers.count == 2 || self.viewControllers.count == 1) {
-            [UIView animateWithDuration:0.2 animations:^{
-                for (UIButton *button in self.indicatorButtons) {
-                    button.alpha = 1;
-                }
-
-            }];
-        }else{
-            [UIView animateWithDuration:0.2 animations:^{
-                for (UIButton *button in self.indicatorButtons) {
-                    button.alpha = 0;
-                }
-                
-            }];
-        }
-
-
-}
+//- (void)updateIndicatorButtonsStateForVCDismissal {
+//    printf("UPDATING");
+//
+//        if (self.viewControllers.count == 2 || self.viewControllers.count == 1) {
+//            [UIView animateWithDuration:0.2 animations:^{
+//                for (UIButton *button in self.indicatorButtons) {
+//                    button.alpha = 1;
+//                }
+//
+//            }];
+//        }else{
+//            [UIView animateWithDuration:0.2 animations:^{
+//                for (UIButton *button in self.indicatorButtons) {
+//                    button.alpha = 0;
+//                }
+//                
+//            }];
+//        }
+//
+//
+//}
 
 - (void)updateIndicatorButtonsStateForPush {
     printf("UPDATING");
@@ -145,11 +145,11 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
     
 }
 
-- (void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion {
-    [self updateIndicatorButtonsStateForVCDismissal];
-     printf("DISMISS");
-    [super dismissViewControllerAnimated:flag completion:completion];
-}
+//- (void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion {
+//     printf("DISMISS");
+//    [super dismissViewControllerAnimated:flag completion:completion];
+//    [self updateIndicatorButtonsStateForVCDismissal];
+//}
 
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated {
      printf("POP");

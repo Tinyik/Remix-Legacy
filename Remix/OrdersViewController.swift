@@ -50,12 +50,15 @@ class OrdersViewController: UITableViewController, UIGestureRecognizerDelegate {
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("CustomerObjectId", equalTo: currentUser.objectId)
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
+        
             if error == nil {
                 for order in orders {
                     self.parentActivityIds.append(order.objectForKey("ParentActivityObjectId") as! String)
                     self.orders.append(order as! BmobObject)
+                    
                 }
-                
+                print("ddd")
+                print(self.parentActivityIds.count)
                 self.findParentActivities()
             }
         }
@@ -66,11 +69,15 @@ class OrdersViewController: UITableViewController, UIGestureRecognizerDelegate {
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
             if error == nil {
+                print(self.parentActivityIds)
                 for activity in activities {
-                    print(activity.objectId)
+                    
                     if self.parentActivityIds.contains(activity.objectId) {
                         self.coverImgURLs.append(NSURL(string: (activity.objectForKey("CoverImg") as! BmobFile).url)!)
                         self.parentActivities.append(activity as! BmobObject)
+                        print("Added")
+                    }else{
+                        print("NOTCONTAIN")
                     }
                 }
                 print("READY")
@@ -119,6 +126,7 @@ class OrdersViewController: UITableViewController, UIGestureRecognizerDelegate {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        print(parentActivities.count)
         return parentActivities.count
     }
     
