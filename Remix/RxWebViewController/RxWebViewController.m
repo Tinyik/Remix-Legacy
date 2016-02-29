@@ -9,6 +9,7 @@
 #import "RxWebViewController.h"
 #import "NJKWebViewProgress.h"
 #import "NJKWebViewProgressView.h"
+#import "Remix-Swift.h"
 
 #define boundsWidth self.view.bounds.size.width
 #define boundsHeight self.view.bounds.size.height
@@ -76,7 +77,6 @@
     
     //config navigation item
     self.navigationItem.leftItemsSupplementBackButton = YES;
-    
     self.webView.delegate = self.progressProxy;
     [self.view addSubview:self.webView];
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
@@ -230,8 +230,8 @@
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
         [self.navigationItem setLeftBarButtonItems:@[self.closeButtonItem] animated:NO];
         
-        //弃用customBackBarItem，使用原生backButtonItem
-//        [self.navigationItem setLeftBarButtonItems:@[spaceButtonItem,self.customBackBarItem,self.closeButtonItem] animated:NO];
+        
+       // [self.navigationItem setLeftBarButtonItems:@[spaceButtonItem,self.customBackBarItem,self.closeButtonItem] animated:NO];
     }else{
         self.navigationController.interactivePopGestureRecognizer.enabled = YES;
         [self.navigationItem setLeftBarButtonItems:nil];
@@ -335,7 +335,8 @@
 
 -(UIWebView*)webView{
     if (!_webView) {
-        _webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+        _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 114)];
+        
         _webView.delegate = (id)self;
         _webView.scalesPageToFit = YES;
         _webView.backgroundColor = [UIColor whiteColor];
@@ -367,6 +368,7 @@
 -(UIBarButtonItem*)closeButtonItem{
     if (!_closeButtonItem) {
         _closeButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(closeItemClicked)];
+        _closeButtonItem.tintColor = [UIColor whiteColor];
     }
     return _closeButtonItem;
 }

@@ -11,13 +11,14 @@ import SafariServices
 import PassKit
 import SDWebImage
 
-var naviController: RKSwipeBetweenViewControllers!
+// Global Constants
 let DEVICE_SCREEN_WIDTH = UIScreen.mainScreen().bounds.width
+let DEVICE_SCREEN_HEIGHT = UIScreen.mainScreen().bounds.height
 
+
+var naviController: RKSwipeBetweenViewControllers!
 var isHomepageFirstLaunching: Bool!
-
 var hasPromptedToEnableNotif: Bool!
-
 class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelegate, UISearchBarDelegate, PKPaymentAuthorizationViewControllerDelegate, BmobPayDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -818,12 +819,12 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             }
             let adTargetURL = NSURL(string:(self.bannerAds[Int(self.randomAdIndex)].objectForKey("URL") as! String))
             if #available(iOS 9.0, *) {
-                
+            
                 let safariView = SFSafariViewController(URL: adTargetURL!, entersReaderIfAvailable: false)
                 safariView.view.tintColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
                 self.navigationController?.presentViewController(safariView, animated: true, completion: nil)
             } else {
-                let webView = RxWebViewController(url: adTargetURL!)
+                let webView = RMWebViewController(url: adTargetURL!)
                 self.navigationController?.pushViewController(webView, animated: true)
             }
 
@@ -839,14 +840,14 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 activity.incrementKey("PageView", byAmount: 1)
                 activity.updateInBackground()
             }
-        if #available(iOS 9.0, *) {
-            let safariView = SFSafariViewController(URL: NSURL(string: activities[indexPath.section][indexPath.row].objectForKey("URL") as! String)!, entersReaderIfAvailable: false)
-            safariView.view.tintColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
-            self.navigationController?.presentViewController(safariView, animated: true, completion: nil)
-        } else {
-           let webView = RxWebViewController(url: NSURL(string: activities[indexPath.section][indexPath.row].objectForKey("URL") as! String)!)
+//        if #available(iOS 9.0, *) {
+//            let safariView = SFSafariViewController(URL: NSURL(string: activities[indexPath.section][indexPath.row].objectForKey("URL") as! String)!, entersReaderIfAvailable: false)
+//            safariView.view.tintColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
+//            self.navigationController?.presentViewController(safariView, animated: true, completion: nil)
+//        } else {
+           let webView = RMWebViewController(url: NSURL(string: activities[indexPath.section][indexPath.row].objectForKey("URL") as! String)!)
             self.navigationController?.pushViewController(webView, animated: true)
-        }
+    //    }
             
       
        

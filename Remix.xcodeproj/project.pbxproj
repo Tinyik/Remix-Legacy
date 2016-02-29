@@ -68,6 +68,8 @@
 		189782841C63CA6900458515 /* RMTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189782831C63CA6900458515 /* RMTableViewController.swift */; };
 		189782861C63DEAC00458515 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189782851C63DEAC00458515 /* CategoryViewController.swift */; };
 		189782881C63E0D600458515 /* RMNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189782871C63E0D600458515 /* RMNavigationController.swift */; };
+		18984F8F1C8472A300821477 /* RMToolBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18984F8E1C8472A300821477 /* RMToolBarView.xib */; };
+		18984F911C8473C400821477 /* RMToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18984F901C8473C400821477 /* RMToolBarView.swift */; };
 		1898CA3D1C68AD15009D3261 /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1898CA3B1C68AD15009D3261 /* ParallaxHeaderView.m */; };
 		1898CA401C68ADCF009D3261 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 1898CA3F1C68ADCF009D3261 /* UIImage+ImageEffects.m */; };
 		1898CA4B1C6900B8009D3261 /* RegLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1898CA4A1C6900B8009D3261 /* RegLoginViewController.swift */; };
@@ -241,6 +243,8 @@
 		189782831C63CA6900458515 /* RMTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMTableViewController.swift; sourceTree = "<group>"; };
 		189782851C63DEAC00458515 /* CategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		189782871C63E0D600458515 /* RMNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMNavigationController.swift; sourceTree = "<group>"; };
+		18984F8E1C8472A300821477 /* RMToolBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMToolBarView.xib; sourceTree = "<group>"; };
+		18984F901C8473C400821477 /* RMToolBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMToolBarView.swift; sourceTree = "<group>"; };
 		1898CA3B1C68AD15009D3261 /* ParallaxHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxHeaderView.m; sourceTree = "<group>"; };
 		1898CA3C1C68AD15009D3261 /* ParallaxHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxHeaderView.h; sourceTree = "<group>"; };
 		1898CA3E1C68ADCF009D3261 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
@@ -517,10 +521,11 @@
 				1824543F1C7F827600CF0CC6 /* Remix.entitlements */,
 				1899E9B61C663E1500ADC2AC /* Extern Classes */,
 				189782511C63C7EF00458515 /* Main.storyboard */,
-				18BCA0351C6EE29F00DF3EC7 /* RMWebViewController.swift */,
 				1824544F1C7FA16C00CF0CC6 /* VersionCheck.swift */,
 				18E239311C805E1600363655 /* FloatingActivityView.swift */,
 				18C79D851C83EDCF004AAA44 /* RMPageViewController.swift */,
+				18984F8E1C8472A300821477 /* RMToolBarView.xib */,
+				18984F901C8473C400821477 /* RMToolBarView.swift */,
 				18E239331C805E2D00363655 /* FloatingActivityView.xib */,
 				1898CA4A1C6900B8009D3261 /* RegLoginViewController.swift */,
 				180199551C79E25F00A6C7E4 /* TermsAndConditionsViewController.swift */,
@@ -674,6 +679,7 @@
 			children = (
 				18BCA0291C6E3FE600DF3EC7 /* CommunityViewController.swift */,
 				1899E9BE1C66F75600ADC2AC /* RMFullCoverCell.swift */,
+				18BCA0351C6EE29F00DF3EC7 /* RMWebViewController.swift */,
 				189782831C63CA6900458515 /* RMTableViewController.swift */,
 				1899E9B41C66360E00ADC2AC /* AdvertiseCell.swift */,
 				1897827D1C63C8F500458515 /* RMTableViewCell.swift */,
@@ -950,6 +956,7 @@
 				181F2B2D1C6A2D8D00FC237D /* backItemImage_hl@2x.png in Resources */,
 				187745901C6ACB1D000427C7 /* UMSCommentInputController.xib in Resources */,
 				187745961C6ACB1D000427C7 /* UMSShareListController.xib in Resources */,
+				18984F8F1C8472A300821477 /* RMToolBarView.xib in Resources */,
 				187745931C6ACB1D000427C7 /* UMShareEditViewControlleriPad.xib in Resources */,
 				1877458F1C6ACB1D000427C7 /* UMSCommentDetailController.xib in Resources */,
 				187745921C6ACB1D000427C7 /* UMShareEditViewController.xib in Resources */,
@@ -1105,6 +1112,7 @@
 				189782861C63DEAC00458515 /* CategoryViewController.swift in Sources */,
 				1898CA851C69B599009D3261 /* BlixtTransitionAnimation.swift in Sources */,
 				18C79D7D1C8215FF004AAA44 /* OrdersViewController.swift in Sources */,
+				18984F911C8473C400821477 /* RMToolBarView.swift in Sources */,
 				1898CA831C69B599009D3261 /* TRTabBarTransitionDelegate.swift in Sources */,
 				1898CA3D1C68AD15009D3261 /* ParallaxHeaderView.m in Sources */,
 				1898CA8D1C69B599009D3261 /* ScanbotTransitionAnimation.swift in Sources */,
