@@ -142,6 +142,21 @@ class OrdersViewController: UITableViewController, UIGestureRecognizerDelegate {
         }
         cell.timeLabel.text = selectedActivity.objectForKey("Date") as? String
         cell.orgLabel.text = selectedActivity.objectForKey("Org") as? String
+        if let price = selectedActivity.objectForKey("Price") as? Double {
+            if price != 0 {
+                let priceNumberFont = UIFont.systemFontOfSize(19)
+                let attrDic1 = [NSFontAttributeName:priceNumberFont]
+                let priceString = NSMutableAttributedString(string: String(price), attributes: attrDic1)
+                let currencyFont = UIFont.systemFontOfSize(13)
+                let attrDic2 = [NSFontAttributeName:currencyFont]
+                let currencyString = NSMutableAttributedString(string: "元", attributes: attrDic2)
+                priceString.appendAttributedString(currencyString)
+                cell.priceTag.attributedText = priceString
+            }else{
+                cell.priceTag.text = "免费"
+                
+            }
+        }
         cell.orderNoLabel.text = "订单号: " + selectedOrder.objectId
         cell.contactButton.addTarget(self, action: "contactOrganization", forControlEvents: .TouchUpInside)
         cell.deleteButton.addTarget(self, action: "removeOrderFromApplication", forControlEvents: .TouchUpInside)

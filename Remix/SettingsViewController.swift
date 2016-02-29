@@ -95,7 +95,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
                 return cell
             }else if indexPath.row == 0 {
                 let cell2 = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") as! SettingsCell
-                cell2.label.text = "我参加的活动"
+                cell2.label.text = "我的订单"
                 return cell2
             }else{
                 cell.titleLabel.text = "向我们推荐魔都好去处"
