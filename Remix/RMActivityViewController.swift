@@ -25,7 +25,10 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
         containerView.backgroundColor = .clearColor()
         self.view.addSubview(containerView)
         let toolBar = UIView.loadFromNibNamed("RMToolBarView") as! RMToolBarView
-        toolBar.backgroundColor = .blackColor()
+        
+        // Moved to IB
+//        toolBar.backgroundColor = .blackColor()
+        
         toolBar.registerButton.addTarget(self, action: "prepareForActivityRegistration", forControlEvents: .TouchUpInside)
         toolBar.showComments.addTarget(self, action: "showCommentsVC", forControlEvents: .TouchUpInside)
         toolBar.frame = containerView.bounds
@@ -52,7 +55,8 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
         let commentsVC = storyBoard.instantiateViewControllerWithIdentifier("CommentsVC") as! CommentsTableViewController
         commentsVC.presentingActivity = self.activity
         let naviController = UINavigationController(rootViewController: commentsVC)
-        self.tr_presentViewController(naviController, method: TRPresentTransitionMethod.PopTip(visibleHeight: 450))
+        
+        self.tr_presentViewController(naviController, method: TRPresentTransitionMethod.PopTip(visibleHeight: COMMENTS_TABLE_VIEW_VISIBLE_HEIGHT))
 
     }
     

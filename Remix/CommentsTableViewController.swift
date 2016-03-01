@@ -21,6 +21,10 @@ class CommentsTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "添加评论", style: .Plain, target: self, action: "addNewComment")
         self.navigationController?.navigationBar.tintColor = .blackColor()
         
+        // Bottom margin for halved view
+        let tableViewBottomMargin: CGFloat = DEVICE_SCREEN_HEIGHT - COMMENTS_TABLE_VIEW_VISIBLE_HEIGHT
+        tableView.contentInset = UIEdgeInsetsMake(0, 0, tableViewBottomMargin, 0)
+        
     }
     
     override func viewWillAppear(animated: Bool) {

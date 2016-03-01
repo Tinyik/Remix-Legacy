@@ -14,6 +14,7 @@ import SDWebImage
 // Global Constants
 let DEVICE_SCREEN_WIDTH = UIScreen.mainScreen().bounds.width
 let DEVICE_SCREEN_HEIGHT = UIScreen.mainScreen().bounds.height
+let COMMENTS_TABLE_VIEW_VISIBLE_HEIGHT: CGFloat = 450
 
 
 var naviController: RKSwipeBetweenViewControllers!

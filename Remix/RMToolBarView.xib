@@ -11,33 +11,47 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aty-So-iYg">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aty-So-iYg">
                     <rect key="frame" x="165" y="10" width="60" height="30"/>
                     <state key="normal" title="查看评论">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1KH-9K-NCB">
-                    <rect key="frame" x="261" y="0.0" width="114" height="51"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1KH-9K-NCB">
+                    <rect key="frame" x="261" y="0.0" width="114" height="50"/>
                     <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="114" id="Loq-hM-V3t"/>
+                    </constraints>
                     <state key="normal" title="立即报名">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yX5-va-q5F">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yX5-va-q5F">
                     <rect key="frame" x="84" y="10" width="30" height="30"/>
                     <state key="normal" title="收藏">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RRP-N4-HbT">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RRP-N4-HbT">
                     <rect key="frame" x="19" y="10" width="30" height="30"/>
                     <state key="normal" title="赞">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Aty-So-iYg" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="09C-aP-LJV"/>
+                <constraint firstAttribute="bottom" secondItem="1KH-9K-NCB" secondAttribute="bottom" id="4o5-gP-udA"/>
+                <constraint firstItem="1KH-9K-NCB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="6Wg-l8-G3f"/>
+                <constraint firstAttribute="trailing" secondItem="1KH-9K-NCB" secondAttribute="trailing" id="9Em-EX-OiM"/>
+                <constraint firstItem="RRP-N4-HbT" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Eee-uN-4Ir"/>
+                <constraint firstItem="RRP-N4-HbT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="19" id="OM3-z9-vHB"/>
+                <constraint firstItem="yX5-va-q5F" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="OQP-Qf-tQg"/>
+                <constraint firstItem="Aty-So-iYg" firstAttribute="leading" secondItem="yX5-va-q5F" secondAttribute="trailing" constant="51" id="dXt-5U-IzR"/>
+                <constraint firstItem="yX5-va-q5F" firstAttribute="leading" secondItem="RRP-N4-HbT" secondAttribute="trailing" constant="35" id="z5S-4n-Xkg"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
