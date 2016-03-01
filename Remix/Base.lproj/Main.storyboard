@@ -1102,10 +1102,10 @@
             </objects>
             <point key="canvasLocation" x="819.5" y="-1571"/>
         </scene>
-        <!--Community View Controller-->
+        <!--First Filtered View Controller-->
         <scene sceneID="yBa-Gy-B0C">
             <objects>
-                <viewController storyboardIdentifier="FirstFilteredVC" id="z93-PV-Ivv" customClass="CommunityViewController" customModule="Remix" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FirstFilteredVC" id="z93-PV-Ivv" customClass="RMFirstFilteredViewController" customModule="Remix" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hie-YW-Ppc"/>
                         <viewControllerLayoutGuide type="bottom" id="YPQ-9Q-lOX"/>
@@ -3555,10 +3555,10 @@
             </objects>
             <point key="canvasLocation" x="1257.5" y="-1737.5"/>
         </scene>
-        <!--Trending View Controller-->
+        <!--Second Filtered View Controller-->
         <scene sceneID="cAH-yb-5Uo">
             <objects>
-                <viewController storyboardIdentifier="SecondFilteredVC" id="3Gg-z0-YX6" customClass="TrendingViewController" customModule="Remix" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SecondFilteredVC" id="3Gg-z0-YX6" customClass="RMSecondFilteredViewController" customModule="Remix" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RUh-2m-8Bb"/>
                         <viewControllerLayoutGuide type="bottom" id="5W3-sO-pBp"/>
