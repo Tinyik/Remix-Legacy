@@ -66,97 +66,6 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
     self.hasAppearedFlag = NO;
 }
 
-//- (void)updateIndicatorButtonsStateForVCDismissal {
-//    printf("UPDATING");
-//
-//        if (self.viewControllers.count == 2 || self.viewControllers.count == 1) {
-//            [UIView animateWithDuration:0.2 animations:^{
-//                for (UIButton *button in self.indicatorButtons) {
-//                    button.alpha = 1;
-//                }
-//
-//            }];
-//        }else{
-//            [UIView animateWithDuration:0.2 animations:^{
-//                for (UIButton *button in self.indicatorButtons) {
-//                    button.alpha = 0;
-//                }
-//                
-//            }];
-//        }
-//
-//
-//}
-
-- (void)updateIndicatorButtonsStateForPush {
-    printf("UPDATING");
-    if (self.viewControllers != NULL) {
-        NSLog(@"%ul", self.viewControllers.count);
-    }
-    if (self.viewControllers.count == 0) {
-        
-        [UIView animateWithDuration:0.2 animations:^{
-            for (UIButton *button in self.indicatorButtons) {
-                button.alpha = 1;
-            }
-            
-        }];
-    }else{
-        [UIView animateWithDuration:0.2 animations:^{
-            for (UIButton *button in self.indicatorButtons) {
-                button.alpha = 0;
-            }
-            
-        }];
-    }
-    
-    
-}
-- (void)updateIndicatorButtonsStateForPop {
-    printf("UPDATING");
-    if (self.viewControllers != NULL) {
-        NSLog(@"%ul", self.viewControllers.count);
-    }
-    if (self.viewControllers.count == 1 || self.viewControllers.count == 2) {
-        
-        [UIView animateWithDuration:0.2 animations:^{
-            for (UIButton *button in self.indicatorButtons) {
-                button.alpha = 1;
-            }
-            
-        }];
-    }else{
-        [UIView animateWithDuration:0.2 animations:^{
-            for (UIButton *button in self.indicatorButtons) {
-                button.alpha = 0;
-            }
-            
-        }];
-    }
-    
-    
-}
-
-
-
-- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    [self updateIndicatorButtonsStateForPush];
-    [super pushViewController:viewController animated:animated];
-    
-}
-
-//- (void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion {
-//     printf("DISMISS");
-//    [super dismissViewControllerAnimated:flag completion:completion];
-//    [self updateIndicatorButtonsStateForVCDismissal];
-//}
-
-- (UIViewController *)popViewControllerAnimated:(BOOL)animated {
-     printf("POP");
-    [self updateIndicatorButtonsStateForPop];
-    
-    return [super popViewControllerAnimated:animated];
-}
 
 #pragma mark Customizables
 
@@ -168,7 +77,7 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
 
 //%%% sets up the tabs using a loop.  You can take apart the loop to customize individual buttons, but remember to tag the buttons.  (button.tag=0 and the second button.tag=1, etc)
 -(void)setupSegmentButtons {
-    navigationView = [[UIView alloc]initWithFrame:CGRectMake(0,0,self.view.frame.size.width,self.navigationBar.frame.size.height)];
+    navigationView = [[UIView alloc]initWithFrame:CGRectMake(0,0,[UIScreen mainScreen].bounds.size.width,self.navigationBar.frame.size.height)];
     
     NSInteger numControllers = [viewControllerArray count];
     
@@ -176,8 +85,15 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
          buttonText = [[NSArray alloc]initWithObjects: @"first",@"second",@"third",@"fourth",@"etc",@"etc",@"etc",@"etc",nil]; //%%%buttontitle
     }
     for (int i = 0; i<numControllers; i++) {
-        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(i*[UIScreen mainScreen].bounds.size.width/3, 64, [UIScreen mainScreen].bounds.size.width/3, HEIGHT)];
-        [self.view addSubview:button];
+        //SET BUTTON FRAME
+        CGFloat SCREEN_WIDTH = [UIScreen mainScreen].bounds.size.width;
+        if (SCREEN_WIDTH == 414) {
+            X_OFFSET = 12;
+        }
+        
+        
+        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(i*[UIScreen mainScreen].bounds.size.width/3-X_OFFSET, 44, SCREEN_WIDTH/3, HEIGHT)];
+        [self.navigationView addSubview:button];
         [indicatorButtons addObject:button];
         button.hidden = NO;
         button.tag = i; //%%% IMPORTANT: if you make your own custom buttons, you have to tag them appropriately
@@ -206,7 +122,10 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
 }
 
 - (void)presentSettingsVCFromNaviController {
-    [pageController presentSettingsVC];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName: @"Main" bundle: [NSBundle mainBundle]];
+    SettingsViewController *settingsVC = [storyboard instantiateViewControllerWithIdentifier: @"SettingsVC"];
+    UINavigationController *naviController = [[UINavigationController alloc]initWithRootViewController:settingsVC];
+    [self presentViewController:naviController animated:YES completion:NULL];
 }
 
 

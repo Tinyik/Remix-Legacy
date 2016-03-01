@@ -693,6 +693,7 @@
 			isa = PBXGroup;
 			children = (
 				18B317C51C6B243900336A92 /* DeviceInformation.swift */,
+				1857B5311C856B9E00D00A9E /* AvatarCapture */,
 				18C79D811C83275F004AAA44 /* SwipeBetweenVC */,
 				18B317C21C6B06F100336A92 /* WalkThrough */,
 				181F2B201C6A2D8D00FC237D /* RxWebViewController */,
@@ -809,7 +810,6 @@
 		18C79D811C83275F004AAA44 /* SwipeBetweenVC */ = {
 			isa = PBXGroup;
 			children = (
-				1857B5311C856B9E00D00A9E /* AvatarCapture */,
 				18C79D7E1C83221A004AAA44 /* RKSwipeBetweenViewControllers.h */,
 				18C79D7F1C83221A004AAA44 /* RKSwipeBetweenViewControllers.m */,
 			);

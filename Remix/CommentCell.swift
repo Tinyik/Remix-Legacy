@@ -18,6 +18,7 @@ class CommentCell: UITableViewCell {
         super.awakeFromNib()
         avatarView.layer.cornerRadius = avatarView.frame.size.height/2
         avatarView.clipsToBounds = true
+        avatarView.contentMode = .ScaleAspectFill
         // Initialization code
     }
 
