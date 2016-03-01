@@ -239,7 +239,7 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
                 }
             }
         }
-        return DEVICE_SCREEN_WIDTH*0.4426
+        return 166
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {

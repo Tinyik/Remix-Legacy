@@ -21,13 +21,13 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9UF-1P-2Ee">
-                    <rect key="frame" x="4" y="153" width="98" height="21"/>
+                    <rect key="frame" x="5" y="158" width="98" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="1" green="0.30638606111848787" blue="0.22601045701725642" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mhu-hA-W1x">
-                    <rect key="frame" x="110" y="148" width="60" height="32"/>
+                    <rect key="frame" x="116" y="154" width="53" height="30"/>
                     <state key="normal" image="AliPayDark"/>
                     <connections>
                         <action selector="prepareForFloatingActivityRegistration" destination="iN0-l3-epB" eventType="touchUpInside" id="Vel-iH-Gin"/>

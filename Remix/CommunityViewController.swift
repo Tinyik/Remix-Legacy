@@ -7,23 +7,26 @@
 //
 
 import UIKit
+import SDWebImage
 
-class CommunityViewController: CTFilteredViewController {
-
-    
-    var likedHeaderImage = UIImage(named: "CommunityHeader")
+class RMFirstFilteredViewController: CTFilteredViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "社区推荐"
+        self.title = APPLICATION_UI_REMOTE_CONFIG.objectForKey("FilterLabel_1_Text") as? String
         
     }
     
     override func setUpParallaxHeaderView() {
-        let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(likedHeaderImage, forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, 175)) as! ParallaxHeaderView
+        let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(UIImage(named: "SDPlaceholder"), forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, 175)) as! ParallaxHeaderView
+        let url = NSURL(string: (APPLICATION_UI_REMOTE_CONFIG.objectForKey("Filter_1_HeaderImage") as? BmobFile)!.url)
+        let manager = SDWebImageManager()
+        manager.downloadImageWithURL(url, options: .RetryFailed, progress: nil, completed: { (image, error, type, isSuccessful, url) -> Void in
+            headerView.headerImage = image
+        })
+
         self.tableView.tableHeaderView = headerView
-        headerView.headerTitleLabel.text = "社区推荐"
-        headerView.headerTitleLabel.textColor = .grayColor()
+        headerView.headerTitleLabel.text = APPLICATION_UI_REMOTE_CONFIG.objectForKey("FilterLabel_1_Text") as? String
     }
     
     override func fetchCloudData() {
@@ -39,7 +42,7 @@ class CommunityViewController: CTFilteredViewController {
         
         var query = BmobQuery(className: "Activity")
         query.whereKey("isVisibleToUsers", equalTo: true)
-        query.whereKey("isVisibleOnCommunityList", equalTo: true)
+        query.whereKey("isVisibleOnFilterList_1", equalTo: true)
         query.whereKey("isFloatingActivity", equalTo: false)
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
             if activities.count > 0 {

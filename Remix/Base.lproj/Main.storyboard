@@ -44,7 +44,7 @@
                                         <segue destination="z93-PV-Ivv" kind="push" id="Ckb-je-Z60"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="社区推荐" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="glh-A9-fR8">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="glh-A9-fR8">
                                     <rect key="frame" x="21" y="348" width="64" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="4Ku-El-ECd"/>
@@ -65,7 +65,7 @@
                                         <segue destination="3Gg-z0-YX6" kind="push" id="T5x-Lf-QMx"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="热门" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aek-O3-pLi">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aek-O3-pLi">
                                     <rect key="frame" x="155" y="348" width="64" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="64" id="4bV-Oo-PSf"/>
@@ -86,7 +86,7 @@
                                         <segue destination="7xD-DQ-S5C" kind="push" id="bvV-eG-tbl"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="好去处" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1rE-bu-nph">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1rE-bu-nph">
                                     <rect key="frame" x="290" y="347" width="64" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="lSM-BJ-IxF"/>
@@ -149,7 +149,7 @@
                                 </label>
                                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Nv-gL-53h">
                                     <rect key="frame" x="0.0" y="576" width="375" height="185"/>
-                                    <color key="backgroundColor" red="0.99400252525252519" green="0.99400252525252519" blue="0.99400252525252519" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="185" id="qRu-mD-JVI"/>
                                     </constraints>
@@ -446,8 +446,14 @@
                     <size key="freeformSize" width="375" height="1500"/>
                     <connections>
                         <outlet property="adTableView" destination="Bco-9Z-ALV" id="GeF-Yt-MCk"/>
+                        <outlet property="filterButton_1" destination="J6G-CZ-cbG" id="E9T-6p-Q0a"/>
+                        <outlet property="filterButton_2" destination="TBN-rV-LEh" id="fda-GY-Weh"/>
+                        <outlet property="filterLabel_1" destination="glh-A9-fR8" id="xtv-ep-Cyw"/>
+                        <outlet property="filterLabel_2" destination="Aek-O3-pLi" id="MWi-fg-K6x"/>
                         <outlet property="floatingScrollView" destination="0Nv-gL-53h" id="CnZ-sa-bfK"/>
                         <outlet property="headerScrollView" destination="H6k-ka-jVD" id="uxG-KY-Bld"/>
+                        <outlet property="locationButton" destination="QLk-EE-TKj" id="OKO-80-nfe"/>
+                        <outlet property="locationLabel" destination="1rE-bu-nph" id="aAH-SC-w0X"/>
                         <outlet property="searchBar" destination="u6L-Dn-A8A" id="UU7-G0-HDB"/>
                     </connections>
                 </tableViewController>
@@ -1099,7 +1105,7 @@
         <!--Community View Controller-->
         <scene sceneID="yBa-Gy-B0C">
             <objects>
-                <viewController storyboardIdentifier="CommunityVC" id="z93-PV-Ivv" customClass="CommunityViewController" customModule="Remix" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FirstFilteredVC" id="z93-PV-Ivv" customClass="CommunityViewController" customModule="Remix" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hie-YW-Ppc"/>
                         <viewControllerLayoutGuide type="bottom" id="YPQ-9Q-lOX"/>
@@ -3552,7 +3558,7 @@
         <!--Trending View Controller-->
         <scene sceneID="cAH-yb-5Uo">
             <objects>
-                <viewController storyboardIdentifier="TrendingVC" id="3Gg-z0-YX6" customClass="TrendingViewController" customModule="Remix" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SecondFilteredVC" id="3Gg-z0-YX6" customClass="TrendingViewController" customModule="Remix" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RUh-2m-8Bb"/>
                         <viewControllerLayoutGuide type="bottom" id="5W3-sO-pBp"/>

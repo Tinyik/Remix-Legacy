@@ -7,17 +7,25 @@
 //
 
 import UIKit
+import SDWebImage
 
-class TrendingViewController: CTFilteredViewController {
+class RMSecondFilteredViewController: CTFilteredViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "热门活动"
+        self.title = APPLICATION_UI_REMOTE_CONFIG.objectForKey("FilterLabel_2_Text") as? String
     }
     
     override func setUpParallaxHeaderView() {
-        let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(UIImage(named: "TrendingHeader"), forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, 175)) as! ParallaxHeaderView
-        headerView.headerTitleLabel.text = "热门活动"
+        
+        let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(UIImage(named: "SDPlaceholder"), forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, 175)) as! ParallaxHeaderView
+        let url = NSURL(string: (APPLICATION_UI_REMOTE_CONFIG.objectForKey("Filter_2_HeaderImage") as? BmobFile)!.url)
+        let manager = SDWebImageManager()
+        manager.downloadImageWithURL(url, options: .RetryFailed, progress: nil, completed: { (image, error, type, isSuccessful, url) -> Void in
+            headerView.headerImage = image
+        })
+        
+        headerView.headerTitleLabel.text = APPLICATION_UI_REMOTE_CONFIG.objectForKey("FilterLabel_2_Text") as? String
         self.tableView.tableHeaderView = headerView
         
     }
@@ -31,7 +39,7 @@ class TrendingViewController: CTFilteredViewController {
         
         
         let query = BmobQuery(className: "Activity")
-        query.whereKey("isTrending", equalTo: true)
+        query.whereKey("isVisibleOnFilterList_2", equalTo: true)
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("isFloatingActivity", equalTo: false)
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in

@@ -194,7 +194,7 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
                 }
             }
         }
-        return DEVICE_SCREEN_WIDTH*0.4426
+        return 166
     }
     
 

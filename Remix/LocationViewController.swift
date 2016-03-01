@@ -25,7 +25,7 @@ class LocationViewController: UITableViewController, UIGestureRecognizerDelegate
             self.navigationItem.leftBarButtonItem = backItem
             self.navigationController?.interactivePopGestureRecognizer?.delegate = self
             self.navigationController?.navigationBar.translucent = false
-            self.title = "好去处"
+            self.title = APPLICATION_UI_REMOTE_CONFIG.objectForKey("LocationLabel_Text") as? String
             fetchCloudData()
         }
         

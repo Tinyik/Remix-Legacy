@@ -15,7 +15,7 @@ import SDWebImage
 let DEVICE_SCREEN_WIDTH = UIScreen.mainScreen().bounds.width
 let DEVICE_SCREEN_HEIGHT = UIScreen.mainScreen().bounds.height
 let COMMENTS_TABLE_VIEW_VISIBLE_HEIGHT: CGFloat = 450
-
+var APPLICATION_UI_REMOTE_CONFIG: BmobObject!
 
 var naviController: RKSwipeBetweenViewControllers!
 var isHomepageFirstLaunching: Bool!
@@ -26,6 +26,13 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     @IBOutlet weak var headerScrollView: UIScrollView!
     @IBOutlet weak var adTableView: UITableView!
     @IBOutlet weak var floatingScrollView: UIScrollView!
+    
+    @IBOutlet weak var filterButton_1: UIButton!
+    @IBOutlet weak var filterButton_2: UIButton!
+    @IBOutlet weak var locationButton: UIButton!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var filterLabel_2: UILabel!
+    @IBOutlet weak var filterLabel_1: UILabel!
     
     var shouldAskToEnableNotif = true
     var coverImgURLs: [[NSURL]] = []
@@ -84,11 +91,37 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     
   
     func setUpViews() {
+        loadRemoteUIConfigurations()
         adTableView.separatorStyle = .None
         searchBar.searchBarStyle = .Minimal
         self.tableView.separatorColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.4)
         self.navigationController?.navigationBar.translucent = false
         self.navigationItem.hidesBackButton = true
+    }
+    
+    func loadRemoteUIConfigurations() {
+        let query = BmobQuery(className: "UIRemoteConfig")
+        query.getObjectInBackgroundWithId("Cd3f1112") { (config, error) -> Void in
+            if error == nil {
+                APPLICATION_UI_REMOTE_CONFIG = config
+                self.filterLabel_1.text = config.objectForKey("FilterLabel_1_Text") as? String
+                self.filterLabel_2.text = config.objectForKey("FilterLabel_2_Text") as? String
+                self.locationLabel.text = config.objectForKey("LocationLabel_Text") as? String
+                let url1 = NSURL(string: (config.objectForKey("FilterButton_1_Image") as? BmobFile)!.url)
+                let url2 = NSURL(string: (config.objectForKey("FilterButton_2_Image") as? BmobFile)!.url)
+                let url3 = NSURL(string: (config.objectForKey("LocationButton_Image") as? BmobFile)!.url)
+                let manager = SDWebImageManager()
+                manager.downloadImageWithURL(url1, options: .RetryFailed, progress: nil, completed: { (image, error, type, isSuccessful, url) -> Void in
+                    self.filterButton_1.setImage(image, forState: .Normal)
+                })
+                manager.downloadImageWithURL(url2, options: .RetryFailed, progress: nil, completed: { (image, error, type, isSuccessful, url) -> Void in
+                    self.filterButton_2.setImage(image, forState: .Normal)
+                })
+                manager.downloadImageWithURL(url3, options: .RetryFailed, progress: nil, completed: { (image, error, type, isSuccessful, url) -> Void in
+                    self.locationButton.setImage(image, forState: .Normal)
+                })
+            }
+        }
     }
     
     func configurePageControl() {
@@ -174,10 +207,11 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                  
                     }else{
                         fView.priceTag.text = "免费"
-                        fView.payButton.setBackgroundImage(UIImage(named: "RegisterButton"), forState: .Normal)
+                        fView.payButton.setImage(UIImage(named: "RegisterButton"), forState: .Normal)
                     }
 
                 }
+                
                 self.floatingScrollView.addSubview(fView)
             }
             
@@ -333,7 +367,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             }
         }
         }
-        return DEVICE_SCREEN_WIDTH*0.4426
+        return 166
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

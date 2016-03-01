@@ -250,7 +250,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
                 }
             }
         }
-        return DEVICE_SCREEN_WIDTH*0.4426
+        return 166
     }
     
     
