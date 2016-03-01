@@ -25,7 +25,10 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
         containerView.backgroundColor = .clearColor()
         self.view.addSubview(containerView)
         let toolBar = UIView.loadFromNibNamed("RMToolBarView") as! RMToolBarView
-        toolBar.backgroundColor = .blackColor()
+        
+        // Moved to IB
+//        toolBar.backgroundColor = .blackColor()
+        
         toolBar.registerButton.addTarget(self, action: "prepareForActivityRegistration", forControlEvents: .TouchUpInside)
         toolBar.showComments.addTarget(self, action: "showCommentsVC", forControlEvents: .TouchUpInside)
         toolBar.frame = containerView.bounds
