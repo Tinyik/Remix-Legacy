@@ -11,7 +11,7 @@ import UIKit
 class RMFullCoverCell: MGSwipeTableCell {
    
     
-    @IBOutlet weak var payButton: UIButton!
+   
     
     @IBOutlet weak var priceTag: UILabel!
     

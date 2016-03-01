@@ -45,6 +45,8 @@
 		1857B52C1C855A7000D00A9E /* CommentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1857B52B1C855A7000D00A9E /* CommentsTableViewController.swift */; };
 		1857B52E1C855A8900D00A9E /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1857B52D1C855A8900D00A9E /* CommentCell.swift */; };
 		1857B5301C85623900D00A9E /* CommentInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1857B52F1C85623900D00A9E /* CommentInputViewController.swift */; };
+		1857B5341C856BB000D00A9E /* PKImageBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1857B5331C856BB000D00A9E /* PKImageBundle.bundle */; };
+		1857B5361C856BB400D00A9E /* ZCSAvatarCaptureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857B5351C856BB400D00A9E /* ZCSAvatarCaptureController.m */; };
 		1857BDFA1C65B78700A51248 /* CTFilteredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1857BDF91C65B78700A51248 /* CTFilteredViewController.swift */; };
 		187745701C6AC572000427C7 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1877456D1C6AC572000427C7 /* libMobClickLibrary.a */; };
 		1877458D1C6ACB1D000427C7 /* UMSocialLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 187745731C6ACB1D000427C7 /* UMSocialLocalizable.strings */; };
@@ -203,6 +205,9 @@
 		1857B52B1C855A7000D00A9E /* CommentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewController.swift; sourceTree = "<group>"; };
 		1857B52D1C855A8900D00A9E /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		1857B52F1C85623900D00A9E /* CommentInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentInputViewController.swift; sourceTree = "<group>"; };
+		1857B5321C856BAC00D00A9E /* ZCSAvatarCaptureController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZCSAvatarCaptureController.h; sourceTree = "<group>"; };
+		1857B5331C856BB000D00A9E /* PKImageBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PKImageBundle.bundle; sourceTree = "<group>"; };
+		1857B5351C856BB400D00A9E /* ZCSAvatarCaptureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCSAvatarCaptureController.m; sourceTree = "<group>"; };
 		1857BDF91C65B78700A51248 /* CTFilteredViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTFilteredViewController.swift; sourceTree = "<group>"; };
 		1877456D1C6AC572000427C7 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		1877456E1C6AC572000427C7 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
@@ -432,6 +437,16 @@
 				1857B52D1C855A8900D00A9E /* CommentCell.swift */,
 			);
 			name = ActivityInterface;
+			sourceTree = "<group>";
+		};
+		1857B5311C856B9E00D00A9E /* AvatarCapture */ = {
+			isa = PBXGroup;
+			children = (
+				1857B5321C856BAC00D00A9E /* ZCSAvatarCaptureController.h */,
+				1857B5351C856BB400D00A9E /* ZCSAvatarCaptureController.m */,
+				1857B5331C856BB000D00A9E /* PKImageBundle.bundle */,
+			);
+			name = AvatarCapture;
 			sourceTree = "<group>";
 		};
 		187745711C6AC57C000427C7 /* Framework */ = {
@@ -794,6 +809,7 @@
 		18C79D811C83275F004AAA44 /* SwipeBetweenVC */ = {
 			isa = PBXGroup;
 			children = (
+				1857B5311C856B9E00D00A9E /* AvatarCapture */,
 				18C79D7E1C83221A004AAA44 /* RKSwipeBetweenViewControllers.h */,
 				18C79D7F1C83221A004AAA44 /* RKSwipeBetweenViewControllers.m */,
 			);
@@ -970,6 +986,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				181F2B2C1C6A2D8D00FC237D /* backItemImage@2x.png in Resources */,
+				1857B5341C856BB000D00A9E /* PKImageBundle.bundle in Resources */,
 				181F2B2D1C6A2D8D00FC237D /* backItemImage_hl@2x.png in Resources */,
 				187745901C6ACB1D000427C7 /* UMSCommentInputController.xib in Resources */,
 				187745961C6ACB1D000427C7 /* UMSShareListController.xib in Resources */,
@@ -1150,6 +1167,7 @@
 				1898CA8B1C69B599009D3261 /* PageTransitionAnimation.swift in Sources */,
 				181F2B2E1C6A2D8D00FC237D /* NJKWebViewProgress.m in Sources */,
 				18C79D801C83221A004AAA44 /* RKSwipeBetweenViewControllers.m in Sources */,
+				1857B5361C856BB400D00A9E /* ZCSAvatarCaptureController.m in Sources */,
 				1898CA931C69B599009D3261 /* TransitionTreasury.swift in Sources */,
 				187AE32E1C65ECBB00B255FF /* SettingsViewController.swift in Sources */,
 				1899E9BC1C663E3B00ADC2AC /* MGSwipeButton.m in Sources */,

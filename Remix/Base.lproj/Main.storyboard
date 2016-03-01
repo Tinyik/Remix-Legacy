@@ -484,17 +484,6 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h8X-yG-teN">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="374.5"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Xb-3u-t54">
-                                                            <rect key="frame" x="312" y="309" width="52" height="30"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="30" id="Aep-gk-jSI"/>
-                                                                <constraint firstAttribute="width" constant="52" id="KqA-pa-9z3"/>
-                                                            </constraints>
-                                                            <state key="normal" title="Button" image="AlipayFullCover"/>
-                                                            <connections>
-                                                                <action selector="payForActivity:" destination="IBJ-73-c9K" eventType="touchUpInside" id="9Vc-TS-feM"/>
-                                                            </connections>
-                                                        </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2S7-sG-ATl">
                                                             <rect key="frame" x="14" y="313" width="38" height="20"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -504,7 +493,6 @@
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="1Xb-3u-t54" secondAttribute="trailing" constant="11" id="1SF-TY-QgN"/>
                                                         <constraint firstItem="2S7-sG-ATl" firstAttribute="leading" secondItem="h8X-yG-teN" secondAttribute="leading" constant="14" id="eku-6b-RMO"/>
                                                     </constraints>
                                                 </view>
@@ -561,7 +549,6 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="hXq-Fs-KV2" firstAttribute="leading" secondItem="gTc-Ls-eeZ" secondAttribute="trailing" constant="12" id="2Jw-Ei-Lci"/>
-                                                <constraint firstItem="cc6-R3-DAH" firstAttribute="top" secondItem="1Xb-3u-t54" secondAttribute="bottom" constant="11" id="3R3-dj-PVJ"/>
                                                 <constraint firstAttribute="trailing" secondItem="cc6-R3-DAH" secondAttribute="trailing" constant="8" id="50i-39-M4p"/>
                                                 <constraint firstItem="cc6-R3-DAH" firstAttribute="leading" secondItem="hXq-Fs-KV2" secondAttribute="trailing" constant="6" id="6e2-Sm-zkD"/>
                                                 <constraint firstAttribute="bottom" secondItem="hXq-Fs-KV2" secondAttribute="bottom" constant="8.5" id="8fh-Oo-pZy"/>
@@ -591,7 +578,6 @@
                                             <outlet property="likesNumberLabel" destination="hXq-Fs-KV2" id="IpR-oB-8Bl"/>
                                             <outlet property="orgLabel" destination="ztJ-yx-QVF" id="REG-vE-QkH"/>
                                             <outlet property="orgLogo" destination="NzA-wy-3PA" id="bpr-sT-WJT"/>
-                                            <outlet property="payButton" destination="1Xb-3u-t54" id="Duq-2d-VSQ"/>
                                             <outlet property="priceTag" destination="2S7-sG-ATl" id="gEE-qD-7jJ"/>
                                             <outlet property="timeLabel" destination="gTc-Ls-eeZ" id="Hrt-bQ-haZ"/>
                                             <outlet property="titleLabel" destination="oUw-gc-nfj" id="6fj-TM-gwx"/>
@@ -667,17 +653,6 @@
                                                     <color key="textColor" red="0.47468828909999999" green="0.47468828909999999" blue="0.47468828909999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YdS-fT-eZW">
-                                                    <rect key="frame" x="309" y="110" width="46" height="27"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="27" id="49Q-9N-TPz"/>
-                                                        <constraint firstAttribute="width" constant="46" id="SWj-Ku-khn"/>
-                                                    </constraints>
-                                                    <state key="normal" title="Button" image="Alipay"/>
-                                                    <connections>
-                                                        <action selector="payForActivity:" destination="djR-98-Wdm" eventType="touchUpInside" id="XDa-Sa-rv1"/>
-                                                    </connections>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f04-j4-IwR">
                                                     <rect key="frame" x="20" y="113" width="38" height="20"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -687,7 +662,6 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="0o0-My-1OU" firstAttribute="leading" secondItem="GNu-9Q-KvS" secondAttribute="trailing" constant="12" id="0Wm-4H-ziK"/>
-                                                <constraint firstAttribute="trailing" secondItem="YdS-fT-eZW" secondAttribute="trailing" constant="20" id="0q6-Ca-wP4"/>
                                                 <constraint firstAttribute="bottom" secondItem="Lih-PI-7Lc" secondAttribute="bottom" constant="5.5" id="0z8-Ck-fqc"/>
                                                 <constraint firstAttribute="trailing" secondItem="K7S-al-Ugb" secondAttribute="trailing" constant="20" id="2xZ-26-dSS"/>
                                                 <constraint firstItem="f04-j4-IwR" firstAttribute="leading" secondItem="FRM-gJ-yai" secondAttribute="leading" constant="20" id="4Np-hH-J46"/>
@@ -702,7 +676,6 @@
                                                 <constraint firstItem="mJP-gO-XXt" firstAttribute="top" secondItem="NYZ-1C-lhk" secondAttribute="bottom" constant="8" id="aSY-ni-sak"/>
                                                 <constraint firstItem="mJP-gO-XXt" firstAttribute="leading" secondItem="FRM-gJ-yai" secondAttribute="leading" constant="20" id="knj-zE-KMb"/>
                                                 <constraint firstAttribute="bottom" secondItem="K7S-al-Ugb" secondAttribute="bottom" constant="10.5" id="liI-hc-Dc3"/>
-                                                <constraint firstItem="K7S-al-Ugb" firstAttribute="top" secondItem="YdS-fT-eZW" secondAttribute="bottom" constant="7" id="mfq-UD-Cmw"/>
                                                 <constraint firstItem="0zJ-Dw-TmA" firstAttribute="top" secondItem="FRM-gJ-yai" secondAttribute="top" constant="20" id="qjP-Y8-yyO"/>
                                                 <constraint firstItem="GNu-9Q-KvS" firstAttribute="leading" secondItem="FRM-gJ-yai" secondAttribute="leading" constant="20" id="rVx-O6-eJI"/>
                                                 <constraint firstItem="K7S-al-Ugb" firstAttribute="leading" secondItem="1Xt-ju-WjA" secondAttribute="trailing" constant="45" id="tqf-a5-6uV"/>
@@ -717,7 +690,6 @@
                                             <outlet property="likesNumberLabel" destination="Lih-PI-7Lc" id="blG-e0-I0w"/>
                                             <outlet property="orgLabel" destination="0o0-My-1OU" id="47E-ci-bIb"/>
                                             <outlet property="orgLogo" destination="GNu-9Q-KvS" id="Hh3-iC-RL2"/>
-                                            <outlet property="payButton" destination="YdS-fT-eZW" id="elE-b0-XoE"/>
                                             <outlet property="priceTag" destination="f04-j4-IwR" id="uLj-w4-XeP"/>
                                             <outlet property="themeImg" destination="0zJ-Dw-TmA" id="4UN-wV-IzW"/>
                                             <outlet property="timeLabel" destination="1Xt-ju-WjA" id="iFs-kD-u57"/>
@@ -942,17 +914,6 @@
                                             <color key="textColor" red="0.47468828909999999" green="0.47468828909999999" blue="0.47468828909999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vqw-3W-AB9">
-                                            <rect key="frame" x="309" y="110" width="46" height="27"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="27" id="DJn-PY-ee6"/>
-                                                <constraint firstAttribute="width" constant="46" id="ruI-vL-aF2"/>
-                                            </constraints>
-                                            <state key="normal" title="Button" image="Alipay"/>
-                                            <connections>
-                                                <action selector="payForActivity:" destination="9Wj-mn-cgo" eventType="touchUpInside" id="01R-Pl-KFb"/>
-                                            </connections>
-                                        </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kaf-Jz-844">
                                             <rect key="frame" x="20" y="113" width="38" height="20"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -973,7 +934,6 @@
                                         <constraint firstItem="eiJ-ad-Vsa" firstAttribute="top" secondItem="tQj-b3-YDz" secondAttribute="top" constant="20" id="R1F-Vs-tmn"/>
                                         <constraint firstAttribute="bottom" secondItem="Lcl-jm-0GV" secondAttribute="bottom" constant="6.5" id="T5V-wb-1bt"/>
                                         <constraint firstItem="IFi-AI-HDO" firstAttribute="top" secondItem="eiJ-ad-Vsa" secondAttribute="bottom" constant="8" id="aCf-9X-x64"/>
-                                        <constraint firstItem="nNw-mJ-HHo" firstAttribute="top" secondItem="Vqw-3W-AB9" secondAttribute="bottom" constant="7" id="cET-R4-VUD"/>
                                         <constraint firstItem="Loh-t9-hn5" firstAttribute="top" secondItem="tQj-b3-YDz" secondAttribute="top" constant="20" id="djK-xP-NzB"/>
                                         <constraint firstItem="nNw-mJ-HHo" firstAttribute="leading" secondItem="BKD-Xy-kMc" secondAttribute="trailing" constant="6" id="djz-u2-m6W"/>
                                         <constraint firstAttribute="bottom" secondItem="BKD-Xy-kMc" secondAttribute="bottom" constant="5.5" id="moA-JH-bOW"/>
@@ -981,7 +941,6 @@
                                         <constraint firstItem="nNw-mJ-HHo" firstAttribute="leading" secondItem="0cg-J7-nPa" secondAttribute="trailing" constant="45" id="qyV-l9-l02"/>
                                         <constraint firstAttribute="bottom" secondItem="nNw-mJ-HHo" secondAttribute="bottom" constant="10.5" id="sUP-aE-T8O"/>
                                         <constraint firstAttribute="bottom" secondItem="0cg-J7-nPa" secondAttribute="bottom" constant="5.5" id="udZ-p1-ih3"/>
-                                        <constraint firstAttribute="trailing" secondItem="Vqw-3W-AB9" secondAttribute="trailing" constant="20" id="y7U-qg-MyV"/>
                                         <constraint firstItem="Kaf-Jz-844" firstAttribute="leading" secondItem="tQj-b3-YDz" secondAttribute="leading" constant="20" id="zJ4-Zy-6iv"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -992,7 +951,6 @@
                                     <outlet property="likesNumberLabel" destination="BKD-Xy-kMc" id="g1R-pC-rKN"/>
                                     <outlet property="orgLabel" destination="hQS-7M-rRv" id="yW4-0h-PsD"/>
                                     <outlet property="orgLogo" destination="Lcl-jm-0GV" id="hoh-3K-jof"/>
-                                    <outlet property="payButton" destination="Vqw-3W-AB9" id="XBP-bc-4Au"/>
                                     <outlet property="priceTag" destination="Kaf-Jz-844" id="txA-6b-7c0"/>
                                     <outlet property="themeImg" destination="Loh-t9-hn5" id="Lf5-aB-QZZ"/>
                                     <outlet property="timeLabel" destination="0cg-J7-nPa" id="oSc-sV-sKe"/>
@@ -1012,17 +970,6 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TC9-Rk-TL1">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="374.5"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yy2-Ie-FRo">
-                                                    <rect key="frame" x="312" y="309" width="52" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="52" id="2hh-Rs-d6H"/>
-                                                        <constraint firstAttribute="height" constant="30" id="RBj-HA-19C"/>
-                                                    </constraints>
-                                                    <state key="normal" title="Button" image="AlipayFullCover"/>
-                                                    <connections>
-                                                        <action selector="payForActivity:" destination="nwH-ac-U1i" eventType="touchUpInside" id="ZO2-cQ-2DH"/>
-                                                    </connections>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PQM-s7-oGy">
                                                     <rect key="frame" x="14" y="313" width="38" height="20"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -1032,7 +979,6 @@
                                             </subviews>
                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="yy2-Ie-FRo" secondAttribute="trailing" constant="11" id="ByS-xW-ZCZ"/>
                                                 <constraint firstItem="PQM-s7-oGy" firstAttribute="leading" secondItem="TC9-Rk-TL1" secondAttribute="leading" constant="14" id="iY2-LI-PIH"/>
                                             </constraints>
                                         </view>
@@ -1107,7 +1053,6 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="1VH-K2-q20" secondAttribute="trailing" constant="30" id="jNM-qa-vW5"/>
                                         <constraint firstAttribute="bottom" secondItem="TC9-Rk-TL1" secondAttribute="bottom" id="jdZ-kU-abb"/>
                                         <constraint firstItem="TC9-Rk-TL1" firstAttribute="top" secondItem="V6b-rH-pXe" secondAttribute="top" id="jzA-TS-ZM4"/>
-                                        <constraint firstItem="0me-uk-lv3" firstAttribute="top" secondItem="yy2-Ie-FRo" secondAttribute="bottom" constant="11" id="mvE-Vz-dTc"/>
                                         <constraint firstAttribute="bottom" secondItem="0me-uk-lv3" secondAttribute="bottom" constant="12.5" id="o5x-KQ-q9J"/>
                                         <constraint firstItem="fsu-D3-bG7" firstAttribute="top" secondItem="PQM-s7-oGy" secondAttribute="bottom" constant="13" id="saQ-t2-Gl8"/>
                                         <constraint firstItem="Oee-ek-nKZ" firstAttribute="leading" secondItem="fsu-D3-bG7" secondAttribute="trailing" constant="8" id="vnu-zJ-dPo"/>
@@ -1119,7 +1064,6 @@
                                     <outlet property="likesNumberLabel" destination="NRn-Ve-jrY" id="q2P-8m-r0g"/>
                                     <outlet property="orgLabel" destination="Oee-ek-nKZ" id="D1Y-O7-hmo"/>
                                     <outlet property="orgLogo" destination="fsu-D3-bG7" id="nvY-zI-qwH"/>
-                                    <outlet property="payButton" destination="yy2-Ie-FRo" id="QXb-2L-O03"/>
                                     <outlet property="priceTag" destination="PQM-s7-oGy" id="qsP-pg-8e1"/>
                                     <outlet property="timeLabel" destination="eS9-Rg-DsR" id="731-oQ-DKg"/>
                                     <outlet property="titleLabel" destination="1VH-K2-q20" id="Qvs-q9-51A"/>
@@ -1181,17 +1125,6 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dMG-zZ-aRW">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="374.5"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jax-es-zdb">
-                                                            <rect key="frame" x="312" y="309" width="52" height="30"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="30" id="egU-cO-CKX"/>
-                                                                <constraint firstAttribute="width" constant="52" id="xkx-hu-kUY"/>
-                                                            </constraints>
-                                                            <state key="normal" title="Button" image="AlipayFullCover"/>
-                                                            <connections>
-                                                                <action selector="payForActivity:" destination="fR8-ne-bxJ" eventType="touchUpInside" id="jTQ-Pz-AgL"/>
-                                                            </connections>
-                                                        </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HZV-tG-VXS">
                                                             <rect key="frame" x="14" y="313" width="38" height="20"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -1201,7 +1134,6 @@
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="jax-es-zdb" secondAttribute="trailing" constant="11" id="K95-p2-tAu"/>
                                                         <constraint firstItem="HZV-tG-VXS" firstAttribute="leading" secondItem="dMG-zZ-aRW" secondAttribute="leading" constant="14" id="MbT-cj-BPN"/>
                                                     </constraints>
                                                 </view>
@@ -1277,7 +1209,6 @@
                                                 <constraint firstAttribute="bottom" secondItem="qfi-Gt-W0X" secondAttribute="bottom" constant="8.5" id="ntF-tq-R53"/>
                                                 <constraint firstItem="qfi-Gt-W0X" firstAttribute="top" secondItem="HZV-tG-VXS" secondAttribute="bottom" constant="13" id="p2E-kC-IoI"/>
                                                 <constraint firstAttribute="trailing" secondItem="BQv-9a-awS" secondAttribute="trailing" id="rlY-oE-JHb"/>
-                                                <constraint firstItem="Nfd-cf-zGV" firstAttribute="top" secondItem="jax-es-zdb" secondAttribute="bottom" constant="11" id="u7k-kR-kaU"/>
                                                 <constraint firstAttribute="bottom" secondItem="WjJ-N7-KZ6" secondAttribute="bottom" constant="8.5" id="wVK-1b-IEQ"/>
                                                 <constraint firstAttribute="bottom" secondItem="BQv-9a-awS" secondAttribute="bottom" id="xaC-1R-mpk"/>
                                             </constraints>
@@ -1288,7 +1219,6 @@
                                             <outlet property="likesNumberLabel" destination="iSe-1j-SJf" id="lmm-rt-Jej"/>
                                             <outlet property="orgLabel" destination="WjJ-N7-KZ6" id="Xfo-FD-LLC"/>
                                             <outlet property="orgLogo" destination="qfi-Gt-W0X" id="PDg-VY-mIQ"/>
-                                            <outlet property="payButton" destination="jax-es-zdb" id="nzv-6r-PQO"/>
                                             <outlet property="priceTag" destination="HZV-tG-VXS" id="m0e-8w-96N"/>
                                             <outlet property="timeLabel" destination="fDz-vM-QOi" id="LH4-XQ-Xzo"/>
                                             <outlet property="titleLabel" destination="8yd-hY-V5N" id="BvB-0n-SqC"/>
@@ -1364,17 +1294,6 @@
                                                     <color key="textColor" red="0.47468828909999999" green="0.47468828909999999" blue="0.47468828909999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="teO-73-ekr">
-                                                    <rect key="frame" x="309" y="110" width="46" height="27"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="46" id="hYX-Uo-IqX"/>
-                                                        <constraint firstAttribute="height" constant="27" id="nR3-TE-J2q"/>
-                                                    </constraints>
-                                                    <state key="normal" title="Button" image="Alipay"/>
-                                                    <connections>
-                                                        <action selector="payForActivity:" destination="pqR-0q-mlN" eventType="touchUpInside" id="m8e-jN-L3d"/>
-                                                    </connections>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahc-X2-4Du">
                                                     <rect key="frame" x="20" y="113" width="38" height="20"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -1389,13 +1308,11 @@
                                                 <constraint firstItem="QZ8-PI-9Ad" firstAttribute="leading" secondItem="pg0-iV-3yr" secondAttribute="leading" constant="20" id="HnJ-hd-vLc"/>
                                                 <constraint firstItem="Ok4-p9-dP4" firstAttribute="leading" secondItem="QZ8-PI-9Ad" secondAttribute="trailing" constant="12" id="Me4-f6-QZv"/>
                                                 <constraint firstItem="MbR-3n-g33" firstAttribute="leading" secondItem="592-e9-8dq" secondAttribute="trailing" constant="20" id="QDT-4y-3H4"/>
-                                                <constraint firstItem="gIk-g5-5LB" firstAttribute="top" secondItem="teO-73-ekr" secondAttribute="bottom" constant="7" id="QTW-qt-96h"/>
                                                 <constraint firstItem="592-e9-8dq" firstAttribute="top" secondItem="pg0-iV-3yr" secondAttribute="top" constant="20" id="Qhi-hk-2tB"/>
                                                 <constraint firstAttribute="trailing" secondItem="gIk-g5-5LB" secondAttribute="trailing" constant="20" id="QrX-dW-dI3"/>
                                                 <constraint firstItem="BYs-Am-6lN" firstAttribute="leading" secondItem="pg0-iV-3yr" secondAttribute="leading" constant="20" id="UFB-2Q-3Do"/>
                                                 <constraint firstAttribute="bottom" secondItem="Esr-29-KX7" secondAttribute="bottom" constant="5.5" id="UOT-5j-Jhb"/>
                                                 <constraint firstAttribute="trailing" secondItem="MbR-3n-g33" secondAttribute="trailing" constant="20" id="bFf-A3-Jdz"/>
-                                                <constraint firstAttribute="trailing" secondItem="teO-73-ekr" secondAttribute="trailing" constant="20" id="c2W-Tq-Cwy"/>
                                                 <constraint firstItem="MbR-3n-g33" firstAttribute="top" secondItem="pg0-iV-3yr" secondAttribute="top" constant="20" id="ccY-dO-FrX"/>
                                                 <constraint firstAttribute="bottom" secondItem="gIk-g5-5LB" secondAttribute="bottom" constant="10.5" id="dNg-Qh-x2w"/>
                                                 <constraint firstItem="gIk-g5-5LB" firstAttribute="leading" secondItem="Esr-29-KX7" secondAttribute="trailing" constant="6" id="ds0-je-NqU"/>
@@ -1414,7 +1331,6 @@
                                             <outlet property="likesNumberLabel" destination="Esr-29-KX7" id="oF0-h8-blS"/>
                                             <outlet property="orgLabel" destination="Ok4-p9-dP4" id="qhO-lo-FXa"/>
                                             <outlet property="orgLogo" destination="QZ8-PI-9Ad" id="fVc-ci-G9d"/>
-                                            <outlet property="payButton" destination="teO-73-ekr" id="Cds-rB-2BB"/>
                                             <outlet property="priceTag" destination="ahc-X2-4Du" id="3xS-Zj-SA6"/>
                                             <outlet property="themeImg" destination="MbR-3n-g33" id="4zq-VC-ZsK"/>
                                             <outlet property="timeLabel" destination="8bJ-gy-KxG" id="42m-it-uai"/>
@@ -1469,23 +1385,21 @@
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="eav-wL-uR1">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="195"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BRt-0Z-iBr">
+                                            <rect key="frame" x="137" y="8" width="100" height="100"/>
+                                        </imageView>
+                                    </subviews>
                                 </view>
                                 <blurEffect style="dark"/>
                             </visualEffectView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="H7q-P9-X3m">
-                                <rect key="frame" x="114" y="40" width="146" height="76"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="146" id="ITa-7e-85r"/>
-                                    <constraint firstAttribute="height" constant="76" id="yJv-aK-0hq"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NOM-0a-qEp">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NOM-0a-qEp">
                                 <rect key="frame" x="166" y="131" width="42" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.64993686868686873" green="0.64993686868686873" blue="0.64993686868686873" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vFp-eJ-oKh">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vFp-eJ-oKh">
                                 <rect key="frame" x="147" y="166.5" width="80" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="Dg5-C9-1fB"/>
@@ -1555,19 +1469,16 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="aAU-jM-N0x" firstAttribute="leading" secondItem="OIb-ed-f6p" secondAttribute="leading" id="0gx-TF-IL1"/>
-                            <constraint firstItem="H7q-P9-X3m" firstAttribute="top" secondItem="n9W-QI-bsk" secondAttribute="bottom" constant="20" id="3eg-iK-9Tb"/>
                             <constraint firstItem="V2C-rL-ol6" firstAttribute="leading" secondItem="OIb-ed-f6p" secondAttribute="leading" id="523-cV-zdx"/>
                             <constraint firstItem="diF-cL-AEg" firstAttribute="leading" secondItem="OIb-ed-f6p" secondAttribute="leading" id="EW2-JY-y26"/>
                             <constraint firstItem="vFp-eJ-oKh" firstAttribute="top" secondItem="NOM-0a-qEp" secondAttribute="bottom" constant="15" id="EdZ-eu-XbN"/>
                             <constraint firstAttribute="trailing" secondItem="aAU-jM-N0x" secondAttribute="trailing" id="Ft1-KJ-b6m"/>
                             <constraint firstItem="diF-cL-AEg" firstAttribute="top" secondItem="n9W-QI-bsk" secondAttribute="bottom" id="HP7-p4-bFb"/>
-                            <constraint firstItem="H7q-P9-X3m" firstAttribute="centerX" secondItem="OIb-ed-f6p" secondAttribute="centerX" id="MtQ-kd-mSq"/>
                             <constraint firstItem="V2C-rL-ol6" firstAttribute="top" secondItem="diF-cL-AEg" secondAttribute="bottom" id="RcH-9E-yR6"/>
                             <constraint firstAttribute="trailing" secondItem="diF-cL-AEg" secondAttribute="trailing" id="Rqm-D4-Yy0"/>
                             <constraint firstAttribute="trailing" secondItem="V2C-rL-ol6" secondAttribute="trailing" id="TAx-av-cR7"/>
                             <constraint firstItem="aAU-jM-N0x" firstAttribute="height" secondItem="diF-cL-AEg" secondAttribute="height" id="b1p-xK-ZKY"/>
                             <constraint firstItem="NOM-0a-qEp" firstAttribute="centerX" secondItem="OIb-ed-f6p" secondAttribute="centerX" id="gSk-af-w5e"/>
-                            <constraint firstItem="NOM-0a-qEp" firstAttribute="top" secondItem="H7q-P9-X3m" secondAttribute="bottom" constant="15" id="ijh-KS-X2M"/>
                             <constraint firstItem="aAU-jM-N0x" firstAttribute="top" secondItem="n9W-QI-bsk" secondAttribute="bottom" id="jjQ-1J-6oA"/>
                             <constraint firstItem="Fa8-7p-yRB" firstAttribute="top" secondItem="V2C-rL-ol6" secondAttribute="bottom" id="pT8-ht-wyR"/>
                             <constraint firstItem="vFp-eJ-oKh" firstAttribute="centerX" secondItem="OIb-ed-f6p" secondAttribute="centerX" id="qZS-UK-TnG"/>
@@ -1576,6 +1487,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
+                        <outlet property="avatarView" destination="BRt-0Z-iBr" id="ftb-y6-Tor"/>
                         <outlet property="blurredAvatarView" destination="diF-cL-AEg" id="UJD-TZ-sf2"/>
                         <outlet property="firstTableView" destination="V2C-rL-ol6" id="cch-Sk-cYx"/>
                         <outlet property="userNameLabel" destination="NOM-0a-qEp" id="T6K-Sm-TSd"/>
@@ -2115,17 +2027,6 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="faO-Sq-2RL">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="374.5"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQz-He-JEh">
-                                                            <rect key="frame" x="312" y="309" width="52" height="30"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="52" id="4KS-OM-VZ9"/>
-                                                                <constraint firstAttribute="height" constant="30" id="9rE-6H-pjP"/>
-                                                            </constraints>
-                                                            <state key="normal" title="Button" image="AlipayFullCover"/>
-                                                            <connections>
-                                                                <action selector="payForActivity:" destination="4J2-Oy-w71" eventType="touchUpInside" id="zvr-Yj-juM"/>
-                                                            </connections>
-                                                        </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IeY-qe-gdN">
                                                             <rect key="frame" x="14" y="313" width="38" height="20"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -2136,7 +2037,6 @@
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstItem="IeY-qe-gdN" firstAttribute="leading" secondItem="faO-Sq-2RL" secondAttribute="leading" constant="14" id="1UM-Sf-GHE"/>
-                                                        <constraint firstAttribute="trailing" secondItem="RQz-He-JEh" secondAttribute="trailing" constant="11" id="vNq-7N-k9i"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="如何抵抗上海35年来最冷寒冬" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgc-QV-OQx">
@@ -2205,7 +2105,6 @@
                                                 <constraint firstItem="faO-Sq-2RL" firstAttribute="leading" secondItem="2Yi-Qd-w0K" secondAttribute="leading" id="NzI-b3-Fjk"/>
                                                 <constraint firstItem="faO-Sq-2RL" firstAttribute="top" secondItem="2Yi-Qd-w0K" secondAttribute="top" id="Zj4-fm-5Tr"/>
                                                 <constraint firstItem="d4H-2r-tOj" firstAttribute="top" secondItem="2Yi-Qd-w0K" secondAttribute="top" id="cBr-wY-MS6"/>
-                                                <constraint firstItem="UnN-cR-hEJ" firstAttribute="top" secondItem="RQz-He-JEh" secondAttribute="bottom" constant="11" id="dfE-S3-ZKH"/>
                                                 <constraint firstAttribute="bottom" secondItem="Pn7-IX-7No" secondAttribute="bottom" constant="8.5" id="eCC-j9-FCN"/>
                                                 <constraint firstAttribute="bottom" secondItem="RYr-mO-ZE8" secondAttribute="bottom" constant="8.5" id="i6a-g9-iKW"/>
                                                 <constraint firstAttribute="trailing" secondItem="faO-Sq-2RL" secondAttribute="trailing" id="i8u-Uq-tyi"/>
@@ -2222,7 +2121,6 @@
                                             <outlet property="likesNumberLabel" destination="Pn7-IX-7No" id="bub-Ef-V52"/>
                                             <outlet property="orgLabel" destination="IQV-jV-5UL" id="T84-E7-8LK"/>
                                             <outlet property="orgLogo" destination="3DU-Ro-N3n" id="bh3-jq-IMO"/>
-                                            <outlet property="payButton" destination="RQz-He-JEh" id="Lzt-sE-HS2"/>
                                             <outlet property="priceTag" destination="IeY-qe-gdN" id="eO9-Nt-eeD"/>
                                             <outlet property="timeLabel" destination="RYr-mO-ZE8" id="m8k-kj-aTM"/>
                                             <outlet property="titleLabel" destination="mgc-QV-OQx" id="AY0-0Z-N9g"/>
@@ -2298,17 +2196,6 @@
                                                     <color key="textColor" red="0.47468828909999999" green="0.47468828909999999" blue="0.47468828909999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oqa-h8-cpc">
-                                                    <rect key="frame" x="309" y="110" width="46" height="27"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="27" id="OIi-Ru-QcS"/>
-                                                        <constraint firstAttribute="width" constant="46" id="kwl-U9-00s"/>
-                                                    </constraints>
-                                                    <state key="normal" title="Button" image="Alipay"/>
-                                                    <connections>
-                                                        <action selector="payForActivity:" destination="WzT-dl-cL0" eventType="touchUpInside" id="Mgy-7p-DbL"/>
-                                                    </connections>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxl-K0-H2k">
                                                     <rect key="frame" x="20" y="113" width="38" height="20"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -2328,8 +2215,6 @@
                                                 <constraint firstItem="p6d-7i-3Zi" firstAttribute="leading" secondItem="aQD-9C-Whs" secondAttribute="trailing" constant="45" id="Z9U-5f-9my"/>
                                                 <constraint firstItem="oFe-NX-Dkp" firstAttribute="leading" secondItem="np1-WV-Pu1" secondAttribute="trailing" constant="20" id="Zef-CK-c8O"/>
                                                 <constraint firstAttribute="bottom" secondItem="Gvl-xe-0SX" secondAttribute="bottom" constant="6.5" id="Zqq-vF-sZc"/>
-                                                <constraint firstItem="p6d-7i-3Zi" firstAttribute="top" secondItem="Oqa-h8-cpc" secondAttribute="bottom" constant="7" id="aMd-mf-WPh"/>
-                                                <constraint firstAttribute="trailing" secondItem="Oqa-h8-cpc" secondAttribute="trailing" constant="20" id="cRd-JW-rqa"/>
                                                 <constraint firstItem="kn6-rD-cpB" firstAttribute="top" secondItem="rj5-Nk-oz6" secondAttribute="top" constant="20" id="hZP-X4-b0L"/>
                                                 <constraint firstItem="np1-WV-Pu1" firstAttribute="top" secondItem="kn6-rD-cpB" secondAttribute="bottom" constant="8" id="iXM-vK-6S9"/>
                                                 <constraint firstItem="Gvl-xe-0SX" firstAttribute="leading" secondItem="Xim-lx-KTz" secondAttribute="trailing" constant="12" id="nZq-be-4ih"/>
@@ -2348,7 +2233,6 @@
                                             <outlet property="likesNumberLabel" destination="yuC-GU-6bd" id="mVH-oa-KXJ"/>
                                             <outlet property="orgLabel" destination="Gvl-xe-0SX" id="yIw-V9-Zaw"/>
                                             <outlet property="orgLogo" destination="Xim-lx-KTz" id="GOs-7c-wex"/>
-                                            <outlet property="payButton" destination="Oqa-h8-cpc" id="7sT-LX-jdT"/>
                                             <outlet property="priceTag" destination="xxl-K0-H2k" id="Tct-BJ-qZ2"/>
                                             <outlet property="themeImg" destination="oFe-NX-Dkp" id="TlK-Hf-Qjf"/>
                                             <outlet property="timeLabel" destination="aQD-9C-Whs" id="1Ha-Xa-WJj"/>
@@ -2604,17 +2488,6 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ju3-qR-9Vf">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="374.5"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Z0-yb-979">
-                                                            <rect key="frame" x="312" y="309" width="52" height="30"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="52" id="9MM-LF-Bar"/>
-                                                                <constraint firstAttribute="height" constant="30" id="9gC-d9-XMF"/>
-                                                            </constraints>
-                                                            <state key="normal" title="Button" image="AlipayFullCover"/>
-                                                            <connections>
-                                                                <action selector="payForActivity:" destination="aDk-ah-EUz" eventType="touchUpInside" id="R0j-in-WIK"/>
-                                                            </connections>
-                                                        </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qrd-0v-nMl">
                                                             <rect key="frame" x="14" y="313" width="38" height="20"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -2624,7 +2497,6 @@
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="4Z0-yb-979" secondAttribute="trailing" constant="11" id="0pr-BJ-W8N"/>
                                                         <constraint firstItem="qrd-0v-nMl" firstAttribute="leading" secondItem="Ju3-qR-9Vf" secondAttribute="leading" constant="14" id="6eT-JH-Czf"/>
                                                     </constraints>
                                                 </view>
@@ -2693,7 +2565,6 @@
                                                 <constraint firstItem="eGI-mD-PK9" firstAttribute="leading" secondItem="HMh-DF-lpX" secondAttribute="trailing" constant="6" id="JTS-d3-0TC"/>
                                                 <constraint firstAttribute="bottom" secondItem="Ju3-qR-9Vf" secondAttribute="bottom" id="MVe-jd-lyf"/>
                                                 <constraint firstAttribute="trailing" secondItem="ihT-wa-CNy" secondAttribute="trailing" id="UNm-v7-6d4"/>
-                                                <constraint firstItem="eGI-mD-PK9" firstAttribute="top" secondItem="4Z0-yb-979" secondAttribute="bottom" constant="11" id="ahO-NF-YaT"/>
                                                 <constraint firstItem="jHP-l6-XDq" firstAttribute="centerY" secondItem="okH-SH-4Jy" secondAttribute="centerY" id="bJj-Xw-3Zn"/>
                                                 <constraint firstItem="jHP-l6-XDq" firstAttribute="leading" secondItem="okH-SH-4Jy" secondAttribute="leadingMargin" constant="30" id="drn-3i-cdA"/>
                                                 <constraint firstAttribute="bottom" secondItem="bqq-sb-oDG" secondAttribute="bottom" constant="8.5" id="gTU-BU-8gg"/>
@@ -2711,7 +2582,6 @@
                                             <outlet property="likesNumberLabel" destination="HMh-DF-lpX" id="wVH-Qe-vmP"/>
                                             <outlet property="orgLabel" destination="bqq-sb-oDG" id="bmu-5m-0qs"/>
                                             <outlet property="orgLogo" destination="zEz-E8-STU" id="ObM-m5-NE9"/>
-                                            <outlet property="payButton" destination="4Z0-yb-979" id="Fhv-Hg-a9E"/>
                                             <outlet property="priceTag" destination="qrd-0v-nMl" id="Dsc-Sk-sCN"/>
                                             <outlet property="timeLabel" destination="c1F-Ct-bcV" id="Efs-nT-WAX"/>
                                             <outlet property="titleLabel" destination="jHP-l6-XDq" id="cdb-B0-w4s"/>
@@ -2787,17 +2657,6 @@
                                                     <color key="textColor" red="0.47468828909999999" green="0.47468828909999999" blue="0.47468828909999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9EN-pl-V6F">
-                                                    <rect key="frame" x="309" y="110" width="46" height="27"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="46" id="Hbe-4D-73e"/>
-                                                        <constraint firstAttribute="height" constant="27" id="rsa-wZ-Fo2"/>
-                                                    </constraints>
-                                                    <state key="normal" title="Button" image="Alipay"/>
-                                                    <connections>
-                                                        <action selector="payForActivity:" destination="Chd-pd-18Z" eventType="touchUpInside" id="0Up-jt-Di9"/>
-                                                    </connections>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qUd-Vv-xO4">
                                                     <rect key="frame" x="20" y="113" width="38" height="20"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -2807,10 +2666,8 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="RIJ-pG-hLF" secondAttribute="trailing" constant="20" id="01v-kB-OEC"/>
-                                                <constraint firstAttribute="trailing" secondItem="9EN-pl-V6F" secondAttribute="trailing" constant="20" id="12a-eW-CaT"/>
                                                 <constraint firstItem="RIJ-pG-hLF" firstAttribute="leading" secondItem="ugi-Dm-iRC" secondAttribute="trailing" constant="6" id="26P-Gb-lCH"/>
                                                 <constraint firstAttribute="bottom" secondItem="wd4-ut-Sjo" secondAttribute="bottom" constant="6.5" id="2A2-Qx-C7j"/>
-                                                <constraint firstItem="RIJ-pG-hLF" firstAttribute="top" secondItem="9EN-pl-V6F" secondAttribute="bottom" constant="7" id="42y-R7-5zu"/>
                                                 <constraint firstItem="2NQ-W6-Hke" firstAttribute="leading" secondItem="kVY-nq-G7T" secondAttribute="leading" constant="20" id="66c-GQ-tBk"/>
                                                 <constraint firstItem="IGi-fm-od6" firstAttribute="leading" secondItem="dId-Qp-as0" secondAttribute="trailing" constant="20" id="6wT-sk-Eii"/>
                                                 <constraint firstAttribute="bottom" secondItem="RIJ-pG-hLF" secondAttribute="bottom" constant="10.5" id="BjQ-Gi-xDV"/>
@@ -2837,7 +2694,6 @@
                                             <outlet property="likesNumberLabel" destination="ugi-Dm-iRC" id="dtM-fd-d4S"/>
                                             <outlet property="orgLabel" destination="wd4-ut-Sjo" id="mQe-dW-elf"/>
                                             <outlet property="orgLogo" destination="2NQ-W6-Hke" id="63p-pw-vOz"/>
-                                            <outlet property="payButton" destination="9EN-pl-V6F" id="GOi-MM-W62"/>
                                             <outlet property="priceTag" destination="qUd-Vv-xO4" id="RKR-Ml-SHf"/>
                                             <outlet property="themeImg" destination="IGi-fm-od6" id="I9q-i4-LLb"/>
                                             <outlet property="timeLabel" destination="EnM-ni-7bo" id="ow2-Zs-jff"/>
@@ -3174,9 +3030,15 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="用户名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJW-fC-DVy">
-                                            <rect key="frame" x="38" y="6" width="224" height="21"/>
+                                            <rect key="frame" x="67" y="8" width="224" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.46983506944444442" green="0.46983506944444442" blue="0.46983506944444442" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="评论内容" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZW3-fF-UFx">
+                                            <rect key="frame" x="66" y="34" width="206" height="40.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="日期" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K6R-KD-DPq">
@@ -3185,15 +3047,13 @@
                                             <color key="textColor" red="0.37204071969696972" green="0.37204071969696972" blue="0.37204071969696972" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="评论内容" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZW3-fF-UFx">
-                                            <rect key="frame" x="36" y="32" width="281" height="40.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E6c-hu-SI0">
+                                            <rect key="frame" x="8" y="14" width="48" height="48"/>
+                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="avatarView" destination="E6c-hu-SI0" id="maY-Xc-ynw"/>
                                     <outlet property="commentContentLabel" destination="ZW3-fF-UFx" id="nbe-Af-06F"/>
                                     <outlet property="timeLabel" destination="K6R-KD-DPq" id="16n-ir-reI"/>
                                     <outlet property="usernameLabel" destination="IJW-fC-DVy" id="Hor-HF-YND"/>
@@ -3415,17 +3275,6 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Nf-Yh-6wG">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="374.5"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ext-6L-Fdy">
-                                                            <rect key="frame" x="312" y="309" width="52" height="30"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="52" id="PgC-kL-jVc"/>
-                                                                <constraint firstAttribute="height" constant="30" id="fVF-uN-Tqm"/>
-                                                            </constraints>
-                                                            <state key="normal" title="Button" image="AlipayFullCover"/>
-                                                            <connections>
-                                                                <action selector="payForActivity:" destination="sOT-YW-xDp" eventType="touchUpInside" id="B0U-ch-pG0"/>
-                                                            </connections>
-                                                        </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jbv-qh-eUM">
                                                             <rect key="frame" x="14" y="313" width="38" height="20"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -3436,7 +3285,6 @@
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstItem="jbv-qh-eUM" firstAttribute="leading" secondItem="8Nf-Yh-6wG" secondAttribute="leading" constant="14" id="Kcu-Os-92D"/>
-                                                        <constraint firstAttribute="trailing" secondItem="ext-6L-Fdy" secondAttribute="trailing" constant="11" id="NAX-xW-L4N"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="如何抵抗上海35年来最冷寒冬" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PfV-Qr-cNO">
@@ -3503,7 +3351,6 @@
                                                 <constraint firstAttribute="trailing" secondItem="kcr-DY-DSp" secondAttribute="trailing" id="M8x-Vx-5lV"/>
                                                 <constraint firstItem="kcr-DY-DSp" firstAttribute="leading" secondItem="enH-Nd-RUM" secondAttribute="leading" id="QFK-Lc-EGG"/>
                                                 <constraint firstItem="ZW0-HH-enw" firstAttribute="leading" secondItem="Kfd-gI-ePT" secondAttribute="trailing" constant="12" id="Rf0-ij-jZi"/>
-                                                <constraint firstItem="xpa-KS-NsS" firstAttribute="top" secondItem="ext-6L-Fdy" secondAttribute="bottom" constant="11" id="TfM-0o-IQe"/>
                                                 <constraint firstAttribute="bottom" secondItem="kcr-DY-DSp" secondAttribute="bottom" id="W5o-xU-1tR"/>
                                                 <constraint firstAttribute="bottom" secondItem="Kfd-gI-ePT" secondAttribute="bottom" constant="8.5" id="arR-nU-h2C"/>
                                                 <constraint firstAttribute="bottom" secondItem="ZW0-HH-enw" secondAttribute="bottom" constant="8.5" id="b0l-6J-KNg"/>
@@ -3522,7 +3369,6 @@
                                             <outlet property="likesNumberLabel" destination="ZW0-HH-enw" id="RkD-XF-9wU"/>
                                             <outlet property="orgLabel" destination="cpc-tu-hlR" id="PG4-Ry-fPf"/>
                                             <outlet property="orgLogo" destination="UcO-Zl-4ES" id="vkF-d1-b89"/>
-                                            <outlet property="payButton" destination="ext-6L-Fdy" id="bD6-c0-rk1"/>
                                             <outlet property="priceTag" destination="jbv-qh-eUM" id="csf-nd-mdL"/>
                                             <outlet property="timeLabel" destination="Kfd-gI-ePT" id="Ath-26-e6a"/>
                                             <outlet property="titleLabel" destination="PfV-Qr-cNO" id="G10-ba-8Z1"/>
@@ -3598,17 +3444,6 @@
                                                     <color key="textColor" red="0.47468828909999999" green="0.47468828909999999" blue="0.47468828909999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gvT-G1-276">
-                                                    <rect key="frame" x="309" y="110" width="46" height="27"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="46" id="JYj-GV-YXW"/>
-                                                        <constraint firstAttribute="height" constant="27" id="mld-2S-ISc"/>
-                                                    </constraints>
-                                                    <state key="normal" title="Button" image="Alipay"/>
-                                                    <connections>
-                                                        <action selector="payForActivity:" destination="Ydp-53-Rur" eventType="touchUpInside" id="xFK-sh-EuB"/>
-                                                    </connections>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JvQ-1X-mLZ">
                                                     <rect key="frame" x="20" y="113" width="38" height="20"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -3618,9 +3453,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="7nV-xw-DHs" firstAttribute="top" secondItem="02w-NY-ZeI" secondAttribute="bottom" constant="8" id="0Q4-EV-4Og"/>
-                                                <constraint firstItem="TEQ-dd-YUO" firstAttribute="top" secondItem="gvT-G1-276" secondAttribute="bottom" constant="7" id="1iK-Ve-4mV"/>
                                                 <constraint firstAttribute="trailing" secondItem="ZZ2-Lt-8wg" secondAttribute="trailing" constant="20" id="1lC-kp-xZ0"/>
-                                                <constraint firstAttribute="trailing" secondItem="gvT-G1-276" secondAttribute="trailing" constant="20" id="202-bB-dug"/>
                                                 <constraint firstAttribute="bottom" secondItem="5Ns-dW-Q6n" secondAttribute="bottom" constant="5.5" id="2ij-T4-ahF"/>
                                                 <constraint firstItem="ZZ2-Lt-8wg" firstAttribute="leading" secondItem="02w-NY-ZeI" secondAttribute="trailing" constant="20" id="H1d-6f-QCE"/>
                                                 <constraint firstItem="ZZ2-Lt-8wg" firstAttribute="leading" secondItem="7nV-xw-DHs" secondAttribute="trailing" constant="20" id="IGN-1e-4me"/>
@@ -3648,7 +3481,6 @@
                                             <outlet property="likesNumberLabel" destination="cLk-7X-obB" id="r6B-mU-VIm"/>
                                             <outlet property="orgLabel" destination="TDf-KS-WZx" id="aep-qc-sUz"/>
                                             <outlet property="orgLogo" destination="Ecu-r0-ocN" id="3xE-GF-aDk"/>
-                                            <outlet property="payButton" destination="gvT-G1-276" id="WA2-XK-sMo"/>
                                             <outlet property="priceTag" destination="JvQ-1X-mLZ" id="SSp-S2-B0z"/>
                                             <outlet property="themeImg" destination="ZZ2-Lt-8wg" id="3T7-0c-ddk"/>
                                             <outlet property="timeLabel" destination="5Ns-dW-Q6n" id="5SZ-08-mJj"/>
@@ -3709,17 +3541,6 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2cD-5I-A4R">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="374.5"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lx1-Hs-Fgb">
-                                                            <rect key="frame" x="312" y="309" width="52" height="30"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="30" id="F0c-lI-sFp"/>
-                                                                <constraint firstAttribute="width" constant="52" id="Rdy-Tk-EOj"/>
-                                                            </constraints>
-                                                            <state key="normal" title="Button" image="AlipayFullCover"/>
-                                                            <connections>
-                                                                <action selector="payForActivity:" destination="RUb-dH-wLl" eventType="touchUpInside" id="vXj-ne-otW"/>
-                                                            </connections>
-                                                        </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WbM-bh-Nfd">
                                                             <rect key="frame" x="14" y="313" width="38" height="20"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -3729,7 +3550,6 @@
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="Lx1-Hs-Fgb" secondAttribute="trailing" constant="11" id="3nQ-vh-n6S"/>
                                                         <constraint firstItem="WbM-bh-Nfd" firstAttribute="leading" secondItem="2cD-5I-A4R" secondAttribute="leading" constant="14" id="l7C-qR-h0a"/>
                                                     </constraints>
                                                 </view>
@@ -3786,7 +3606,6 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="2cD-5I-A4R" firstAttribute="leading" secondItem="sHa-0e-xmm" secondAttribute="leading" id="1Z2-cd-1Xw"/>
-                                                <constraint firstItem="aaj-Hg-ddN" firstAttribute="top" secondItem="Lx1-Hs-Fgb" secondAttribute="bottom" constant="11" id="2Uy-zH-pLW"/>
                                                 <constraint firstAttribute="bottom" secondItem="RIp-JP-KiA" secondAttribute="bottom" constant="8.5" id="2jK-tT-ncp"/>
                                                 <constraint firstItem="HS1-PJ-rL1" firstAttribute="centerY" secondItem="sHa-0e-xmm" secondAttribute="centerY" id="3go-Lw-aCD"/>
                                                 <constraint firstAttribute="bottom" secondItem="odJ-rT-C4a" secondAttribute="bottom" id="3yo-C6-Jne"/>
@@ -3816,7 +3635,6 @@
                                             <outlet property="likesNumberLabel" destination="EKE-Zt-Ils" id="V9L-P1-uvq"/>
                                             <outlet property="orgLabel" destination="XC8-c6-KtR" id="g9m-1a-Asj"/>
                                             <outlet property="orgLogo" destination="gqB-ww-W0n" id="Z7N-Us-bZU"/>
-                                            <outlet property="payButton" destination="Lx1-Hs-Fgb" id="qvb-0C-wxm"/>
                                             <outlet property="priceTag" destination="WbM-bh-Nfd" id="n9J-qS-6X8"/>
                                             <outlet property="timeLabel" destination="RIp-JP-KiA" id="TcC-Jf-DfV"/>
                                             <outlet property="titleLabel" destination="HS1-PJ-rL1" id="4n3-5f-L44"/>
@@ -3892,17 +3710,6 @@
                                                     <color key="textColor" red="0.47468828909999999" green="0.47468828909999999" blue="0.47468828909999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gp5-vM-VTD">
-                                                    <rect key="frame" x="309" y="110" width="46" height="27"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="46" id="d2u-TM-Lom"/>
-                                                        <constraint firstAttribute="height" constant="27" id="yeU-oS-Vz9"/>
-                                                    </constraints>
-                                                    <state key="normal" title="Button" image="Alipay"/>
-                                                    <connections>
-                                                        <action selector="payForActivity:" destination="ktW-BV-tte" eventType="touchUpInside" id="MWt-QX-8ev"/>
-                                                    </connections>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W23-mM-ulf">
                                                     <rect key="frame" x="20" y="113" width="38" height="20"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -3915,9 +3722,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="3l8-Ph-WIb" secondAttribute="trailing" constant="20" id="3v9-9d-Y0G"/>
                                                 <constraint firstAttribute="trailing" secondItem="j0q-iO-zl2" secondAttribute="trailing" constant="20" id="41G-6W-EZZ"/>
                                                 <constraint firstAttribute="bottom" secondItem="HAW-Hk-YIf" secondAttribute="bottom" constant="6.5" id="AUg-yT-7lA"/>
-                                                <constraint firstItem="j0q-iO-zl2" firstAttribute="top" secondItem="Gp5-vM-VTD" secondAttribute="bottom" constant="7" id="Avr-YG-A1Q"/>
                                                 <constraint firstAttribute="bottom" secondItem="pk2-zs-zTw" secondAttribute="bottom" constant="5.5" id="Mky-pT-93I"/>
-                                                <constraint firstAttribute="trailing" secondItem="Gp5-vM-VTD" secondAttribute="trailing" constant="20" id="SpV-UQ-7ad"/>
                                                 <constraint firstItem="3l8-Ph-WIb" firstAttribute="top" secondItem="ENo-TF-ccj" secondAttribute="top" constant="20" id="WrD-QF-sva"/>
                                                 <constraint firstAttribute="bottom" secondItem="nnZ-uf-td6" secondAttribute="bottom" constant="5.5" id="cP0-sc-RCA"/>
                                                 <constraint firstItem="tWz-LA-Um5" firstAttribute="leading" secondItem="ENo-TF-ccj" secondAttribute="leading" constant="20" id="dMT-5h-244"/>
@@ -3942,7 +3747,6 @@
                                             <outlet property="likesNumberLabel" destination="pk2-zs-zTw" id="NGZ-ck-AbV"/>
                                             <outlet property="orgLabel" destination="tRr-XU-6aP" id="FNS-jr-TX2"/>
                                             <outlet property="orgLogo" destination="HAW-Hk-YIf" id="o3J-SQ-nI6"/>
-                                            <outlet property="payButton" destination="Gp5-vM-VTD" id="PnE-t7-Tr9"/>
                                             <outlet property="priceTag" destination="W23-mM-ulf" id="D1B-fW-D53"/>
                                             <outlet property="themeImg" destination="3l8-Ph-WIb" id="kyv-eb-QPv"/>
                                             <outlet property="timeLabel" destination="nnZ-uf-td6" id="jvD-e0-MhE"/>
@@ -3976,8 +3780,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Alipay" width="138" height="78"/>
-        <image name="AlipayFullCover" width="138" height="78"/>
         <image name="Community" width="252" height="252"/>
         <image name="Fire" width="1729" height="1729"/>
         <image name="Gallery" width="856" height="504"/>

@@ -11,16 +11,16 @@ import MessageUI
 import SafariServices
 import SDWebImage
 
-class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate, ModalTransitionDelegate {
+class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate, ModalTransitionDelegate, ZCSAvatarCaptureControllerDelegate {
    
     
     @IBOutlet weak var blurredAvatarView: UIImageView!
     
     @IBOutlet weak var firstTableView: UITableView!
-    
+    @IBOutlet weak var avatarView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     
-    
+    var avatarController: ZCSAvatarCaptureController!
     var tr_presentTransition: TRViewControllerTransitionDelegate?
     var currentUser = BmobUser.getCurrentUser()
     override func viewDidLoad() {
@@ -35,27 +35,33 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         blurredAvatarView.contentMode = .ScaleAspectFill
         blurredAvatarView.clipsToBounds = true
-        
-        // Moved to IB
-//        let blurEffect = UIBlurEffect(style: .Dark)
-//        let visualEffectView = UIVisualEffectView(effect: blurEffect)
-//        visualEffectView.frame = blurredAvatarView.frame
-//        visualEffectView.frame.size.width = view.frame.size.width
-//        blurredAvatarView.addSubview(visualEffectView)
-        
         firstTableView.scrollEnabled = true
         firstTableView.separatorInset = UIEdgeInsetsZero
-//        let avatarURL = NSURL(string:(BmobUser.getCurrentUser().objectForKey("Avatar") as! BmobFile).url)
-//        let manager = SDWebImageManager()
-//        manager.downloadImageWithURL(avatarURL, options: SDWebImageOptions.RetryFailed, progress: nil) { (avatar, error, cacheType, finished, url) -> Void in
-//              self.avatarController = ZCSAvatarCaptureController()
-//              self.avatarController.delegate = self
-//              self.avatarController.image = avatar
-//              self.blurredAvatarView.image = avatar
-//              self.avatarView.addSubview(self.avatarController.view)
-//            
-//            
-//        }
+        avatarView.image = UIImage(named: "DefaultAvatar")
+        avatarView.layer.cornerRadius = avatarView.frame.size.width/2
+        avatarView.clipsToBounds = true
+        blurredAvatarView.image = UIImage(named: "DefaultAvatar")
+        
+        if let avatar = BmobUser.getCurrentUser().objectForKey("Avatar") as? BmobFile {
+            let avatarURL = NSURL(string:avatar.url)
+            let manager = SDWebImageManager()
+            manager.downloadImageWithURL(avatarURL, options: SDWebImageOptions.RetryFailed, progress: nil) { (avatar, error, cacheType, finished, url) -> Void in
+                self.avatarController = ZCSAvatarCaptureController()
+                self.avatarController.delegate = self
+                self.avatarController.image = avatar
+                self.avatarView.image = avatar
+                self.blurredAvatarView.image = avatar
+                self.avatarView.userInteractionEnabled = true
+                self.avatarView.addSubview(self.avatarController.view)
+                
+            }
+        }else{
+            self.avatarController = ZCSAvatarCaptureController()
+            self.avatarController.delegate = self
+            self.avatarView.userInteractionEnabled = true
+            self.avatarView.addSubview(self.avatarController.view)
+        }
+        
 
       
     }
@@ -65,17 +71,24 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         userNameLabel.text = currentUser.objectForKey("username") as? String
     }
     
-//    func imageSelected(image: UIImage!) {
-//        let avatarData = UIImagePNGRepresentation(image)
-//        let newAvatar = BmobFile(fileName: "Avatar", withFileData: avatarData!)
-//        currentUser.setObject(newAvatar, forKey: "Avatar")
-//        currentUser.saveInBackground()
-//        blurredAvatarView.image = image
-//    }
-//    
-//    func imageSelectionCancelled() {
-//        print("Canc")
-//    }
+    func imageSelected(image: UIImage!) {
+        self.blurredAvatarView.image = image
+        let avatarData = UIImageJPEGRepresentation(image, 0.05)
+        let newAvatar = BmobFile(fileName: "Avatar.jpg", withFileData: avatarData!)
+        newAvatar.saveInBackground { (isSuccessful, error) -> Void in
+            if isSuccessful {
+                self.currentUser.setObject(newAvatar, forKey: "Avatar")
+                self.currentUser.updateInBackground()
+            }
+        }
+        
+    
+
+    }
+    
+    func imageSelectionCancelled() {
+        print("Canc")
+    }
     
     func popCurrentVC() {
         self.dismissViewControllerAnimated(true, completion: nil)

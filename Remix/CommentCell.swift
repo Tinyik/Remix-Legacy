@@ -12,9 +12,12 @@ class CommentCell: UITableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var commentContentLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var avatarView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        avatarView.layer.cornerRadius = avatarView.frame.size.height/2
+        avatarView.clipsToBounds = true
         // Initialization code
     }
 

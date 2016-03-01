@@ -21,7 +21,6 @@ class RMTableViewCell: MGSwipeTableCell {
     @IBOutlet weak var orgLogo: UIImageView!
     @IBOutlet weak var desLabel: UILabel!
     
-    @IBOutlet weak var payButton: UIButton!
     
     @IBOutlet weak var orgLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!

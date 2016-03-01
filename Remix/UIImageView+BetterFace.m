@@ -28,7 +28,7 @@ void hack_uiimageview_bf(){
 }
 
 - (void)setBetterFaceImage:(UIImage *)image{
-    [self setBetterFaceImage:image];
+ 
     if (![self needsBetterFace]) {
         return;
     }

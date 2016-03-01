@@ -549,15 +549,11 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 activity.incrementKey("PageView", byAmount: 1)
                 activity.updateInBackground()
             }
-//        if #available(iOS 9.0, *) {
-//            let safariView = SFSafariViewController(URL: NSURL(string: activities[indexPath.section][indexPath.row].objectForKey("URL") as! String)!, entersReaderIfAvailable: false)
-//            safariView.view.tintColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
-//            self.navigationController?.presentViewController(safariView, animated: true, completion: nil)
-//        } else {
-           let webView = RMActivityViewController(url: NSURL(string: activities[indexPath.section][indexPath.row].objectForKey("URL") as! String)!)
-            webView.activity = activities[indexPath.section][indexPath.row]
-            self.navigationController?.pushViewController(webView, animated: true)
-    //    }
+
+           let activityView = RMActivityViewController(url: NSURL(string: activities[indexPath.section][indexPath.row].objectForKey("URL") as! String)!)
+            activityView.activity = activities[indexPath.section][indexPath.row]
+            self.navigationController?.pushViewController(activityView, animated: true)
+   
             
       
        
