@@ -30,7 +30,7 @@
                     <rect key="frame" x="110" y="148" width="60" height="32"/>
                     <state key="normal" image="AliPayDark"/>
                     <connections>
-                        <action selector="payForActivity" destination="iN0-l3-epB" eventType="touchUpInside" id="cKd-dL-KNm"/>
+                        <action selector="prepareForFloatingActivityRegistration" destination="iN0-l3-epB" eventType="touchUpInside" id="Vel-iH-Gin"/>
                     </connections>
                 </button>
             </subviews>

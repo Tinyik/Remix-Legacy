@@ -30,6 +30,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     var coverImgURLs: [[NSURL]] = []
     var activities: [[BmobObject]] = []
     var floatingActivities: [BmobObject] = []
+    var registeredActivitiesIds: [String] = []
     var monthNameStrings: [String] = []
     var dateLabel: UILabel!
     var likedActivitiesIds: [String] = []
@@ -76,9 +77,8 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         self.refreshControl = refreshCtrl
         setUpViews()
         fetchCloudData()
-        fetchFloatingActivities()
         fetchCloudAdvertisement()
-        
+        fetchOrdersInformation()
           }
     
   
@@ -122,26 +122,38 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
 
     }
     
-    
-    func fetchFloatingActivities() {
-        let query = BmobQuery(className: "FloatingActivity")
-        query.whereKey("isVisibleToUsers", equalTo: true)
-        query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
-            var imageURLs: [NSURL] = []
-            for activity in activities {
-                let imageURL = NSURL(string: (activity.objectForKey("CoverImg") as! BmobFile).url)
-                imageURLs.append(imageURL!)
-                self.floatingActivities.append(activity as! BmobObject)
+    func fetchOrdersInformation() {
+        let query = BmobQuery(className: "Orders")
+        query.whereKey("CustomerObjectId", equalTo: currentUser.objectId)
+        query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
+            if error == nil {
+                for order in orders {
+                    print(order.objectId)
+                    self.registeredActivitiesIds.append(order.objectForKey("ParentActivityObjectId") as! String)
+                }
             }
+        }
+    }
+
+    
+    func setUpFloatingScrollView() {
+        var imageURLs: [NSURL] = []
+        for activity in floatingActivities {
+            let imageURL = NSURL(string: (activity.objectForKey("CoverImg") as! BmobFile).url)
+            imageURLs.append(imageURL!)
+            print("FLAOTING")
+        }
 
             let elementWidth: CGFloat = 170 + 12
             self.floatingScrollView.contentSize = CGSizeMake(elementWidth*CGFloat(activities.count) + 12, self.floatingScrollView.frame.height)
             self.floatingScrollView.userInteractionEnabled = true
             
-            for var i = 0; i < activities.count; ++i {
+            for var i = 0; i < floatingActivities.count; ++i {
                 let fView = FloatingActivityView.loadFromNibNamed("FloatingActivityView") as! FloatingActivityView
                 fView.tag = i
-
+                fView.activity = self.floatingActivities[i]
+                fView.registeredActivitiesIds = self.registeredActivitiesIds
+                fView.parentViewController = self
                 fView.frame = CGRectMake(5 + elementWidth*CGFloat(i), 0, elementWidth, 185)
                 fView.imageView.sd_setImageWithURL(imageURLs[i], placeholderImage: UIImage(named: "SDPlaceholder"))
                 let tap = UITapGestureRecognizer(target: self, action: "handleFloatingViewSelection:")
@@ -158,17 +170,17 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                         let currencyString = NSMutableAttributedString(string: "元", attributes: attrDic2)
                         priceString.appendAttributedString(currencyString)
                         fView.priceTag.attributedText = priceString
-                        fView.payButton.hidden = false
+                 
                     }else{
                         fView.priceTag.text = "免费"
-                        fView.payButton.hidden = true
+                        fView.payButton.setBackgroundImage(UIImage(named: "RegisterButton"), forState: .Normal)
                     }
 
                 }
                 self.floatingScrollView.addSubview(fView)
             }
             
-        }
+        
     }
     
     func fetchCloudAdvertisement() {
@@ -221,33 +233,39 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
             if activities.count > 0 {
                 for activity in activities {
-                    
-                    let coverImg = activity.objectForKey("CoverImg") as! BmobFile
-                    let imageURL = NSURL(string:coverImg.url)!
-        
-                    let dateString = activity.objectForKey("Date") as! String
-                    let monthName = dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2]
-                
-                    if self.isMonthAdded(monthName) == false {
-                       self.monthNameStrings.append(monthName)
-                        self.activities.append([activity as! BmobObject])
-                        self.coverImgURLs.append([imageURL])
-                    } else {
-                     
-                        if let index = self.activities.indexOf({
+                    if activity.objectForKey("isFloatingActivity") as! Bool == false {
+                        
+                        let coverImg = activity.objectForKey("CoverImg") as! BmobFile
+                        let imageURL = NSURL(string:coverImg.url)!
+                        
+                        let dateString = activity.objectForKey("Date") as! String
+                        let monthName = dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2]
+                        
+                        if self.isMonthAdded(monthName) == false {
+                            self.monthNameStrings.append(monthName)
+                            self.activities.append([activity as! BmobObject])
+                            self.coverImgURLs.append([imageURL])
+                        } else {
                             
-                            ($0[0].objectForKey("Date") as! String).componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2] == monthName})
-                        {
-                            self.activities[index].append(activity as! BmobObject)
-                            self.coverImgURLs[index].append(imageURL)
+                            if let index = self.activities.indexOf({
+                                
+                                ($0[0].objectForKey("Date") as! String).componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2] == monthName})
+                            {
+                                self.activities[index].append(activity as! BmobObject)
+                                self.coverImgURLs[index].append(imageURL)
+                            }
+                            
                         }
-               
-                    }
-                    
-                
+                        
 
-                    self.tableView.reloadData()
+                    }else{
+                        print("NO")
+                        self.floatingActivities.append(activity as! BmobObject)
+                    }
                 }
+                self.setUpFloatingScrollView()
+                self.tableView.reloadData()
+              
             }
         }
         
@@ -280,15 +298,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             shouldAskToEnableNotif = false
         }
         let targetURL = NSURL(string: floatingActivities[(sender.view?.tag)!].objectForKey("URL") as! String)
-        if #available(iOS 9.0, *) {
-            
-            let safariView = SFSafariViewController(URL: targetURL!, entersReaderIfAvailable: false)
-            safariView.view.tintColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
-            self.navigationController?.presentViewController(safariView, animated: true, completion: nil)
-        } else {
-            let webView = RxWebViewController(url: targetURL)
-            self.navigationController?.pushViewController(webView, animated: true)
-        }
+       
+            let activityView = RMActivityViewController(url: targetURL)
+            activityView.activity = floatingActivities[(sender.view?.tag)!]
+            self.navigationController?.pushViewController(activityView, animated: true)
     }
     
     func handlePromoSelection(sender: UIGestureRecognizer) {

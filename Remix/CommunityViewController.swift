@@ -40,6 +40,7 @@ class CommunityViewController: CTFilteredViewController {
         var query = BmobQuery(className: "Activity")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("isVisibleOnCommunityList", equalTo: true)
+        query.whereKey("isFloatingActivity", equalTo: false)
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
             if activities.count > 0 {
                 for activity in activities {

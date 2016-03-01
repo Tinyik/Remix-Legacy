@@ -33,6 +33,7 @@ class TrendingViewController: CTFilteredViewController {
         let query = BmobQuery(className: "Activity")
         query.whereKey("isTrending", equalTo: true)
         query.whereKey("isVisibleToUsers", equalTo: true)
+        query.whereKey("isFloatingActivity", equalTo: false)
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
             if activities.count > 0 {
                 for activity in activities {

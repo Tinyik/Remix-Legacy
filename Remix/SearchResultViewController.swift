@@ -79,6 +79,8 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
         activities = []
         coverImgURLs = []
         let query = BmobQuery(className: "Activity")
+        query.whereKey("isVisibleToUsers", equalTo: true)
+        query.whereKey("isFloatingActivity", equalTo: false)
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
             if activities.count > 0 {
                 for activity in activities {

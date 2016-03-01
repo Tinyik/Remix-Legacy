@@ -85,6 +85,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         query.whereKey("Org", equalTo: orgName)
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("isVisibleOnMainList", equalTo: true)
+        query.whereKey("isFloatingActivity", equalTo: false)
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
             if activities.count > 0 {
                 for activity in activities {
