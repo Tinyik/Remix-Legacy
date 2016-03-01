@@ -3102,28 +3102,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mR2-m1-Vc1">
-                                <rect key="frame" x="7" y="50" width="360" height="51"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="请在此输入你的评论" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="XH4-rO-Alc">
-                                <rect key="frame" x="0.0" y="109" width="375" height="163"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pn6-TH-4MQ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                 <items>
                                     <navigationItem title="Title" id="EM9-yR-Nbt"/>
                                 </items>
                             </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GRJ-EJ-lFB">
-                                <rect key="frame" x="39" y="287" width="296" height="44"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mR2-m1-Vc1">
+                                <rect key="frame" x="20" y="40" width="335" height="23"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="请在此输入你的评论" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="XH4-rO-Alc">
+                                <rect key="frame" x="0.0" y="83" width="375" height="163"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="163" id="CI4-Nh-OSn"/>
+                                </constraints>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GRJ-EJ-lFB">
+                                <rect key="frame" x="40" y="276" width="295" height="34"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="qFe-iA-jWq"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="添加评论">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -3134,6 +3140,17 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.97693734217171713" green="0.97693734217171713" blue="0.97693734217171713" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="XH4-rO-Alc" firstAttribute="leading" secondItem="MRM-dA-MMj" secondAttribute="leading" id="3jc-Qc-a9J"/>
+                            <constraint firstAttribute="trailing" secondItem="mR2-m1-Vc1" secondAttribute="trailing" constant="20" id="6lY-j6-Vjj"/>
+                            <constraint firstItem="mR2-m1-Vc1" firstAttribute="top" secondItem="HWR-8g-85U" secondAttribute="bottom" constant="20" id="BL1-I7-bXF"/>
+                            <constraint firstAttribute="trailing" secondItem="XH4-rO-Alc" secondAttribute="trailing" id="Duq-Jx-gW5"/>
+                            <constraint firstAttribute="trailing" secondItem="GRJ-EJ-lFB" secondAttribute="trailing" constant="40" id="HdB-hC-Kc1"/>
+                            <constraint firstItem="GRJ-EJ-lFB" firstAttribute="top" secondItem="XH4-rO-Alc" secondAttribute="bottom" constant="30" id="O8M-f3-5ld"/>
+                            <constraint firstItem="mR2-m1-Vc1" firstAttribute="leading" secondItem="MRM-dA-MMj" secondAttribute="leading" constant="20" id="aMV-Eq-KLr"/>
+                            <constraint firstItem="GRJ-EJ-lFB" firstAttribute="leading" secondItem="MRM-dA-MMj" secondAttribute="leading" constant="40" id="aob-vP-R4n"/>
+                            <constraint firstItem="XH4-rO-Alc" firstAttribute="top" secondItem="mR2-m1-Vc1" secondAttribute="bottom" constant="20" id="x5l-G1-WFz"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
