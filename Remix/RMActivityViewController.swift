@@ -52,7 +52,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
         let commentsVC = storyBoard.instantiateViewControllerWithIdentifier("CommentsVC") as! CommentsTableViewController
         commentsVC.presentingActivity = self.activity
         let naviController = UINavigationController(rootViewController: commentsVC)
-        self.tr_presentViewController(naviController, method: TRPresentTransitionMethod.PopTip(visibleHeight: 400))
+        self.tr_presentViewController(naviController, method: TRPresentTransitionMethod.PopTip(visibleHeight: 450))
 
     }
     

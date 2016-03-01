@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CommentInputViewController: UIViewController {
+class CommentInputViewController: UIViewController, UITextViewDelegate {
 
     var presentingActivity: BmobObject!
     var currentUser = BmobUser.getCurrentUser()
@@ -19,6 +19,7 @@ class CommentInputViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.text = presentingActivity.objectForKey("Title") as? String
+        inputTextView.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -47,6 +48,33 @@ class CommentInputViewController: UIViewController {
             }
         }
         
+    }
+    
+    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+        if textView.tag == 0 {
+            textView.text = ""
+            textView.textColor = .blackColor()
+            textView.tag = 1
+        }
+        
+        return true
+    }
+    
+    func textViewDidChange(textView: UITextView) {
+        if textView.text.characters.count == 0 {
+            textView.text = "请在此输入你的评论"
+            textView.textColor = .lightGrayColor()
+            textView.tag = 0
+        }
+    }
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        }
+        
+        return true
     }
    
 }
