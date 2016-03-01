@@ -19,7 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
        // hack_uiimageview_bf()
-        self.window?.tintColor = .whiteColor()
         let image = UIImage(named: "back")
        
         Bmob.registerWithAppKey("08329e2e3a8d3cdde96bf91d7459e8ab")

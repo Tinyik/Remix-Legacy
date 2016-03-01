@@ -50,20 +50,7 @@ class RMTableViewCell: MGSwipeTableCell {
         orgLogo.layer.cornerRadius = orgLogo.frame.size.height/2
            }
     
-    @IBAction func payForActivity(sender: UIButton) {
-        if let pVC = parentViewController as? RMTableViewController {
-            pVC.registerForActivity(self)
-        }
-        if let pVC = parentViewController as? CTFilteredViewController {
-            pVC.registerForActivity(self)
-        }
-        if let pVC = parentViewController as? OrgFilteredViewController {
-            pVC.registerForActivity(self)
-        }
-        if let pVC = parentViewController as? SearchResultViewController {
-            pVC.registerForActivity(self)
-        }
-    }
+
     
  
     

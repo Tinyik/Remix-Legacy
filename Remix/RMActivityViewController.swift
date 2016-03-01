@@ -8,10 +8,12 @@
 
 import UIKit
 
-class RMWebViewController: RxWebViewController, UIGestureRecognizerDelegate, BmobPayDelegate {
+class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate, BmobPayDelegate, ModalTransitionDelegate {
    
+    var tr_presentTransition: TRViewControllerTransitionDelegate?
+    
     var activity: BmobObject!
-    var registeredActivitiesIds: [String]!
+    var registeredActivitiesIds: [String] = []
     var ongoingTransactionId: String!
     var ongoingTransactionPrice: Double!
     var ongoingTransactionRemarks = "No comments."
@@ -19,12 +21,16 @@ class RMWebViewController: RxWebViewController, UIGestureRecognizerDelegate, Bmo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       let containerView = UIView(frame: CGRectMake(0, DEVICE_SCREEN_HEIGHT - 114 , DEVICE_SCREEN_WIDTH, 50))
+        containerView.backgroundColor = .clearColor()
+        self.view.addSubview(containerView)
         let toolBar = UIView.loadFromNibNamed("RMToolBarView") as! RMToolBarView
         toolBar.backgroundColor = .blackColor()
         toolBar.registerButton.addTarget(self, action: "prepareForActivityRegistration", forControlEvents: .TouchUpInside)
-        toolBar.frame = CGRectMake(0, DEVICE_SCREEN_HEIGHT - 114 , DEVICE_SCREEN_WIDTH, 50)
-        self.view.addSubview(toolBar)
-        
+        toolBar.showComments.addTarget(self, action: "showCommentsVC", forControlEvents: .TouchUpInside)
+        toolBar.frame = containerView.bounds
+        containerView.addSubview(toolBar)
+        toolBar.clipsToBounds = true
         fetchOrdersInformation()
     }
     
@@ -41,7 +47,17 @@ class RMWebViewController: RxWebViewController, UIGestureRecognizerDelegate, Bmo
         }
     }
     
+    func showCommentsVC() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let commentsVC = storyBoard.instantiateViewControllerWithIdentifier("CommentsVC") as! CommentsTableViewController
+        commentsVC.presentingActivity = self.activity
+        let naviController = UINavigationController(rootViewController: commentsVC)
+        self.tr_presentViewController(naviController, method: TRPresentTransitionMethod.PopTip(visibleHeight: 400))
+
+    }
+    
     func prepareForActivityRegistration() {
+ 
         if registeredActivitiesIds.contains(activity.objectId) {
             let alert = UIAlertController(title: "报名提示", message: "你已报名了这个活动，请进入我的订单查看。", preferredStyle: .Alert)
             let action = UIAlertAction(title: "立即查看", style: .Default, handler: { (action) -> Void in
@@ -151,22 +167,29 @@ class RMWebViewController: RxWebViewController, UIGestureRecognizerDelegate, Bmo
             if price != 0 {
                 ongoingTransactionId = activity.objectId
                 ongoingTransactionPrice = price
-                let bPay = BmobPay()
-                bPay.delegate = self
-                bPay.price = NSNumber(double: price)
-                bPay.productName = orgName! + "活动报名费"
-                bPay.body = (activity.objectForKey("ItemName") as! String) + "用户姓名" + (currentUser.objectForKey("LegalName") as! String)
-                bPay.appScheme = "BmobPay"
-                bPay.payInBackgroundWithBlock({ (isSuccessful, error) -> Void in
-                    if isSuccessful == false {
-                        let alert = UIAlertController(title: "支付状态", message: "支付失败！请检查网络连接。", preferredStyle: .Alert)
-                        let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
-                        alert.addAction(action)
-                        self.presentViewController(alert, animated: true, completion: nil)
-                    }
-                })
                 
-                //                }
+                let alert = UIAlertController(title: "Remix报名确认", message: "确定要报名参加这个活动吗？(●'◡'●)ﾉ♥", preferredStyle: .Alert)
+                let action = UIAlertAction(title: "确认", style: .Default, handler: { (action) -> Void in
+                    let bPay = BmobPay()
+                    bPay.delegate = self
+                    bPay.price = NSNumber(double: price)
+                    bPay.productName = orgName! + "活动报名费"
+                    bPay.body = (self.activity.objectForKey("ItemName") as! String) + "用户姓名" + (self.currentUser.objectForKey("LegalName") as! String)
+                    bPay.appScheme = "BmobPay"
+                    bPay.payInBackgroundWithBlock({ (isSuccessful, error) -> Void in
+                        if isSuccessful == false {
+                            let alert = UIAlertController(title: "支付状态", message: "支付失败！请检查网络连接。", preferredStyle: .Alert)
+                            let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+                            alert.addAction(action)
+                            self.presentViewController(alert, animated: true, completion: nil)
+                        }
+                    })
+                })
+                let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+                alert.addAction(action)
+                alert.addAction(cancel)
+                self.presentViewController(alert, animated: true, completion: nil)
+
                 
             }else{
                 ongoingTransactionId = activity.objectId

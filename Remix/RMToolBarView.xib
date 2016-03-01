@@ -11,25 +11,11 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n95-0h-iZC">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="51"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RRP-N4-HbT">
-                            <rect key="frame" x="16" y="10" width="30" height="30"/>
-                            <state key="normal" title="赞"/>
-                            <connections>
-                                <action selector="thumbUpActivity" destination="iN0-l3-epB" eventType="touchUpInside" id="Hm2-kS-mI3"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aty-So-iYg">
                     <rect key="frame" x="165" y="10" width="60" height="30"/>
-                    <state key="normal" title="查看评论"/>
-                    <connections>
-                        <action selector="showActivityComments" destination="iN0-l3-epB" eventType="touchUpInside" id="p2T-F5-45Z"/>
-                    </connections>
+                    <state key="normal" title="查看评论">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1KH-9K-NCB">
                     <rect key="frame" x="261" y="0.0" width="114" height="51"/>
@@ -37,28 +23,30 @@
                     <state key="normal" title="立即报名">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
-                    <connections>
-                        <action selector="prepareForActivityRegistration" destination="iN0-l3-epB" eventType="touchUpInside" id="uC4-ef-0ET"/>
-                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yX5-va-q5F">
                     <rect key="frame" x="84" y="10" width="30" height="30"/>
-                    <state key="normal" title="收藏"/>
-                    <connections>
-                        <action selector="likeActivity" destination="iN0-l3-epB" eventType="touchUpInside" id="Zz5-Ux-gp8"/>
-                    </connections>
+                    <state key="normal" title="收藏">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RRP-N4-HbT">
+                    <rect key="frame" x="19" y="10" width="30" height="30"/>
+                    <state key="normal" title="赞">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="likeButton" destination="yX5-va-q5F" id="CYU-2V-gyB"/>
-                <outlet property="registerButton" destination="1KH-9K-NCB" id="ga3-Oh-1B1"/>
-                <outlet property="showComments" destination="Aty-So-iYg" id="4Up-5J-H2d"/>
-                <outlet property="thumpUpButton" destination="RRP-N4-HbT" id="WNw-Uh-aPf"/>
+                <outlet property="likeButton" destination="yX5-va-q5F" id="UJX-LD-nXb"/>
+                <outlet property="registerButton" destination="1KH-9K-NCB" id="8Rk-vb-MwG"/>
+                <outlet property="showComments" destination="Aty-So-iYg" id="oBl-Dq-zr7"/>
+                <outlet property="thumpUpButton" destination="RRP-N4-HbT" id="xsK-da-V3X"/>
             </connections>
-            <point key="canvasLocation" x="236.5" y="76"/>
+            <point key="canvasLocation" x="158.5" y="98"/>
         </view>
     </objects>
 </document>
