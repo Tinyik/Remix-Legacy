@@ -23,7 +23,7 @@ class CategoryViewController: UITableViewController {
     var coverImageURLs: [NSURL] = []
     var coverTitles: [String] = []
     var cloudCoverTitles: [String] = []
-    
+
     @IBOutlet weak var showGallery: UIImageView!
     @IBOutlet weak var showLiked: UIImageView!
     override func viewDidLoad() {
@@ -67,6 +67,7 @@ class CategoryViewController: UITableViewController {
         showGallery.addSubview(galleryMaskView)
         
     }
+    
     
     func fetchCloudData() {
         let query = BmobQuery(className: "Category")

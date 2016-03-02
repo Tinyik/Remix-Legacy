@@ -34,6 +34,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     @IBOutlet weak var filterLabel_2: UILabel!
     @IBOutlet weak var filterLabel_1: UILabel!
     
+    var isRefreshing: Bool = false
     var shouldAskToEnableNotif = true
     var coverImgURLs: [[NSURL]] = []
     var activities: [[BmobObject]] = []
@@ -85,6 +86,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         refreshCtrl.addTarget(self, action: "refresh", forControlEvents: .ValueChanged)
         self.refreshControl = refreshCtrl
         setUpViews()
+        loadRemoteUIConfigurations()
         fetchCloudData()
         fetchCloudAdvertisement()
         fetchOrdersInformation()
@@ -92,7 +94,6 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     
 
     func setUpViews() {
-        loadRemoteUIConfigurations()
        
         adTableView.separatorStyle = .None
         searchBar.searchBarStyle = .Minimal
@@ -158,6 +159,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     }
     
     func fetchOrdersInformation() {
+        registeredActivitiesIds = []
         let query = BmobQuery(className: "Orders")
         query.whereKey("CustomerObjectId", equalTo: currentUser.objectId)
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
@@ -166,17 +168,21 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                     print(order.objectId)
                     self.registeredActivitiesIds.append(order.objectForKey("ParentActivityObjectId") as! String)
                 }
+                self.setUpFloatingScrollView()
             }
         }
     }
 
     
     func setUpFloatingScrollView() {
+        for subView in floatingScrollView.subviews {
+            subView.removeFromSuperview()
+        }
         var imageURLs: [NSURL] = []
         for activity in floatingActivities {
             let imageURL = NSURL(string: (activity.objectForKey("CoverImg") as! BmobFile).url)
             imageURLs.append(imageURL!)
-            print("FLAOTING")
+
         }
 
             let elementWidth: CGFloat = 170 + 12
@@ -220,38 +226,58 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     }
     
     func fetchCloudAdvertisement() {
+        adTargetURLs = []
+        headerAds = []
         let query = BmobQuery(className: "HeaderPromotion")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.findObjectsInBackgroundWithBlock { (ads, error) -> Void in
-            var adImageURLs: [NSURL] = []
-            for ad in ads{
-                let adImageURL = NSURL(string: (ad.objectForKey("AdImage") as! BmobFile).url)
-                if let urlString = ad.objectForKey("URL") as? String {
-                    self.adTargetURLs.append(NSURL(string: urlString)!)
+            if error == nil {
+                if self.isRefreshing == true {
+                    self.isRefreshing = false
+                    self.refreshControl?.endRefreshing()
                 }
-                adImageURLs.append(adImageURL!)
-               self.headerAds.append(ad as! BmobObject)
-            }
-            
-            
-            let screenWidth = UIScreen.mainScreen().bounds.width
-            self.headerScrollView.contentSize = CGSizeMake(screenWidth*CGFloat((ads.count)), self.headerScrollView.frame.height)
-            self.headerScrollView.userInteractionEnabled = true
-            for var i = 0; i < ads.count; ++i {
-                let headerImageView = UIImageView(frame: CGRectMake(screenWidth*CGFloat(i),0,screenWidth,self.headerScrollView.frame.height ))
-                headerImageView.contentMode = .ScaleAspectFill
-                headerImageView.clipsToBounds = true
-                headerImageView.tag = i
-                headerImageView.userInteractionEnabled = true
-                let tap = UITapGestureRecognizer(target: self, action: "handlePromoSelection:")
-                headerImageView.addGestureRecognizer(tap)
-                headerImageView.sd_setImageWithURL(adImageURLs[i], placeholderImage: UIImage(named: "SDPlaceholder"))
-                self.headerScrollView.addSubview(headerImageView)
+                var adImageURLs: [NSURL] = []
+                for ad in ads{
+                    let adImageURL = NSURL(string: (ad.objectForKey("AdImage") as! BmobFile).url)
+                    if let urlString = ad.objectForKey("URL") as? String {
+                        self.adTargetURLs.append(NSURL(string: urlString)!)
+                    }
+                    adImageURLs.append(adImageURL!)
+                    self.headerAds.append(ad as! BmobObject)
+                }
                 
+                
+                let screenWidth = UIScreen.mainScreen().bounds.width
+                self.headerScrollView.contentSize = CGSizeMake(screenWidth*CGFloat((ads.count)), self.headerScrollView.frame.height)
+                self.headerScrollView.userInteractionEnabled = true
+                for var i = 0; i < ads.count; ++i {
+                    let headerImageView = UIImageView(frame: CGRectMake(screenWidth*CGFloat(i),0,screenWidth,self.headerScrollView.frame.height ))
+                    headerImageView.contentMode = .ScaleAspectFill
+                    headerImageView.clipsToBounds = true
+                    headerImageView.tag = i
+                    headerImageView.userInteractionEnabled = true
+                    let tap = UITapGestureRecognizer(target: self, action: "handlePromoSelection:")
+                    headerImageView.addGestureRecognizer(tap)
+                    headerImageView.sd_setImageWithURL(adImageURLs[i], placeholderImage: UIImage(named: "SDPlaceholder"))
+                    self.headerScrollView.addSubview(headerImageView)
+                    
+                }
+                
+                self.configurePageControl()
+                self.pageControl.frame.origin.x = UIScreen.mainScreen().bounds.size.width/2 - self.pageControl.frame.size.width/2
+            }else{
+                let alert = UIAlertController(title: "Remix提示", message: "出错了！ |ﾟДﾟ)))请检查你的网络连接后重试。", preferredStyle: .Alert)
+                let action = UIAlertAction(title: "好的", style: .Default, handler: { (action) -> Void in
+                    if self.isRefreshing == true {
+                        self.isRefreshing = false
+                        self.refreshControl?.endRefreshing()
+                    }
+                })
+                
+                alert.addAction(action)
+                self.presentViewController(alert, animated: true, completion: nil)
             }
-        
-        self.configurePageControl()
-        self.pageControl.frame.origin.x = UIScreen.mainScreen().bounds.size.width/2 - self.pageControl.frame.size.width/2
+            
         }
     
     }
@@ -261,7 +287,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
       
         monthNameStrings = []
         activities = []
-        
+        floatingActivities = []
         
         let query = BmobQuery(className: "Activity")
         query.whereKey("isVisibleToUsers", equalTo: true)
@@ -299,7 +325,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                         self.floatingActivities.append(activity as! BmobObject)
                     }
                 }
-                self.setUpFloatingScrollView()
+                self.fetchOrdersInformation()
                 self.tableView.reloadData()
               
             }
@@ -314,7 +340,11 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     }
     
     func refresh() {
-         self.refreshControl?.endRefreshing()
+        isRefreshing = true
+        loadRemoteUIConfigurations()
+        fetchCloudData()
+        fetchCloudAdvertisement()
+
     }
     
     
@@ -413,7 +443,24 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         dateHeaderView.layer.shadowOpacity = 0.08
         dateHeaderView.layer.shadowOffset = CGSizeMake(0, 0.7)
         dateLabel = UILabel(frame: CGRectMake(0,0,300,390))
-        dateLabel.text = monthNameStrings[section]
+        
+        if monthNameStrings.count > section {
+            dateLabel.text = monthNameStrings[section]
+        }else{
+            let alert = UIAlertController(title: "Remix提示", message: "出错了！ |ﾟДﾟ)))请检查你的网络连接后重试。", preferredStyle: .Alert)
+            let action = UIAlertAction(title: "立即重试", style: .Default, handler: { (action) -> Void in
+                if self.isRefreshing == false {
+                    self.isRefreshing = true
+                    self.refreshControl?.beginRefreshing()
+                }
+            })
+            
+            let cancel = UIAlertAction(title: "好的", style: .Cancel, handler: nil)
+            alert.addAction(cancel)
+            alert.addAction(action)
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        
         dateLabel.font = UIFont.systemFontOfSize(19)
         dateLabel.sizeToFit()
         dateHeaderView.addSubview(dateLabel)
