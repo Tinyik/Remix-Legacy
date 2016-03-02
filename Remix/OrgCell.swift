@@ -17,17 +17,17 @@ class OrgCell: UICollectionViewCell {
     @IBOutlet weak var containerView: UIView!
     
     override func awakeFromNib() {
-//        logoImageView.contentMode = .ScaleAspectFill
-//        logoImageView.clipsToBounds = false
-      //  logoImageView.layer.masksToBounds = true
-        logoImageView.layer.cornerRadius = 15
+
+        logoImageView.contentMode = .ScaleAspectFill
+        logoImageView.clipsToBounds = true
         containerView.backgroundColor = .clearColor()
-        containerView.layer.cornerRadius = 15
+        let path = UIBezierPath(rect: containerView.bounds).CGPath
+        containerView.layer.shadowPath = path
+        containerView.layer.shouldRasterize = true
+        containerView.layer.rasterizationScale = UIScreen.mainScreen().scale
         containerView.layer.shadowColor = UIColor.blackColor().CGColor
         containerView.layer.shadowOffset = CGSizeMake(0, 0)
         containerView.layer.shadowOpacity = 0.1
-       
-        
-     
+
     }
 }

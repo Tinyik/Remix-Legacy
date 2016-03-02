@@ -62,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let vc2 = storyBoard.instantiateViewControllerWithIdentifier("CategoryVC")
         let vc3 = storyBoard.instantiateViewControllerWithIdentifier("OrgsVC")
         let pageController = RMPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
-        naviController = RKSwipeBetweenViewControllers(rootViewController: pageController)
+        naviController = RMSwipeBetweenViewControllers(rootViewController: pageController)
         naviController.viewControllerArray.addObjectsFromArray([vc1, vc2, vc3])
         naviController.buttonText = ["活动", "分类", "组织"]
         naviController.navigationBar.translucent = true

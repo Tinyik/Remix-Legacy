@@ -165,4 +165,5 @@
 @property (nonatomic, strong)UIView *navigationView;
 @property (nonatomic, strong)NSArray *buttonText;
 
+- (void)recommendActivityAndLocation;
 @end

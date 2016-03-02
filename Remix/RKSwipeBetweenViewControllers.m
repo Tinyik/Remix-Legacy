@@ -10,6 +10,9 @@
 #import "RKSwipeBetweenViewControllers.h"
 #import <ChameleonFramework/Chameleon.h>
 #import "Remix-Swift.h"
+#import <SafariServices/SafariServices.h>
+#import <MessageUI/MessageUI.h>
+
 
 //%%% customizeable button attributes
 CGFloat X_BUFFER = 0.0; //%%% the number of pixels on either side of the segment
@@ -123,10 +126,7 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
 }
 
 - (void)recommendActivityAndLocation {
-    LCActionSheet *sheet = [LCActionSheet sheetWithTitle:@"添加活动或地点至Remix。审核通过后其他用户将看到你的推荐。" buttonTitles:@[@"添加一条活动", @"推荐一家店或地点", @"入驻Remix"] redButtonIndex: -1 clicked:^(NSInteger buttonIndex) {
-        
-    }];
-    [sheet show];
+   // Please refer to RMSwipeBetweenViewControllers
 }
 
 - (void)presentSettingsVCFromNaviController {

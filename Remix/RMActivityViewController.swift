@@ -32,6 +32,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
         toolBar.registerButton.addTarget(self, action: "prepareForActivityRegistration", forControlEvents: .TouchUpInside)
         toolBar.showComments.addTarget(self, action: "showCommentsVC", forControlEvents: .TouchUpInside)
         toolBar.frame = containerView.bounds
+        self.webView.frame.size.height -= 50
         containerView.addSubview(toolBar)
         toolBar.clipsToBounds = true
         fetchOrdersInformation()

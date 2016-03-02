@@ -64,7 +64,7 @@
     self = [super init];
     if (self) {
         self.url = url;
-        _progressViewColor = [UIColor colorWithRed:119.0/255 green:228.0/255 blue:115.0/255 alpha:1];
+        _progressViewColor = FlatRed;
     }
     return self;
 }
@@ -74,7 +74,7 @@
     
     self.title = @"";
     self.view.backgroundColor = [UIColor whiteColor];
-    
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     //config navigation item
     self.navigationItem.leftItemsSupplementBackButton = YES;
     self.webView.delegate = self.progressProxy;
@@ -335,7 +335,7 @@
 
 -(UIWebView*)webView{
     if (!_webView) {
-        _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 50)];
+        _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
         
         _webView.delegate = (id)self;
         _webView.scalesPageToFit = YES;

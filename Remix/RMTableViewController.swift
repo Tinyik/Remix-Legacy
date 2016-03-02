@@ -17,7 +17,7 @@ let DEVICE_SCREEN_HEIGHT = UIScreen.mainScreen().bounds.height
 let COMMENTS_TABLE_VIEW_VISIBLE_HEIGHT: CGFloat = 450
 var APPLICATION_UI_REMOTE_CONFIG: BmobObject!
 
-var naviController: RKSwipeBetweenViewControllers!
+var naviController: RMSwipeBetweenViewControllers!
 var isHomepageFirstLaunching: Bool!
 var hasPromptedToEnableNotif: Bool!
 class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelegate, UISearchBarDelegate, PKPaymentAuthorizationViewControllerDelegate, BmobPayDelegate {
@@ -359,8 +359,8 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 let safariView = SFSafariViewController(URL: adTargetURLs[(sender.view?.tag)!], entersReaderIfAvailable: false)
                 self.navigationController?.pushViewController(safariView, animated: true)
             } else {
-                let webView = RxWebViewController(url: adTargetURLs[(sender.view?.tag)!])
-                self.navigationController?.pushViewController(webView, animated: true)
+                let webVC = RxWebViewController(url: adTargetURLs[(sender.view?.tag)!])
+                self.navigationController?.pushViewController(webVC, animated: true)
             }
             
         }

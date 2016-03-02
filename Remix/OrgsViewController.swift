@@ -29,16 +29,10 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
         orgsCollectionView.delegate = self
         orgsCollectionView.dataSource = self
         fetchCloudData()
-        setUpViews()
+
     }
     
     
-    func setUpViews() {
-        self.navigationItem.hidesBackButton = true
-    
-          }
-    
-   
     
     func fetchCloudData() {
         logoURLs = []
@@ -53,9 +47,8 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
                 let logoURL = NSURL(string: logoFile.url)!
                 self.names.append(name)
                 self.logoURLs.append(logoURL)
-                
-               self.orgsCollectionView.reloadData()
             }
+            self.orgsCollectionView.reloadData()
         }
     }
     
@@ -66,11 +59,7 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
  
     
-    
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-//         return UIEdgeInsetsMake(35, 20, 5, 20)
-//    }
-//    
+  
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
         return CGSizeMake(collectionView.frame.size.width/3, 130)

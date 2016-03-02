@@ -132,7 +132,7 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
                     let vc2 = storyBoard.instantiateViewControllerWithIdentifier("CategoryVC")
                     let vc3 = storyBoard.instantiateViewControllerWithIdentifier("OrgsVC")
                     let pageController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
-                    naviController = RKSwipeBetweenViewControllers(rootViewController: pageController)
+                    naviController = RMSwipeBetweenViewControllers(rootViewController: pageController)
                     naviController.viewControllerArray.addObjectsFromArray([vc1, vc2, vc3])
                     naviController.buttonText = ["活动", "分类", "组织"]
                     self.tr_presentViewController(naviController, method: TRPresentTransitionMethod.Fade)
@@ -189,7 +189,7 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
                 let vc2 = storyBoard.instantiateViewControllerWithIdentifier("CategoryVC")
                 let vc3 = storyBoard.instantiateViewControllerWithIdentifier("OrgsVC")
                 let pageController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
-                naviController = RKSwipeBetweenViewControllers(rootViewController: pageController)
+                naviController = RMSwipeBetweenViewControllers(rootViewController: pageController)
                 naviController.viewControllerArray.addObjectsFromArray([vc1, vc2, vc3])
                 naviController.buttonText = ["活动", "分类", "组织"]
                 self.tr_presentViewController(naviController, method: TRPresentTransitionMethod.Fade)

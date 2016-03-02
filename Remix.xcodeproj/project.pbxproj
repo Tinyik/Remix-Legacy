@@ -141,6 +141,7 @@
 		18E684A61C86ACFA00C32C3D /* ILTranslucentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E684A51C86ACFA00C32C3D /* ILTranslucentView.swift */; };
 		18E684AF1C86EE4200C32C3D /* LCActionSheet.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18E684AC1C86EE4200C32C3D /* LCActionSheet.bundle */; };
 		18E684B01C86EE4200C32C3D /* LCActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E684AE1C86EE4200C32C3D /* LCActionSheet.m */; };
+		18E684B21C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E684B11C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift */; };
 		C65AC89D9691BD7F666EED10 /* Pods_Remix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B1D0C0C5F1570ADFFD72F7 /* Pods_Remix.framework */; };
 /* End PBXBuildFile section */
 
@@ -339,6 +340,7 @@
 		18E684AC1C86EE4200C32C3D /* LCActionSheet.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LCActionSheet.bundle; sourceTree = "<group>"; };
 		18E684AD1C86EE4200C32C3D /* LCActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCActionSheet.h; sourceTree = "<group>"; };
 		18E684AE1C86EE4200C32C3D /* LCActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCActionSheet.m; sourceTree = "<group>"; };
+		18E684B11C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMSwipeBetweenViewControllers.swift; sourceTree = "<group>"; };
 		29B1D0C0C5F1570ADFFD72F7 /* Pods_Remix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Remix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		935D89E2C8FE64DFD0F2D2DC /* Pods-Remix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Remix.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Remix/Pods-Remix.debug.xcconfig"; sourceTree = "<group>"; };
 		E7316228DE2D22A22A1955AE /* Pods-Remix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Remix.release.xcconfig"; path = "Pods/Target Support Files/Pods-Remix/Pods-Remix.release.xcconfig"; sourceTree = "<group>"; };
@@ -821,6 +823,7 @@
 			children = (
 				18C79D7E1C83221A004AAA44 /* RKSwipeBetweenViewControllers.h */,
 				18C79D7F1C83221A004AAA44 /* RKSwipeBetweenViewControllers.m */,
+				18E684B11C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift */,
 			);
 			name = SwipeBetweenVC;
 			sourceTree = "<group>";
@@ -1190,6 +1193,7 @@
 				181F2B2E1C6A2D8D00FC237D /* NJKWebViewProgress.m in Sources */,
 				18C79D801C83221A004AAA44 /* RKSwipeBetweenViewControllers.m in Sources */,
 				1857B5361C856BB400D00A9E /* ZCSAvatarCaptureController.m in Sources */,
+				18E684B21C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift in Sources */,
 				1898CA931C69B599009D3261 /* TransitionTreasury.swift in Sources */,
 				187AE32E1C65ECBB00B255FF /* SettingsViewController.swift in Sources */,
 				1899E9BC1C663E3B00ADC2AC /* MGSwipeButton.m in Sources */,
