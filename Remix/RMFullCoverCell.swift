@@ -47,12 +47,6 @@ class RMFullCoverCell: MGSwipeTableCell {
         fullImageView.contentMode = .ScaleAspectFill
         fullImageView.clipsToBounds = true
         
-        // Using IB instead
-//        var maskView = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height))
-//        maskView.backgroundColor = .blackColor()
-//        maskView.alpha = 0.5
-//        fullImageView.addSubview(maskView)
-        
         orgLogo.layer.masksToBounds = true
         orgLogo.layer.cornerRadius = orgLogo.frame.size.height/2
     }

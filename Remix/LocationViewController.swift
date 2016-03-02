@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-class LocationViewController: UITableViewController, UIGestureRecognizerDelegate {
+class LocationViewController: UITableViewController {
     
         var photoURLArray: [[NSURL]] = []
         var locationObjects: [BmobObject] = []
@@ -18,13 +18,7 @@ class LocationViewController: UITableViewController, UIGestureRecognizerDelegate
         override func viewDidLoad() {
             super.viewDidLoad()
             self.tableView.separatorStyle = .None
-            let backButton = UIButton(frame: CGRectMake(0,0,30,30))
-            backButton.setImage(UIImage(named: "back"), forState: .Normal)
-            backButton.addTarget(self, action: "popCurrentVC", forControlEvents: .TouchUpInside)
-            let backItem = UIBarButtonItem(customView: backButton)
-            self.navigationItem.leftBarButtonItem = backItem
-            self.navigationController?.interactivePopGestureRecognizer?.delegate = self
-            self.navigationController?.navigationBar.translucent = false
+            self.navigationController?.navigationBar.tintColor = .whiteColor()
             self.title = APPLICATION_UI_REMOTE_CONFIG.objectForKey("LocationLabel_Text") as? String
             fetchCloudData()
         }

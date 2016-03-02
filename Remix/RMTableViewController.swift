@@ -37,6 +37,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     var shouldAskToEnableNotif = true
     var coverImgURLs: [[NSURL]] = []
     var activities: [[BmobObject]] = []
+    var headerAds: [BmobObject] = []
     var floatingActivities: [BmobObject] = []
     var registeredActivitiesIds: [String] = []
     var monthNameStrings: [String] = []
@@ -89,13 +90,13 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         fetchOrdersInformation()
           }
     
-  
+    
     func setUpViews() {
         loadRemoteUIConfigurations()
+       
         adTableView.separatorStyle = .None
         searchBar.searchBarStyle = .Minimal
         self.tableView.separatorColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.4)
-        self.navigationController?.navigationBar.translucent = false
         self.navigationItem.hidesBackButton = true
     }
     
@@ -229,7 +230,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                     self.adTargetURLs.append(NSURL(string: urlString)!)
                 }
                 adImageURLs.append(adImageURL!)
-               
+               self.headerAds.append(ad as! BmobObject)
             }
             
             
@@ -344,15 +345,26 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             askToEnableNotifications()
             shouldAskToEnableNotif = false
         }
-        if #available(iOS 9.0, *) {
-            let safariView = SFSafariViewController(URL: adTargetURLs[(sender.view?.tag)!], entersReaderIfAvailable: false)
-            safariView.view.tintColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
-            self.navigationController?.presentViewController(safariView, animated: true, completion: nil)
-        } else {
-            let webView = RxWebViewController(url: adTargetURLs[(sender.view?.tag)!])
-            self.navigationController?.pushViewController(webView, animated: true)
+        
+        if let parentActivityId = headerAds[(sender.view?.tag)!].objectForKey("ParentActivityObjectId") as? String {
+            let query = BmobQuery(className: "Activity")
+            query.getObjectInBackgroundWithId(parentActivityId, block: { (activity, error) -> Void in
+                let activityView = RMActivityViewController(url: NSURL(string: activity.objectForKey("URL") as! String))
+                activityView.activity = activity
+                self.navigationController?.pushViewController(activityView, animated: true)
+            })
+            
+        }else{
+            if #available(iOS 9.0, *) {
+                let safariView = SFSafariViewController(URL: adTargetURLs[(sender.view?.tag)!], entersReaderIfAvailable: false)
+                self.navigationController?.pushViewController(safariView, animated: true)
+            } else {
+                let webView = RxWebViewController(url: adTargetURLs[(sender.view?.tag)!])
+                self.navigationController?.pushViewController(webView, animated: true)
+            }
+            
         }
-
+        
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

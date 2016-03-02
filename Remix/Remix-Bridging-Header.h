@@ -22,4 +22,5 @@
 #import "GHWalkThroughView.h"
 #import <MWPhotoBrowser/MWPhotoBrowser.h>
 #import "UMSocialWechatHandler.h"
+#import <ChameleonFramework/Chameleon.h>
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RMNavigationController: RxWebViewNavigationViewController, UIGestureRecognizerDelegate {
+class RMNavigationController: RxWebViewNavigationViewController {
 
      weak var modalDelegate: ModalViewControllerDelegate?
     

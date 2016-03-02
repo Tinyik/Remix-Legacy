@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate, BmobPayDelegate, ModalTransitionDelegate {
    
     var tr_presentTransition: TRViewControllerTransitionDelegate?
@@ -21,14 +22,13 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       let containerView = UIView(frame: CGRectMake(0, DEVICE_SCREEN_HEIGHT - 114 , DEVICE_SCREEN_WIDTH, 50))
+        self.navigationController?.navigationBar.translucent = true
+        self.progressViewColor = FlatRed()
+        self.navigationController?.navigationBar.tintColor = .whiteColor()
+       let containerView = UIView(frame: CGRectMake(0, DEVICE_SCREEN_HEIGHT - 50 , DEVICE_SCREEN_WIDTH, 50))
         containerView.backgroundColor = .clearColor()
         self.view.addSubview(containerView)
         let toolBar = UIView.loadFromNibNamed("RMToolBarView") as! RMToolBarView
-        
-        // Moved to IB
-//        toolBar.backgroundColor = .blackColor()
-        
         toolBar.registerButton.addTarget(self, action: "prepareForActivityRegistration", forControlEvents: .TouchUpInside)
         toolBar.showComments.addTarget(self, action: "showCommentsVC", forControlEvents: .TouchUpInside)
         toolBar.frame = containerView.bounds
@@ -50,10 +50,16 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
         }
     }
     
+    override func webViewDidFinishLoad(webView: UIWebView!) {
+        super.webViewDidFinishLoad(webView)
+        self.title = activity.objectForKey("Org") as! String + "活动详情"
+    }
+    
     func showCommentsVC() {
         let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let commentsVC = storyBoard.instantiateViewControllerWithIdentifier("CommentsVC") as! CommentsTableViewController
         commentsVC.presentingActivity = self.activity
+        commentsVC.parentActivityVC = self
         let naviController = UINavigationController(rootViewController: commentsVC)
         
         self.tr_presentViewController(naviController, method: TRPresentTransitionMethod.PopTip(visibleHeight: COMMENTS_TABLE_VIEW_VISIBLE_HEIGHT))

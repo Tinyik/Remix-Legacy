@@ -5,6 +5,7 @@
 
 target 'Remix' do
 pod "MWPhotoBrowser"
+pod 'ChameleonFramework/Swift'
 end
 
 target 'RemixTests' do

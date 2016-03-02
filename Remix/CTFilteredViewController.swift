@@ -30,13 +30,7 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
         super.viewDidLoad()
         fetchCloudData()
         setUpParallaxHeaderView()
-        let backButton = UIButton(frame: CGRectMake(0,0,30,30))
-        backButton.setImage(UIImage(named: "back"), forState: .Normal)
-        backButton.addTarget(self, action: "popCurrentVC", forControlEvents: .TouchUpInside)
-        let backItem = UIBarButtonItem(customView: backButton)
-        self.navigationItem.leftBarButtonItem = backItem
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
-        self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.navigationBar.tintColor = .whiteColor()
         self.title = filterName
      
    

@@ -47,7 +47,6 @@ class SettingsInputViewController: UIViewController, SettingInputViewDelegate, U
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "保存", style: .Plain, target: self, action: "saveEditedInformation")
         self.navigationItem.rightBarButtonItem?.tintColor = .blackColor()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
-        self.navigationController?.navigationBar.translucent = false
         self.title = editingKey
         // Do any additional setup after loading the view.
     }

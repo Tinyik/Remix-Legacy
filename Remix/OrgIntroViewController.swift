@@ -10,7 +10,7 @@ import UIKit
 import MWPhotoBrowser
 import MessageUI
 
-class OrgIntroViewController: UIViewController, UIGestureRecognizerDelegate, MWPhotoBrowserDelegate, MFMailComposeViewControllerDelegate {
+class OrgIntroViewController: UIViewController, MWPhotoBrowserDelegate, MFMailComposeViewControllerDelegate {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var mainImageView: UIImageView!
@@ -107,14 +107,8 @@ class OrgIntroViewController: UIViewController, UIGestureRecognizerDelegate, MWP
     }
 
     func setUpView() {
-        let backButton = UIButton(frame: CGRectMake(0,0,30,30))
-        backButton.setImage(UIImage(named: "back"), forState: .Normal)
-        backButton.addTarget(self, action: "popCurrentVC", forControlEvents: .TouchUpInside)
-        let backItem = UIBarButtonItem(customView: backButton)
-        self.navigationItem.leftBarButtonItem = backItem
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
-        self.navigationController?.navigationBar.translucent = false
-        self.title = orgName + "简介"
+       self.navigationController?.navigationBar.tintColor = .whiteColor()
+        self.title = "简介"
         scrollView.contentSize = CGSizeMake(375, 1400)
         scrollView.userInteractionEnabled = true
         mainImageView.contentMode = .ScaleAspectFill

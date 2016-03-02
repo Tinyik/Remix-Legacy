@@ -19,7 +19,7 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1KH-9K-NCB">
                     <rect key="frame" x="261" y="0.0" width="114" height="50"/>
-                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.85043728351593018" green="0.21816034615039825" blue="0.15920260548591614" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="114" id="Loq-hM-V3t"/>
                     </constraints>
@@ -40,7 +40,7 @@
                     </state>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.19376453757286072" green="0.50850099325180054" blue="0.85232251882553101" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="Aty-So-iYg" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="09C-aP-LJV"/>
                 <constraint firstAttribute="bottom" secondItem="1KH-9K-NCB" secondAttribute="bottom" id="4o5-gP-udA"/>
@@ -54,6 +54,15 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="translucent" value="YES"/>
+                <userDefinedRuntimeAttribute type="color" keyPath="translucentTintColor">
+                    <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="translucentAlpha">
+                    <real key="value" value="1"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="likeButton" destination="yX5-va-q5F" id="UJX-LD-nXb"/>
                 <outlet property="registerButton" destination="1KH-9K-NCB" id="8Rk-vb-MwG"/>

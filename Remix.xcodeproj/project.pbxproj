@@ -138,6 +138,7 @@
 		18E239301C80392800363655 /* SettingsInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2392F1C80392800363655 /* SettingsInputViewController.swift */; };
 		18E239321C805E1600363655 /* FloatingActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E239311C805E1600363655 /* FloatingActivityView.swift */; };
 		18E239341C805E2D00363655 /* FloatingActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E239331C805E2D00363655 /* FloatingActivityView.xib */; };
+		18E684A61C86ACFA00C32C3D /* ILTranslucentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E684A51C86ACFA00C32C3D /* ILTranslucentView.swift */; };
 		C65AC89D9691BD7F666EED10 /* Pods_Remix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B1D0C0C5F1570ADFFD72F7 /* Pods_Remix.framework */; };
 /* End PBXBuildFile section */
 
@@ -332,6 +333,7 @@
 		18E2392F1C80392800363655 /* SettingsInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsInputViewController.swift; sourceTree = "<group>"; };
 		18E239311C805E1600363655 /* FloatingActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingActivityView.swift; sourceTree = "<group>"; };
 		18E239331C805E2D00363655 /* FloatingActivityView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FloatingActivityView.xib; sourceTree = "<group>"; };
+		18E684A51C86ACFA00C32C3D /* ILTranslucentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ILTranslucentView.swift; sourceTree = "<group>"; };
 		29B1D0C0C5F1570ADFFD72F7 /* Pods_Remix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Remix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		935D89E2C8FE64DFD0F2D2DC /* Pods-Remix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Remix.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Remix/Pods-Remix.debug.xcconfig"; sourceTree = "<group>"; };
 		E7316228DE2D22A22A1955AE /* Pods-Remix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Remix.release.xcconfig"; path = "Pods/Target Support Files/Pods-Remix/Pods-Remix.release.xcconfig"; sourceTree = "<group>"; };
@@ -693,6 +695,7 @@
 			isa = PBXGroup;
 			children = (
 				18B317C51C6B243900336A92 /* DeviceInformation.swift */,
+				18E684A51C86ACFA00C32C3D /* ILTranslucentView.swift */,
 				1857B5311C856B9E00D00A9E /* AvatarCapture */,
 				18C79D811C83275F004AAA44 /* SwipeBetweenVC */,
 				18B317C21C6B06F100336A92 /* WalkThrough */,
@@ -1148,6 +1151,7 @@
 				1898CA851C69B599009D3261 /* BlixtTransitionAnimation.swift in Sources */,
 				18C79D7D1C8215FF004AAA44 /* OrdersViewController.swift in Sources */,
 				18984F911C8473C400821477 /* RMToolBarView.swift in Sources */,
+				18E684A61C86ACFA00C32C3D /* ILTranslucentView.swift in Sources */,
 				1898CA831C69B599009D3261 /* TRTabBarTransitionDelegate.swift in Sources */,
 				1898CA3D1C68AD15009D3261 /* ParallaxHeaderView.m in Sources */,
 				1898CA8D1C69B599009D3261 /* ScanbotTransitionAnimation.swift in Sources */,

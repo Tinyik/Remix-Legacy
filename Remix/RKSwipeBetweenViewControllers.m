@@ -8,6 +8,7 @@
 //  @cwRichardKim for regular updates
 
 #import "RKSwipeBetweenViewControllers.h"
+#import <ChameleonFramework/Chameleon.h>
 #import "Remix-Swift.h"
 
 //%%% customizeable button attributes
@@ -30,7 +31,7 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
 @property (nonatomic) NSInteger currentPageIndex;
 @property (nonatomic) BOOL isPageScrollingFlag; //%%% prevents scrolling / segment tap crash
 @property (nonatomic) BOOL hasAppearedFlag; //%%% prevents reloading (maintains state)
-
+@property (nonatomic) UIColor *themeColor_1;
 @end
 
 @implementation RKSwipeBetweenViewControllers
@@ -40,6 +41,7 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
 @synthesize navigationView;
 @synthesize buttonText;
 @synthesize indicatorButtons;
+@synthesize themeColor_1;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,17 +55,17 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-
+    themeColor_1 = FlatBlueDark;
     [self.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    self.navigationBar.barTintColor = [UIColor colorWithRed:0.01 green:0.05 blue:0.06 alpha:1]; //%%% bartint
-    self.navigationBar.translucent = NO;
+    self.navigationBar.barTintColor = themeColor_1; //%%% bartint
+    self.navigationBar.translucent = YES;
     indicatorButtons = [NSMutableArray new];
     viewControllerArray = [[NSMutableArray alloc]init];
     self.currentPageIndex = 0;
     self.isPageScrollingFlag = NO;
     self.hasAppearedFlag = NO;
+    
 }
 
 
@@ -97,7 +99,7 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
         [indicatorButtons addObject:button];
         button.hidden = NO;
         button.tag = i; //%%% IMPORTANT: if you make your own custom buttons, you have to tag them appropriately
-        button.backgroundColor = [UIColor colorWithRed:0.03 green:0.07 blue:0.08 alpha:1];//%%% buttoncolors
+        button.backgroundColor = themeColor_1;//%%% buttoncolors
         button.titleLabel.font = [UIFont systemFontOfSize:16];
         [button addTarget:self action:@selector(tapSegmentButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -111,7 +113,6 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
     UIButton *showAdd = [[UIButton alloc] initWithFrame:CGRectMake(5, 12, 25, 25)];
     [showAdd addTarget:self action:@selector(presentSettingsVCFromNaviController) forControlEvents:UIControlEventTouchUpInside];
     [showAdd setBackgroundImage:[UIImage imageNamed:@"Add"] forState:UIControlStateNormal];
-   // barLogoView.center = self.navigationBar.center;
     [navigationView addSubview:barLogoView];
     [navigationView addSubview:showSettings];
     [navigationView addSubview:showAdd];
@@ -132,7 +133,7 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
 //%%% sets up the selection bar under the buttons on the navigation bar
 -(void)setupSelector {
     selectionBar = [[UIView alloc]initWithFrame:CGRectMake(X_BUFFER-X_OFFSET, SELECTOR_Y_BUFFER,(self.view.frame.size.width-2*X_BUFFER)/[viewControllerArray count], SELECTOR_HEIGHT)];
-    selectionBar.backgroundColor = [UIColor greenColor]; //%%% sbcolor
+    selectionBar.backgroundColor = [UIColor flatRedColor]; //%%% sbcolor
     selectionBar.alpha = 0.8; //%%% sbalpha
     [navigationView addSubview:selectionBar];
 }
@@ -227,11 +228,14 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
 //%%% method is called when any of the pages moves.
 //It extracts the xcoordinate from the center point and instructs the selection bar to move accordingly
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    CGFloat xFromCenter = self.view.frame.size.width-scrollView.contentOffset.x; //%%% positive for right swipe, negative for left
-    
-    //%%% checks to see what page you are on and adjusts the xCoor accordingly.
-    //i.e. if you're on the second page, it makes sure that the bar starts from the frame.origin.x of the
-    //second tab instead of the beginning
+    CGFloat xFromCenter = self.view.frame.size.width-scrollView.contentOffset.x; //%%% positive for right
+//    CGFloat red1, red2, green1, green2, blue1, blue2, alpha1, alpha2;
+//    [themeColor_1 getRed: &red1 green: &green1 blue: &blue1 alpha: &alpha1];
+//    [themeColor_2 getRed: &red2 green: &green2 blue: &blue2 alpha: &alpha2];
+//    CGFloat scrollPercentage = scrollView.contentOffset.x/self.view.frame.size.width - 1;
+//    NSLog(@"%f", scrollView.contentOffset.x);
+//    UIColor *newColor = [[UIColor alloc] initWithRed:red1*(1-scrollPercentage)+red2*scrollPercentage green:green1*(1-scrollPercentage)+green2*scrollPercentage blue:blue1*(1-scrollPercentage)+blue2*scrollPercentage alpha:1];
+//    self.navigationBar.barTintColor = newColor;
     NSInteger xCoor = X_BUFFER+selectionBar.frame.size.width*self.currentPageIndex-X_OFFSET;
     
     selectionBar.frame = CGRectMake(xCoor-xFromCenter/[viewControllerArray count], selectionBar.frame.origin.y, selectionBar.frame.size.width, selectionBar.frame.size.height);

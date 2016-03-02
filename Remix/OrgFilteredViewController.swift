@@ -11,7 +11,7 @@ import SafariServices
 import PassKit
 import SDWebImage
 
-class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, MGSwipeTableCellDelegate, OrganizationViewDelegate, BmobPayDelegate {
+class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MGSwipeTableCellDelegate, OrganizationViewDelegate, BmobPayDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -29,18 +29,11 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchCloudData()
-        let backButton = UIButton(frame: CGRectMake(0,0,30,30))
-        backButton.setImage(UIImage(named: "back"), forState: .Normal)
-        backButton.addTarget(self, action: "popCurrentVC", forControlEvents: .TouchUpInside)
-        let backItem = UIBarButtonItem(customView: backButton)
-        self.navigationItem.leftBarButtonItem = backItem
+        self.navigationController?.navigationBar.tintColor = .whiteColor()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "关于我们", style: .Plain, target: self, action: "showOrgIntroView")
-        self.navigationItem.rightBarButtonItem?.tintColor = .whiteColor()
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         self.title = orgName
         setUpParallaxHeaderView()
         setParallaxHeaderImage()
-        self.navigationController?.navigationBar.translucent = false
         
         
     }

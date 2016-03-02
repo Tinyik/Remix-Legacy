@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ChameleonFramework
 
 @UIApplicationMain
 
@@ -18,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-    
+       
         let image = UIImage(named: "back")
        
         Bmob.registerWithAppKey("08329e2e3a8d3cdde96bf91d7459e8ab")
@@ -64,7 +65,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         naviController = RKSwipeBetweenViewControllers(rootViewController: pageController)
         naviController.viewControllerArray.addObjectsFromArray([vc1, vc2, vc3])
         naviController.buttonText = ["活动", "分类", "组织"]
+        naviController.navigationBar.translucent = true
         self.window?.rootViewController = naviController
+
         }
         
         self.window?.makeKeyAndVisible()

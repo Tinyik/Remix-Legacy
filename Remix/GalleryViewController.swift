@@ -10,7 +10,7 @@ import UIKit
 import SafariServices
 import MWPhotoBrowser
 
-class GalleryViewController: UITableViewController, UIGestureRecognizerDelegate {
+class GalleryViewController: UITableViewController {
     
     var photoURLArray: [[[NSURL]]] = []
     var mwPhotos: [MWPhoto] = []
@@ -23,13 +23,7 @@ class GalleryViewController: UITableViewController, UIGestureRecognizerDelegate 
     
         super.viewDidLoad()
         self.tableView.separatorStyle = .None
-        let backButton = UIButton(frame: CGRectMake(0,0,30,30))
-        backButton.setImage(UIImage(named: "back"), forState: .Normal)
-        backButton.addTarget(self, action: "popCurrentVC", forControlEvents: .TouchUpInside)
-        let backItem = UIBarButtonItem(customView: backButton)
-        self.navigationItem.leftBarButtonItem = backItem
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
-        self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.navigationBar.tintColor = .whiteColor()
         self.title = "往期活动"
         fetchCloudData()
         setUpParallaxHeaderView()

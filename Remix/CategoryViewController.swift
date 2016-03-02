@@ -31,7 +31,6 @@ class CategoryViewController: UITableViewController {
         
         setUpViews()
         fetchCloudData()
-        self.navigationController?.navigationBar.translucent = false
         tableView.separatorStyle = .None
         self.tableView.delegate = self
         self.tableView.dataSource = self

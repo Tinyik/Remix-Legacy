@@ -14,6 +14,7 @@ class CommentsTableViewController: UITableViewController {
     let currentUser = BmobUser.getCurrentUser()
     
     var presentingActivity: BmobObject!
+    var parentActivityVC: RMActivityViewController!
     var activityComments: [BmobObject] = []
   
     override func viewDidLoad() {
@@ -45,12 +46,34 @@ class CommentsTableViewController: UITableViewController {
     }
     
    
-
+   
     func addNewComment() {
-        let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let commentInputVC = storyBoard.instantiateViewControllerWithIdentifier("CommentInputVC") as! CommentInputViewController
-        commentInputVC.presentingActivity = self.presentingActivity
-        self.navigationController?.pushViewController(commentInputVC, animated: true)
+        if parentActivityVC.checkPersonalInfoIntegrity() {
+            let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+            let commentInputVC = storyBoard.instantiateViewControllerWithIdentifier("CommentInputVC") as! CommentInputViewController
+            commentInputVC.presentingActivity = self.presentingActivity
+            self.navigationController?.pushViewController(commentInputVC, animated: true)
+
+        }else{
+            let alert = UIAlertController(title: "完善信息", message: "请先进入账户设置完善个人信息后再继续添加评论。", preferredStyle: .Alert)
+            let action = UIAlertAction(title: "去设置", style: .Default, handler: { (action) -> Void in
+                self.presentSettingsVC()
+            })
+            let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+            alert.addAction(action)
+            alert.addAction(cancel)
+            self.presentViewController(alert, animated: true, completion: nil)
+
+        }
+    }
+    
+    func presentSettingsVC() {
+        self.navigationController?.dismissViewControllerAnimated(true, completion: { () -> Void in
+            let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+            let settingsVC = storyBoard.instantiateViewControllerWithIdentifier("SettingsVC")
+            let navigationController = UINavigationController(rootViewController: settingsVC)
+            self.parentActivityVC.navigationController!.presentViewController(navigationController, animated: true, completion: nil)
+        })
         
     }
 
@@ -73,8 +96,13 @@ class CommentsTableViewController: UITableViewController {
         query.getObjectInBackgroundWithId(userId) { (user, error) -> Void in
             if error == nil {
                 cell.usernameLabel.text = (user as! BmobUser).username
-                let avatarURL = NSURL(string: (user.objectForKey("Avatar") as! BmobFile).url)
-                cell.avatarView.sd_setImageWithURL(avatarURL, placeholderImage: UIImage(named: "SDPlaceholder"))
+                if let _avatar = user.objectForKey("Avatar") as? BmobFile {
+                    let avatarURL = NSURL(string: _avatar.url)
+                    cell.avatarView.sd_setImageWithURL(avatarURL, placeholderImage: UIImage(named: "DefaultAvatar"))
+                }else{
+                    cell.avatarView.image = UIImage(named: "DefaultAvatar")
+                }
+               
             }
         }
         return cell

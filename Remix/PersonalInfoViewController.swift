@@ -21,7 +21,6 @@ class PersonalInfoViewController: UITableViewController, UIGestureRecognizerDele
         let backItem = UIBarButtonItem(customView: backButton)
         self.navigationItem.leftBarButtonItem = backItem
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
-        self.navigationController?.navigationBar.translucent = false
         self.title = "账户设置"
        
     }
@@ -150,6 +149,12 @@ class PersonalInfoViewController: UITableViewController, UIGestureRecognizerDele
                 }
             default: break
             }
+        }
+        
+        if cell.detailLabel.text == "必填" || cell.detailLabel.text == "建议填写" {
+            cell.detailLabel.textColor = FlatRed()
+        }else{
+            cell.detailLabel.textColor = FlatGray()
         }
         return cell
     }

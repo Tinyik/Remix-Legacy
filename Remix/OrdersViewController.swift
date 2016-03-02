@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-class OrdersViewController: UITableViewController, UIGestureRecognizerDelegate {
+class OrdersViewController: UITableViewController {
     
     var coverImgURLs: [NSURL]!
     var parentActivityIds: [String]!
@@ -24,13 +24,7 @@ class OrdersViewController: UITableViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchCloudData()
-        let backButton = UIButton(frame: CGRectMake(0,0,30,30))
-        backButton.setImage(UIImage(named: "back"), forState: .Normal)
-        backButton.addTarget(self, action: "popCurrentVC", forControlEvents: .TouchUpInside)
-        let backItem = UIBarButtonItem(customView: backButton)
-        self.navigationItem.leftBarButtonItem = backItem
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
-        self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.navigationBar.tintColor = .whiteColor()
         self.title = "我的订单"
         self.tableView.separatorStyle = .None
            }

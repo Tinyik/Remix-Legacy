@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '5E24FA00AF3EDDA0813085D5'
+               BlueprintIdentifier = '1661FFF1251E552BE6A21B2C'
                BlueprintName = 'Pods-Remix'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_Remix.framework'>

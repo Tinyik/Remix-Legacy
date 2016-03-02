@@ -34,6 +34,7 @@
  */
 -(instancetype)initWithUrl:(NSURL*)url;
 
+- (void)webViewDidFinishLoad:(UIWebView *)webView;
 
 -(void)reloadWebView;
 

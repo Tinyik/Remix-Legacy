@@ -11,7 +11,7 @@ import SafariServices
 import SDWebImage
 
 
-class SearchResultViewController: UITableViewController, UIGestureRecognizerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, MGSwipeTableCellDelegate, BmobPayDelegate {
+class SearchResultViewController: UITableViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, MGSwipeTableCellDelegate, BmobPayDelegate {
     
     var labelName = ""
     var delegate: ActivityFilterDelegate!
@@ -39,13 +39,7 @@ class SearchResultViewController: UITableViewController, UIGestureRecognizerDele
         searchBar.delegate = self
         trendingLabelsCollectionView.delegate = self
         trendingLabelsCollectionView.dataSource = self
-        let backButton = UIButton(frame: CGRectMake(0,0,30,30))
-        backButton.setImage(UIImage(named: "back"), forState: .Normal)
-        backButton.addTarget(self, action: "popCurrentVC", forControlEvents: .TouchUpInside)
-        let backItem = UIBarButtonItem(customView: backButton)
-        self.navigationItem.leftBarButtonItem = backItem
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
-        self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.navigationBar.tintColor = .whiteColor()
         self.title = "搜索"
        fetchTrendingLabels()
     }
