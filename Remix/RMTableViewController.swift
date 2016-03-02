@@ -94,7 +94,6 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     
 
     func setUpViews() {
-       
         adTableView.separatorStyle = .None
         searchBar.searchBarStyle = .Minimal
         self.tableView.separatorColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.4)

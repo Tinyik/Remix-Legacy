@@ -75,5 +75,28 @@ class LikedViewController: CTFilteredViewController {
         
     }
     
+    
+    //DZNEmptyDataSet
+    
+    override func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(17)]
+        return NSAttributedString(string: "\n\n\n\n\n\n\n\n\n\n\n\n你还没有❤过Remix的活动\n", attributes: attrDic)
+    }
+    
+    override func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(15)]
+        return NSAttributedString(string: "在活动详情页面中，为活动点赞后它将会出现在这里。", attributes: attrDic)
+    }
+    
+    override func buttonTitleForEmptyDataSet(scrollView: UIScrollView!, forState state: UIControlState) -> NSAttributedString! {
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(16), NSForegroundColorAttributeName: FlatRed()]
+        return NSAttributedString(string: "去逛逛", attributes: attrDic)
+    }
+    
+    override func emptyDataSet(scrollView: UIScrollView!, didTapButton button: UIButton!) {
+        self.navigationController?.popViewControllerAnimated(true)
+        
+    }
 
 }

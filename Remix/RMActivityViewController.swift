@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SDWebImage
 
 class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate, BmobPayDelegate, ModalTransitionDelegate {
    
@@ -23,6 +23,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.translucent = true
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "shareActivity")
         self.progressViewColor = FlatRed()
         self.navigationController?.navigationBar.tintColor = .whiteColor()
        let containerView = UIView(frame: CGRectMake(0, DEVICE_SCREEN_HEIGHT - 50 , DEVICE_SCREEN_WIDTH, 50))
@@ -230,6 +231,20 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
         }
         
         
+    }
+    
+    func shareActivity() {
+        let coverImageURL = NSURL(string: (activity.objectForKey("CoverImg") as! BmobFile).url)
+        let shareText = "Remix活动推荐: " + (activity.objectForKey("Title") as! String)
+        let manager = SDWebImageManager()
+        manager.downloadImageWithURL(coverImageURL, options: .RetryFailed, progress: nil, completed: { (coverImage, error, cache, finished, url) -> Void in
+            if error == nil {
+                let url = self.activity.objectForKey("URL") as! String
+                let handler = UMSocialWechatHandler.setWXAppId("wx6e2c22b24588e0e1", appSecret: "e085edb726c5b92bf443f1e3da3f838e", url: url)
+                UMSocialSnsService.presentSnsIconSheetView(self, appKey: "56ba8fa2e0f55a1071000931", shareText: shareText, shareImage: coverImage, shareToSnsNames: [UMShareToWechatSession,UMShareToWechatTimeline, UMShareToQQ, UMShareToQzone, UMShareToTwitter], delegate: nil)
+            }
+        })
+
     }
     
     func paySuccess() {
