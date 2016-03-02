@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-class OrdersViewController: UITableViewController {
+class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     
     var coverImgURLs: [NSURL]!
     var parentActivityIds: [String]!
@@ -24,7 +24,10 @@ class OrdersViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchCloudData()
-        self.navigationController?.navigationBar.tintColor = .whiteColor()
+        self.tableView.emptyDataSetSource = self
+        self.tableView.emptyDataSetDelegate = self
+        self.tableView.tableFooterView = UIView()
+        self.navigationController?.navigationBar.tintColor = .blackColor()
         self.title = "我的订单"
         self.tableView.separatorStyle = .None
            }
@@ -174,6 +177,37 @@ class OrdersViewController: UITableViewController {
             self.navigationController?.pushViewController(webView, animated: true)
         }
         
+    }
+
+    //DZNEmptyDataSet
+    
+    
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(19)]
+        return NSAttributedString(string: "(:3[____] 你还没有进行中的订单\n", attributes: attrDic)
+    }
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(15)]
+        return NSAttributedString(string: "报名成功后活动的订单将出现在这里", attributes: attrDic)
+    }
+    
+    func buttonTitleForEmptyDataSet(scrollView: UIScrollView!, forState state: UIControlState) -> NSAttributedString! {
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(17), NSForegroundColorAttributeName: FlatRed()]
+        return NSAttributedString(string: "去逛逛", attributes: attrDic)
+    }
+    
+    func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
+        return UIColor(red: 0.97255, green: 0.97255, blue: 0.97255, alpha: 1)
+    }
+    
+    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+        return UIImage(named: "NoData")
+    }
+    
+    func emptyDataSet(scrollView: UIScrollView!, didTapButton button: UIButton!) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     

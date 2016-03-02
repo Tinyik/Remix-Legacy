@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CommentsTableViewController: UITableViewController {
+class CommentsTableViewController: UITableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
 
     weak var modalDelegate: ModalViewControllerDelegate?
     let currentUser = BmobUser.getCurrentUser()
@@ -19,7 +19,11 @@ class CommentsTableViewController: UITableViewController {
   
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.emptyDataSetSource = self
+        self.tableView.emptyDataSetDelegate = self
+        self.tableView.tableFooterView = UIView()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "添加评论", style: .Plain, target: self, action: "addNewComment")
+        self.navigationController?.navigationBar.translucent = true
         self.navigationController?.navigationBar.tintColor = .blackColor()
         
         // Bottom margin for halved view
@@ -95,6 +99,7 @@ class CommentsTableViewController: UITableViewController {
         let query = BmobQuery(className: "_User")
         query.getObjectInBackgroundWithId(userId) { (user, error) -> Void in
             if error == nil {
+                cell.usernameLabel.textColor = FlatRed()
                 cell.usernameLabel.text = (user as! BmobUser).username
                 if let _avatar = user.objectForKey("Avatar") as? BmobFile {
                     let avatarURL = NSURL(string: _avatar.url)
@@ -108,6 +113,29 @@ class CommentsTableViewController: UITableViewController {
         return cell
     }
     
+    //DZNEmptyDataSet
     
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(19)]
+        return NSAttributedString(string: "..._(:з」∠)_...\n", attributes: attrDic)
+    }
+    
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(15)]
+        return NSAttributedString(string: "这么精彩的活动，居然没人评论？😳", attributes: attrDic)
+    }
+    
+    func buttonTitleForEmptyDataSet(scrollView: UIScrollView!, forState state: UIControlState) -> NSAttributedString! {
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(16), NSForegroundColorAttributeName: FlatRed()]
+        return NSAttributedString(string: ">>>抢占沙发<<<", attributes: attrDic)
+    }
+    
+    
+    func emptyDataSet(scrollView: UIScrollView!, didTapButton button: UIButton!) {
+       self.addNewComment()
+    }
+
    
 }

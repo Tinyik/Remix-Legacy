@@ -97,6 +97,7 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
             }
             
             self.tableView.reloadData()
+            self.tableView.reloadEmptyDataSet()
         }
         
         if let _likedlist = currentUser.objectForKey("LikedActivities") as? [String] {

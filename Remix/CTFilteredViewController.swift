@@ -333,7 +333,7 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         
         let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(17)]
-        return NSAttributedString(string: "Oops. 这里还没有内容。以后再来看看吧~\n", attributes: attrDic)
+        return NSAttributedString(string: "\n\n\n\n\n\n\n\n\n\n\n\nOops. 这里还没有内容。以后再来看看吧~\n", attributes: attrDic)
     }
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
@@ -349,6 +349,7 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
     func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
         return true
     }
+    
     
     func emptyDataSet(scrollView: UIScrollView!, didTapButton button: UIButton!) {
         let sheet = LCActionSheet(title: "添加活动或地点至Remix。审核通过后其他用户将看到你的推荐。", buttonTitles: ["添加一条活动", "推荐一家店或地点", "入驻Remix"], redButtonIndex: -1) { (buttonIndex) -> Void in

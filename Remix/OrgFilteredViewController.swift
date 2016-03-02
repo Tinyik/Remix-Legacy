@@ -396,7 +396,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(15)]
-        return NSAttributedString(string: "当然，你也可以:", attributes: attrDic)
+        return NSAttributedString(string: "不过，你可以:", attributes: attrDic)
     }
     
     func buttonTitleForEmptyDataSet(scrollView: UIScrollView!, forState state: UIControlState) -> NSAttributedString! {
@@ -407,6 +407,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
     func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
         return true
     }
+    
     
     func emptyDataSet(scrollView: UIScrollView!, didTapButton button: UIButton!) {
         let sheet = LCActionSheet(title: "添加活动或地点至Remix。审核通过后其他用户将看到你的推荐。", buttonTitles: ["添加一条活动", "推荐一家店或地点", "入驻Remix"], redButtonIndex: -1) { (buttonIndex) -> Void in
