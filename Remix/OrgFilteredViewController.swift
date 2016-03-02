@@ -363,6 +363,12 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         }
         let activityView = RMActivityViewController(url: NSURL(string: activities[indexPath.section][indexPath.row].objectForKey("URL") as! String)!)
         activityView.activity = activities[indexPath.section][indexPath.row]
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? RMFullCoverCell {
+            activityView.isLiked = cell.isLiked
+        }
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? RMTableViewCell {
+            activityView.isLiked = cell.isLiked
+        }
         self.navigationController?.pushViewController(activityView, animated: true)
 
     }

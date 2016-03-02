@@ -14,23 +14,36 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
     var tr_presentTransition: TRViewControllerTransitionDelegate?
     
     var activity: BmobObject!
+    var isLiked: Bool = false {
+        didSet {
+            if isLiked == true {
+                toolBar.likeButton.setBackgroundImage(UIImage(named: "Like"), forState: .Normal)
+                
+            }else{
+                toolBar.likeButton.setBackgroundImage(UIImage(named: "Unlike"), forState: .Normal)
+            }
+        }
+    }
     var registeredActivitiesIds: [String] = []
     var ongoingTransactionId: String!
     var ongoingTransactionPrice: Double!
     var ongoingTransactionRemarks = "No comments."
     var currentUser = BmobUser.getCurrentObject()
+    var toolBar = UIView.loadFromNibNamed("RMToolBarView") as! RMToolBarView
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.translucent = true
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "shareActivity")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "sharePresentingActivity")
         self.progressViewColor = FlatRed()
         self.navigationController?.navigationBar.tintColor = .whiteColor()
        let containerView = UIView(frame: CGRectMake(0, DEVICE_SCREEN_HEIGHT - 50 , DEVICE_SCREEN_WIDTH, 50))
         containerView.backgroundColor = .clearColor()
         self.view.addSubview(containerView)
-        let toolBar = UIView.loadFromNibNamed("RMToolBarView") as! RMToolBarView
+        toolBar.likeButton.contentHorizontalAlignment = .Fill
+        toolBar.likeButton.contentVerticalAlignment = .Fill
         toolBar.registerButton.addTarget(self, action: "prepareForActivityRegistration", forControlEvents: .TouchUpInside)
+        toolBar.likeButton.addTarget(self, action: "likePresentingActivity", forControlEvents: .TouchUpInside)
         toolBar.showComments.addTarget(self, action: "showCommentsVC", forControlEvents: .TouchUpInside)
         toolBar.frame = containerView.bounds
         self.webView.frame.size.height -= 50
@@ -233,7 +246,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
         
     }
     
-    func shareActivity() {
+    func sharePresentingActivity() {
         let coverImageURL = NSURL(string: (activity.objectForKey("CoverImg") as! BmobFile).url)
         let shareText = "Remix活动推荐: " + (activity.objectForKey("Title") as! String)
         let manager = SDWebImageManager()
@@ -245,6 +258,11 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
             }
         })
 
+    }
+    
+    func likePresentingActivity() {
+        isLiked = !isLiked
+        
     }
     
     func paySuccess() {

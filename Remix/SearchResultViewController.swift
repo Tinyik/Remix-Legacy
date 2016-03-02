@@ -305,6 +305,12 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
                 activity.updateInBackground()
             }
             let activityView = RMActivityViewController(url: NSURL(string: activities[indexPath.row].objectForKey("URL") as! String)!)
+            if let cell = tableView.cellForRowAtIndexPath(indexPath) as? RMFullCoverCell {
+                activityView.isLiked = cell.isLiked
+            }
+            if let cell = tableView.cellForRowAtIndexPath(indexPath) as? RMTableViewCell {
+                activityView.isLiked = cell.isLiked
+            }
             activityView.activity = activities[indexPath.row]
             self.navigationController?.pushViewController(activityView, animated: true)
 
