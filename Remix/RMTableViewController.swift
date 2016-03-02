@@ -90,7 +90,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         fetchOrdersInformation()
           }
     
-    
+
     func setUpViews() {
         loadRemoteUIConfigurations()
        
@@ -606,8 +606,15 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             let query = BmobQuery(className: "Activity")
             let objectId = activities[indexPath.section][indexPath.row].objectId
             query.getObjectInBackgroundWithId(objectId) { (activity, error) -> Void in
+                if error == nil {
                 activity.incrementKey("PageView", byAmount: 1)
                 activity.updateInBackground()
+                }else{
+                    let alert = UIAlertController(title: "Remix提示", message: "出错了！ |ﾟДﾟ)))请检查你的网络连接后重试。", preferredStyle: .Alert)
+                    let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+                    alert.addAction(action)
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
             }
 
            let activityView = RMActivityViewController(url: NSURL(string: activities[indexPath.section][indexPath.row].objectForKey("URL") as! String)!)

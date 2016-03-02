@@ -111,7 +111,7 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
     UIImageView *barLogoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TitleLogo"]];
     barLogoView.frame = CGRectMake(self.navigationBar.frame.size.width/2-40, 10, 70, 26);
     UIButton *showAdd = [[UIButton alloc] initWithFrame:CGRectMake(5, 12, 25, 25)];
-    [showAdd addTarget:self action:@selector(presentSettingsVCFromNaviController) forControlEvents:UIControlEventTouchUpInside];
+    [showAdd addTarget:self action:@selector(recommendActivityAndLocation) forControlEvents:UIControlEventTouchUpInside];
     [showAdd setBackgroundImage:[UIImage imageNamed:@"Add"] forState:UIControlStateNormal];
     [navigationView addSubview:barLogoView];
     [navigationView addSubview:showSettings];
@@ -120,6 +120,13 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
     
     
     [self setupSelector];
+}
+
+- (void)recommendActivityAndLocation {
+    LCActionSheet *sheet = [LCActionSheet sheetWithTitle:@"添加活动或地点至Remix。审核通过后其他用户将看到你的推荐。" buttonTitles:@[@"添加一条活动", @"推荐一家店或地点", @"入驻Remix"] redButtonIndex: -1 clicked:^(NSInteger buttonIndex) {
+        
+    }];
+    [sheet show];
 }
 
 - (void)presentSettingsVCFromNaviController {
