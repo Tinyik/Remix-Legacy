@@ -9,8 +9,9 @@
 import UIKit
 import SafariServices
 import SDWebImage
+import MessageUI
 
-class CTFilteredViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ActivityFilterDelegate, UIGestureRecognizerDelegate, MGSwipeTableCellDelegate, BmobPayDelegate {
+class CTFilteredViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ActivityFilterDelegate, UIGestureRecognizerDelegate, MGSwipeTableCellDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, MFMailComposeViewControllerDelegate {
   
     @IBOutlet weak var tableView: UITableView!
     
@@ -32,8 +33,9 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
         setUpParallaxHeaderView()
         self.navigationController?.navigationBar.tintColor = .whiteColor()
         self.title = filterName
-     
-   
+        self.tableView.emptyDataSetSource = self
+        self.tableView.emptyDataSetDelegate = self
+        self.tableView.tableFooterView = UIView()
     }
     
   
@@ -326,7 +328,56 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
 //        self.tableView.tableHeaderView = header
     }
     
+    //DZNEmptyDataSet
     
-
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(17)]
+        return NSAttributedString(string: "Oops. 这里还没有内容。以后再来看看吧~\n", attributes: attrDic)
+    }
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(15)]
+        return NSAttributedString(string: "Remix团队会积极添加更多的活动和种类。当然，你也可以:", attributes: attrDic)
+    }
+    
+    func buttonTitleForEmptyDataSet(scrollView: UIScrollView!, forState state: UIControlState) -> NSAttributedString! {
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(16), NSForegroundColorAttributeName: FlatRed()]
+        return NSAttributedString(string: "向Remix推荐活动", attributes: attrDic)
+    }
+    
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
+    func emptyDataSet(scrollView: UIScrollView!, didTapButton button: UIButton!) {
+        let sheet = LCActionSheet(title: "添加活动或地点至Remix。审核通过后其他用户将看到你的推荐。", buttonTitles: ["添加一条活动", "推荐一家店或地点", "入驻Remix"], redButtonIndex: -1) { (buttonIndex) -> Void in
+            if buttonIndex == 0 {
+                let webVC = RxWebViewController(url:NSURL(string: "http://jsform.com/f/v5pfam")!)
+                self.navigationController?.pushViewController(webVC, animated: true)
+            }
+            
+            if buttonIndex == 1 {
+                let webVC = RxWebViewController(url:NSURL(string: "http://jsform.com/f/j49bk8")!)
+                self.navigationController?.pushViewController(webVC, animated: true)
+            }
+            
+            if buttonIndex == 2 {
+                if MFMailComposeViewController.canSendMail() {
+                    let composer = MFMailComposeViewController()
+                    composer.mailComposeDelegate = self
+                    let subjectString = NSString(format: "Remix平台组织入驻申请")
+                    let bodyString = NSString(format: "简介:\n\n\n\n\n\n-----\n组织成立时间: \n组织名称:\n微信公众号ID:\n负责人联系方式:\n组织性质及分类:\n-----")
+                    composer.setMessageBody(bodyString as String, isHTML: false)
+                    composer.setSubject(subjectString as String)
+                    composer.setToRecipients(["fongtinyik@gmail.com", "remixapp@163.com"])
+                    self.presentViewController(composer, animated: true, completion: nil)
+                }
+                
+            }
+        }
+        
+        sheet.show()
+    }
     
 }

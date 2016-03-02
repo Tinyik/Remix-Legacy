@@ -142,6 +142,7 @@
 		18E684AF1C86EE4200C32C3D /* LCActionSheet.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18E684AC1C86EE4200C32C3D /* LCActionSheet.bundle */; };
 		18E684B01C86EE4200C32C3D /* LCActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E684AE1C86EE4200C32C3D /* LCActionSheet.m */; };
 		18E684B21C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E684B11C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift */; };
+		18E684B51C87243300C32C3D /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E684B41C87243300C32C3D /* UIScrollView+EmptyDataSet.m */; };
 		C65AC89D9691BD7F666EED10 /* Pods_Remix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B1D0C0C5F1570ADFFD72F7 /* Pods_Remix.framework */; };
 /* End PBXBuildFile section */
 
@@ -341,6 +342,8 @@
 		18E684AD1C86EE4200C32C3D /* LCActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCActionSheet.h; sourceTree = "<group>"; };
 		18E684AE1C86EE4200C32C3D /* LCActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCActionSheet.m; sourceTree = "<group>"; };
 		18E684B11C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMSwipeBetweenViewControllers.swift; sourceTree = "<group>"; };
+		18E684B31C87243300C32C3D /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
+		18E684B41C87243300C32C3D /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
 		29B1D0C0C5F1570ADFFD72F7 /* Pods_Remix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Remix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		935D89E2C8FE64DFD0F2D2DC /* Pods-Remix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Remix.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Remix/Pods-Remix.debug.xcconfig"; sourceTree = "<group>"; };
 		E7316228DE2D22A22A1955AE /* Pods-Remix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Remix.release.xcconfig"; path = "Pods/Target Support Files/Pods-Remix/Pods-Remix.release.xcconfig"; sourceTree = "<group>"; };
@@ -569,6 +572,7 @@
 				1857B52A1C855A4500D00A9E /* ActivityInterface */,
 				18E239331C805E2D00363655 /* FloatingActivityView.xib */,
 				18E239311C805E1600363655 /* FloatingActivityView.swift */,
+				18E684B11C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift */,
 				1898CA4A1C6900B8009D3261 /* RegLoginViewController.swift */,
 				180199551C79E25F00A6C7E4 /* TermsAndConditionsViewController.swift */,
 				18C79D7B1C8215E0004AAA44 /* OrdersVC */,
@@ -703,6 +707,8 @@
 			children = (
 				18B317C51C6B243900336A92 /* DeviceInformation.swift */,
 				18E684A51C86ACFA00C32C3D /* ILTranslucentView.swift */,
+				18E684B31C87243300C32C3D /* UIScrollView+EmptyDataSet.h */,
+				18E684B41C87243300C32C3D /* UIScrollView+EmptyDataSet.m */,
 				18E684AB1C86EE4200C32C3D /* LCActionSheet */,
 				1857B5311C856B9E00D00A9E /* AvatarCapture */,
 				18C79D811C83275F004AAA44 /* SwipeBetweenVC */,
@@ -823,7 +829,6 @@
 			children = (
 				18C79D7E1C83221A004AAA44 /* RKSwipeBetweenViewControllers.h */,
 				18C79D7F1C83221A004AAA44 /* RKSwipeBetweenViewControllers.m */,
-				18E684B11C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift */,
 			);
 			name = SwipeBetweenVC;
 			sourceTree = "<group>";
@@ -1195,6 +1200,7 @@
 				1857B5361C856BB400D00A9E /* ZCSAvatarCaptureController.m in Sources */,
 				18E684B21C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift in Sources */,
 				1898CA931C69B599009D3261 /* TransitionTreasury.swift in Sources */,
+				18E684B51C87243300C32C3D /* UIScrollView+EmptyDataSet.m in Sources */,
 				187AE32E1C65ECBB00B255FF /* SettingsViewController.swift in Sources */,
 				1899E9BC1C663E3B00ADC2AC /* MGSwipeButton.m in Sources */,
 				1898CA811C69B599009D3261 /* UINavigationController+TRPushPop.swift in Sources */,
