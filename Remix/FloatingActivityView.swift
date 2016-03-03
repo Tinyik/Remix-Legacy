@@ -30,7 +30,6 @@ class FloatingActivityView: UIView, BmobPayDelegate {
     var ongoingTransactionId: String!
     var ongoingTransactionPrice: Double!
     var ongoingTransactionRemarks = "No comments."
-    var currentUser = BmobUser.getCurrentObject()
     
     override func awakeFromNib() {
         imageView.contentMode = .ScaleAspectFill
@@ -113,7 +112,7 @@ class FloatingActivityView: UIView, BmobPayDelegate {
     func fetchOrdersInformation() {
         registeredActivitiesIds = []
         let query = BmobQuery(className: "Orders")
-        query.whereKey("CustomerObjectId", equalTo: currentUser.objectId)
+        query.whereKey("CustomerObjectId", equalTo: CURRENT_USER.objectId)
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
             if error == nil {
                 for order in orders {
@@ -125,20 +124,20 @@ class FloatingActivityView: UIView, BmobPayDelegate {
     }
     
     func checkPersonalInfoIntegrity() -> Bool {
-        currentUser = BmobUser.getCurrentUser()
-        if currentUser.objectForKey("LegalName") == nil || currentUser.objectForKey("LegalName") as! String == "" {
+    
+        if CURRENT_USER.objectForKey("LegalName") == nil || CURRENT_USER.objectForKey("LegalName") as! String == "" {
             return false
         }
         
-        if currentUser.objectForKey("School") == nil || currentUser.objectForKey("School") as! String == ""{
+        if CURRENT_USER.objectForKey("School") == nil || CURRENT_USER.objectForKey("School") as! String == ""{
             return false
         }
         
-        if currentUser.objectForKey("username") == nil || currentUser.objectForKey("username") as! String == ""{
+        if CURRENT_USER.objectForKey("username") == nil || CURRENT_USER.objectForKey("username") as! String == ""{
             return false
         }
         
-        if currentUser.objectForKey("email") == nil || currentUser.objectForKey("email") as! String == ""{
+        if CURRENT_USER.objectForKey("email") == nil || CURRENT_USER.objectForKey("email") as! String == ""{
             return false
         }
         
@@ -162,7 +161,7 @@ class FloatingActivityView: UIView, BmobPayDelegate {
                     bPay.delegate = self
                     bPay.price = NSNumber(double: price)
                     bPay.productName = orgName! + "活动报名费"
-                    bPay.body = (self.activity.objectForKey("ItemName") as! String) + "用户姓名" + (self.currentUser.objectForKey("LegalName") as! String)
+                    bPay.body = (self.activity.objectForKey("ItemName") as! String) + "用户姓名" + (CURRENT_USER.objectForKey("LegalName") as! String)
                     bPay.appScheme = "BmobPay"
                     bPay.payInBackgroundWithBlock({ (isSuccessful, error) -> Void in
                         if isSuccessful == false {
@@ -213,7 +212,7 @@ class FloatingActivityView: UIView, BmobPayDelegate {
         let newOrder = BmobObject(className: "Orders")
         newOrder.setObject(ongoingTransactionId, forKey: "ParentActivityObjectId")
         newOrder.setObject(ongoingTransactionPrice, forKey: "Amount")
-        newOrder.setObject(currentUser.objectId, forKey: "CustomerObjectId")
+        newOrder.setObject(CURRENT_USER.objectId, forKey: "CustomerObjectId")
         newOrder.setObject(ongoingTransactionRemarks, forKey: "Remarks")
         newOrder.setObject(true, forKey: "isVisibleToUsers")
         newOrder.saveInBackgroundWithResultBlock { (isSuccessful, error) -> Void in

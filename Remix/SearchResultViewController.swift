@@ -22,7 +22,6 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
     var activities: [BmobObject] = []
     var coverImgURLs: [NSURL] = []
     var likedActivitiesIds: [String] = []
-    var currentUser = BmobUser.getCurrentUser()
     
     
     var ongoingTransactionId: String!
@@ -100,7 +99,7 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
             self.tableView.reloadEmptyDataSet()
         }
         
-        if let _likedlist = currentUser.objectForKey("LikedActivities") as? [String] {
+        if let _likedlist = CURRENT_USER.objectForKey("LikedActivities") as? [String] {
             likedActivitiesIds = _likedlist
         }
 

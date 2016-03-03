@@ -9,13 +9,18 @@
 import UIKit
 import SDWebImage
 
+protocol RMActivityViewControllerDelegate{
+    func reloadRowForActivity(activity: BmobObject)
+}
+
 class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate, BmobPayDelegate, ModalTransitionDelegate {
    
     var tr_presentTransition: TRViewControllerTransitionDelegate?
-    
+    var delegate: RMActivityViewControllerDelegate!
     var activity: BmobObject!
     var isLiked: Bool = false {
         didSet {
+            print("isLike equils " + String(isLiked))
             if isLiked == true {
                 toolBar.likeButton.setBackgroundImage(UIImage(named: "Like"), forState: .Normal)
                 
@@ -25,10 +30,10 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
         }
     }
     var registeredActivitiesIds: [String] = []
+    var likedActivitiesIds: [String] = []
     var ongoingTransactionId: String!
     var ongoingTransactionPrice: Double!
     var ongoingTransactionRemarks = "No comments."
-    var currentUser = BmobUser.getCurrentObject()
     var toolBar = UIView.loadFromNibNamed("RMToolBarView") as! RMToolBarView
     
     override func viewDidLoad() {
@@ -42,7 +47,15 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
         self.view.addSubview(containerView)
         toolBar.likeButton.contentHorizontalAlignment = .Fill
         toolBar.likeButton.contentVerticalAlignment = .Fill
+        toolBar.likesNumberLabel.text = String(activity.objectForKey("LikesNumber") as! Int) + "人已喜欢"
         toolBar.registerButton.addTarget(self, action: "prepareForActivityRegistration", forControlEvents: .TouchUpInside)
+        if let price = activity.objectForKey("Price") as? Double {
+            if price != 0 {
+                toolBar.registerButton.setTitle("报名： ￥" + String(price), forState: .Normal)
+            }else{
+                toolBar.registerButton.setTitle("报名： 免费", forState: .Normal)
+            }
+        }
         toolBar.likeButton.addTarget(self, action: "likePresentingActivity", forControlEvents: .TouchUpInside)
         toolBar.showComments.addTarget(self, action: "showCommentsVC", forControlEvents: .TouchUpInside)
         toolBar.frame = containerView.bounds
@@ -52,9 +65,10 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
         fetchOrdersInformation()
     }
     
+    
     func fetchOrdersInformation() {
         let query = BmobQuery(className: "Orders")
-        query.whereKey("CustomerObjectId", equalTo: currentUser.objectId)
+        query.whereKey("CustomerObjectId", equalTo: CURRENT_USER.objectId)
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
             if error == nil {
                 for order in orders {
@@ -136,13 +150,13 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
                     }
                     
                 }else{
-                    let alert = UIAlertController(title: "提示", message: "这个活动太火爆啦！参与活动人数已满(Ｔ▽Ｔ)再看看别的活动吧~下次记得早早下手哦。", preferredStyle: .Alert)
+                    let alert = UIAlertController(title: "Remix提示", message: "Sorry.._(:qゝ∠)_此活动暂时不支持在Remix报名或报名人数已达上限。", preferredStyle: .Alert)
                     let action = UIAlertAction(title: "好吧", style: .Default, handler: nil)
                     alert.addAction(action)
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
             }else{
-                let alert = UIAlertController(title: "提示", message: "这个活动太火爆啦！参与活动人数已满(Ｔ▽Ｔ)再看看别的活动吧~下次记得早早下手哦。", preferredStyle: .Alert)
+                let alert = UIAlertController(title: "Remix提示", message: "Sorry.._(:qゝ∠)_此活动暂时不支持在Remix报名或报名人数已达上限。", preferredStyle: .Alert)
                 let action = UIAlertAction(title: "好吧", style: .Default, handler: nil)
                 alert.addAction(action)
                 self.presentViewController(alert, animated: true, completion: nil)
@@ -153,20 +167,20 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
     }
     
     func checkPersonalInfoIntegrity() -> Bool {
-        currentUser = BmobUser.getCurrentUser()
-        if currentUser.objectForKey("LegalName") == nil || currentUser.objectForKey("LegalName") as! String == "" {
+
+        if CURRENT_USER.objectForKey("LegalName") == nil || CURRENT_USER.objectForKey("LegalName") as! String == "" {
             return false
         }
         
-        if currentUser.objectForKey("School") == nil || currentUser.objectForKey("School") as! String == ""{
+        if CURRENT_USER.objectForKey("School") == nil || CURRENT_USER.objectForKey("School") as! String == ""{
             return false
         }
         
-        if currentUser.objectForKey("username") == nil || currentUser.objectForKey("username") as! String == ""{
+        if CURRENT_USER.objectForKey("username") == nil || CURRENT_USER.objectForKey("username") as! String == ""{
             return false
         }
         
-        if currentUser.objectForKey("email") == nil || currentUser.objectForKey("email") as! String == ""{
+        if CURRENT_USER.objectForKey("email") == nil || CURRENT_USER.objectForKey("email") as! String == ""{
             return false
         }
         
@@ -181,6 +195,55 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
         self.navigationController?.presentViewController(navigationController, animated: true, completion: nil)
         
     }
+    
+    func fetchLikedActivitiesList() {
+        if let _likedlist = CURRENT_USER.objectForKey("LikedActivities") as? [String] {
+            likedActivitiesIds = _likedlist
+        }
+    }
+    func likePresentingActivity() {
+        isLiked = !isLiked
+        if isLiked == true {
+            print("TRUE")
+            fetchLikedActivitiesList()
+            if likedActivitiesIds.contains(activity.objectId) == false {
+                likedActivitiesIds.append(activity.objectId)
+                toolBar.likesNumberLabel.text = String(Int(toolBar.likesNumberLabel.text!.stringByReplacingOccurrencesOfString("人已喜欢", withString: ""))!+1) + "人已喜欢"
+                let query = BmobQuery(className: "Activity")
+                query.getObjectInBackgroundWithId(activity.objectId, block: { (activity, error) -> Void in
+                    activity.incrementKey("LikesNumber", byAmount: 1)
+                    activity.updateInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
+                         self.delegate.reloadRowForActivity(self.activity)
+                    })
+                })
+                
+            }
+        }else{
+            fetchLikedActivitiesList()
+            if likedActivitiesIds.contains(activity.objectId) == true {
+                likedActivitiesIds.removeAtIndex(likedActivitiesIds.indexOf(activity.objectId)!)
+                toolBar.likesNumberLabel.text = String(Int(toolBar.likesNumberLabel.text!.stringByReplacingOccurrencesOfString("人已喜欢", withString: ""))!-1) + "人已喜欢"
+                let query = BmobQuery(className: "Activity")
+                query.getObjectInBackgroundWithId(activity.objectId, block: { (activity, error) -> Void in
+                    activity.decrementKey("LikesNumber", byAmount: 1)
+                    activity.updateInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
+                        self.delegate.reloadRowForActivity(self.activity)
+                    })
+                })
+                
+                
+            }
+        }
+        print("LIKED")
+        print(self.likedActivitiesIds)
+        CURRENT_USER.setObject(self.likedActivitiesIds, forKey: "LikedActivities")
+        CURRENT_USER.updateInBackgroundWithResultBlock { (isSuccessful, error) -> Void in
+            self.delegate.reloadRowForActivity(self.activity)
+        }
+        
+        
+    }
+
     
     func registerForActivity() {
         
@@ -199,7 +262,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
                     bPay.delegate = self
                     bPay.price = NSNumber(double: price)
                     bPay.productName = orgName! + "活动报名费"
-                    bPay.body = (self.activity.objectForKey("ItemName") as! String) + "用户姓名" + (self.currentUser.objectForKey("LegalName") as! String)
+                    bPay.body = (self.activity.objectForKey("ItemName") as! String) + "用户姓名" + (CURRENT_USER.objectForKey("LegalName") as! String)
                     bPay.appScheme = "BmobPay"
                     bPay.payInBackgroundWithBlock({ (isSuccessful, error) -> Void in
                         if isSuccessful == false {
@@ -260,16 +323,12 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
 
     }
     
-    func likePresentingActivity() {
-        isLiked = !isLiked
-        
-    }
     
     func paySuccess() {
         let newOrder = BmobObject(className: "Orders")
         newOrder.setObject(ongoingTransactionId, forKey: "ParentActivityObjectId")
         newOrder.setObject(ongoingTransactionPrice, forKey: "Amount")
-        newOrder.setObject(currentUser.objectId, forKey: "CustomerObjectId")
+        newOrder.setObject(CURRENT_USER.objectId, forKey: "CustomerObjectId")
         newOrder.setObject(ongoingTransactionRemarks, forKey: "Remarks")
         newOrder.setObject(true, forKey: "isVisibleToUsers")
         newOrder.saveInBackgroundWithResultBlock { (isSuccessful, error) -> Void in

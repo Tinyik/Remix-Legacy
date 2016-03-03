@@ -22,7 +22,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var avatarController: ZCSAvatarCaptureController!
     var tr_presentTransition: TRViewControllerTransitionDelegate?
-    var currentUser = BmobUser.getCurrentUser()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.translucent = false
@@ -42,7 +42,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         avatarView.clipsToBounds = true
         blurredAvatarView.image = UIImage(named: "DefaultAvatar")
         
-        if let avatar = BmobUser.getCurrentUser().objectForKey("Avatar") as? BmobFile {
+        if let avatar = CURRENT_USER.objectForKey("Avatar") as? BmobFile {
             let avatarURL = NSURL(string:avatar.url)
             let manager = SDWebImageManager()
             manager.downloadImageWithURL(avatarURL, options: SDWebImageOptions.RetryFailed, progress: nil) { (avatar, error, cacheType, finished, url) -> Void in
@@ -67,8 +67,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     override func viewWillAppear(animated: Bool) {
-        currentUser = BmobUser.getCurrentUser()
-        userNameLabel.text = currentUser.objectForKey("username") as? String
+ 
+        userNameLabel.text = CURRENT_USER.objectForKey("username") as? String
     }
     
     func imageSelected(image: UIImage!) {
@@ -77,8 +77,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         let newAvatar = BmobFile(fileName: "Avatar.jpg", withFileData: avatarData!)
         newAvatar.saveInBackground { (isSuccessful, error) -> Void in
             if isSuccessful {
-                self.currentUser.setObject(newAvatar, forKey: "Avatar")
-                self.currentUser.updateInBackground()
+                CURRENT_USER.setObject(newAvatar, forKey: "Avatar")
+                CURRENT_USER.updateInBackground()
             }
         }
         

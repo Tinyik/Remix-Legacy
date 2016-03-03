@@ -127,6 +127,7 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
             BmobUser.loginInbackgroundWithAccount("appstoredemo", andPassword: "demo", block: { (user, error) -> Void in
                 if error == nil {
                     self.view.removeKeyboardControl()
+                    CURRENT_USER = BmobUser.getCurrentUser()
                     let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
                     let vc1 = storyBoard.instantiateViewControllerWithIdentifier("MainVC")
                     let vc2 = storyBoard.instantiateViewControllerWithIdentifier("CategoryVC")

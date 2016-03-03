@@ -36,7 +36,7 @@ class RMFirstFilteredViewController: CTFilteredViewController {
         monthNameStrings = []
         activities = []
         
-        if let _likedlist = currentUser.objectForKey("LikedActivities") as? [String] {
+        if let _likedlist = CURRENT_USER.objectForKey("LikedActivities") as? [String] {
             likedActivitiesIds = _likedlist
         }
         
@@ -78,7 +78,7 @@ class RMFirstFilteredViewController: CTFilteredViewController {
             }
         }
         
-        if let _likedlist = currentUser.objectForKey("LikedActivities") as? [String] {
+        if let _likedlist = CURRENT_USER.objectForKey("LikedActivities") as? [String] {
             likedActivitiesIds = _likedlist
         }
 

@@ -20,7 +20,6 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
     var monthNameStrings: [String] = []
     var dateLabel: UILabel!
     var likedActivitiesIds: [String] = []
-    var currentUser = BmobUser.getCurrentUser()
     var orgName: String = "BookyGreen"
     var headerImage: UIImage!
     var headerImageLoaded = false
@@ -114,7 +113,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
             }
         }
         
-        if let _likedlist = currentUser.objectForKey("LikedActivities") as? [String] {
+        if let _likedlist = CURRENT_USER.objectForKey("LikedActivities") as? [String] {
             likedActivitiesIds = _likedlist
         }
         

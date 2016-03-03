@@ -16,11 +16,13 @@ let DEVICE_SCREEN_WIDTH = UIScreen.mainScreen().bounds.width
 let DEVICE_SCREEN_HEIGHT = UIScreen.mainScreen().bounds.height
 let COMMENTS_TABLE_VIEW_VISIBLE_HEIGHT: CGFloat = 450
 var APPLICATION_UI_REMOTE_CONFIG: BmobObject!
+var CURRENT_USER: BmobUser!
 
 var naviController: RMSwipeBetweenViewControllers!
 var isHomepageFirstLaunching: Bool!
 var hasPromptedToEnableNotif: Bool!
-class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelegate, UISearchBarDelegate, PKPaymentAuthorizationViewControllerDelegate, BmobPayDelegate {
+
+class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelegate, UISearchBarDelegate, PKPaymentAuthorizationViewControllerDelegate, BmobPayDelegate, RMActivityViewControllerDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var headerScrollView: UIScrollView!
@@ -47,10 +49,11 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     var adTargetURLs: [NSURL] = []
     var bannerAds: [BmobObject]!
     var randomAdIndex = Int()
-    var currentUser = BmobUser.getCurrentUser()
     var launchedTimes: Int!
     var pageControl = UIPageControl(frame: CGRectMake(80, 240, 200, 50))
-  
+    
+    var indexPathForSelectedActivity: NSIndexPath!
+    
     func updateLaunchedTimes() {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         hasPromptedToEnableNotif = userDefaults.boolForKey("hasPromptedToEnableNotif")
@@ -101,6 +104,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         self.tableView.separatorColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.4)
         self.navigationItem.hidesBackButton = true
     }
+    
     
     func loadRemoteUIConfigurations() {
         let query = BmobQuery(className: "UIRemoteConfig")
@@ -162,7 +166,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     func fetchOrdersInformation() {
         registeredActivitiesIds = []
         let query = BmobQuery(className: "Orders")
-        query.whereKey("CustomerObjectId", equalTo: currentUser.objectId)
+        query.whereKey("CustomerObjectId", equalTo: CURRENT_USER.objectId)
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
             if error == nil {
                 for order in orders {
@@ -331,13 +335,13 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
               
             }
         }
-        
-        if let _likedlist = currentUser.objectForKey("LikedActivities") as? [String] {
+                fetchLikedActivitiesList()
+    }
+    
+    func fetchLikedActivitiesList() {
+        if let _likedlist = CURRENT_USER.objectForKey("LikedActivities") as? [String] {
             likedActivitiesIds = _likedlist
         }
-        
-       
-        
     }
     
     func refresh() {
@@ -347,6 +351,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         fetchCloudAdvertisement()
 
     }
+    
     
     
     func isMonthAdded(monthName: String) -> Bool {
@@ -396,6 +401,55 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             
         }
         
+    }
+    
+//    func reloadIndicatorForActivityLikeStatus(isLiked: Bool) {
+//        if isLiked {
+//            if let cell = self.tableView.cellForRowAtIndexPath(indexPathForSelectedActivity) as? RMTableViewCell {
+//                if cell.isLiked != isLiked {
+//                    cell.likesNumberLabel.text = String(Int(cell.likesNumberLabel.text!)! + 1)
+//                    cell.likeStatusIndicatorView.image = UIImage(named: "Like")
+//                    cell.isLiked = true
+//                }
+//            }
+//            if let cell = self.tableView.cellForRowAtIndexPath(indexPathForSelectedActivity) as? RMFullCoverCell {
+//                if cell.isLiked != isLiked {
+//                    cell.likesNumberLabel.text = String(Int(cell.likesNumberLabel.text!)! + 1)
+//                    cell.likeStatusIndicatorView.image = UIImage(named: "Like")
+//                    cell.isLiked = true
+//                }
+//            }
+//
+//        }else{
+//            if let cell = self.tableView.cellForRowAtIndexPath(indexPathForSelectedActivity) as? RMTableViewCell {
+//                if cell.isLiked != isLiked {
+//                    cell.likesNumberLabel.text = String(Int(cell.likesNumberLabel.text!)! - 1)
+//                    cell.likeStatusIndicatorView.image = UIImage(named: "Unlike")
+//                    cell.isLiked = false
+//                }
+//    
+//            }
+//            if let cell = self.tableView.cellForRowAtIndexPath(indexPathForSelectedActivity) as? RMFullCoverCell {
+//                if cell.isLiked != isLiked {
+//                    cell.likesNumberLabel.text = String(Int(cell.likesNumberLabel.text!)! - 1)
+//                    cell.likeStatusIndicatorView.image = UIImage(named: "Unlike")
+//                    cell.isLiked = false
+//                    
+//                }
+//            }
+//        }
+        
+//    }
+    
+    func reloadRowForActivity(activity: BmobObject) {
+        fetchLikedActivitiesList()
+        let query = BmobQuery(className: "Activity")
+        query.getObjectInBackgroundWithId(activity.objectId) { (activity, error) -> Void in
+            if error == nil {
+                self.activities[self.indexPathForSelectedActivity.section][self.indexPathForSelectedActivity.row] = activity
+                self.tableView.reloadRowsAtIndexPaths([self.indexPathForSelectedActivity], withRowAnimation: .Automatic)
+            }
+        }
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -564,9 +618,14 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                         }
                     }
                 })
+                print("sdfsdf")
+                print(likedActivitiesIds)
+                print(_objId)
                 if likedActivitiesIds.contains(_objId) {
+                    print("CONTIAN")
                     cell.isLiked = true
                 }else{
+                    print("NOTCONTAIN")
                     cell.isLiked = false
                 }
                 
@@ -610,15 +669,20 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 }
             })
             if likedActivitiesIds.contains(_objId) {
+                 print(CURRENT_USER.objectForKey("LikedActivities") as! [String])
                 cell.isLiked = true
             }else{
+                 print(CURRENT_USER.objectForKey("LikedActivities") as! [String])
                 cell.isLiked = false
             }
 
         
-            return cell }
+            return cell
+        }
         
     }
+    
+    
     
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -673,7 +737,8 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             if let cell = tableView.cellForRowAtIndexPath(indexPath) as? RMTableViewCell {
                 activityView.isLiked = cell.isLiked
             }
-            
+            indexPathForSelectedActivity = indexPath
+            activityView.delegate = self
             self.navigationController?.pushViewController(activityView, animated: true)
    
             

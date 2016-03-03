@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
            
             
         }else{
-        
+        CURRENT_USER = BmobUser.getCurrentUser()
         let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let vc1 = storyBoard.instantiateViewControllerWithIdentifier("MainVC")
         let vc2 = storyBoard.instantiateViewControllerWithIdentifier("CategoryVC")

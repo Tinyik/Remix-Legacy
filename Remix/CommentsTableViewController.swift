@@ -11,7 +11,6 @@ import UIKit
 class CommentsTableViewController: UITableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
 
     weak var modalDelegate: ModalViewControllerDelegate?
-    let currentUser = BmobUser.getCurrentUser()
     
     var presentingActivity: BmobObject!
     var parentActivityVC: RMActivityViewController!

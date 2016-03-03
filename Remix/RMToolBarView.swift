@@ -13,6 +13,6 @@ class RMToolBarView: ILTranslucentView {
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var showComments: UIButton!
     @IBOutlet weak var likeButton: UIButton!
-    
+    @IBOutlet weak var likesNumberLabel: UILabel!
   
 }

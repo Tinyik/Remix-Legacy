@@ -27,8 +27,14 @@
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="25人已喜欢" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="t7e-28-JvM">
+                    <rect key="frame" x="8" y="16" width="89" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.85043728351593018" green="0.21816034615039825" blue="0.15920260548591614" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yX5-va-q5F">
-                    <rect key="frame" x="84" y="14" width="28" height="24"/>
+                    <rect key="frame" x="105" y="15" width="28" height="24"/>
                     <state key="normal" backgroundImage="Like">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
@@ -53,6 +59,7 @@
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="likeButton" destination="yX5-va-q5F" id="UJX-LD-nXb"/>
+                <outlet property="likesNumberLabel" destination="t7e-28-JvM" id="TAf-Ga-avd"/>
                 <outlet property="registerButton" destination="1KH-9K-NCB" id="8Rk-vb-MwG"/>
                 <outlet property="showComments" destination="Aty-So-iYg" id="oBl-Dq-zr7"/>
             </connections>

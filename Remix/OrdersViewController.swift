@@ -18,7 +18,6 @@ class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNE
     var selectedOrder: BmobObject!
     var orders: [BmobObject]!
     var contactNumber: String!
-    let currentUser = BmobUser.getCurrentUser()
     
 
     override func viewDidLoad() {
@@ -45,7 +44,7 @@ class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNE
         
         let query = BmobQuery(className: "Orders")
         query.whereKey("isVisibleToUsers", equalTo: true)
-        query.whereKey("CustomerObjectId", equalTo: currentUser.objectId)
+        query.whereKey("CustomerObjectId", equalTo: CURRENT_USER.objectId)
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
         
             if error == nil {

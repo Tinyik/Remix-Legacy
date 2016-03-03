@@ -11,7 +11,6 @@ import UIKit
 class CommentInputViewController: UIViewController, UITextViewDelegate {
 
     var presentingActivity: BmobObject!
-    var currentUser = BmobUser.getCurrentUser()
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var inputTextView: UITextView!
@@ -26,7 +25,7 @@ class CommentInputViewController: UIViewController, UITextViewDelegate {
     @IBAction func addComment() {
         let newComment = BmobObject(className: "Comments")
         newComment.setObject(presentingActivity.objectId, forKey: "ParentActivityObjectId")
-        newComment.setObject(currentUser.objectId, forKey: "UserObjectId")
+        newComment.setObject(CURRENT_USER.objectId, forKey: "UserObjectId")
         newComment.setObject(inputTextView.text, forKey: "Content")
         newComment.setObject(true, forKey: "isVisibleToUsers")
         newComment.saveInBackgroundWithResultBlock { (isSuccessful, error) -> Void in

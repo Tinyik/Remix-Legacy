@@ -21,8 +21,6 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
     var dateLabel: UILabel!
     var likedActivitiesIds: [String] = []
 
-    var currentUser = BmobUser.getCurrentUser()
-
     var filterName: String = "Technology"
     var headerImage: UIImage!
     
@@ -106,7 +104,7 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
             }
         }
         
-        if let _likedlist = currentUser.objectForKey("LikedActivities") as? [String] {
+        if let _likedlist = CURRENT_USER.objectForKey("LikedActivities") as? [String] {
             likedActivitiesIds = _likedlist
         }
         

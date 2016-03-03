@@ -9,7 +9,7 @@
 import UIKit
 
 class PersonalInfoViewController: UITableViewController, UIGestureRecognizerDelegate {
-    var currentUser = BmobUser.getCurrentUser()
+
     
     var delegate: SettingInputViewDelegate!
     
@@ -27,7 +27,6 @@ class PersonalInfoViewController: UITableViewController, UIGestureRecognizerDele
     
     override func viewWillAppear(animated: Bool) {
         print("WILLAPPEAR")
-        currentUser = BmobUser.getCurrentUser()
         self.tableView.reloadData()
     }
     
@@ -65,7 +64,7 @@ class PersonalInfoViewController: UITableViewController, UIGestureRecognizerDele
         cell.placeHolder = "姓名"
         cell.explanationText = "姓名将被活动主办方用于进行签到与联络。"
 
-        if let legalName = currentUser.objectForKey("LegalName") as? String {
+        if let legalName = CURRENT_USER.objectForKey("LegalName") as? String {
             cell.detailLabel.text = legalName
             cell.currentValue = legalName
             if legalName == "" {
@@ -78,7 +77,7 @@ class PersonalInfoViewController: UITableViewController, UIGestureRecognizerDele
                 cell.editingPropertyKey = "School"
                 cell.placeHolder = "学校或单位"
                 cell.explanationText = "学校信息将被活动主办方用于统计参与者数据和进行资源配置。"
-        if let school = currentUser.objectForKey("School") as? String {
+        if let school = CURRENT_USER.objectForKey("School") as? String {
             cell.detailLabel.text = school
             cell.currentValue = school
             if school == "" {
@@ -92,7 +91,7 @@ class PersonalInfoViewController: UITableViewController, UIGestureRecognizerDele
         cell.placeHolder = "Remix昵称"
         cell.explanationText = "昵称将是Remix中他人识别你的标志。"
 
-        if let userName = currentUser.objectForKey("username") as? String {
+        if let userName = CURRENT_USER.objectForKey("username") as? String {
             cell.detailLabel.text = userName
             cell.currentValue = userName
             if userName == "" {
@@ -106,7 +105,7 @@ class PersonalInfoViewController: UITableViewController, UIGestureRecognizerDele
         cell.placeHolder = "常用邮箱"
         cell.explanationText = "邮箱地址信息将被活动主办方用于联络与信息更新。"
 
-        if let email = currentUser.objectForKey("email") as? String {
+        if let email = CURRENT_USER.objectForKey("email") as? String {
             cell.detailLabel.text = email
             cell.currentValue = email
             if email == "" {
@@ -125,7 +124,7 @@ class PersonalInfoViewController: UITableViewController, UIGestureRecognizerDele
             cell.editingPropertyKey = "Weibo"
             cell.placeHolder = "微博用户名"
             cell.explanationText = ""
-            if let weibo = currentUser.objectForKey("Weibo") as? String {
+            if let weibo = CURRENT_USER.objectForKey("Weibo") as? String {
                 cell.detailLabel.text = weibo
                 cell.currentValue = weibo
                 if weibo == "" {
@@ -138,7 +137,7 @@ class PersonalInfoViewController: UITableViewController, UIGestureRecognizerDele
             cell.editingPropertyKey = "Wechat"
             cell.placeHolder = "微信号"
             cell.explanationText = "微信号将被活动主办方用于联络。"
-            if let wechat = currentUser.objectForKey("Wechat") as? String {
+            if let wechat = CURRENT_USER.objectForKey("Wechat") as? String {
                 cell.detailLabel.text = wechat
                 cell.currentValue = wechat
                 if wechat == "" {
