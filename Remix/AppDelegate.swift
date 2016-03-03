@@ -108,11 +108,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         if url.host == "safepay" {
-            print("skldjlk")
             AlipaySDK.defaultService().processOrderWithPaymentResult(url, standbyCallback: { (resultDic) -> Void in
               
             })
             
+        }
+        
+        if url.scheme == "remix" {
+            if BmobUser.getCurrentUser() != nil {
+                let query = BmobQuery(className: "Activity")
+                var activity = BmobObject()
+                query.getObjectInBackgroundWithId(url.host!, block: { (_activity, error) -> Void in
+                    if error == nil {
+                        activity = _activity as! BmobObject
+                        let activityView = RMActivityViewController(url: NSURL(string: activity.objectForKey("URL") as! String))
+                        activityView.activity = activity
+                        activityView.toolBar.likeButton.hidden = true
+                        (self.window?.rootViewController as! RMSwipeBetweenViewControllers).pushViewController(activityView, animated: true)
+                        
+                    }else{
+                        let alert = UIAlertController(title: "Remix提示", message: "_(´ཀ`」 ∠)_ 这里没有找到你想要的活动😢，看看Remix别的活动吧~", preferredStyle: .Alert)
+                        let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+                        alert.addAction(action)
+                        self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+                    }
+                })
+
+            }else{
+                let alert = UIAlertController(title: "Remix提示", message: "这个活动这么精彩，赶紧登录Remix来报名吧~", preferredStyle: .Alert)
+                let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+                alert.addAction(action)
+                self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+            }
         }
         
         return true

@@ -126,8 +126,8 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
         if phoneNumberField.text == "AppStoreDEMO" {
             BmobUser.loginInbackgroundWithAccount("appstoredemo", andPassword: "demo", block: { (user, error) -> Void in
                 if error == nil {
+                    CURRENT_USER = user
                     self.view.removeKeyboardControl()
-                    CURRENT_USER = BmobUser.getCurrentUser()
                     let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
                     let vc1 = storyBoard.instantiateViewControllerWithIdentifier("MainVC")
                     let vc2 = storyBoard.instantiateViewControllerWithIdentifier("CategoryVC")
@@ -185,6 +185,7 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
         BmobUser.signOrLoginInbackgroundWithMobilePhoneNumber(phoneNumberField.text, andSMSCode: captchaField.text) { (_user, error) -> Void in
             if error == nil {
                 self.view.removeKeyboardControl()
+                CURRENT_USER = _user
                 let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
                 let vc1 = storyBoard.instantiateViewControllerWithIdentifier("MainVC")
                 let vc2 = storyBoard.instantiateViewControllerWithIdentifier("CategoryVC")

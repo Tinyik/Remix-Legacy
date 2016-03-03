@@ -166,4 +166,5 @@
 @property (nonatomic, strong)NSArray *buttonText;
 
 - (void)recommendActivityAndLocation;
+- (void)tapSegmentButtonAction:(UIButton *)button;
 @end

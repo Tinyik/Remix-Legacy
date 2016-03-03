@@ -97,18 +97,33 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         
           }
     
-
+    
     func setUpViews() {
+        
         adTableView.separatorStyle = .None
         searchBar.searchBarStyle = .Minimal
         self.tableView.separatorColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.4)
         self.navigationItem.hidesBackButton = true
     }
     
+    func setUpTapTrackingArea() {
+        for var i = 0; i < 3; ++i {
+            let button = UIButton(frame: CGRectMake(CGFloat(i)*DEVICE_SCREEN_WIDTH/3, 64, DEVICE_SCREEN_WIDTH/3, 30))
+            button.backgroundColor = .clearColor()
+            button.tag = i
+            button.addTarget(self, action: "handlePageIndicatorSelection:", forControlEvents: .TouchUpInside)
+            UIApplication.sharedApplication().keyWindow?.addSubview(button)
+        }
+    }
+    
+    func handlePageIndicatorSelection(button: UIButton) {
+        (self.navigationController as! RMSwipeBetweenViewControllers).tapSegmentButtonAction(button)
+    }
     
     func loadRemoteUIConfigurations() {
         let query = BmobQuery(className: "UIRemoteConfig")
         query.getObjectInBackgroundWithId("Cd3f1112") { (config, error) -> Void in
+            self.setUpTapTrackingArea() //FIXME: I don't know why but in viewDidLoad() keywindow? always return nil.
             if error == nil {
                 APPLICATION_UI_REMOTE_CONFIG = config
                 self.filterLabel_1.text = config.objectForKey("FilterLabel_1_Text") as? String
@@ -633,10 +648,8 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 }
             })
             if likedActivitiesIds.contains(_objId) {
-                 print(CURRENT_USER.objectForKey("LikedActivities") as! [String])
                 cell.isLiked = true
             }else{
-                 print(CURRENT_USER.objectForKey("LikedActivities") as! [String])
                 cell.isLiked = false
             }
 
@@ -715,7 +728,6 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let searchResultVC = storyBoard.instantiateViewControllerWithIdentifier("SearchVC")
         self.navigationController?.pushViewController(searchResultVC, animated: true)
-        
         return false
     }
     
