@@ -4,6 +4,7 @@
 
 #import <BmobSDK/Bmob.h>
 #import <BmobPay/BmobPay.h>
+#import <OneSignal/OneSignal.h>
 #import "UIScrollView+EmptyDataSet.h"
 #import "ZCSAvatarCaptureController.h"
 #import "RKSwipeBetweenViewControllers.h"
