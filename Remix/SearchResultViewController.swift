@@ -11,7 +11,7 @@ import SafariServices
 import SDWebImage
 import MessageUI
 
-class SearchResultViewController: UITableViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, MGSwipeTableCellDelegate, MFMailComposeViewControllerDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
+class SearchResultViewController: UITableViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, MGSwipeTableCellDelegate, MFMailComposeViewControllerDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, RMActivityViewControllerDelegate {
     
     var labelName = ""
     var delegate: ActivityFilterDelegate!
@@ -27,6 +27,8 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
     var ongoingTransactionId: String!
     var ongoingTransactionPrice: Double!
     var ongoingTransactionRemarks = "No comments."
+    
+    var indexPathForSelectedActivity: NSIndexPath!
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var trendingLabelsCollectionView: UICollectionView!
@@ -99,11 +101,15 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
             self.tableView.reloadEmptyDataSet()
         }
         
+       fetchLikedActivitiesList()
+
+        
+    }
+    
+    func fetchLikedActivitiesList() {
         if let _likedlist = CURRENT_USER.objectForKey("LikedActivities") as? [String] {
             likedActivitiesIds = _likedlist
         }
-
-        
     }
     // MARK: - Table view data source
     
@@ -226,7 +232,16 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
 
     }
     
- 
+    func reloadRowForActivity(activity: BmobObject) {
+        fetchLikedActivitiesList()
+        let query = BmobQuery(className: "Activity")
+        query.getObjectInBackgroundWithId(activity.objectId) { (activity, error) -> Void in
+            if error == nil {
+                self.activities[self.indexPathForSelectedActivity.row] = activity
+                self.tableView.reloadRowsAtIndexPaths([self.indexPathForSelectedActivity], withRowAnimation: .Automatic)
+            }
+        }
+    }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if activities.count > 0  {
@@ -304,13 +319,15 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
                 activity.updateInBackground()
             }
             let activityView = RMActivityViewController(url: NSURL(string: activities[indexPath.row].objectForKey("URL") as! String)!)
+            activityView.activity = activities[indexPath.row]
             if let cell = tableView.cellForRowAtIndexPath(indexPath) as? RMFullCoverCell {
                 activityView.isLiked = cell.isLiked
             }
             if let cell = tableView.cellForRowAtIndexPath(indexPath) as? RMTableViewCell {
                 activityView.isLiked = cell.isLiked
             }
-            activityView.activity = activities[indexPath.row]
+            indexPathForSelectedActivity = indexPath
+            activityView.delegate = self
             self.navigationController?.pushViewController(activityView, animated: true)
 
             

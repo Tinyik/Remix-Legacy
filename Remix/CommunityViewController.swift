@@ -36,10 +36,7 @@ class RMFirstFilteredViewController: CTFilteredViewController {
         monthNameStrings = []
         activities = []
         
-        if let _likedlist = CURRENT_USER.objectForKey("LikedActivities") as? [String] {
-            likedActivitiesIds = _likedlist
-        }
-        
+        fetchLikedActivitiesList()
         var query = BmobQuery(className: "Activity")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("isVisibleOnFilterList_1", equalTo: true)
@@ -78,10 +75,6 @@ class RMFirstFilteredViewController: CTFilteredViewController {
             }
         }
         
-        if let _likedlist = CURRENT_USER.objectForKey("LikedActivities") as? [String] {
-            likedActivitiesIds = _likedlist
-        }
-
-        
+            
     }
 }

@@ -30,17 +30,12 @@ class LikedViewController: CTFilteredViewController {
         monthNameStrings = []
         activities = []
         
-        if let _likedlist = CURRENT_USER.objectForKey("LikedActivities") as? [String] {
-            likedActivitiesIds = _likedlist
-        }
+    
         
         var query = BmobQuery(className: "Activity")
+    
+        fetchLikedActivitiesList()
         
-        
-        if let _likedlist = CURRENT_USER.objectForKey("LikedActivities") as? [String] {
-            likedActivitiesIds = _likedlist
-            
-        }
         print(likedActivitiesIds)
         for likedActivityId in likedActivitiesIds {
             query.getObjectInBackgroundWithId(likedActivityId, block: { (activity, error) -> Void in

@@ -11,7 +11,7 @@ import SafariServices
 import SDWebImage
 import MessageUI
 
-class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MGSwipeTableCellDelegate, OrganizationViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, MFMailComposeViewControllerDelegate {
+class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MGSwipeTableCellDelegate, OrganizationViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, MFMailComposeViewControllerDelegate, RMActivityViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -24,6 +24,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
     var headerImage: UIImage!
     var headerImageLoaded = false
     
+    var indexPathForSelectedActivity: NSIndexPath!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +41,13 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         
     }
     
-   
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.navigationBar.translucent = false
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.navigationController?.navigationBar.translucent = true
+    }
     
     func setUpParallaxHeaderView() {
         if headerImageLoaded == true {
@@ -113,13 +120,25 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
             }
         }
         
+        fetchLikedActivitiesList()
+    }
+    
+    func fetchLikedActivitiesList() {
         if let _likedlist = CURRENT_USER.objectForKey("LikedActivities") as? [String] {
             likedActivitiesIds = _likedlist
         }
-        
     }
-    
    
+    func reloadRowForActivity(activity: BmobObject) {
+        fetchLikedActivitiesList()
+        let query = BmobQuery(className: "Activity")
+        query.getObjectInBackgroundWithId(activity.objectId) { (activity, error) -> Void in
+            if error == nil {
+                self.activities[self.indexPathForSelectedActivity.section][self.indexPathForSelectedActivity.row] = activity
+                self.tableView.reloadRowsAtIndexPaths([self.indexPathForSelectedActivity], withRowAnimation: .Automatic)
+            }
+        }
+    }
     
     func isMonthAdded(monthName: String) -> Bool {
         
@@ -368,6 +387,8 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? RMTableViewCell {
             activityView.isLiked = cell.isLiked
         }
+        indexPathForSelectedActivity = indexPath
+        activityView.delegate = self
         self.navigationController?.pushViewController(activityView, animated: true)
 
     }

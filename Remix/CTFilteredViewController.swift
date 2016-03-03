@@ -11,7 +11,7 @@ import SafariServices
 import SDWebImage
 import MessageUI
 
-class CTFilteredViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ActivityFilterDelegate, UIGestureRecognizerDelegate, MGSwipeTableCellDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, MFMailComposeViewControllerDelegate {
+class CTFilteredViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ActivityFilterDelegate, UIGestureRecognizerDelegate, MGSwipeTableCellDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, MFMailComposeViewControllerDelegate, RMActivityViewControllerDelegate {
   
     @IBOutlet weak var tableView: UITableView!
     
@@ -24,6 +24,7 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
     var filterName: String = "Technology"
     var headerImage: UIImage!
     
+    var indexPathForSelectedActivity: NSIndexPath!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +49,14 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
     override func viewDidAppear(animated: Bool) {
         (tableView.tableHeaderView as! ParallaxHeaderView).refreshBlurViewForNewImage()
         super.viewDidAppear(animated)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.navigationBar.translucent = false
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.navigationController?.navigationBar.translucent = true
     }
     
     
@@ -104,12 +113,26 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
             }
         }
         
-        if let _likedlist = CURRENT_USER.objectForKey("LikedActivities") as? [String] {
-            likedActivitiesIds = _likedlist
-        }
+       fetchLikedActivitiesList()
         
     }
     
+    func fetchLikedActivitiesList() {
+        if let _likedlist = CURRENT_USER.objectForKey("LikedActivities") as? [String] {
+            likedActivitiesIds = _likedlist
+        }
+    }
+    
+    func reloadRowForActivity(activity: BmobObject) {
+        fetchLikedActivitiesList()
+        let query = BmobQuery(className: "Activity")
+        query.getObjectInBackgroundWithId(activity.objectId) { (activity, error) -> Void in
+            if error == nil {
+                self.activities[self.indexPathForSelectedActivity.section][self.indexPathForSelectedActivity.row] = activity
+                self.tableView.reloadRowsAtIndexPaths([self.indexPathForSelectedActivity], withRowAnimation: .Automatic)
+            }
+        }
+    }
   
     
     func isMonthAdded(monthName: String) -> Bool {
@@ -321,6 +344,8 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? RMTableViewCell {
             activityView.isLiked = cell.isLiked
         }
+        indexPathForSelectedActivity = indexPath
+        activityView.delegate = self
         self.navigationController?.pushViewController(activityView, animated: true)
         
     }

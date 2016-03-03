@@ -74,9 +74,7 @@ class RMSecondFilteredViewController: CTFilteredViewController {
             }
         }
         
-        if let _likedlist = CURRENT_USER.objectForKey("LikedActivities") as? [String] {
-            likedActivitiesIds = _likedlist
-        }
+        fetchLikedActivitiesList()
         
     }
 

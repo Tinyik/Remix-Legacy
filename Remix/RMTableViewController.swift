@@ -403,43 +403,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         
     }
     
-//    func reloadIndicatorForActivityLikeStatus(isLiked: Bool) {
-//        if isLiked {
-//            if let cell = self.tableView.cellForRowAtIndexPath(indexPathForSelectedActivity) as? RMTableViewCell {
-//                if cell.isLiked != isLiked {
-//                    cell.likesNumberLabel.text = String(Int(cell.likesNumberLabel.text!)! + 1)
-//                    cell.likeStatusIndicatorView.image = UIImage(named: "Like")
-//                    cell.isLiked = true
-//                }
-//            }
-//            if let cell = self.tableView.cellForRowAtIndexPath(indexPathForSelectedActivity) as? RMFullCoverCell {
-//                if cell.isLiked != isLiked {
-//                    cell.likesNumberLabel.text = String(Int(cell.likesNumberLabel.text!)! + 1)
-//                    cell.likeStatusIndicatorView.image = UIImage(named: "Like")
-//                    cell.isLiked = true
-//                }
-//            }
-//
-//        }else{
-//            if let cell = self.tableView.cellForRowAtIndexPath(indexPathForSelectedActivity) as? RMTableViewCell {
-//                if cell.isLiked != isLiked {
-//                    cell.likesNumberLabel.text = String(Int(cell.likesNumberLabel.text!)! - 1)
-//                    cell.likeStatusIndicatorView.image = UIImage(named: "Unlike")
-//                    cell.isLiked = false
-//                }
-//    
-//            }
-//            if let cell = self.tableView.cellForRowAtIndexPath(indexPathForSelectedActivity) as? RMFullCoverCell {
-//                if cell.isLiked != isLiked {
-//                    cell.likesNumberLabel.text = String(Int(cell.likesNumberLabel.text!)! - 1)
-//                    cell.likeStatusIndicatorView.image = UIImage(named: "Unlike")
-//                    cell.isLiked = false
-//                    
-//                }
-//            }
-//        }
-        
-//    }
+
     
     func reloadRowForActivity(activity: BmobObject) {
         fetchLikedActivitiesList()

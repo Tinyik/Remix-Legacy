@@ -108,6 +108,7 @@ class OrgIntroViewController: UIViewController, MWPhotoBrowserDelegate, MFMailCo
 
     func setUpView() {
        self.navigationController?.navigationBar.tintColor = .whiteColor()
+        self.scrollView.contentInset.top = -65
         self.title = "简介"
         scrollView.contentSize = CGSizeMake(375, 1400)
         scrollView.userInteractionEnabled = true
