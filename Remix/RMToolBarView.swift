@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RMToolBarView: ILTranslucentView {
+class RMToolBarView: UIView {
     
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var showComments: UIButton!

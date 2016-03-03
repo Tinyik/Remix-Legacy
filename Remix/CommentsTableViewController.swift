@@ -23,7 +23,7 @@ class CommentsTableViewController: UITableViewController, DZNEmptyDataSetSource,
         self.tableView.tableFooterView = UIView()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "添加评论", style: .Plain, target: self, action: "addNewComment")
         self.navigationController?.navigationBar.translucent = true
-        self.navigationController?.navigationBar.tintColor = .blackColor()
+        self.navigationController?.navigationBar.tintColor = FlatRed()
         
         // Bottom margin for halved view
         let tableViewBottomMargin: CGFloat = DEVICE_SCREEN_HEIGHT - COMMENTS_TABLE_VIEW_VISIBLE_HEIGHT
