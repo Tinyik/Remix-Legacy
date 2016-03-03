@@ -18,9 +18,10 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
     var tr_presentTransition: TRViewControllerTransitionDelegate?
     var delegate: RMActivityViewControllerDelegate!
     var activity: BmobObject!
+    var shouldApplyWhiteTint = true
     var isLiked: Bool = false {
         didSet {
-            print("isLike equils " + String(isLiked))
+   
             if isLiked == true {
                 toolBar.likeButton.setBackgroundImage(UIImage(named: "Like"), forState: .Normal)
                 
@@ -39,10 +40,14 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.translucent = true
+        if shouldApplyWhiteTint == true {
+        self.navigationController?.navigationBar.tintColor = .whiteColor()
+        }else{
+        self.navigationController?.navigationBar.tintColor = .blackColor()
+        }
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "sharePresentingActivity")
         self.progressViewColor = FlatRed()
-        self.navigationController?.navigationBar.tintColor = .whiteColor()
-       let containerView = UIView(frame: CGRectMake(0, DEVICE_SCREEN_HEIGHT - 50 , DEVICE_SCREEN_WIDTH, 50))
+        let containerView = UIView(frame: CGRectMake(0, DEVICE_SCREEN_HEIGHT - 50 , DEVICE_SCREEN_WIDTH, 50))
         containerView.backgroundColor = .clearColor()
         self.view.addSubview(containerView)
         toolBar.likeButton.contentHorizontalAlignment = .Fill

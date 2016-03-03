@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SafariServices
 import SDWebImage
 import MessageUI
 

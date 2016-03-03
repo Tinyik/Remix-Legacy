@@ -114,7 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         
-        if url.scheme == "remix" {
+        if url.scheme == "remix" && url.host != "" && url.path == "" && url.query == "" {
             if BmobUser.getCurrentUser() != nil {
                 let query = BmobQuery(className: "Activity")
                 var activity = BmobObject()
@@ -140,7 +140,68 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 alert.addAction(action)
                 self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
             }
+            
+        }else if url.scheme == "remix" && url.host != "" && url.path != "" && url.query != "" {
+            if BmobUser.getCurrentUser() != nil {
+                let newActivity = BmobObject(className: "UnderReview")
+                newActivity.setObject(url.host, forKey: "URL")
+                newActivity.setObject(url.path, forKey: "Org")
+                newActivity.setObject(url.query, forKey: "Price")
+                newActivity.setObject(BmobUser.getCurrentUser().objectId, forKey: "UserObjectId")
+                newActivity.setObject(BmobUser.getCurrentUser().mobilePhoneNumber, forKey: "PhoneNumber")
+                newActivity.saveInBackgroundWithResultBlock({ (isSuccessul, error) -> Void in
+                    if error == nil {
+                        let alert = UIAlertController(title: "Remix提示", message: "活动添加成功。审核通过后活动将在Remix中显示。", preferredStyle: .Alert)
+                        let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+                        alert.addAction(action)
+                        self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+
+                    }else{
+                        let alert = UIAlertController(title: "Remix提示", message: "活动添加失败，请检查你的网络后再试一次。", preferredStyle: .Alert)
+                        let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+                        alert.addAction(action)
+                        self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+                    }
+                })
+                
+            }else{
+                let alert = UIAlertController(title: "Remix提示", message: "请先登录Remix再提交活动。", preferredStyle: .Alert)
+                let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+                alert.addAction(action)
+                self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+            }
+        }else if url.scheme == "remix" && url.host?.containsString("www.") == true{
+            if BmobUser.getCurrentUser() != nil {
+                if url.path != "" {
+                    print("NOTNILLPATH")
+                    print(url.path)
+                    let targetURL = url.host! + url.path!
+                    let webView = RxWebViewController(url: NSURL(string: "http://" + targetURL))
+                    (self.window?.rootViewController as! RMSwipeBetweenViewControllers).pushViewController(webView, animated: true)
+                }else{
+                    print("NILPATH")
+                    print(url.host!)
+                    let webView = RxWebViewController(url: NSURL(string: "http://" + url.host!))
+                    (self.window?.rootViewController as! RMSwipeBetweenViewControllers).pushViewController(webView, animated: true)
+                }
+
+            }else{
+                let alert = UIAlertController(title: "Remix提示", message: "(:3[____] 登录Remix来查看网页的详细信息。", preferredStyle: .Alert)
+                let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+                alert.addAction(action)
+                self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+
+            }
+        
+        
+        }else{
+            let alert = UIAlertController(title: "Remix提示", message: "Remix URL Scheme加载失败。", preferredStyle: .Alert)
+            let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+            alert.addAction(action)
+            self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
         }
+        
+        
         
         return true
     }

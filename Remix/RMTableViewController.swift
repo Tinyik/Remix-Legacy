@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SafariServices
 import PassKit
 import SDWebImage
 
@@ -406,13 +405,11 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             })
             
         }else{
-            if #available(iOS 9.0, *) {
-                let safariView = SFSafariViewController(URL: adTargetURLs[(sender.view?.tag)!], entersReaderIfAvailable: false)
-                self.navigationController?.pushViewController(safariView, animated: true)
-            } else {
+          
+            
                 let webVC = RxWebViewController(url: adTargetURLs[(sender.view?.tag)!])
                 self.navigationController?.pushViewController(webVC, animated: true)
-            }
+            
             
         }
         
@@ -676,15 +673,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 ad.updateInBackground()
             }
             let adTargetURL = NSURL(string:(self.bannerAds[Int(self.randomAdIndex)].objectForKey("URL") as! String))
-            if #available(iOS 9.0, *) {
             
-                let safariView = SFSafariViewController(URL: adTargetURL!, entersReaderIfAvailable: false)
-                safariView.view.tintColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
-                self.navigationController?.presentViewController(safariView, animated: true, completion: nil)
-            } else {
                 let webView = RxWebViewController(url: adTargetURL!)
                 self.navigationController?.pushViewController(webView, animated: true)
-            }
+            
 
             
         }

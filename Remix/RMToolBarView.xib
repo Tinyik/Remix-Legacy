@@ -58,15 +58,6 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <userDefinedRuntimeAttributes>
-                <userDefinedRuntimeAttribute type="boolean" keyPath="translucent" value="YES"/>
-                <userDefinedRuntimeAttribute type="color" keyPath="translucentTintColor">
-                    <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                </userDefinedRuntimeAttribute>
-                <userDefinedRuntimeAttribute type="number" keyPath="translucentAlpha">
-                    <real key="value" value="1"/>
-                </userDefinedRuntimeAttribute>
-            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="likeButton" destination="yX5-va-q5F" id="UJX-LD-nXb"/>
                 <outlet property="likesNumberLabel" destination="t7e-28-JvM" id="TAf-Ga-avd"/>

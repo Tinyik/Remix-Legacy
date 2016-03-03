@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SafariServices
+
 
 class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     
@@ -34,6 +34,11 @@ class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNE
     
     func popCurrentVC() {
         self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.translucent = false
     }
     
     func fetchCloudData() {
@@ -167,17 +172,15 @@ class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNE
             activity.incrementKey("PageView", byAmount: 1)
             activity.updateInBackground()
         }
-        if #available(iOS 9.0, *) {
-            let safariView = SFSafariViewController(URL: NSURL(string: parentActivities[indexPath.row].objectForKey("URL") as! String)!, entersReaderIfAvailable: false)
-            safariView.view.tintColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
-            self.navigationController?.presentViewController(safariView, animated: true, completion: nil)
-        } else {
-            let webView = RxWebViewController(url: NSURL(string: parentActivities[indexPath.row].objectForKey("URL") as! String)!)
-            self.navigationController?.pushViewController(webView, animated: true)
-        }
         
-    }
-
+            let activityView = RMActivityViewController(url: NSURL(string: parentActivities[indexPath.row].objectForKey("URL") as! String)!)
+            activityView.activity = parentActivities[indexPath.row]
+            activityView.toolBar.registerButton.userInteractionEnabled = false
+            activityView.toolBar.likeButton.hidden = true
+            activityView.shouldApplyWhiteTint = false
+            self.navigationController?.pushViewController(activityView, animated: true)
+        }
+    
     //DZNEmptyDataSet
     
     

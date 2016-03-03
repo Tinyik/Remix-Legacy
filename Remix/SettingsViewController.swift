@@ -8,10 +8,9 @@
 
 import UIKit
 import MessageUI
-import SafariServices
 import SDWebImage
 
-class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate, ModalTransitionDelegate, ZCSAvatarCaptureControllerDelegate {
+class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, ModalTransitionDelegate, ZCSAvatarCaptureControllerDelegate {
    
     
     @IBOutlet weak var blurredAvatarView: UIImageView!
@@ -26,13 +25,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.translucent = false
-        let closeButton = UIButton(frame: CGRectMake(0,0,27,27))
-        closeButton.setImage(UIImage(named: "close"), forState: .Normal)
-        closeButton.addTarget(self, action: "popCurrentVC", forControlEvents: .TouchUpInside)
-        closeButton.alpha = 0.9
-        let backItem = UIBarButtonItem(customView: closeButton)
-        self.navigationItem.leftBarButtonItem = backItem
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: "popCurrentVC")
+        self.navigationController?.navigationBar.tintColor = .blackColor()
         blurredAvatarView.contentMode = .ScaleAspectFill
         blurredAvatarView.clipsToBounds = true
         firstTableView.scrollEnabled = true
@@ -103,7 +97,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             if indexPath.row == 1 {
            
                 cell.titleLabel.text = "向我们推荐活动"
-                cell.detailsLabel.text = "你的推荐将出现在 首页-社区推荐 中"
+                cell.detailsLabel.text = "审核通过后你的推荐将出现在首页。"
               
                 return cell
             }else if indexPath.row == 0 {
@@ -112,7 +106,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
                 return cell2
             }else{
                 cell.titleLabel.text = "向我们推荐魔都好去处"
-                cell.detailsLabel.text = "你的推荐将出现在 首页-好去处 中"
+                cell.detailsLabel.text = "你的推荐将出现在首页地点推荐中。"
                 return cell
             }
             
@@ -184,23 +178,15 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             case 0 : let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
                 let ordersVC = storyBoard.instantiateViewControllerWithIdentifier("OrdersVC")
                 self.navigationController?.pushViewController(ordersVC, animated: true)
-            case 1:if #available(iOS 9.0, *) {
-                let safariView = SFSafariViewController(URL: NSURL(string: "http://jsform.com/f/v5pfam")!)
-                safariView.view.tintColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
-                self.navigationController?.presentViewController(safariView, animated: true, completion: nil)
-            } else {
-                let webView = RxWebViewController(url: NSURL(string: "http://jsform.com/f/v5pfam")!)
-                self.navigationController?.pushViewController(webView, animated: true)
-                }
                 
-            case 2:if #available(iOS 9.0, *) {
-                let safariView = SFSafariViewController(URL: NSURL(string: "http://jsform.com/f/j49bk8")!)
-                safariView.view.tintColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
-                self.navigationController?.presentViewController(safariView, animated: true, completion: nil)
-            } else {
-                let webView = RxWebViewController(url: NSURL(string: "http://jsform.com/f/j49bk8")!)
+            case 1:
+                let webView = RMWebViewController(url: NSURL(string: "http://jsform.com/f/v5pfam")!)
                 self.navigationController?.pushViewController(webView, animated: true)
-                }
+                
+            case 2:
+                let webView = RMWebViewController(url: NSURL(string: "http://jsform.com/f/j49bk8")!)
+                self.navigationController?.pushViewController(webView, animated: true)
+                
                 
             default: break
             }

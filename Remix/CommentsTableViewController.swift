@@ -94,6 +94,8 @@ class CommentsTableViewController: UITableViewController, DZNEmptyDataSetSource,
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") as! CommentCell
         cell.commentContentLabel.text = activityComments[indexPath.row].objectForKey("Content") as? String
+        let dateString = String(activityComments[indexPath.row].createdAt)
+        cell.timeLabel.text = dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0]
         let userId = activityComments[indexPath.row].objectForKey("UserObjectId") as! String
         let query = BmobQuery(className: "_User")
         query.getObjectInBackgroundWithId(userId) { (user, error) -> Void in
@@ -113,6 +115,10 @@ class CommentsTableViewController: UITableViewController, DZNEmptyDataSetSource,
     }
     
     //DZNEmptyDataSet
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         

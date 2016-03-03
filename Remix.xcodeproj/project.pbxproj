@@ -110,6 +110,7 @@
 		1899E9C91C670FFB00ADC2AC /* GalleryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1899E9C81C670FFB00ADC2AC /* GalleryTableViewCell.swift */; };
 		1899E9CB1C67106600ADC2AC /* GalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1899E9CA1C67106600ADC2AC /* GalleryCell.swift */; };
 		1899E9CD1C67108A00ADC2AC /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1899E9CC1C67108A00ADC2AC /* GalleryViewController.swift */; };
+		189F45011C88CF6800EE1B3B /* RMWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189F45001C88CF6800EE1B3B /* RMWebViewController.swift */; };
 		18A443901C64EEAC00FEB149 /* OrgCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A4438F1C64EEAC00FEB149 /* OrgCell.swift */; };
 		18A443921C64F5BB00FEB149 /* OrgsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A443911C64F5BB00FEB149 /* OrgsViewController.swift */; };
 		18B317C01C6B06EC00336A92 /* GHWalkThroughPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B317BD1C6B06EC00336A92 /* GHWalkThroughPageCell.m */; };
@@ -302,6 +303,7 @@
 		1899E9C81C670FFB00ADC2AC /* GalleryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryTableViewCell.swift; sourceTree = "<group>"; };
 		1899E9CA1C67106600ADC2AC /* GalleryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCell.swift; sourceTree = "<group>"; };
 		1899E9CC1C67108A00ADC2AC /* GalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		189F45001C88CF6800EE1B3B /* RMWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMWebViewController.swift; sourceTree = "<group>"; };
 		18A4438F1C64EEAC00FEB149 /* OrgCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgCell.swift; sourceTree = "<group>"; };
 		18A443911C64F5BB00FEB149 /* OrgsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgsViewController.swift; sourceTree = "<group>"; };
 		18B317BC1C6B06EC00336A92 /* GHWalkThroughPageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHWalkThroughPageCell.h; sourceTree = "<group>"; };
@@ -572,6 +574,7 @@
 				189782511C63C7EF00458515 /* Main.storyboard */,
 				1824544F1C7FA16C00CF0CC6 /* VersionCheck.swift */,
 				18C79D851C83EDCF004AAA44 /* RMPageViewController.swift */,
+				189F45001C88CF6800EE1B3B /* RMWebViewController.swift */,
 				1857B52A1C855A4500D00A9E /* ActivityInterface */,
 				18E239331C805E2D00363655 /* FloatingActivityView.xib */,
 				18E239311C805E1600363655 /* FloatingActivityView.swift */,
@@ -1156,6 +1159,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				189782881C63E0D600458515 /* RMNavigationController.swift in Sources */,
+				189F45011C88CF6800EE1B3B /* RMWebViewController.swift in Sources */,
 				182454501C7FA16C00CF0CC6 /* VersionCheck.swift in Sources */,
 				180199541C79C14700A6C7E4 /* TrendingViewController.swift in Sources */,
 				1857B52E1C855A8900D00A9E /* CommentCell.swift in Sources */,

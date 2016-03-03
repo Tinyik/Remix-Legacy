@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SafariServices
+
 
 class LocationViewController: UITableViewController {
     
@@ -124,20 +124,11 @@ class LocationViewController: UITableViewController {
                 locationObject.updateInBackground()
             }
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            if #available(iOS 9.0, *) {
-                
-                let safariView = SFSafariViewController(URL: NSURL(string: locationObjects[indexPath.row].objectForKey("URL") as! String)!, entersReaderIfAvailable: false)
-                safariView.view.tintColor = UIColor(red: 74/255, green: 144/255, blue: 224/255, alpha: 1)
-                self.navigationController?.presentViewController(safariView, animated: true, completion: nil)
-                
-            } else {
                 
                 let webView = RxWebViewController(url: NSURL(string: locationObjects[indexPath.row].objectForKey("URL") as! String)!)
                 self.navigationController?.pushViewController(webView, animated: true)
                 
-            }
-            
-            
+  
         }
     
    
