@@ -112,7 +112,10 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
     [showSettings addTarget:self action:@selector(presentSettingsVCFromNaviController) forControlEvents:UIControlEventTouchUpInside];
     [showSettings setBackgroundImage:[UIImage imageNamed:@"Settings"] forState:UIControlStateNormal];
     UIImageView *barLogoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TitleLogo"]];
+    barLogoView.userInteractionEnabled = YES;
     barLogoView.frame = CGRectMake(self.navigationBar.frame.size.width/2-40, 10, 70, 26);
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchRemixCity)];
+    [barLogoView addGestureRecognizer:tap];
     UIButton *showAdd = [[UIButton alloc] initWithFrame:CGRectMake(5, 12, 25, 25)];
     [showAdd addTarget:self action:@selector(recommendActivityAndLocation) forControlEvents:UIControlEventTouchUpInside];
     [showAdd setBackgroundImage:[UIImage imageNamed:@"Add"] forState:UIControlStateNormal];
@@ -127,6 +130,10 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
 
 - (void)recommendActivityAndLocation {
    // Please refer to RMSwipeBetweenViewControllers
+}
+
+- (void)switchRemixCity{
+    // Please refer to RMSwipeBetweenViewControllers
 }
 
 - (void)presentSettingsVCFromNaviController {

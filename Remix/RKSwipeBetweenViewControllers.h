@@ -166,5 +166,6 @@
 @property (nonatomic, strong)NSArray *buttonText;
 
 - (void)recommendActivityAndLocation;
+- (void)switchRemixCity;
 - (void)tapSegmentButtonAction:(UIButton *)button;
 @end

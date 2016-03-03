@@ -9,8 +9,9 @@
 import UIKit
 import MessageUI
 
-class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailComposeViewControllerDelegate {
+class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailComposeViewControllerDelegate, LCActionSheetDelegate {
 
+    var cityNameArray: [String] = []
     
     override func recommendActivityAndLocation() {
         print("Clikced")
@@ -43,9 +44,35 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
         sheet.show()
     }
     
+    override func switchRemixCity() {
+        cityNameArray = []
+        print("Switch")
+        let query = BmobQuery(className: "SupportedCities")
+        query.findObjectsInBackgroundWithBlock { (cities, error) -> Void in
+            if error == nil {
+                for city in cities {
+                    self.cityNameArray.append(city.objectForKey("CityName") as! String)
+                }
+                let sheet = LCActionSheet(title: "请选择你所在的城市。Remix团队将积极更新并尽快支持更多城市。", buttonTitles: self.cityNameArray + ["全国", "申请开通城市"], redButtonIndex: -1, delegate: self)
+                sheet.show()
+            }
+        }
+       
+    }
+    
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-   
+    func actionSheet(actionSheet: LCActionSheet!, didClickedButtonAtIndex buttonIndex: Int) {
+        if buttonIndex != cityNameArray.count - 1 {
+            REMIX_CITY_NAME = cityNameArray[buttonIndex]
+            CURRENT_USER.setObject(REMIX_CITY_NAME, forKey: "City")
+            CURRENT_USER.updateInBackground()
+        }else{
+            //Apply for new city...
+            
+        }
+    }
+    
 }

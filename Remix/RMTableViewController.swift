@@ -16,6 +16,7 @@ let DEVICE_SCREEN_HEIGHT = UIScreen.mainScreen().bounds.height
 let COMMENTS_TABLE_VIEW_VISIBLE_HEIGHT: CGFloat = 450
 var APPLICATION_UI_REMOTE_CONFIG: BmobObject!
 var CURRENT_USER: BmobUser!
+var REMIX_CITY_NAME: String!
 
 var naviController: RMSwipeBetweenViewControllers!
 var isHomepageFirstLaunching: Bool!

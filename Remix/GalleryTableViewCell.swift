@@ -30,7 +30,9 @@ class GalleryTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLayout,
         galleryView.delegate = self
         galleryView.dataSource = self
         galleryView.scrollEnabled = false
-             
+        orgLogo.contentMode = .ScaleAspectFill
+        orgLogo.clipsToBounds = true
+        orgLogo.layer.cornerRadius = orgLabel.frame.height/2
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

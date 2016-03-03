@@ -186,6 +186,10 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
             if error == nil {
                 self.view.removeKeyboardControl()
                 CURRENT_USER = _user
+                if _user.objectForKey("City") == nil {
+                    CURRENT_USER.setObject("全国", forKey: "Cinty")
+                    CURRENT_USER.updateInBackground()
+                }
                 let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
                 let vc1 = storyBoard.instantiateViewControllerWithIdentifier("MainVC")
                 let vc2 = storyBoard.instantiateViewControllerWithIdentifier("CategoryVC")

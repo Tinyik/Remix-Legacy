@@ -143,6 +143,17 @@ class GalleryViewController: UITableViewController {
         cell.desLabel.text = galleryObjects[indexPath.section][indexPath.row].objectForKey("Description") as? String
         cell.parentViewController = self
         cell.orgLabel.text = galleryObjects[indexPath.section][indexPath.row].objectForKey("Org") as? String
+        let query = BmobQuery(className: "Organization")
+        query.whereKey("Name", equalTo: cell.orgLabel.text)
+        query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
+            if error == nil {
+                for org in organizations {
+                    let url = NSURL(string: (org.objectForKey("Logo") as! BmobFile).url)
+                    cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
+                }
+            }
+        })
+        
         cell.timeLabel.text = galleryObjects[indexPath.section][indexPath.row].objectForKey("Date") as? String
         cell.galleryView.reloadData()
         return cell

@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        
         let image = UIImage(named: "back")
         let oneSignal = OneSignal(launchOptions: launchOptions, appId: "7a1e4c8b-51f0-49f1-b50a-72cc581121a0", handleNotification: nil)
-        
+
         OneSignal.defaultClient().enableInAppAlertNotification(true)
         Bmob.registerWithAppKey("08329e2e3a8d3cdde96bf91d7459e8ab")
       //  BmobPaySDK.registerWithAppKey("08329e2e3a8d3cdde96bf91d7459e8ab")
@@ -69,7 +69,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         naviController.buttonText = ["活动", "分类", "组织"]
         naviController.navigationBar.translucent = true
         self.window?.rootViewController = naviController
-
+            if CURRENT_USER.objectForKey("City") as! String == "全国" {
+                naviController.switchRemixCity()
+            }else{
+                REMIX_CITY_NAME = CURRENT_USER.objectForKey("City") as! String
+            }
         }
         
         self.window?.makeKeyAndVisible()
