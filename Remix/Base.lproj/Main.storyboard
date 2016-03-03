@@ -2740,7 +2740,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="980"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xpE-wy-sP2" userLabel="Scroll Content">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2000"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pvq-fx-ye4">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="215"/>
@@ -2834,7 +2834,7 @@
                                             <constraint firstItem="war-5I-hHf" firstAttribute="leading" secondItem="xpE-wy-sP2" secondAttribute="leading" constant="20" id="1Ki-hw-jdB"/>
                                             <constraint firstAttribute="trailing" secondItem="6Xg-qE-21V" secondAttribute="trailing" constant="20" id="3CZ-Pg-HCO"/>
                                             <constraint firstItem="pvq-fx-ye4" firstAttribute="top" secondItem="xpE-wy-sP2" secondAttribute="top" id="3Ne-sn-Qfv"/>
-                                            <constraint firstAttribute="height" constant="2000" id="9ZX-v7-YkR"/>
+                                            <constraint firstAttribute="height" constant="800" id="9ZX-v7-YkR"/>
                                             <constraint firstItem="kPc-ME-mVH" firstAttribute="leading" secondItem="xpE-wy-sP2" secondAttribute="leading" constant="20" id="BYY-mW-dgH"/>
                                             <constraint firstItem="6Xg-qE-21V" firstAttribute="top" secondItem="pvq-fx-ye4" secondAttribute="bottom" constant="20" id="Fko-RX-yJC"/>
                                             <constraint firstItem="GU9-RN-XAR" firstAttribute="leading" secondItem="xpE-wy-sP2" secondAttribute="leading" constant="20" id="Iir-eK-ziK"/>
@@ -2884,7 +2884,10 @@
                     <connections>
                         <outlet property="firstLabel" destination="6Xg-qE-21V" id="tZB-66-ovU"/>
                         <outlet property="firstTextView" destination="kPc-ME-mVH" id="I4z-4V-nGa"/>
+                        <outlet property="mailButton" destination="GU9-RN-XAR" id="yni-YT-tjN"/>
                         <outlet property="mainImageView" destination="pvq-fx-ye4" id="D91-SB-m8h"/>
+                        <outlet property="scrollContentHeight" destination="9ZX-v7-YkR" id="zPN-BV-CZL"/>
+                        <outlet property="scrollContentView" destination="xpE-wy-sP2" id="s58-jA-nsT"/>
                         <outlet property="scrollView" destination="hkW-sq-GzB" id="meA-aD-5ct"/>
                         <outlet property="secondImageView" destination="Wl1-xM-vdr" id="FVa-LP-wbv"/>
                         <outlet property="secondLabel" destination="CU0-QX-8lG" id="V8y-MZ-XIY"/>

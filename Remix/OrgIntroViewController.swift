@@ -19,6 +19,10 @@ class OrgIntroViewController: UIViewController, MWPhotoBrowserDelegate, MFMailCo
     @IBOutlet weak var secondImageView: UIImageView!
     @IBOutlet weak var secondLabel: UILabel!
     @IBOutlet weak var secondTextView: UITextView!
+    @IBOutlet weak var mailButton: UIButton!
+    @IBOutlet weak var scrollContentHeight: NSLayoutConstraint!
+    @IBOutlet weak var scrollContentView: UIView!
+    
     
     var photos: [MWPhoto] = []
     var orgName = "Remix"
@@ -80,6 +84,17 @@ class OrgIntroViewController: UIViewController, MWPhotoBrowserDelegate, MFMailCo
                     self.secondTextView.editable = false
                    
                 }
+                
+                
+                // Calculate scroll content height
+                var contentRect = CGRectZero
+                for view in self.scrollContentView.subviews {
+                    view.layoutIfNeeded()
+                    contentRect = CGRectUnion(contentRect, view.frame)
+                }
+                
+                let bottomMargin: CGFloat = 30
+                self.scrollContentHeight.constant = contentRect.size.height + bottomMargin
             }
         }
     }
