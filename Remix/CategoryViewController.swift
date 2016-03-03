@@ -34,6 +34,7 @@ class CategoryViewController: UITableViewController {
         tableView.separatorStyle = .None
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.contentInset.top = 90
         showGallery.userInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: "showGalleryAction")
         showGallery.addGestureRecognizer(tap)

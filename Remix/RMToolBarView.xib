@@ -28,7 +28,7 @@
                     </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yX5-va-q5F">
-                    <rect key="frame" x="84" y="14" width="26" height="24"/>
+                    <rect key="frame" x="84" y="14" width="28" height="24"/>
                     <state key="normal" backgroundImage="Like">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>

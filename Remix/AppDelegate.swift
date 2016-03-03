@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
        
         let image = UIImage(named: "back")
-       
+        
         Bmob.registerWithAppKey("08329e2e3a8d3cdde96bf91d7459e8ab")
       //  BmobPaySDK.registerWithAppKey("08329e2e3a8d3cdde96bf91d7459e8ab")
         MobClick.startWithAppkey("56ba8fa2e0f55a1071000931", reportPolicy: BATCH, channelId: nil)

@@ -28,8 +28,9 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
         super.viewDidLoad()
         orgsCollectionView.delegate = self
         orgsCollectionView.dataSource = self
+        orgsCollectionView.contentInset.top = 40
         fetchCloudData()
-
+        
     }
     
     

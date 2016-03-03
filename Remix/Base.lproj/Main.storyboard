@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tAU-AP-HKZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hb0-1Y-cpE">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="bLC-Jv-spq">
-                            <rect key="frame" x="0.0" y="64" width="375" height="820"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="820"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <searchBar contentMode="redraw" placeholder="搜索你感兴趣的活动吧~" translatesAutoresizingMaskIntoConstraints="NO" id="u6L-Dn-A8A">
@@ -96,8 +96,8 @@
                                     <color key="textColor" red="0.21951941289999999" green="0.21951941289999999" blue="0.21951941289999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="149" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Bco-9Z-ALV">
-                                    <rect key="frame" x="0.0" y="412" width="375" height="150"/>
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="149" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Bco-9Z-ALV">
+                                    <rect key="frame" x="0.0" y="413" width="375" height="150"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="150" id="2SH-M7-Kcu"/>
@@ -170,6 +170,10 @@
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qOi-x8-7XF">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -211,7 +215,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" rowHeight="166" id="oqm-Tb-oIf" customClass="RMTableViewCell" customModule="Remix" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="912" width="375" height="166"/>
+                                <rect key="frame" x="0.0" y="848" width="375" height="166"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oqm-Tb-oIf" id="3a8-df-ECA">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="165.5"/>
@@ -324,7 +328,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="fullCellReuseIdentifier" rowHeight="375" id="rqE-a6-Rd0" customClass="RMFullCoverCell" customModule="Remix" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="1078" width="375" height="375"/>
+                                <rect key="frame" x="0.0" y="1014" width="375" height="375"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rqE-a6-Rd0" id="RE0-HO-ANy">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="374.5"/>
@@ -441,6 +445,7 @@
                             <outlet property="delegate" destination="hb0-1Y-cpE" id="Wyw-M2-c0y"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="活动" id="bgx-Bq-6Mg"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1500"/>
@@ -459,7 +464,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="snh-Cu-cwa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="397.5" y="-1174"/>
+            <point key="canvasLocation" x="407.5" y="-1130"/>
         </scene>
         <!--Filtered View Controller-->
         <scene sceneID="WbW-gE-xMc">
@@ -1119,7 +1124,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="fullCellReuseIdentifier" rowHeight="375" id="fR8-ne-bxJ" customClass="RMFullCoverCell" customModule="Remix" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="375" height="375"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="375"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fR8-ne-bxJ" id="dcP-PN-xIY">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="374.5"/>
@@ -1231,7 +1236,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" rowHeight="166" id="pqR-0q-mlN" customClass="RMTableViewCell" customModule="Remix" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="467" width="375" height="166"/>
+                                        <rect key="frame" x="0.0" y="403" width="375" height="166"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pqR-0q-mlN" id="pg0-iV-3yr">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="165.5"/>
@@ -1991,24 +1996,6 @@
             </objects>
             <point key="canvasLocation" x="-741.5" y="131.5"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Wbg-Bd-1rE">
-            <objects>
-                <navigationController storyboardIdentifier="MainNaviController" id="tAU-AP-HKZ" customClass="RMNavigationController" customModule="Remix" customModuleProvider="target" sceneMemberID="viewController">
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Rh3-Fi-Hf2">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="hb0-1Y-cpE" kind="relationship" relationship="rootViewController" id="C5c-QC-Bba"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JrB-BH-7YJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-238.5" y="131.5"/>
-        </scene>
         <!--Liked View Controller-->
         <scene sceneID="89p-n5-N15">
             <objects>
@@ -2285,7 +2272,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="locationTVCIdentifier" rowHeight="530" id="kWm-ri-2EW" customClass="LocationTableViewCell" customModule="Remix" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="375" height="530"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="530"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kWm-ri-2EW" id="kwe-kA-vjT">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="529.5"/>
@@ -2399,7 +2386,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="locationFullCell" rowHeight="375" id="qZH-Yv-zPE" customClass="LocationFullCoverCell" customModule="Remix" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="622" width="375" height="375"/>
+                                <rect key="frame" x="0.0" y="558" width="375" height="375"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qZH-Yv-zPE" id="FT3-th-x44">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="374.5"/>
@@ -3609,7 +3596,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="fullCellReuseIdentifier" rowHeight="375" id="RUb-dH-wLl" customClass="RMFullCoverCell" customModule="Remix" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="375" height="375"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="375"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RUb-dH-wLl" id="sHa-0e-xmm">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="374.5"/>
@@ -3721,7 +3708,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" rowHeight="166" id="ktW-BV-tte" customClass="RMTableViewCell" customModule="Remix" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="467" width="375" height="166"/>
+                                        <rect key="frame" x="0.0" y="403" width="375" height="166"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ktW-BV-tte" id="ENo-TF-ccj">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="165.5"/>
