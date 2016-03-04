@@ -45,6 +45,7 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
 @synthesize buttonText;
 @synthesize indicatorButtons;
 @synthesize themeColor_1;
+@synthesize cityLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -113,12 +114,18 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
     [showSettings setBackgroundImage:[UIImage imageNamed:@"Settings"] forState:UIControlStateNormal];
     UIImageView *barLogoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TitleLogo"]];
     barLogoView.userInteractionEnabled = YES;
-    barLogoView.frame = CGRectMake(self.navigationBar.frame.size.width/2-40, 10, 70, 26);
+    barLogoView.frame = CGRectMake(self.navigationBar.frame.size.width/2-52, 10, 70, 26);
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchRemixCity)];
     [barLogoView addGestureRecognizer:tap];
     UIButton *showAdd = [[UIButton alloc] initWithFrame:CGRectMake(5, 12, 25, 25)];
     [showAdd addTarget:self action:@selector(recommendActivityAndLocation) forControlEvents:UIControlEventTouchUpInside];
     [showAdd setBackgroundImage:[UIImage imageNamed:@"Add"] forState:UIControlStateNormal];
+    
+    cityLabel = [[UILabel alloc] initWithFrame:CGRectMake(barLogoView.frame.origin.x + 75, barLogoView.frame.origin.y + 5, 40, 30)];
+    cityLabel.text = @"上海";
+    cityLabel.textColor = [UIColor whiteColor];
+    cityLabel.font = [UIFont systemFontOfSize:12];
+    [navigationView addSubview:cityLabel];
     [navigationView addSubview:barLogoView];
     [navigationView addSubview:showSettings];
     [navigationView addSubview:showAdd];

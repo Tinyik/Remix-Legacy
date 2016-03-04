@@ -26,7 +26,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         self.navigationController?.navigationBar.translucent = false
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: "popCurrentVC")
-        self.navigationController?.navigationBar.tintColor = .blackColor()
+        self.navigationController?.navigationBar.tintColor = FlatBlueDark()
         blurredAvatarView.contentMode = .ScaleAspectFill
         blurredAvatarView.clipsToBounds = true
         firstTableView.scrollEnabled = true

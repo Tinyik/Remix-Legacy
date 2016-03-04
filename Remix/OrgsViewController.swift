@@ -24,6 +24,7 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     var logoURLs: [NSURL] = []
     var names: [String] = []
+    let refreshCtrl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,9 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
         orgsCollectionView.emptyDataSetDelegate = self
         orgsCollectionView.emptyDataSetSource = self
         orgsCollectionView.contentInset.top = 40
+        orgsCollectionView.alwaysBounceVertical = true
+        refreshCtrl.addTarget(self, action: "refresh", forControlEvents: .ValueChanged)
+        orgsCollectionView.addSubview(refreshCtrl)
         fetchCloudData()
         
     }
@@ -46,6 +50,9 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.findObjectsInBackgroundWithBlock { (organizations, error) -> Void in
+            if self.refreshCtrl.refreshing {
+               self.refreshCtrl.endRefreshing()
+            }
             for org in organizations {
                 let name = org.objectForKey("Name") as! String
                 let logoFile = org.objectForKey("Logo") as! BmobFile
@@ -53,12 +60,19 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
                 self.names.append(name)
                 self.logoURLs.append(logoURL)
             }
+            if self.orgsCollectionView != nil {
             self.orgsCollectionView.reloadData()
+            }
         }
     }
     
+    func refresh() {
+        refreshCtrl.beginRefreshing()
+        fetchCloudData()
+    }
+    
     func refreshViewContentForCityChange() {
-        
+        refresh()
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {

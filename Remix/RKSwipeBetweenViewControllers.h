@@ -164,7 +164,7 @@
 @property (nonatomic, strong) RMPageViewController *pageController;
 @property (nonatomic, strong)UIView *navigationView;
 @property (nonatomic, strong)NSArray *buttonText;
-
+@property (nonatomic, strong)UILabel *cityLabel;
 - (void)recommendActivityAndLocation;
 - (void)switchRemixCity;
 - (void)tapSegmentButtonAction:(UIButton *)button;

@@ -61,6 +61,8 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
                 }
                 let sheet = LCActionSheet(title: "请选择你所在的城市。Remix团队将积极更新并尽快支持更多城市。", buttonTitles: self.cityNameArray + ["全国", "申请开通城市"], redButtonIndex: -1, delegate: self)
                 sheet.show()
+                print("COUNT")
+                print(self.cityNameArray)
             }
         }
        
@@ -71,15 +73,20 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
     }
     
     func actionSheet(actionSheet: LCActionSheet!, didClickedButtonAtIndex buttonIndex: Int) {
-        if buttonIndex != cityNameArray.count - 1 {
-            REMIX_CITY_NAME = cityNameArray[buttonIndex]
+       
+        if buttonIndex == cityNameArray.count {
+            REMIX_CITY_NAME = "全国"
             CURRENT_USER.setObject(REMIX_CITY_NAME, forKey: "City")
             CURRENT_USER.updateInBackground()
             self.rm_delegate.refreshViewContentForCityChange()
             self.rm_delegate2.refreshViewContentForCityChange()
-        }else{
+            self.cityLabel.text = REMIX_CITY_NAME
+        }else if buttonIndex == cityNameArray.count + 1{
             //Apply for new city...
             
+        }else if buttonIndex != cityNameArray.count + 2{
+            REMIX_CITY_NAME = cityNameArray[buttonIndex]
+ 
         }
     }
     
