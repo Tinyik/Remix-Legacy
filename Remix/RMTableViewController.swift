@@ -22,7 +22,7 @@ var naviController: RMSwipeBetweenViewControllers!
 var isHomepageFirstLaunching: Bool!
 var hasPromptedToEnableNotif: Bool!
 
-class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelegate, UISearchBarDelegate, PKPaymentAuthorizationViewControllerDelegate, BmobPayDelegate, RMActivityViewControllerDelegate {
+class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelegate, UISearchBarDelegate, PKPaymentAuthorizationViewControllerDelegate, BmobPayDelegate, RMActivityViewControllerDelegate, RMSwipeBetweenViewControllersDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var headerScrollView: UIScrollView!
@@ -77,12 +77,16 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         if launchedTimes % 10 == 0 {
             askToEnableNotifications()
         }
+        
         cellZoomAnimationDuration = 0.4
         cellZoomXScaleFactor = 1.1
         cellZoomYScaleFactor = 1.1
         cellZoomInitialAlpha = 0.5
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.emptyDataSetDelegate = self
+        self.tableView.emptyDataSetSource = self
+        self.tableView.tableFooterView = UIView()
         searchBar.delegate = self
         headerScrollView.delegate = self
         let refreshCtrl = UIRefreshControl()
@@ -250,6 +254,8 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         headerAds = []
         let query = BmobQuery(className: "HeaderPromotion")
         query.whereKey("isVisibleToUsers", equalTo: true)
+        query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
+        print(REMIX_CITY_NAME)
         query.findObjectsInBackgroundWithBlock { (ads, error) -> Void in
             if error == nil {
                 if self.isRefreshing == true {
@@ -312,8 +318,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         let query = BmobQuery(className: "Activity")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("isVisibleOnMainList", equalTo: true)
+        query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
             if activities.count > 0 {
+                self.tableView.tableHeaderView?.hidden = false
                 for activity in activities {
                     if activity.objectForKey("isFloatingActivity") as! Bool == false {
                         
@@ -327,6 +335,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                             self.monthNameStrings.append(monthName)
                             self.activities.append([activity as! BmobObject])
                             self.coverImgURLs.append([imageURL])
+                            print(self.monthNameStrings)
                         } else {
                             
                             if let index = self.activities.indexOf({
@@ -348,8 +357,13 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 self.fetchOrdersInformation()
                 self.tableView.reloadData()
               
+            }else{
+                self.tableView.contentOffset = CGPointMake(0, 0 - self.tableView.contentInset.top)
+                self.tableView.tableHeaderView?.hidden = true
+                self.tableView.reloadData()
             }
         }
+        
                 fetchLikedActivitiesList()
     }
     
@@ -416,11 +430,17 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         
     }
     
-
+    func refreshViewContentForCityChange() {
+        print("Refreshing...")
+        //self.refreshControl?.beginRefreshing()
+        self.refresh()
+        
+    }
     
     func reloadRowForActivity(activity: BmobObject) {
         fetchLikedActivitiesList()
         let query = BmobQuery(className: "Activity")
+        query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.getObjectInBackgroundWithId(activity.objectId) { (activity, error) -> Void in
             if error == nil {
                 self.activities[self.indexPathForSelectedActivity.section][self.indexPathForSelectedActivity.row] = activity
@@ -458,7 +478,8 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         if tableView == adTableView {
             return 1
         }
-        
+        print("MONTHNAME")
+        print(monthNameStrings.count)
         return monthNameStrings.count
     }
     
@@ -543,6 +564,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             let cell = tableView.dequeueReusableCellWithIdentifier("adCellReuseIdentifier", forIndexPath: indexPath) as! AdvertiseCell
             let query = BmobQuery(className: "BannerPromotion")
             query.whereKey("isVisibleToUsers", equalTo: true)
+            query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
             query.findObjectsInBackgroundWithBlock({ (promotions, error) -> Void in
                 if promotions.count > 0{
                     for promotion in promotions {
@@ -668,6 +690,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         if tableView == adTableView {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             let query = BmobQuery(className: "BannerPromotion")
+            query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
             let objectId = bannerAds[randomAdIndex].objectId
             query.getObjectInBackgroundWithId(objectId) { (ad, error) -> Void in
                 ad.incrementKey("PageView", byAmount: 1)
@@ -686,6 +709,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
             let query = BmobQuery(className: "Activity")
+            query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
             let objectId = activities[indexPath.section][indexPath.row].objectId
             query.getObjectInBackgroundWithId(objectId) { (activity, error) -> Void in
                 if error == nil {
@@ -768,6 +792,40 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    //DZNEmptyDataSet
     
+    
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(19)]
+        return NSAttributedString(string: "(:3[____] 哎呀...! 你发现了一座空荡荡的城池！\n", attributes: attrDic)
+    }
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(15)]
+        return NSAttributedString(string: "快点击左上角向我们推荐活动，成为邦主吧！如果你想离开这里, 你也可以：", attributes: attrDic)
+    }
+    
+    func buttonTitleForEmptyDataSet(scrollView: UIScrollView!, forState state: UIControlState) -> NSAttributedString! {
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(17), NSForegroundColorAttributeName: FlatRed()]
+        return NSAttributedString(string: "切换城市", attributes: attrDic)
+    }
+    
+    func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
+        return UIColor(red: 0.97255, green: 0.97255, blue: 0.97255, alpha: 1)
+    }
+    
+    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+        return UIImage(named: "NoData")
+    }
+    
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+        return false
+    }
+    
+    func emptyDataSet(scrollView: UIScrollView!, didTapButton button: UIButton!) {
+        (self.navigationController as! RMSwipeBetweenViewControllers).switchRemixCity()
+    }
+
 }
    

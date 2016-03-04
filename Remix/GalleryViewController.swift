@@ -39,6 +39,7 @@ class GalleryViewController: UITableViewController {
     
     func fetchCloudData() {
         let query = BmobQuery(className: "Gallery")
+        query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.findObjectsInBackgroundWithBlock { (galleryObjects, error) -> Void in
             if galleryObjects.count > 0 {
@@ -163,6 +164,7 @@ class GalleryViewController: UITableViewController {
         
         // FIXME: 非空判断
         let query = BmobQuery(className: "Gallery")
+        query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         let objectId = galleryObjects[indexPath.section][indexPath.row].objectId
         query.getObjectInBackgroundWithId(objectId) { (galleryObject, error) -> Void in
             galleryObject.incrementKey("PageView", byAmount: 1)

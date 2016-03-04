@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import MessageUI
 
 protocol OrganizationViewDelegate {
     func filterQueryWithOrganizationName(name: String)
     
 }
 
-class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, MFMailComposeViewControllerDelegate, RMSwipeBetweenViewControllersDelegate {
     
     @IBOutlet weak var orgsCollectionView: UICollectionView!
     
@@ -28,6 +29,8 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
         super.viewDidLoad()
         orgsCollectionView.delegate = self
         orgsCollectionView.dataSource = self
+        orgsCollectionView.emptyDataSetDelegate = self
+        orgsCollectionView.emptyDataSetSource = self
         orgsCollectionView.contentInset.top = 40
         fetchCloudData()
         
@@ -41,6 +44,7 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         let query = BmobQuery(className: "Organization")
         query.whereKey("isVisibleToUsers", equalTo: true)
+        query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.findObjectsInBackgroundWithBlock { (organizations, error) -> Void in
             for org in organizations {
                 let name = org.objectForKey("Name") as! String
@@ -53,7 +57,9 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
-    
+    func refreshViewContentForCityChange() {
+        
+    }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
@@ -112,5 +118,53 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
+    //DZNEmptyDataSet
+    
+    
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(19)]
+        return NSAttributedString(string: "(:3[____] 这座城市似乎非常地冷清...\n", attributes: attrDic)
+    }
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(15)]
+        return NSAttributedString(string: "马上入驻Remix，成为这个城市里的第一个组织吧！", attributes: attrDic)
+    }
+    
+    func buttonTitleForEmptyDataSet(scrollView: UIScrollView!, forState state: UIControlState) -> NSAttributedString! {
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(17), NSForegroundColorAttributeName: FlatRed()]
+        return NSAttributedString(string: "入驻Remix", attributes: attrDic)
+    }
+    
+    func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
+        return UIColor(red: 0.97255, green: 0.97255, blue: 0.97255, alpha: 1)
+    }
+    
+    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+        return UIImage(named: "NoData")
+    }
+    
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+        return false
+    }
+    
+    func emptyDataSet(scrollView: UIScrollView!, didTapButton button: UIButton!) {
+        if MFMailComposeViewController.canSendMail() {
+            let composer = MFMailComposeViewController()
+            composer.mailComposeDelegate = self
+            let subjectString = NSString(format: "Remix平台组织入驻申请")
+            let bodyString = NSString(format: "简介:\n\n\n\n\n\n-----\n组织所在城市: \n组织成立时间: \n组织名称:\n微信公众号ID:\n负责人联系方式:\n组织性质及分类:\n-----")
+            composer.setMessageBody(bodyString as String, isHTML: false)
+            composer.setSubject(subjectString as String)
+            composer.setToRecipients(["fongtinyik@gmail.com", "remixapp@163.com"])
+            self.presentViewController(composer, animated: true, completion: nil)
+        }
+    }
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+
   
 }

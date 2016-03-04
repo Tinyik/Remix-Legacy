@@ -9,9 +9,15 @@
 import UIKit
 import MessageUI
 
+protocol RMSwipeBetweenViewControllersDelegate {
+    func refreshViewContentForCityChange()
+}
+
 class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailComposeViewControllerDelegate, LCActionSheetDelegate {
 
     var cityNameArray: [String] = []
+    var rm_delegate: RMSwipeBetweenViewControllersDelegate!
+    var rm_delegate2: RMSwipeBetweenViewControllersDelegate!
     
     override func recommendActivityAndLocation() {
         print("Clikced")
@@ -31,7 +37,7 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
                     let composer = MFMailComposeViewController()
                     composer.mailComposeDelegate = self
                     let subjectString = NSString(format: "Remix平台组织入驻申请")
-                    let bodyString = NSString(format: "简介:\n\n\n\n\n\n-----\n组织成立时间: \n组织名称:\n微信公众号ID:\n负责人联系方式:\n组织性质及分类:\n-----")
+                    let bodyString = NSString(format: "简介:\n\n\n\n\n\n-----\n组织所在城市: \n组织成立时间: \n组织名称:\n微信公众号ID:\n负责人联系方式:\n组织性质及分类:\n-----")
                     composer.setMessageBody(bodyString as String, isHTML: false)
                     composer.setSubject(subjectString as String)
                     composer.setToRecipients(["fongtinyik@gmail.com", "remixapp@163.com"])
@@ -69,6 +75,8 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
             REMIX_CITY_NAME = cityNameArray[buttonIndex]
             CURRENT_USER.setObject(REMIX_CITY_NAME, forKey: "City")
             CURRENT_USER.updateInBackground()
+            self.rm_delegate.refreshViewContentForCityChange()
+            self.rm_delegate2.refreshViewContentForCityChange()
         }else{
             //Apply for new city...
             

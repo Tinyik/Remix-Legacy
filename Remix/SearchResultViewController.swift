@@ -54,6 +54,7 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
     func fetchTrendingLabels() {
         let query = BmobQuery(className: "TrendingLabel")
         query.whereKey("isVisibleToUsers", equalTo: true)
+        query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.findObjectsInBackgroundWithBlock { (labels, error) -> Void in
             if labels.count > 0{
                 for label in labels {
@@ -234,6 +235,7 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
     func reloadRowForActivity(activity: BmobObject) {
         fetchLikedActivitiesList()
         let query = BmobQuery(className: "Activity")
+        query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.getObjectInBackgroundWithId(activity.objectId) { (activity, error) -> Void in
             if error == nil {
                 self.activities[self.indexPathForSelectedActivity.row] = activity
@@ -312,6 +314,7 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
         if tableView == self.tableView {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             var query = BmobQuery(className: "Activity")
+            query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
             let objectId = activities[indexPath.row].objectId
             query.getObjectInBackgroundWithId(objectId) { (activity, error) -> Void in
                 activity.incrementKey("PageView", byAmount: 1)
@@ -390,7 +393,7 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
                     let composer = MFMailComposeViewController()
                     composer.mailComposeDelegate = self
                     let subjectString = NSString(format: "Remix平台组织入驻申请")
-                    let bodyString = NSString(format: "简介:\n\n\n\n\n\n-----\n组织成立时间: \n组织名称:\n微信公众号ID:\n负责人联系方式:\n组织性质及分类:\n-----")
+                    let bodyString = NSString(format: "简介:\n\n\n\n\n\n-----\n组织所在城市: \n组织成立时间: \n组织名称:\n微信公众号ID:\n负责人联系方式:\n组织性质及分类:\n-----")
                     composer.setMessageBody(bodyString as String, isHTML: false)
                     composer.setSubject(subjectString as String)
                     composer.setToRecipients(["fongtinyik@gmail.com", "remixapp@163.com"])

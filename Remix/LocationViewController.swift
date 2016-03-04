@@ -29,6 +29,7 @@ class LocationViewController: UITableViewController {
         func fetchCloudData() {
          
             let query = BmobQuery(className: "Location")
+            query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
             query.whereKey("isVisibleToUsers", equalTo: true)
             query.findObjectsInBackgroundWithBlock { (locationObjects, error) -> Void in
                 if locationObjects.count > 0 {
@@ -118,6 +119,7 @@ class LocationViewController: UITableViewController {
             
             // FIXME: 非空判断
             let query = BmobQuery(className: "Location")
+            query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
             let objectId = locationObjects[indexPath.row].objectId
             query.getObjectInBackgroundWithId(objectId) { (locationObject, error) -> Void in
                 locationObject.incrementKey("PageView", byAmount: 1)

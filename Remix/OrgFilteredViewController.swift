@@ -83,6 +83,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         
         
         let query = BmobQuery(className: "Activity")
+        query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.whereKey("Org", equalTo: orgName)
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("isVisibleOnMainList", equalTo: true)
@@ -131,6 +132,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
     func reloadRowForActivity(activity: BmobObject) {
         fetchLikedActivitiesList()
         let query = BmobQuery(className: "Activity")
+        query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.getObjectInBackgroundWithId(activity.objectId) { (activity, error) -> Void in
             if error == nil {
                 self.activities[self.indexPathForSelectedActivity.section][self.indexPathForSelectedActivity.row] = activity
@@ -373,6 +375,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let query = BmobQuery(className: "Activity")
+        query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         let objectId = activities[indexPath.section][indexPath.row].objectId
         query.getObjectInBackgroundWithId(objectId) { (activity, error) -> Void in
             activity.incrementKey("PageView", byAmount: 1)
@@ -451,7 +454,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
                     let composer = MFMailComposeViewController()
                     composer.mailComposeDelegate = self
                     let subjectString = NSString(format: "Remix平台组织入驻申请")
-                    let bodyString = NSString(format: "简介:\n\n\n\n\n\n-----\n组织成立时间: \n组织名称:\n微信公众号ID:\n负责人联系方式:\n组织性质及分类:\n-----")
+                    let bodyString = NSString(format: "简介:\n\n\n\n\n\n-----\n组织所在城市: \n组织成立时间: \n组织名称:\n微信公众号ID:\n负责人联系方式:\n组织性质及分类:\n-----")
                     composer.setMessageBody(bodyString as String, isHTML: false)
                     composer.setSubject(subjectString as String)
                     composer.setToRecipients(["fongtinyik@gmail.com", "remixapp@163.com"])

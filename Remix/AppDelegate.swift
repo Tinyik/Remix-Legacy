@@ -68,6 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         naviController.viewControllerArray.addObjectsFromArray([vc1, vc2, vc3])
         naviController.buttonText = ["活动", "分类", "组织"]
         naviController.navigationBar.translucent = true
+        naviController.rm_delegate = vc1 as! RMSwipeBetweenViewControllersDelegate
+        naviController.rm_delegate2 = vc3 as! RMSwipeBetweenViewControllersDelegate
         self.window?.rootViewController = naviController
             if CURRENT_USER.objectForKey("City") as! String == "全国" {
                 naviController.switchRemixCity()

@@ -78,6 +78,7 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("isVisibleOnMainList", equalTo: true)
         query.whereKey("isFloatingActivity", equalTo: false)
+        query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
             if activities.count > 0 {
                 for activity in activities {
@@ -125,6 +126,7 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
     func reloadRowForActivity(activity: BmobObject) {
         fetchLikedActivitiesList()
         let query = BmobQuery(className: "Activity")
+        query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.getObjectInBackgroundWithId(activity.objectId) { (activity, error) -> Void in
             if error == nil {
                 self.activities[self.indexPathForSelectedActivity.section][self.indexPathForSelectedActivity.row] = activity
@@ -329,6 +331,7 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
      func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let query = BmobQuery(className: "Activity")
+        query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         let objectId = activities[indexPath.section][indexPath.row].objectId
         query.getObjectInBackgroundWithId(objectId) { (activity, error) -> Void in
             activity.incrementKey("PageView", byAmount: 1)
@@ -396,7 +399,7 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
                     let composer = MFMailComposeViewController()
                     composer.mailComposeDelegate = self
                     let subjectString = NSString(format: "Remix平台组织入驻申请")
-                    let bodyString = NSString(format: "简介:\n\n\n\n\n\n-----\n组织成立时间: \n组织名称:\n微信公众号ID:\n负责人联系方式:\n组织性质及分类:\n-----")
+                    let bodyString = NSString(format: "简介:\n\n\n\n\n\n-----\n组织所在城市: \n组织成立时间: \n组织名称:\n微信公众号ID:\n负责人联系方式:\n组织性质及分类:\n-----")
                     composer.setMessageBody(bodyString as String, isHTML: false)
                     composer.setSubject(subjectString as String)
                     composer.setToRecipients(["fongtinyik@gmail.com", "remixapp@163.com"])

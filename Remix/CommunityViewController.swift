@@ -38,6 +38,7 @@ class RMFirstFilteredViewController: CTFilteredViewController {
         
         fetchLikedActivitiesList()
         var query = BmobQuery(className: "Activity")
+        query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("isVisibleOnFilterList_1", equalTo: true)
         query.whereKey("isFloatingActivity", equalTo: false)

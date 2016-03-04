@@ -215,6 +215,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
                 likedActivitiesIds.append(activity.objectId)
                 toolBar.likesNumberLabel.text = String(Int(toolBar.likesNumberLabel.text!.stringByReplacingOccurrencesOfString("人已喜欢", withString: ""))!+1) + "人已喜欢"
                 let query = BmobQuery(className: "Activity")
+                query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
                 query.getObjectInBackgroundWithId(activity.objectId, block: { (activity, error) -> Void in
                     activity.incrementKey("LikesNumber", byAmount: 1)
                     activity.updateInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
@@ -229,6 +230,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
                 likedActivitiesIds.removeAtIndex(likedActivitiesIds.indexOf(activity.objectId)!)
                 toolBar.likesNumberLabel.text = String(Int(toolBar.likesNumberLabel.text!.stringByReplacingOccurrencesOfString("人已喜欢", withString: ""))!-1) + "人已喜欢"
                 let query = BmobQuery(className: "Activity")
+                query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
                 query.getObjectInBackgroundWithId(activity.objectId, block: { (activity, error) -> Void in
                     activity.decrementKey("LikesNumber", byAmount: 1)
                     activity.updateInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
