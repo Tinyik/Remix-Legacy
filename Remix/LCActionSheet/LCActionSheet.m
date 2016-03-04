@@ -9,9 +9,9 @@
 //
 
 #import "LCActionSheet.h"
-
+#import <ChameleonFramework/Chameleon.h>
 // 按钮高度
-#define BUTTON_H 49.0f
+#define BUTTON_H 55.0f
 // 屏幕尺寸
 #define SCREEN_SIZE [UIScreen mainScreen].bounds.size
 // 颜色
@@ -192,7 +192,7 @@
             UIColor *titleColor = nil;
             if (i == self.redButtonIndex) {
                 
-                titleColor = LCColor(255, 10, 10);
+                titleColor = FlatRed;
                 
             } else {
                 

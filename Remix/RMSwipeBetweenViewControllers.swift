@@ -19,6 +19,12 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
     var rm_delegate: RMSwipeBetweenViewControllersDelegate!
     var rm_delegate2: RMSwipeBetweenViewControllersDelegate!
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.cityLabel.text = REMIX_CITY_NAME
+        self.cityLabel.sizeToFit()
+    }
+    
     override func recommendActivityAndLocation() {
         print("Clikced")
         let sheet = LCActionSheet(title: "添加活动或地点至Remix。审核通过后其他用户将看到你的推荐。", buttonTitles: ["添加一条活动", "推荐一家店或地点", "入驻Remix"], redButtonIndex: -1) { (buttonIndex) -> Void in
@@ -54,12 +60,13 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
         cityNameArray = []
         print("Switch")
         let query = BmobQuery(className: "SupportedCities")
+        query.whereKey("isVisibleToUsers", equalTo: true)
         query.findObjectsInBackgroundWithBlock { (cities, error) -> Void in
             if error == nil {
                 for city in cities {
                     self.cityNameArray.append(city.objectForKey("CityName") as! String)
                 }
-                let sheet = LCActionSheet(title: "请选择你所在的城市。Remix团队将积极更新并尽快支持更多城市。", buttonTitles: self.cityNameArray + ["全国", "申请开通城市"], redButtonIndex: -1, delegate: self)
+                let sheet = LCActionSheet(title: "请选择你所在的城市。Remix团队将积极更新并尽快支持更多城市。", buttonTitles: self.cityNameArray + ["全国", "申请开通城市"], redButtonIndex: self.cityNameArray.count + 1, delegate: self)
                 sheet.show()
                 print("COUNT")
                 print(self.cityNameArray)
@@ -81,6 +88,7 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
             self.rm_delegate.refreshViewContentForCityChange()
             self.rm_delegate2.refreshViewContentForCityChange()
             self.cityLabel.text = REMIX_CITY_NAME
+            self.cityLabel.sizeToFit()
         }else if buttonIndex == cityNameArray.count + 1{
             //Apply for new city...
             
@@ -91,6 +99,7 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
             self.rm_delegate.refreshViewContentForCityChange()
             self.rm_delegate2.refreshViewContentForCityChange()
             self.cityLabel.text = REMIX_CITY_NAME
+            self.cityLabel.sizeToFit()
         }
     }
     

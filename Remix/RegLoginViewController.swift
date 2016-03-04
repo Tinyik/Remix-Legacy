@@ -128,6 +128,10 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
                 if error == nil {
                     CURRENT_USER = user
                     self.view.removeKeyboardControl()
+                    if CURRENT_USER.objectForKey("City") as! String == "全国" {
+                        naviController.switchRemixCity()
+                    }
+                    REMIX_CITY_NAME = CURRENT_USER.objectForKey("City") as! String
                     let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
                     let vc1 = storyBoard.instantiateViewControllerWithIdentifier("MainVC")
                     let vc2 = storyBoard.instantiateViewControllerWithIdentifier("CategoryVC")
@@ -136,6 +140,8 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
                     naviController = RMSwipeBetweenViewControllers(rootViewController: pageController)
                     naviController.viewControllerArray.addObjectsFromArray([vc1, vc2, vc3])
                     naviController.buttonText = ["活动", "分类", "组织"]
+                    naviController.rm_delegate = vc1 as! RMSwipeBetweenViewControllersDelegate
+                    naviController.rm_delegate2 = vc3 as! RMSwipeBetweenViewControllersDelegate
                     self.tr_presentViewController(naviController, method: TRPresentTransitionMethod.Fade)
 
                 }
@@ -190,6 +196,10 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
                     CURRENT_USER.setObject("全国", forKey: "City")
                     CURRENT_USER.updateInBackground()
                 }
+                if CURRENT_USER.objectForKey("City") as! String == "全国" {
+                    naviController.switchRemixCity()
+                }
+                REMIX_CITY_NAME = CURRENT_USER.objectForKey("City") as! String
                 let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
                 let vc1 = storyBoard.instantiateViewControllerWithIdentifier("MainVC")
                 let vc2 = storyBoard.instantiateViewControllerWithIdentifier("CategoryVC")
@@ -198,6 +208,8 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
                 naviController = RMSwipeBetweenViewControllers(rootViewController: pageController)
                 naviController.viewControllerArray.addObjectsFromArray([vc1, vc2, vc3])
                 naviController.buttonText = ["活动", "分类", "组织"]
+                naviController.rm_delegate = vc1 as! RMSwipeBetweenViewControllersDelegate
+                naviController.rm_delegate2 = vc3 as! RMSwipeBetweenViewControllersDelegate
                 self.tr_presentViewController(naviController, method: TRPresentTransitionMethod.Fade)
                 
             }else{

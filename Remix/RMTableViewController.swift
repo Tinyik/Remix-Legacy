@@ -90,6 +90,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         self.tableView.tableFooterView = UIView()
         searchBar.delegate = self
         headerScrollView.delegate = self
+        self.tableView.tableHeaderView?.hidden = true
         let refreshCtrl = UIRefreshControl()
         refreshCtrl.addTarget(self, action: "refresh", forControlEvents: .ValueChanged)
         self.refreshControl = refreshCtrl

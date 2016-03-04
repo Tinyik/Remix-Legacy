@@ -121,10 +121,11 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
     [showAdd addTarget:self action:@selector(recommendActivityAndLocation) forControlEvents:UIControlEventTouchUpInside];
     [showAdd setBackgroundImage:[UIImage imageNamed:@"Add"] forState:UIControlStateNormal];
     
-    cityLabel = [[UILabel alloc] initWithFrame:CGRectMake(barLogoView.frame.origin.x + 75, barLogoView.frame.origin.y + 5, 40, 30)];
-    cityLabel.text = @"上海";
+    cityLabel = [[UILabel alloc] initWithFrame:CGRectMake(barLogoView.frame.origin.x + 75, barLogoView.frame.origin.y + 14, 40, 10)];
+    cityLabel.text = @"全国";
     cityLabel.textColor = [UIColor whiteColor];
     cityLabel.font = [UIFont systemFontOfSize:12];
+    [cityLabel sizeToFit];
     [navigationView addSubview:cityLabel];
     [navigationView addSubview:barLogoView];
     [navigationView addSubview:showSettings];
