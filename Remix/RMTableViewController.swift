@@ -685,6 +685,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("LAUNCHTIME")
+        print(launchedTimes)
+        print("saten")
+        print(shouldAskToEnableNotif)
         if launchedTimes! == 1 && shouldAskToEnableNotif {
             askToEnableNotifications()
             shouldAskToEnableNotif = false
@@ -751,9 +755,11 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     }
     
     func askToEnableNotifications() {
+        print("ASK")
+
         if UIApplication.sharedApplication().isRegisteredForRemoteNotifications() == false {
-            
-        let alert = UIAlertController(title: "推送设置", message: "Remix需要你允许推送消息才能及时传递魔都学生圈的最新消息。想要现在允许推送消息吗？(●'◡'●)ﾉ♥", preferredStyle: .Alert)
+        print("ASKING")
+        let alert = UIAlertController(title: "推送设置", message: "Remix需要你允许推送消息才能及时传递当前城市学生圈的最新消息。想要现在允许推送消息吗？(●'◡'●)ﾉ♥", preferredStyle: .Alert)
         let buttonOK = UIAlertAction(title: "好的", style: .Default) { (action) -> Void in
             self.promptToEnableNotifications()
         }

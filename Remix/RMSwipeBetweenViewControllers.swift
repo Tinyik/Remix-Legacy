@@ -84,7 +84,11 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
         if buttonIndex == cityNameArray.count {
             REMIX_CITY_NAME = "全国"
             CURRENT_USER.setObject(REMIX_CITY_NAME, forKey: "City")
-            CURRENT_USER.updateInBackground()
+            CURRENT_USER.updateInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
+                if error == nil {
+                    sharedOneSignalInstance.sendTag("City", value: REMIX_CITY_NAME)
+                }
+            })
             self.rm_delegate.refreshViewContentForCityChange()
             self.rm_delegate2.refreshViewContentForCityChange()
             self.cityLabel.text = REMIX_CITY_NAME
@@ -95,7 +99,11 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
         }else if buttonIndex != cityNameArray.count + 2{
             REMIX_CITY_NAME = cityNameArray[buttonIndex]
             CURRENT_USER.setObject(REMIX_CITY_NAME, forKey: "City")
-            CURRENT_USER.updateInBackground()
+            CURRENT_USER.updateInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
+                if error == nil {
+                    sharedOneSignalInstance.sendTag("City", value: REMIX_CITY_NAME)
+                }
+            })
             self.rm_delegate.refreshViewContentForCityChange()
             self.rm_delegate2.refreshViewContentForCityChange()
             self.cityLabel.text = REMIX_CITY_NAME

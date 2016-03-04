@@ -132,6 +132,7 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
                         naviController.switchRemixCity()
                     }
                     REMIX_CITY_NAME = CURRENT_USER.objectForKey("City") as! String
+                    sharedOneSignalInstance.sendTag("City", value: REMIX_CITY_NAME)
                     let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
                     let vc1 = storyBoard.instantiateViewControllerWithIdentifier("MainVC")
                     let vc2 = storyBoard.instantiateViewControllerWithIdentifier("CategoryVC")
@@ -200,6 +201,7 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
                     naviController.switchRemixCity()
                 }
                 REMIX_CITY_NAME = CURRENT_USER.objectForKey("City") as! String
+                sharedOneSignalInstance.sendTag("City", value: REMIX_CITY_NAME)
                 let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
                 let vc1 = storyBoard.instantiateViewControllerWithIdentifier("MainVC")
                 let vc2 = storyBoard.instantiateViewControllerWithIdentifier("CategoryVC")
