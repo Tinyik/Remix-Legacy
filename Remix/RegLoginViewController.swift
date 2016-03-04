@@ -128,13 +128,10 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
                 if error == nil {
                     CURRENT_USER = user
                     self.view.removeKeyboardControl()
-                    REMIX_CITY_NAME = "上海"
                     let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
                     let vc1 = storyBoard.instantiateViewControllerWithIdentifier("MainVC")
                     let vc2 = storyBoard.instantiateViewControllerWithIdentifier("CategoryVC")
                     let vc3 = storyBoard.instantiateViewControllerWithIdentifier("OrgsVC")
-                    naviController.rm_delegate = vc1 as! RMSwipeBetweenViewControllersDelegate
-                    naviController.rm_delegate2 = vc3 as! RMSwipeBetweenViewControllersDelegate
                     let pageController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
                     naviController = RMSwipeBetweenViewControllers(rootViewController: pageController)
                     naviController.viewControllerArray.addObjectsFromArray([vc1, vc2, vc3])
@@ -193,13 +190,10 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
                     CURRENT_USER.setObject("全国", forKey: "City")
                     CURRENT_USER.updateInBackground()
                 }
-                REMIX_CITY_NAME = CURRENT_USER.objectForKey("City") as! String
                 let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
                 let vc1 = storyBoard.instantiateViewControllerWithIdentifier("MainVC")
                 let vc2 = storyBoard.instantiateViewControllerWithIdentifier("CategoryVC")
                 let vc3 = storyBoard.instantiateViewControllerWithIdentifier("OrgsVC")
-                naviController.rm_delegate = vc1 as! RMSwipeBetweenViewControllersDelegate
-                naviController.rm_delegate2 = vc3 as! RMSwipeBetweenViewControllersDelegate
                 let pageController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
                 naviController = RMSwipeBetweenViewControllers(rootViewController: pageController)
                 naviController.viewControllerArray.addObjectsFromArray([vc1, vc2, vc3])

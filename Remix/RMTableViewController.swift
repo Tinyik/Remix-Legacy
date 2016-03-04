@@ -16,16 +16,7 @@ let DEVICE_SCREEN_HEIGHT = UIScreen.mainScreen().bounds.height
 let COMMENTS_TABLE_VIEW_VISIBLE_HEIGHT: CGFloat = 450
 var APPLICATION_UI_REMOTE_CONFIG: BmobObject!
 var CURRENT_USER: BmobUser!
-var REMIX_CITY_NAME: String! {
-    didSet {
-        CURRENT_USER.setObject(REMIX_CITY_NAME, forKey: "City")
-        CURRENT_USER.updateInBackground()
-        naviController.rm_delegate.refreshViewContentForCityChange()
-        naviController.rm_delegate2.refreshViewContentForCityChange()
-        (UIApplication.sharedApplication().delegate?.window??.rootViewController as! RMSwipeBetweenViewControllers).cityLabel.text = REMIX_CITY_NAME
-    }
-
-}
+var REMIX_CITY_NAME: String!
 
 var naviController: RMSwipeBetweenViewControllers!
 var isHomepageFirstLaunching: Bool!
@@ -365,16 +356,12 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                     }
                 }
                 self.fetchOrdersInformation()
-                if self.tableView != nil {
-                    self.tableView.reloadData()
-                }
+                self.tableView.reloadData()
               
             }else{
                 self.tableView.contentOffset = CGPointMake(0, 0 - self.tableView.contentInset.top)
                 self.tableView.tableHeaderView?.hidden = true
-                if self.tableView != nil {
-                    self.tableView.reloadData()
-                }
+                self.tableView.reloadData()
             }
         }
         

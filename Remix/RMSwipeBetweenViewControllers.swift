@@ -86,7 +86,11 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
             
         }else if buttonIndex != cityNameArray.count + 2{
             REMIX_CITY_NAME = cityNameArray[buttonIndex]
- 
+            CURRENT_USER.setObject(REMIX_CITY_NAME, forKey: "City")
+            CURRENT_USER.updateInBackground()
+            self.rm_delegate.refreshViewContentForCityChange()
+            self.rm_delegate2.refreshViewContentForCityChange()
+            self.cityLabel.text = REMIX_CITY_NAME
         }
     }
     
