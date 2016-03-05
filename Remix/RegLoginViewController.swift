@@ -128,9 +128,6 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
                 if error == nil {
                     CURRENT_USER = user
                     self.view.removeKeyboardControl()
-                    if CURRENT_USER.objectForKey("City") as! String == "全国" {
-                        naviController.switchRemixCity()
-                    }
                     REMIX_CITY_NAME = CURRENT_USER.objectForKey("City") as! String
                     sharedOneSignalInstance.sendTag("City", value: REMIX_CITY_NAME)
                     let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
@@ -196,9 +193,6 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
                 if _user.objectForKey("City") == nil {
                     CURRENT_USER.setObject("全国", forKey: "City")
                     CURRENT_USER.updateInBackground()
-                }
-                if CURRENT_USER.objectForKey("City") as! String == "全国" {
-                    naviController.switchRemixCity()
                 }
                 REMIX_CITY_NAME = CURRENT_USER.objectForKey("City") as! String
                 sharedOneSignalInstance.sendTag("City", value: REMIX_CITY_NAME)

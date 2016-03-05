@@ -22,7 +22,8 @@ var naviController: RMSwipeBetweenViewControllers!
 var isHomepageFirstLaunching: Bool!
 var hasPromptedToEnableNotif: Bool!
 var sharedOneSignalInstance: OneSignal!
-
+var launchedTimes: Int!
+var shouldAskToEnableNotif = true
 class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelegate, UISearchBarDelegate, PKPaymentAuthorizationViewControllerDelegate, BmobPayDelegate, RMActivityViewControllerDelegate, RMSwipeBetweenViewControllersDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -38,7 +39,6 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     @IBOutlet weak var filterLabel_1: UILabel!
     
     var isRefreshing: Bool = false
-    var shouldAskToEnableNotif = true
     var coverImgURLs: [[NSURL]] = []
     var activities: [[BmobObject]] = []
     var headerAds: [BmobObject] = []
@@ -50,7 +50,6 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     var adTargetURLs: [NSURL] = []
     var bannerAds: [BmobObject]!
     var randomAdIndex = Int()
-    var launchedTimes: Int!
     var pageControl = UIPageControl(frame: CGRectMake(80, 240, 200, 50))
     
     var indexPathForSelectedActivity: NSIndexPath!
@@ -69,16 +68,22 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             launchedTimes = launchedTimes! + 1
             userDefaults.setObject(launchedTimes, forKey: "LaunchedTimes")
         }
+        print("LAUNCHEDTIMES")
         print(launchedTimes)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateLaunchedTimes()
-        if launchedTimes % 10 == 0 {
-            askToEnableNotifications()
+        //Just to get around the not-in-hierarchy issue by adding a bit of delay here.
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            if launchedTimes % 3 == 0 || launchedTimes == 2 {
+                self.askToEnableNotifications()
+            }
         }
-        
+        if CURRENT_USER.objectForKey("City") as! String == "全国" && launchedTimes == 1 {
+            naviController.switchRemixCity()
+        }
         cellZoomAnimationDuration = 0.4
         cellZoomXScaleFactor = 1.1
         cellZoomYScaleFactor = 1.1
@@ -111,6 +116,8 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         self.tableView.separatorColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.4)
         self.navigationItem.hidesBackButton = true
     }
+    
+    
     
     func setUpTapTrackingArea() {
         for var i = 0; i < 3; ++i {
@@ -685,11 +692,8 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("LAUNCHTIME")
-        print(launchedTimes)
-        print("saten")
-        print(shouldAskToEnableNotif)
-        if launchedTimes! == 1 && shouldAskToEnableNotif {
+      
+        if launchedTimes == 1 && shouldAskToEnableNotif {
             askToEnableNotifications()
             shouldAskToEnableNotif = false
         }
@@ -755,20 +759,45 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     }
     
     func askToEnableNotifications() {
-        print("ASK")
+        print("asking..")
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        sharedOneSignalInstance.IdsAvailable { (userId, pushToken) -> Void in
+            if pushToken != nil {
+                userDefault.setBool(true, forKey: "isRegisteredForNotif")
+                print(pushToken)
+            }else{
+                userDefault.setBool(false, forKey: "isRegisteredForNotif")
+                print("nil token")
+            }
+            
+        }
+        if let key = userDefault.objectForKey("isRegisteredForNotif") as? Bool {
+            print("KEYNOTNIL")
+            print(key)
+            if key == false {
+                let alert = UIAlertController(title: "推送设置", message: "Remix需要你允许推送消息才能及时传递当前城市学生圈的最新消息。想要现在允许推送消息吗？(●'◡'●)ﾉ♥", preferredStyle: .Alert)
+                let buttonOK = UIAlertAction(title: "好的", style: .Default) { (action) -> Void in
+                    self.promptToEnableNotifications()
+                }
+                let buttonCancel = UIAlertAction(title: "不了谢谢", style: .Default, handler: nil)
+                alert.addAction(buttonCancel)
+                alert.addAction(buttonOK)
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+        }else{
+            let alert = UIAlertController(title: "推送设置", message: "Remix需要你允许推送消息才能及时传递当前城市学生圈的最新消息。想要现在允许推送消息吗？(●'◡'●)ﾉ♥", preferredStyle: .Alert)
+            let buttonOK = UIAlertAction(title: "好的", style: .Default) { (action) -> Void in
+                self.promptToEnableNotifications()
+            }
+            let buttonCancel = UIAlertAction(title: "不了谢谢", style: .Default, handler: nil)
+            alert.addAction(buttonCancel)
+            alert.addAction(buttonOK)
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+        }
 
-        if UIApplication.sharedApplication().isRegisteredForRemoteNotifications() == false {
-        print("ASKING")
-        let alert = UIAlertController(title: "推送设置", message: "Remix需要你允许推送消息才能及时传递当前城市学生圈的最新消息。想要现在允许推送消息吗？(●'◡'●)ﾉ♥", preferredStyle: .Alert)
-        let buttonOK = UIAlertAction(title: "好的", style: .Default) { (action) -> Void in
-            self.promptToEnableNotifications()
-        }
-        let buttonCancel = UIAlertAction(title: "稍后再问", style: .Default, handler: nil)
-        alert.addAction(buttonCancel)
-        alert.addAction(buttonOK)
-        self.presentViewController(alert, animated: true, completion: nil)
-        }
-    }
+        
+           }
     
     func promptToEnableNotifications() {
         

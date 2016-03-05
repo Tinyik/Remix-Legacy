@@ -161,7 +161,7 @@ class GalleryViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         // FIXME: 非空判断
         let query = BmobQuery(className: "Gallery")
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
@@ -170,9 +170,15 @@ class GalleryViewController: UITableViewController {
             galleryObject.incrementKey("PageView", byAmount: 1)
             galleryObject.updateInBackground()
         }
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            let webView = RxWebViewController(url: NSURL(string: galleryObjects[indexPath.section][indexPath.row].objectForKey("URL") as! String)!)
-                self.navigationController?.pushViewController(webView, animated: true)
+        
+        if let URLString = galleryObjects[indexPath.section][indexPath.row].objectForKey("URL") as? String {
+            print(URLString)
+            let webView = RxWebViewController(url: NSURL(string: URLString))
+            self.navigationController?.pushViewController(webView, animated: true)
+        }else{
+            //Erro handling...
+        }
+        
             
         
     }

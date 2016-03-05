@@ -113,6 +113,10 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         orgsCollectionView.deselectItemAtIndexPath(indexPath, animated: false)
+        if launchedTimes! == 1 && shouldAskToEnableNotif {
+            askToEnableNotifications()
+            shouldAskToEnableNotif = false
+        }
         self.organizationName = names[indexPath.row]
         collectionView.deselectItemAtIndexPath(indexPath, animated: true)
         self.performSegueWithIdentifier("showOrgHomepage", sender: nil)
@@ -179,6 +183,66 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    func askToEnableNotifications() {
+        print("asking..")
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        sharedOneSignalInstance.IdsAvailable { (userId, pushToken) -> Void in
+            if pushToken != nil {
+                userDefault.setBool(true, forKey: "isRegisteredForNotif")
+                print(pushToken)
+            }else{
+                userDefault.setBool(false, forKey: "isRegisteredForNotif")
+                print("nil token")
+            }
+            
+        }
+        if let key = userDefault.objectForKey("isRegisteredForNotif") as? Bool {
+            print("KEYNOTNIL")
+            print(key)
+            if key == false {
+                let alert = UIAlertController(title: "推送设置", message: "Remix需要你允许推送消息才能及时传递当前城市学生圈的最新消息。想要现在允许推送消息吗？(●'◡'●)ﾉ♥", preferredStyle: .Alert)
+                let buttonOK = UIAlertAction(title: "好的", style: .Default) { (action) -> Void in
+                    self.promptToEnableNotifications()
+                }
+                let buttonCancel = UIAlertAction(title: "不了谢谢", style: .Default, handler: nil)
+                alert.addAction(buttonCancel)
+                alert.addAction(buttonOK)
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+        }else{
+            let alert = UIAlertController(title: "推送设置", message: "Remix需要你允许推送消息才能及时传递当前城市学生圈的最新消息。想要现在允许推送消息吗？(●'◡'●)ﾉ♥", preferredStyle: .Alert)
+            let buttonOK = UIAlertAction(title: "好的", style: .Default) { (action) -> Void in
+                self.promptToEnableNotifications()
+            }
+            let buttonCancel = UIAlertAction(title: "不了谢谢", style: .Default, handler: nil)
+            alert.addAction(buttonCancel)
+            alert.addAction(buttonOK)
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+        }
+        
+        
+    }
+    
+    func promptToEnableNotifications() {
+        
+        if hasPromptedToEnableNotif == false {
+            sharedOneSignalInstance.registerForPushNotifications()
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            userDefaults.setObject(true, forKey: "hasPromptedToEnableNotif")
+            hasPromptedToEnableNotif = true
+            
+        }else{
+            
+            let instruction = UIAlertController(title: "如何开启消息通知", message: "请进入 设置->通知->Remix->允许通知 来开启Remix推送消息。", preferredStyle: .Alert)
+            let ok = UIAlertAction(title: "好的", style: .Default, handler: nil)
+            instruction.addAction(ok)
+            self.presentViewController(instruction, animated: true, completion: nil)
+            
+        }
+    }
+
 
   
 }

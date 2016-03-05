@@ -21,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
        
         let image = UIImage(named: "back")
-     //   sharedOneSignalInstance = OneSignal(launchOptions: launchOptions, appId: "7a1e4c8b-51f0-49f1-b50a-72cc581121a0", handleNotification: nil, autoRegister: false)
-    //    OneSignal.defaultClient().enableInAppAlertNotification(true)
+        sharedOneSignalInstance = OneSignal(launchOptions: launchOptions, appId: "7a1e4c8b-51f0-49f1-b50a-72cc581121a0", handleNotification: nil, autoRegister: false)
+        OneSignal.defaultClient().enableInAppAlertNotification(true)
         Bmob.registerWithAppKey("08329e2e3a8d3cdde96bf91d7459e8ab")
       //  BmobPaySDK.registerWithAppKey("08329e2e3a8d3cdde96bf91d7459e8ab")
         MobClick.startWithAppkey("56ba8fa2e0f55a1071000931", reportPolicy: BATCH, channelId: nil)
@@ -115,6 +115,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
             
         }
+        
+        print(url.host)
+        print(url.path)
+        print(url.query)
+        //FIXMIE: URL Scheme
         
         if url.scheme == "remix" && url.host != "" && url.path == "" && url.query == "" {
             if BmobUser.getCurrentUser() != nil {
