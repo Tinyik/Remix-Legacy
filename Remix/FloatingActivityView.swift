@@ -217,6 +217,7 @@ class FloatingActivityView: UIView, BmobPayDelegate {
         newOrder.setObject(true, forKey: "isVisibleToUsers")
         newOrder.saveInBackgroundWithResultBlock { (isSuccessful, error) -> Void in
             if isSuccessful {
+                sharedOneSignalInstance.sendTag(self.ongoingTransactionId, value: "PaySuccess")
                 self.fetchOrdersInformation()
                 let alert = UIAlertController(title: "支付状态", message: "报名成功！Remix已经把你的基本信息发送给了活动主办方。请进入 \"我的订单\" 查看", preferredStyle: .Alert)
                 let cancel = UIAlertAction(title: "继续逛逛", style: .Cancel, handler: nil)

@@ -73,10 +73,15 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
     
     override func switchRemixCity() {
         cityNameArray = []
-        print("Switch")
+        self.cityLabel.text = "切换中..."
+        self.cityLabel.sizeToFit()
+        self.view.userInteractionEnabled = false
         let query = BmobQuery(className: "SupportedCities")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.findObjectsInBackgroundWithBlock { (cities, error) -> Void in
+            self.cityLabel.text = REMIX_CITY_NAME
+            self.cityLabel.sizeToFit()
+            self.view.userInteractionEnabled = true
             if error == nil {
                 for city in cities {
                     self.cityNameArray.append(city.objectForKey("CityName") as! String)
@@ -85,6 +90,11 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
                 sheet.show()
                 print("COUNT")
                 print(self.cityNameArray)
+            }else{
+                let alert = UIAlertController(title: "Remix提示", message: "切换城市失败，请检查你的网络连接后重试", preferredStyle: .Alert)
+                let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+                alert.addAction(action)
+                self.presentViewController(alert, animated: true, completion: nil)
             }
         }
        

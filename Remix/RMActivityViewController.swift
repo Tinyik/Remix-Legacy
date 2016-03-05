@@ -117,7 +117,6 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
                 if _isRegOpen == true {
                     if checkPersonalInfoIntegrity() {
                         
-                        
                         if let _needInfo = activity.objectForKey("isRequireRemarks") as? Bool {
                             if _needInfo == true {
                                 let prompt = activity.objectForKey("AdditionalPrompt") as? String
@@ -214,6 +213,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
             if likedActivitiesIds.contains(activity.objectId) == false {
                 likedActivitiesIds.append(activity.objectId)
                 toolBar.likesNumberLabel.text = String(Int(toolBar.likesNumberLabel.text!.stringByReplacingOccurrencesOfString("人已喜欢", withString: ""))!+1) + "人已喜欢"
+                sharedOneSignalInstance.sendTag(self.activity.objectId, value: "Liked")
                 let query = BmobQuery(className: "Activity")
                 query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
                 query.getObjectInBackgroundWithId(activity.objectId, block: { (activity, error) -> Void in
@@ -340,6 +340,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
         newOrder.setObject(true, forKey: "isVisibleToUsers")
         newOrder.saveInBackgroundWithResultBlock { (isSuccessful, error) -> Void in
             if isSuccessful {
+                sharedOneSignalInstance.sendTag(self.ongoingTransactionId, value: "PaySuccess")
                 self.fetchOrdersInformation()
                 let alert = UIAlertController(title: "支付状态", message: "报名成功！Remix已经把你的基本信息发送给了活动主办方。请进入 \"我的订单\" 查看", preferredStyle: .Alert)
                 let cancel = UIAlertAction(title: "继续逛逛", style: .Cancel, handler: nil)

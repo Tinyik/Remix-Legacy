@@ -28,6 +28,7 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchCloudData()
+        sharedOneSignalInstance.sendTag(filterName, value: "Visited")
         setUpParallaxHeaderView()
         self.navigationController?.navigationBar.tintColor = .whiteColor()
         self.title = filterName
@@ -159,6 +160,9 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
         manager.downloadImageWithURL(headerImageURL, options: .RetryFailed, progress: nil) { (image, error, cachetype, finished, url) -> Void in
             if error == nil{
                 self.headerImage = image
+                if self.tableView != nil {
+                    self.setUpParallaxHeaderView()
+                }
             }
         }
     }

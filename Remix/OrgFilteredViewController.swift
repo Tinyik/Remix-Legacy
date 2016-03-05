@@ -29,6 +29,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchCloudData()
+        sharedOneSignalInstance.sendTag(orgName, value: "Visited")
         self.navigationController?.navigationBar.tintColor = .whiteColor()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "关于我们", style: .Plain, target: self, action: "showOrgIntroView")
         self.title = orgName
@@ -62,9 +63,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
             let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(UIImage(named: "SDPlaceholder"), forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.width*0.667)) as! ParallaxHeaderView
             self.tableView.tableHeaderView = headerView
         }
-        
-//        headerView.headerTitleLabel.text = orgName
-        
+                
     }
     
     override func viewDidAppear(animated: Bool) {

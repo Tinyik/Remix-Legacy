@@ -576,6 +576,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
             query.findObjectsInBackgroundWithBlock({ (promotions, error) -> Void in
                 if promotions.count > 0{
+                    print("PROMO")
                     for promotion in promotions {
                         self.bannerAds.append(promotion as! BmobObject)
                     }
