@@ -3155,10 +3155,10 @@
                         <color key="backgroundColor" red="0.97849589646464641" green="0.97849589646464641" blue="0.97849589646464641" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" rowHeight="155" id="TAm-se-udm" customClass="ActivityOrderCell" customModule="Remix" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="50" width="375" height="155"/>
+                                <rect key="frame" x="0.0" y="49.5" width="375" height="155"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TAm-se-udm" id="ZPH-ba-mwk">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="155"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="154.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LoF-4G-QQA">

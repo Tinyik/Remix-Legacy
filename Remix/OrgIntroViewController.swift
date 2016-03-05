@@ -10,6 +10,7 @@ import UIKit
 import MWPhotoBrowser
 import MessageUI
 
+
 class OrgIntroViewController: UIViewController, MWPhotoBrowserDelegate, MFMailComposeViewControllerDelegate {
 
     @IBOutlet weak var scrollView: UIScrollView!
@@ -99,6 +100,7 @@ class OrgIntroViewController: UIViewController, MWPhotoBrowserDelegate, MFMailCo
         }
     }
     
+        
     func fetchGalleryURLs() {
         let query = BmobQuery(className: "OrgGallery")
         query.whereKey("OrgName", equalTo: orgName)

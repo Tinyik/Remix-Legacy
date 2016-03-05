@@ -84,16 +84,20 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods-Remix/CBZSplashView.framework"
   install_framework "Pods-Remix/ChameleonFramework.framework"
   install_framework "Pods-Remix/DACircularProgress.framework"
   install_framework "Pods-Remix/MBProgressHUD.framework"
   install_framework "Pods-Remix/MWPhotoBrowser.framework"
   install_framework "Pods-Remix/SDWebImage.framework"
+  install_framework "Pods-Remix/TTGSnackbar.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods-Remix/CBZSplashView.framework"
   install_framework "Pods-Remix/ChameleonFramework.framework"
   install_framework "Pods-Remix/DACircularProgress.framework"
   install_framework "Pods-Remix/MBProgressHUD.framework"
   install_framework "Pods-Remix/MWPhotoBrowser.framework"
   install_framework "Pods-Remix/SDWebImage.framework"
+  install_framework "Pods-Remix/TTGSnackbar.framework"
 fi

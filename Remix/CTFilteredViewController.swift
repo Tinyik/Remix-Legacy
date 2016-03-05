@@ -51,10 +51,12 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         self.navigationController?.navigationBar.translucent = false
     }
     
     override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
         self.navigationController?.navigationBar.translucent = true
     }
     

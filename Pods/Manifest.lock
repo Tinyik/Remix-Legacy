@@ -1,4 +1,5 @@
 PODS:
+  - CBZSplashView (1.0.0)
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
@@ -11,16 +12,21 @@ PODS:
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
+  - TTGSnackbar (0.3.0)
 
 DEPENDENCIES:
+  - CBZSplashView (~> 1.0.0)
   - ChameleonFramework/Swift
   - MWPhotoBrowser
+  - TTGSnackbar
 
 SPEC CHECKSUMS:
+  CBZSplashView: 9ce4cba22024476ff4a97d6433e7347da6376016
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MWPhotoBrowser: ba0d0c09ffda3a7ea10093518738c502c1c7141c
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+  TTGSnackbar: 894b05212357acb4202329dd380c048a707d533e
 
 COCOAPODS: 0.39.0

@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import MessageUI
+import TTGSnackbar
 
 class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MGSwipeTableCellDelegate, OrganizationViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, MFMailComposeViewControllerDelegate, RMActivityViewControllerDelegate {
     
@@ -22,7 +23,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
     var orgName: String = "BookyGreen"
     var headerImage: UIImage!
     var headerImageLoaded = false
-    
+    var snackBar: TTGSnackbar!
     var indexPathForSelectedActivity: NSIndexPath!
     
     override func viewDidLoad() {
@@ -41,11 +42,16 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         self.navigationController?.navigationBar.translucent = false
     }
     
     override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
         self.navigationController?.navigationBar.translucent = true
+        if snackBar != nil {
+            self.snackBar.dismiss()
+        }
     }
     
     func setUpParallaxHeaderView() {
@@ -164,6 +170,23 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         query.findObjectsInBackgroundWithBlock { (organizations, error) -> Void in
             if error == nil {
                 for org in organizations {
+                    if let _wechatId = org.objectForKey("WechatId") as? String {
+                        self.snackBar = TTGSnackbar.init(message: "微信公众号:   " + _wechatId, duration: .Forever, actionText: "关注") { (snackbar) -> Void in
+                            let alert = UIAlertController(title: "复制成功", message: "已复制到系统剪贴板, 即将打开微信。请在微信对话框中粘贴并搜索该公众号。", preferredStyle: .Alert)
+                            let action = UIAlertAction(title: "好的", style: .Default, handler: { (action) -> Void in
+                                UIPasteboard.generalPasteboard().string = _wechatId
+                                UIApplication.sharedApplication().openURL(NSURL(string: "weixin://")!)
+                                snackbar.dismiss()
+                            })
+                            alert.addAction(action)
+                            self.presentViewController(alert, animated: true, completion: nil)
+                        }
+                        self.snackBar.alpha = 0.8
+                        self.snackBar.backgroundColor = FlatBlueDark()
+                        self.snackBar.show()
+                        
+                    }
+
                     if let urlString = org.objectForKey("HomePageCoverImage") as? BmobFile {
                         let url = NSURL(string: urlString.url)
                         let manager = SDWebImageManager()

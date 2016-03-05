@@ -6,6 +6,8 @@
 target 'Remix' do
 pod "MWPhotoBrowser"
 pod 'ChameleonFramework/Swift'
+pod 'CBZSplashView', '~> 1.0.0'
+pod "TTGSnackbar"
 end
 
 target 'RemixTests' do

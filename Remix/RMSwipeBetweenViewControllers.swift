@@ -8,6 +8,7 @@
 
 import UIKit
 import MessageUI
+import CBZSplashView
 
 protocol RMSwipeBetweenViewControllersDelegate {
     func refreshViewContentForCityChange()
@@ -23,6 +24,20 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
         super.viewWillAppear(animated)
         self.cityLabel.text = REMIX_CITY_NAME
         self.cityLabel.sizeToFit()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let image = UIImage(named: "SplashLogo")
+        let bgColor = FlatBlueDark()
+        let splashView = CBZSplashView(icon: image, backgroundColor: bgColor)
+        self.view.addSubview(splashView)
+        splashView.animationDuration = 1.2
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.1 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+            splashView.startAnimation()
+        }
+
     }
     
     override func recommendActivityAndLocation() {

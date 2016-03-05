@@ -37,7 +37,7 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
         refreshCtrl.addTarget(self, action: "refresh", forControlEvents: .ValueChanged)
         orgsCollectionView.addSubview(refreshCtrl)
         fetchCloudData()
-        
+
     }
     
     
