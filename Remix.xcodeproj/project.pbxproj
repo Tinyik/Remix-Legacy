@@ -140,6 +140,8 @@
 		18E239301C80392800363655 /* SettingsInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2392F1C80392800363655 /* SettingsInputViewController.swift */; };
 		18E239321C805E1600363655 /* FloatingActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E239311C805E1600363655 /* FloatingActivityView.swift */; };
 		18E239341C805E2D00363655 /* FloatingActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E239331C805E2D00363655 /* FloatingActivityView.xib */; };
+		18E6209F1C8B38CC00B85941 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6209E1C8B38CC00B85941 /* BannerView.swift */; };
+		18E620A11C8B38E300B85941 /* BannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E620A01C8B38E300B85941 /* BannerView.xib */; };
 		18E684AF1C86EE4200C32C3D /* LCActionSheet.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18E684AC1C86EE4200C32C3D /* LCActionSheet.bundle */; };
 		18E684B01C86EE4200C32C3D /* LCActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E684AE1C86EE4200C32C3D /* LCActionSheet.m */; };
 		18E684B21C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E684B11C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift */; };
@@ -341,6 +343,8 @@
 		18E2392F1C80392800363655 /* SettingsInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SettingsInputViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18E239311C805E1600363655 /* FloatingActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FloatingActivityView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18E239331C805E2D00363655 /* FloatingActivityView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FloatingActivityView.xib; sourceTree = "<group>"; };
+		18E6209E1C8B38CC00B85941 /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
+		18E620A01C8B38E300B85941 /* BannerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BannerView.xib; sourceTree = "<group>"; };
 		18E684AC1C86EE4200C32C3D /* LCActionSheet.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LCActionSheet.bundle; sourceTree = "<group>"; };
 		18E684AD1C86EE4200C32C3D /* LCActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCActionSheet.h; sourceTree = "<group>"; };
 		18E684AE1C86EE4200C32C3D /* LCActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCActionSheet.m; sourceTree = "<group>"; };
@@ -585,6 +589,8 @@
 				189782511C63C7EF00458515 /* Main.storyboard */,
 				1824544F1C7FA16C00CF0CC6 /* VersionCheck.swift */,
 				18E239331C805E2D00363655 /* FloatingActivityView.xib */,
+				18E6209E1C8B38CC00B85941 /* BannerView.swift */,
+				18E620A01C8B38E300B85941 /* BannerView.xib */,
 				18E239311C805E1600363655 /* FloatingActivityView.swift */,
 				18E684B11C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift */,
 				1898CA4A1C6900B8009D3261 /* RegLoginViewController.swift */,
@@ -1032,6 +1038,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E620A11C8B38E300B85941 /* BannerView.xib in Resources */,
 				181F2B2C1C6A2D8D00FC237D /* backItemImage@2x.png in Resources */,
 				1857B5341C856BB000D00A9E /* PKImageBundle.bundle in Resources */,
 				181F2B2D1C6A2D8D00FC237D /* backItemImage_hl@2x.png in Resources */,
@@ -1232,6 +1239,7 @@
 				1857B5301C85623900D00A9E /* CommentInputViewController.swift in Sources */,
 				1857B52C1C855A7000D00A9E /* CommentsTableViewController.swift in Sources */,
 				1898CA8A1C69B599009D3261 /* OMINTransitionAnimation.swift in Sources */,
+				18E6209F1C8B38CC00B85941 /* BannerView.swift in Sources */,
 				18E239321C805E1600363655 /* FloatingActivityView.swift in Sources */,
 				18BCA03D1C6F827900DF3EC7 /* LabelFilteredViewController.swift in Sources */,
 				1897827E1C63C8F500458515 /* RMTableViewCell.swift in Sources */,

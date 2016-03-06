@@ -14,20 +14,25 @@ protocol OrganizationViewDelegate {
     
 }
 
-class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, MFMailComposeViewControllerDelegate, RMSwipeBetweenViewControllersDelegate {
+class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, MFMailComposeViewControllerDelegate, RMSwipeBetweenViewControllersDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var orgsCollectionView: UICollectionView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var organizationName = ""
     var delegate: OrganizationViewDelegate!
     var filteredParallaxImageURL: NSURL!
-    
+    var isSearching: Bool! = false
     var logoURLs: [NSURL] = []
     var names: [String] = []
     let refreshCtrl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.returnKeyType = .Search
+        searchBar.showsCancelButton = true
+        searchBar.tintColor = FlatBlueDark()
+        searchBar.delegate = self
         orgsCollectionView.delegate = self
         orgsCollectionView.dataSource = self
         orgsCollectionView.emptyDataSetDelegate = self
@@ -140,19 +145,32 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        
         let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(19)]
-        return NSAttributedString(string: "(:3[____] 这座城市似乎非常地冷清...\n", attributes: attrDic)
+        if isSearching == false {
+            
+            return NSAttributedString(string: "(:3[____] 这座城市似乎非常地冷清...\n", attributes: attrDic)
+        }else{
+           
+            return NSAttributedString(string: "(:3[____] 这座城市似乎没有你在找的组织...\n", attributes: attrDic)
+        }
     }
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(15)]
-        return NSAttributedString(string: "马上入驻Remix，成为这个城市里的第一个组织吧！", attributes: attrDic)
+        if isSearching == false{
+             return NSAttributedString(string: "马上入驻Remix，成为这个城市里的第一个组织吧！", attributes: attrDic)
+        }else{
+             return NSAttributedString(string: "要试试切换城市吗?", attributes: attrDic)
+        }
     }
     
     func buttonTitleForEmptyDataSet(scrollView: UIScrollView!, forState state: UIControlState) -> NSAttributedString! {
         let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(17), NSForegroundColorAttributeName: FlatRed()]
-        return NSAttributedString(string: "入驻Remix", attributes: attrDic)
+        if isSearching == false {
+            return NSAttributedString(string: "入驻Remix", attributes: attrDic)
+        }else{
+            return NSAttributedString(string: "切换城市", attributes: attrDic)
+        }
     }
     
     func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
@@ -168,15 +186,21 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func emptyDataSet(scrollView: UIScrollView!, didTapButton button: UIButton!) {
-        if MFMailComposeViewController.canSendMail() {
-            let composer = MFMailComposeViewController()
-            composer.mailComposeDelegate = self
-            let subjectString = NSString(format: "Remix平台组织入驻申请")
-            let bodyString = NSString(format: "简介:\n\n\n\n\n\n-----\n组织所在城市: \n组织成立时间: \n组织名称:\n微信公众号ID:\n负责人联系方式:\n组织性质及分类:\n-----")
-            composer.setMessageBody(bodyString as String, isHTML: false)
-            composer.setSubject(subjectString as String)
-            composer.setToRecipients(["fongtinyik@gmail.com", "remixapp@163.com"])
-            self.presentViewController(composer, animated: true, completion: nil)
+        if isSearching == false{
+            if MFMailComposeViewController.canSendMail() {
+                let composer = MFMailComposeViewController()
+                composer.mailComposeDelegate = self
+                let subjectString = NSString(format: "Remix平台组织入驻申请")
+                let bodyString = NSString(format: "简介:\n\n\n\n\n\n-----\n组织所在城市: \n组织成立时间: \n组织名称:\n微信公众号ID:\n负责人联系方式:\n组织性质及分类:\n-----")
+                composer.setMessageBody(bodyString as String, isHTML: false)
+                composer.setSubject(subjectString as String)
+                composer.setToRecipients(["fongtinyik@gmail.com", "remixapp@163.com"])
+                self.presentViewController(composer, animated: true, completion: nil)
+            }
+        }else{
+              searchBar.text = ""
+              isSearching = false
+             (self.navigationController as! RMSwipeBetweenViewControllers).switchRemixCity()
         }
     }
     
@@ -242,7 +266,60 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
             
         }
     }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        isSearching = true
+        logoURLs = []
+        names = []
+        let query = BmobQuery(className: "Organization")
+        query.whereKey("isVisibleToUsers", equalTo: true)
+        query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
+        query.findObjectsInBackgroundWithBlock { (organizations, error) -> Void in
+            if self.refreshCtrl.refreshing {
+                self.refreshCtrl.endRefreshing()
+            }
+            
+            
+            for org in organizations {
+                let name = org.objectForKey("Name") as! String
+                if (name.rangeOfString(self.searchBar.text!, options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil) != nil) {
+                    let logoFile = org.objectForKey("Logo") as! BmobFile
+                    let logoURL = NSURL(string: logoFile.url)!
+                    self.names.append(name)
+                    self.logoURLs.append(logoURL)
+                }else{
+                    if let wechat = org.objectForKey("WechatId") as? String {
+                        if (wechat.rangeOfString(self.searchBar.text!, options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil) != nil) {
+                            let logoFile = org.objectForKey("Logo") as! BmobFile
+                            let logoURL = NSURL(string: logoFile.url)!
+                            self.names.append(name)
+                            self.logoURLs.append(logoURL)
+                        }
+                    }
+                }
+                
 
+            }
+            
+            if self.orgsCollectionView != nil {
+                self.orgsCollectionView.reloadData()
+            }
+        }
 
-  
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        isSearching = false
+        searchBar.text = ""
+        fetchCloudData()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        searchBar.resignFirstResponder()
+    }
+    
+    
 }

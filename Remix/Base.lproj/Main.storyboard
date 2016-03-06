@@ -1795,8 +1795,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="deV-tO-kfL">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="minimal" placeholder="输入组织名称或微信公众号来搜索" translatesAutoresizingMaskIntoConstraints="NO" id="ma0-Ks-Gu5">
+                                <rect key="frame" x="0.0" y="93" width="375" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="deV-tO-kfL">
+                                <rect key="frame" x="0.0" y="137" width="375" height="530"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Kzx-XD-w6a">
                                     <size key="itemSize" width="115" height="116"/>
@@ -1851,16 +1855,11 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="3Zo-5I-iEJ" firstAttribute="top" secondItem="deV-tO-kfL" secondAttribute="bottom" id="FPp-p0-2lQ"/>
-                            <constraint firstItem="deV-tO-kfL" firstAttribute="leading" secondItem="BTg-Gi-wQc" secondAttribute="leading" id="Kra-l1-UWT"/>
-                            <constraint firstItem="deV-tO-kfL" firstAttribute="top" secondItem="LMy-P4-RqW" secondAttribute="bottom" id="YZ1-52-KM4"/>
-                            <constraint firstAttribute="trailing" secondItem="deV-tO-kfL" secondAttribute="trailing" id="Z6e-Gb-33x"/>
-                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="orgsCollectionView" destination="deV-tO-kfL" id="UmC-vW-iPB"/>
+                        <outlet property="searchBar" destination="ma0-Ks-Gu5" id="0HQ-Iu-ZvY"/>
                         <segue destination="J8Y-aY-87W" kind="push" identifier="showOrgHomepage" id="ccW-gV-vuD"/>
                     </connections>
                 </viewController>
@@ -3853,7 +3852,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Community" width="100" height="85"/>
+        <image name="Community" width="138" height="78"/>
         <image name="DetailButton" width="138" height="78"/>
         <image name="Fire" width="1729" height="1729"/>
         <image name="Gallery" width="856" height="504"/>

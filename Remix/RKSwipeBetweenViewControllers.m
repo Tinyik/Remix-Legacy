@@ -116,6 +116,7 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
     barLogoView.userInteractionEnabled = YES;
     barLogoView.frame = CGRectMake(self.navigationBar.frame.size.width/2-52, 10, 70, 26);
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchRemixCity)];
+     UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchRemixCity)];
     [barLogoView addGestureRecognizer:tap];
     UIButton *showAdd = [[UIButton alloc] initWithFrame:CGRectMake(5, 12, 25, 25)];
     [showAdd addTarget:self action:@selector(recommendActivityAndLocation) forControlEvents:UIControlEventTouchUpInside];
@@ -125,6 +126,8 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
     cityLabel.text = @"全国";
     cityLabel.textColor = [UIColor whiteColor];
     cityLabel.font = [UIFont systemFontOfSize:12];
+    [cityLabel addGestureRecognizer:tap2];
+    cityLabel.userInteractionEnabled = YES;
     [cityLabel sizeToFit];
     [navigationView addSubview:cityLabel];
     [navigationView addSubview:barLogoView];

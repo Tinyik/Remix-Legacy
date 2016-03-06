@@ -9,6 +9,7 @@
 import UIKit
 import PassKit
 import SDWebImage
+import TTGSnackbar
 
 // Global Constants
 let DEVICE_SCREEN_WIDTH = UIScreen.mainScreen().bounds.width
@@ -37,7 +38,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var filterLabel_2: UILabel!
     @IBOutlet weak var filterLabel_1: UILabel!
-    
+    var promoSnackbar: TTGSnackbar!
     var isRefreshing: Bool = false
     var coverImgURLs: [[NSURL]] = []
     var activities: [[BmobObject]] = []
@@ -51,7 +52,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     var bannerAds: [BmobObject]!
     var randomAdIndex = Int()
     var pageControl = UIPageControl(frame: CGRectMake(80, 240, 200, 50))
-    
+    var trackingAreas: [UIButton]! = []
     var indexPathForSelectedActivity: NSIndexPath!
     
     func updateLaunchedTimes() {
@@ -120,10 +121,12 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     
     
     func setUpTapTrackingArea() {
+        trackingAreas = []
         for var i = 0; i < 3; ++i {
             let button = UIButton(frame: CGRectMake(CGFloat(i)*DEVICE_SCREEN_WIDTH/3, 64, DEVICE_SCREEN_WIDTH/3, 30))
             button.backgroundColor = .clearColor()
             button.tag = i
+            trackingAreas.append(button)
             button.addTarget(self, action: "handlePageIndicatorSelection:", forControlEvents: .TouchUpInside)
             UIApplication.sharedApplication().keyWindow?.addSubview(button)
         }
@@ -131,6 +134,13 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     
     func handlePageIndicatorSelection(button: UIButton) {
         (self.navigationController as! RMSwipeBetweenViewControllers).tapSegmentButtonAction(button)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        for button in trackingAreas {
+            button.hidden = false
+        }
     }
     
     func loadRemoteUIConfigurations() {
@@ -145,6 +155,17 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 let url1 = NSURL(string: (config.objectForKey("FilterButton_1_Image") as? BmobFile)!.url)
                 let url2 = NSURL(string: (config.objectForKey("FilterButton_2_Image") as? BmobFile)!.url)
                 let url3 = NSURL(string: (config.objectForKey("LocationButton_Image") as? BmobFile)!.url)
+                if config.objectForKey("shouldShowSnackbar") as! Bool == true {
+                    let url = config.objectForKey("SnackbarURL") as! String
+                    let message = config.objectForKey("SnackbarMessage") as! String
+                    self.promoSnackbar = TTGSnackbar.init(message: message, duration: .Long, actionText: "查看", actionBlock: { (snackbar) -> Void in
+                        UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+                        self.promoSnackbar.dismiss()
+                    })
+                    self.promoSnackbar.backgroundColor = FlatBlueDark()
+                    self.promoSnackbar.alpha = 0.9
+                    self.promoSnackbar.show()
+                }
                 let manager = SDWebImageManager()
                 manager.downloadImageWithURL(url1, options: .RetryFailed, progress: nil, completed: { (image, error, type, isSuccessful, url) -> Void in
                     self.filterButton_1.setImage(image, forState: .Normal)
@@ -180,6 +201,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         if scrollView == headerScrollView {
         let pageNumber = round(scrollView.contentOffset.x / scrollView.frame.size.width)
         pageControl.currentPage = Int(pageNumber)
+            
         }
     }
     
@@ -384,14 +406,13 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     
     func refresh() {
         isRefreshing = true
+        self.adTableView.reloadData()
         loadRemoteUIConfigurations()
         fetchCloudData()
         fetchCloudAdvertisement()
 
     }
-    
-    
-    
+        
     func isMonthAdded(monthName: String) -> Bool {
         
         for _date in monthNameStrings {
@@ -584,7 +605,9 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                     let adImageURL = NSURL(string:(self.bannerAds[self.randomAdIndex].objectForKey("AdImage") as! BmobFile).url)
     
                     cell.adImageView.sd_setImageWithURL(adImageURL, placeholderImage: UIImage(named: "SDPlaceholder"))
-                    
+                    tableView.userInteractionEnabled = true
+                }else{
+                    tableView.userInteractionEnabled = false
                 }
             })
             return cell
@@ -753,6 +776,9 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     }
     
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        for button in trackingAreas {
+            button.hidden = true
+        }
         let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let searchResultVC = storyBoard.instantiateViewControllerWithIdentifier("SearchVC")
         self.navigationController?.pushViewController(searchResultVC, animated: true)
