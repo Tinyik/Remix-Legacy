@@ -472,11 +472,11 @@ public class ImageCheckCell<T: Equatable> : Cell<T>, CellType {
     }
     
     lazy public var trueImage: UIImage = {
-        return UIImage(named: "selected")!
+        return UIImage(named: "selectedRectangle")!
     }()
     
     lazy public var falseImage: UIImage = {
-        return UIImage(named: "unselected")!
+        return UIImage(named: "unselectedRectangle")!
     }()
     
     public override func update() {

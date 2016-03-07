@@ -15,7 +15,7 @@ class ActivitySubmissionViewController: FormViewController {
     
     var cates: [BmobObject] = []
     var cities: [String] = []
-    
+    var isModal = true
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpParallaxHeaderView()
@@ -23,14 +23,16 @@ class ActivitySubmissionViewController: FormViewController {
         TextFloatLabelRow.defaultCellSetup = { cell, row in cell.textField.textColor = FlatRed() }
         URLFloatLabelRow.defaultCellSetup = { cell, row in cell.textField.textColor = FlatRed() }
         TextAreaRow.defaultCellSetup = { cell, row in cell.textView.alpha = 0.7 }
-        self.navigationController?.navigationBar.tintColor = .whiteColor()
-        self.navigationController?.navigationBar.barTintColor = FlatBlueDark()
-        self.navigationController?.navigationBar.translucent = false
         self.navigationController?.hidesNavigationBarHairline = true
         self.title = "提交活动至Remix"
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提交", style: .Plain, target: self, action: "submitActivity")
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: "popCurrentVC")
+        if isModal == true {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: "popCurrentVC")
+            self.navigationController?.navigationBar.translucent = false
+
+        }
+    
         form +++
             
         
@@ -39,6 +41,11 @@ class ActivitySubmissionViewController: FormViewController {
                 $0.title = "我是活动主办方"
                 $0.value = false
                 }
+            <<< SwitchRow("FakeRow") {
+                $0.title = "有人报名时通知我"
+                $0.value = true
+                $0.hidden = "$isCoordinator == false"
+            }
             
         +++
         Section("活动信息")
@@ -111,6 +118,17 @@ class ActivitySubmissionViewController: FormViewController {
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.tintColor = .whiteColor()
+        self.navigationController?.navigationBar.barTintColor = FlatBlueDark()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.tintColor = FlatBlueDark()
+        self.navigationController?.navigationBar.barTintColor = .whiteColor()
+    }
     
     func popCurrentVC() {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -366,10 +384,7 @@ class ActivitySubmissionViewController: FormViewController {
                         lrow.tag = option.objectForKey("DisplayName") as! String
                         lrow.selectableValue = option.objectForKey("Name") as! String
                         lrow.value = nil
-                        }.cellSetup { cell, _ in
-                            cell.trueImage = UIImage(named: "selectedRectangle")!
-                            cell.falseImage = UIImage(named: "unselectedRectangle")!
-                    }
+                        }
                 }
              self.form[2] <<< TextFloatLabelRow("OtherCate") {
                     $0.title = "其他类别"

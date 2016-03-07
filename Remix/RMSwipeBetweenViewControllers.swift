@@ -76,8 +76,10 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
     
     override func switchRemixCity() {
         cityNameArray = []
-        self.cityLabel.text = "切换中..."
-        self.cityLabel.sizeToFit()
+        if self.cityLabel != nil {
+            self.cityLabel.text = "切换中..."
+            self.cityLabel.sizeToFit()
+        }
         self.view.userInteractionEnabled = false
         let query = BmobQuery(className: "SupportedCities")
         query.whereKey("isVisibleToUsers", equalTo: true)

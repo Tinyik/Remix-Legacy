@@ -121,7 +121,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(url.query)
         //FIXMIE: URL Scheme
         
-        if url.scheme == "remix" && url.host != "" && url.path == "" && url.query == "" {
+        if url.scheme == "remix" && url.host?.characters.count > 0 && url.path?.characters.count == 0 && url.query == nil {
             if BmobUser.getCurrentUser() != nil {
                 let query = BmobQuery(className: "Activity")
                 var activity = BmobObject()
@@ -148,7 +148,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
             }
             
-        }else if url.scheme == "remix" && url.host != "" && url.path != "" && url.query != "" {
+        }else if url.scheme == "remix" && url.host?.characters.count > 0 && url.path?.characters.count > 0 && url.query?.characters.count > 0 {
             if BmobUser.getCurrentUser() != nil {
                 let newActivity = BmobObject(className: "UnderReview")
                 newActivity.setObject(url.host, forKey: "URL")
@@ -201,13 +201,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         
         
-        }else{
-            let alert = UIAlertController(title: "Remix提示", message: "Remix URL Scheme加载失败。", preferredStyle: .Alert)
-            let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
-            alert.addAction(action)
-            self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
         }
-        
         
         
         return true

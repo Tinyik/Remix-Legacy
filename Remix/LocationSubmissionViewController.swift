@@ -14,6 +14,7 @@ import SDWebImage
 class LocationSubmissionViewController: FormViewController {
     
     var cities: [String] = []
+     var isModal = true
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpParallaxHeaderView()
@@ -21,14 +22,16 @@ class LocationSubmissionViewController: FormViewController {
         TextFloatLabelRow.defaultCellSetup = { cell, row in cell.textField.textColor = FlatRed() }
         URLFloatLabelRow.defaultCellSetup = { cell, row in cell.textField.textColor = FlatRed() }
         TextAreaRow.defaultCellSetup = { cell, row in cell.textView.alpha = 0.7 }
-        self.navigationController?.navigationBar.tintColor = .whiteColor()
-        self.navigationController?.navigationBar.barTintColor = FlatBlueDark()
-        self.navigationController?.navigationBar.translucent = false
         self.navigationController?.hidesNavigationBarHairline = true
         self.title = "提交地点至Remix"
+        if isModal == true {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: "popCurrentVC")
+            self.navigationController?.navigationBar.translucent = false
+            
+        }
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提交", style: .Plain, target: self, action: "submitLocation")
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: "popCurrentVC")
+        
         form +++
         Section("身份")
             <<< SwitchRow("isCoordinator") {
@@ -85,7 +88,19 @@ class LocationSubmissionViewController: FormViewController {
  
         
     }
-
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.tintColor = .whiteColor()
+        self.navigationController?.navigationBar.barTintColor = FlatBlueDark()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.tintColor = FlatBlueDark()
+        self.navigationController?.navigationBar.barTintColor = .whiteColor()
+    }
+    
     func popCurrentVC() {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -272,10 +287,7 @@ class LocationSubmissionViewController: FormViewController {
                         lrow.tag = option
                         lrow.selectableValue = option
                         lrow.value = nil
-                        }.cellSetup { cell, _ in
-                            cell.trueImage = UIImage(named: "selectedRectangle")!
-                            cell.falseImage = UIImage(named: "unselectedRectangle")!
-                    }
+                        }
                 }
                 
                 self.form +++ Section("负责人联系方式", { (section) -> () in

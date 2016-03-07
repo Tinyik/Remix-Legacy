@@ -10,7 +10,7 @@ import UIKit
 import PassKit
 import SDWebImage
 import TTGSnackbar
-
+ 
 // Global Constants
 let DEVICE_SCREEN_WIDTH = UIScreen.mainScreen().bounds.width
 let DEVICE_SCREEN_HEIGHT = UIScreen.mainScreen().bounds.height
@@ -157,15 +157,18 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 let url2 = NSURL(string: (config.objectForKey("FilterButton_2_Image") as? BmobFile)!.url)
                 let url3 = NSURL(string: (config.objectForKey("LocationButton_Image") as? BmobFile)!.url)
                 if config.objectForKey("shouldShowSnackbar") as! Bool == true {
-                    let url = config.objectForKey("SnackbarURL") as! String
-                    let message = config.objectForKey("SnackbarMessage") as! String
-                    self.promoSnackbar = TTGSnackbar.init(message: message, duration: .Long, actionText: "查看", actionBlock: { (snackbar) -> Void in
-                        UIApplication.sharedApplication().openURL(NSURL(string: url)!)
-                        self.promoSnackbar.dismiss()
-                    })
-                    self.promoSnackbar.backgroundColor = FlatBlueDark()
-                    self.promoSnackbar.alpha = 0.9
-                    self.promoSnackbar.show()
+                    if launchedTimes % 3 != 0 && launchedTimes != 2 && launchedTimes != 1 {
+                        let url = config.objectForKey("SnackbarURL") as! String
+                        let message = config.objectForKey("SnackbarMessage") as! String
+                        self.promoSnackbar = TTGSnackbar.init(message: message, duration: .Long, actionText: "查看", actionBlock: { (snackbar) -> Void in
+                            UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+                            self.promoSnackbar.dismiss()
+                        })
+                        self.promoSnackbar.backgroundColor = FlatBlueDark()
+                        self.promoSnackbar.alpha = 0.9
+                        self.promoSnackbar.show()
+                    }
+                    
                 }
                 let manager = SDWebImageManager()
                 manager.downloadImageWithURL(url1, options: .RetryFailed, progress: nil, completed: { (image, error, type, isSuccessful, url) -> Void in

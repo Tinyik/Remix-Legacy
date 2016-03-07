@@ -97,6 +97,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             if indexPath.row == 1 {
            
                 cell.titleLabel.text = "向我们推荐活动"
+                 cell.titleLabel.textColor = FlatRed()
                 cell.detailsLabel.text = "审核通过后你的推荐将出现在首页。"
               
                 return cell
@@ -105,7 +106,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
                 cell2.label.text = "我的订单"
                 return cell2
             }else{
-                cell.titleLabel.text = "向我们推荐魔都好去处"
+                cell.titleLabel.text = "向我们推荐好店/地点"
+                cell.titleLabel.textColor = FlatRed()
                 cell.detailsLabel.text = "你的推荐将出现在首页地点推荐中。"
                 return cell
             }
@@ -118,7 +120,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         switch indexPath.row {
         case 0: cell.label.text = "告诉朋友"
         case 1: cell.label.text = "反馈"
-        case 2: cell.label.text = "加入我们"
+        case 2: cell.label.text = "入驻Remix"
         default: break
         }
        
@@ -180,12 +182,14 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
                 self.navigationController?.pushViewController(ordersVC, animated: true)
                 
             case 1:
-                let webView = RMWebViewController(url: NSURL(string: "http://jsform.com/f/v5pfam")!)
-                self.navigationController?.pushViewController(webView, animated: true)
+                let subm = ActivitySubmissionViewController()
+                subm.isModal = false
+                self.navigationController?.pushViewController(subm, animated: true)
                 
             case 2:
-                let webView = RMWebViewController(url: NSURL(string: "http://jsform.com/f/j49bk8")!)
-                self.navigationController?.pushViewController(webView, animated: true)
+                let subm = LocationSubmissionViewController()
+                subm.isModal = false
+                self.navigationController?.pushViewController(subm, animated: true)
                 
                 
             default: break

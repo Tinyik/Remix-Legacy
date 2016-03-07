@@ -117,10 +117,11 @@ class LocationViewController: UITableViewController {
         
         override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             
-            // FIXME: 非空判断
+            
             let query = BmobQuery(className: "Location")
             query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
             let objectId = locationObjects[indexPath.row].objectId
+            sharedOneSignalInstance.sendTag(objectId, value: "LocationVisited")
             query.getObjectInBackgroundWithId(objectId) { (locationObject, error) -> Void in
                 locationObject.incrementKey("PageView", byAmount: 1)
                 locationObject.updateInBackground()
