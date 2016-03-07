@@ -44,13 +44,16 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
         print("Clikced")
         let sheet = LCActionSheet(title: "添加活动或地点至Remix。审核通过后其他用户将看到你的推荐。", buttonTitles: ["添加一条活动", "推荐一家店或地点", "入驻Remix"], redButtonIndex: -1) { (buttonIndex) -> Void in
             if buttonIndex == 0 {
-                 let webVC = RxWebViewController(url:NSURL(string: "http://jsform.com/f/v5pfam")!)
-                 self.pushViewController(webVC, animated: true)
+                 let submVC = ActivitySubmissionViewController()
+                 let navigationController = UINavigationController(rootViewController: submVC)
+                 self.presentViewController(navigationController, animated: true, completion: nil)
             }
             
             if buttonIndex == 1 {
-                let webVC = RxWebViewController(url:NSURL(string: "http://jsform.com/f/j49bk8")!)
-                self.pushViewController(webVC, animated: true)
+                let submVC = LocationSubmissionViewController()
+                let navigationController = UINavigationController(rootViewController: submVC)
+                self.presentViewController(navigationController, animated: true, completion: nil)
+
             }
             
             if buttonIndex == 2 {

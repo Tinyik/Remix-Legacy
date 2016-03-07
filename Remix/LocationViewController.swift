@@ -126,9 +126,10 @@ class LocationViewController: UITableViewController {
                 locationObject.updateInBackground()
             }
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
-                
-                let webView = RxWebViewController(url: NSURL(string: locationObjects[indexPath.row].objectForKey("URL") as! String)!)
+            if let url = locationObjects[indexPath.row].objectForKey("URL") as? String {
+                let webView = RxWebViewController(url: NSURL(string: url))
                 self.navigationController?.pushViewController(webView, animated: true)
+            }
                 
   
         }

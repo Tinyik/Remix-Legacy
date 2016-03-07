@@ -8,6 +8,7 @@ pod "MWPhotoBrowser"
 pod 'ChameleonFramework/Swift'
 pod 'CBZSplashView', '~> 1.0.0'
 pod "TTGSnackbar"
+pod 'Eureka', '~> 1.3'
 end
 
 target 'RemixTests' do

@@ -72,6 +72,7 @@ class CategoryViewController: UITableViewController {
     
     func fetchCloudData() {
         let query = BmobQuery(className: "Category")
+        query.whereKey("isVisibleToUsers", equalTo: true)
         query.findObjectsInBackgroundWithBlock { (categories, error) -> Void in
             for category in categories {
                 let databaseName = category.objectForKey("Name") as! String
@@ -116,6 +117,7 @@ class CategoryViewController: UITableViewController {
         }
 
         let query = BmobQuery(className: "Category")
+        query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("Name", equalTo: cloudCoverTitles[indexPath.row])
         query.findObjectsInBackgroundWithBlock { (categories, error) -> Void in
             if error == nil {

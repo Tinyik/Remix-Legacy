@@ -250,7 +250,6 @@
 }
 
 - (UIWindow *)backWindow {
-    
     if (_backWindow == nil) {
         
         _backWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -331,7 +330,6 @@
 - (void)show {
     [self setupMainView];
     self.backWindow.hidden = NO;
-    
     [self addSubview:self.bottomView];
     [self.backWindow addSubview:self];
     
@@ -345,6 +343,7 @@
         [_bottomView setFrame:frame];
         
     } completion:nil];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 
 - (void)addButtonTitle:(NSString *)button

@@ -142,6 +142,11 @@
 		18E239341C805E2D00363655 /* FloatingActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E239331C805E2D00363655 /* FloatingActivityView.xib */; };
 		18E6209F1C8B38CC00B85941 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6209E1C8B38CC00B85941 /* BannerView.swift */; };
 		18E620A11C8B38E300B85941 /* BannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E620A01C8B38E300B85941 /* BannerView.xib */; };
+		18E620A41C8C160E00B85941 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E620A31C8C160E00B85941 /* Eureka.framework */; };
+		18E620A61C8C194C00B85941 /* ActivitySubmissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E620A51C8C194C00B85941 /* ActivitySubmissionViewController.swift */; };
+		18E620AA1C8C591000B85941 /* FloatLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E620A91C8C591000B85941 /* FloatLabelTextField.swift */; };
+		18E620AC1C8C591800B85941 /* CustomCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E620AB1C8C591800B85941 /* CustomCells.swift */; };
+		18E620AE1C8D5F9600B85941 /* LocationSubmissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E620AD1C8D5F9600B85941 /* LocationSubmissionViewController.swift */; };
 		18E684AF1C86EE4200C32C3D /* LCActionSheet.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18E684AC1C86EE4200C32C3D /* LCActionSheet.bundle */; };
 		18E684B01C86EE4200C32C3D /* LCActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E684AE1C86EE4200C32C3D /* LCActionSheet.m */; };
 		18E684B21C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E684B11C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift */; };
@@ -345,6 +350,11 @@
 		18E239331C805E2D00363655 /* FloatingActivityView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FloatingActivityView.xib; sourceTree = "<group>"; };
 		18E6209E1C8B38CC00B85941 /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		18E620A01C8B38E300B85941 /* BannerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BannerView.xib; sourceTree = "<group>"; };
+		18E620A31C8C160E00B85941 /* Eureka.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Eureka.framework; path = "Pods/../build/Debug-iphoneos/Eureka.framework"; sourceTree = "<group>"; };
+		18E620A51C8C194C00B85941 /* ActivitySubmissionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySubmissionViewController.swift; sourceTree = "<group>"; };
+		18E620A91C8C591000B85941 /* FloatLabelTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatLabelTextField.swift; sourceTree = "<group>"; };
+		18E620AB1C8C591800B85941 /* CustomCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCells.swift; sourceTree = "<group>"; };
+		18E620AD1C8D5F9600B85941 /* LocationSubmissionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSubmissionViewController.swift; sourceTree = "<group>"; };
 		18E684AC1C86EE4200C32C3D /* LCActionSheet.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LCActionSheet.bundle; sourceTree = "<group>"; };
 		18E684AD1C86EE4200C32C3D /* LCActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCActionSheet.h; sourceTree = "<group>"; };
 		18E684AE1C86EE4200C32C3D /* LCActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCActionSheet.m; sourceTree = "<group>"; };
@@ -363,6 +373,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E620A41C8C160E00B85941 /* Eureka.framework in Frameworks */,
 				1824544E1C7F977A00CF0CC6 /* AlipaySDK.bundle in Frameworks */,
 				182454411C7F833800CF0CC6 /* PassKit.framework in Frameworks */,
 				18E684C81C88662900C32C3D /* OneSignal.framework in Frameworks */,
@@ -593,6 +604,8 @@
 				18E620A01C8B38E300B85941 /* BannerView.xib */,
 				18E239311C805E1600363655 /* FloatingActivityView.swift */,
 				18E684B11C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift */,
+				18E620A51C8C194C00B85941 /* ActivitySubmissionViewController.swift */,
+				18E620AD1C8D5F9600B85941 /* LocationSubmissionViewController.swift */,
 				1898CA4A1C6900B8009D3261 /* RegLoginViewController.swift */,
 				180199551C79E25F00A6C7E4 /* TermsAndConditionsViewController.swift */,
 				180C089F1C8ADBC50025136D /* File.swift */,
@@ -730,6 +743,7 @@
 			isa = PBXGroup;
 			children = (
 				18B317C51C6B243900336A92 /* DeviceInformation.swift */,
+				18E620A81C8C590100B85941 /* EurekaHelper */,
 				180C08B11C8AFE780025136D /* EmptyDataSet */,
 				18E684AB1C86EE4200C32C3D /* LCActionSheet */,
 				1857B5311C856B9E00D00A9E /* AvatarCapture */,
@@ -884,6 +898,15 @@
 			name = FaceAware;
 			sourceTree = "<group>";
 		};
+		18E620A81C8C590100B85941 /* EurekaHelper */ = {
+			isa = PBXGroup;
+			children = (
+				18E620A91C8C591000B85941 /* FloatLabelTextField.swift */,
+				18E620AB1C8C591800B85941 /* CustomCells.swift */,
+			);
+			name = EurekaHelper;
+			sourceTree = "<group>";
+		};
 		18E684AB1C86EE4200C32C3D /* LCActionSheet */ = {
 			isa = PBXGroup;
 			children = (
@@ -897,6 +920,7 @@
 		CCC49B28BC1297BAC2F5C421 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				18E620A31C8C160E00B85941 /* Eureka.framework */,
 				18E684C51C88657800C32C3D /* OneSignal.framework */,
 				182454401C7F833800CF0CC6 /* PassKit.framework */,
 				1841F87B1C7739150046D57F /* libstdc++.tbd */,
@@ -1216,6 +1240,7 @@
 				1898CA7F1C69B599009D3261 /* UIViewController+TRPresent.swift in Sources */,
 				1898CA951C69B599009D3261 /* TRViewControllerAnimatedTransitioning.swift in Sources */,
 				18BCA02D1C6E489400DF3EC7 /* LocationViewController.swift in Sources */,
+				18E620AC1C8C591800B85941 /* CustomCells.swift in Sources */,
 				1898CA401C68ADCF009D3261 /* UIImage+ImageEffects.m in Sources */,
 				1899E9CD1C67108A00ADC2AC /* GalleryViewController.swift in Sources */,
 				1898CA8E1C69B599009D3261 /* SlideTransitionAnimation.swift in Sources */,
@@ -1229,9 +1254,11 @@
 				18E684B21C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift in Sources */,
 				1898CA931C69B599009D3261 /* TransitionTreasury.swift in Sources */,
 				18E684B51C87243300C32C3D /* UIScrollView+EmptyDataSet.m in Sources */,
+				18E620A61C8C194C00B85941 /* ActivitySubmissionViewController.swift in Sources */,
 				187AE32E1C65ECBB00B255FF /* SettingsViewController.swift in Sources */,
 				1899E9BC1C663E3B00ADC2AC /* MGSwipeButton.m in Sources */,
 				1898CA811C69B599009D3261 /* UINavigationController+TRPushPop.swift in Sources */,
+				18E620AA1C8C591000B85941 /* FloatLabelTextField.swift in Sources */,
 				18C79D861C83EDCF004AAA44 /* RMPageViewController.swift in Sources */,
 				18B317C41C6B183000336A92 /* OrgFilteredViewController.swift in Sources */,
 				184857141C63E5BC004E516A /* CTTableViewCell.swift in Sources */,
@@ -1265,6 +1292,7 @@
 				181F2B311C6A2D8D00FC237D /* RxWebViewNavigationViewController.m in Sources */,
 				1857BDFA1C65B78700A51248 /* CTFilteredViewController.swift in Sources */,
 				1898CA801C69B599009D3261 /* TRNavgationTransitionDelegate.swift in Sources */,
+				18E620AE1C8D5F9600B85941 /* LocationSubmissionViewController.swift in Sources */,
 				1898CA871C69B599009D3261 /* ElevateTransitionAnimation.swift in Sources */,
 				18A443901C64EEAC00FEB149 /* OrgCell.swift in Sources */,
 			);
@@ -1427,6 +1455,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Remix",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = Remix/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1460,6 +1489,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Remix",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = Remix/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
