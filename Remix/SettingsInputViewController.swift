@@ -15,7 +15,7 @@ protocol SettingInputViewDelegate {
     func setInputFieldText(text:String!)
 }
 
-class SettingsInputViewController: UIViewController, SettingInputViewDelegate, UITextFieldDelegate,UIGestureRecognizerDelegate {
+class SettingsInputViewController: UIViewController, SettingInputViewDelegate, UITextFieldDelegate {
 
     
     @IBOutlet weak var inputField: UITextField!
@@ -38,14 +38,8 @@ class SettingsInputViewController: UIViewController, SettingInputViewDelegate, U
         let spaceView = UIView(frame: CGRectMake(0,0,10,10))
         inputField.leftViewMode = .Always
         inputField.leftView = spaceView
-        let backButton = UIButton(frame: CGRectMake(0,0,30,30))
-        backButton.setImage(UIImage(named: "back"), forState: .Normal)
-        backButton.addTarget(self, action: "popCurrentVC", forControlEvents: .TouchUpInside)
-        let backItem = UIBarButtonItem(customView: backButton)
-        self.navigationItem.leftBarButtonItem = backItem
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "保存", style: .Plain, target: self, action: "saveEditedInformation")
         self.navigationItem.rightBarButtonItem?.tintColor = .blackColor()
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         self.title = editingKey
         // Do any additional setup after loading the view.
     }
