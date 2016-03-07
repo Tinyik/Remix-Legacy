@@ -268,8 +268,17 @@ class ActivitySubmissionViewController: FormViewController {
                                     alert.addAction(action)
                                     self.presentViewController(alert, animated: true, completion: nil)
 
+                                }else{
+                                    let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                                    snackBar.backgroundColor = FlatWatermelonDark()
+                                    snackBar.show()
                                 }
+
                             })
+                        }else{
+                            let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                            snackBar.backgroundColor = FlatWatermelonDark()
+                            snackBar.show()
                         }
                     }
                 }
@@ -340,7 +349,12 @@ class ActivitySubmissionViewController: FormViewController {
                         alert.addAction(action)
                         self.presentViewController(alert, animated: true, completion: nil)
                         
+                    }else{
+                        let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                        snackBar.backgroundColor = FlatWatermelonDark()
+                        snackBar.show()
                     }
+
                 })
                 
             }
@@ -358,10 +372,17 @@ class ActivitySubmissionViewController: FormViewController {
             let manager = SDWebImageManager()
             let query = BmobQuery(className: "UIRemoteConfig")
             query.getObjectInBackgroundWithId("Cd3f1112") { (remix, error) -> Void in
-                let url = NSURL(string: (remix.objectForKey("ActivitySubm_Image") as! BmobFile).url)
-                manager.downloadImageWithURL(url, options: .RetryFailed, progress: nil) { (image, error, type, bool, url) -> Void in
-                    let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(image, forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.width/2)) as! ParallaxHeaderView
-                    self.tableView!.tableHeaderView = headerView
+                if error == nil {
+                    let url = NSURL(string: (remix.objectForKey("ActivitySubm_Image") as! BmobFile).url)
+                    manager.downloadImageWithURL(url, options: .RetryFailed, progress: nil) { (image, error, type, bool, url) -> Void in
+                        let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(image, forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.width/2)) as! ParallaxHeaderView
+                        self.tableView!.tableHeaderView = headerView
+                    }
+                }else{
+                    let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                    snackBar.backgroundColor = FlatWatermelonDark()
+                    snackBar.show()
+
                 }
 
             }
@@ -456,10 +477,18 @@ class ActivitySubmissionViewController: FormViewController {
 
 
                         
+                    }else{
+                        let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                        snackBar.backgroundColor = FlatWatermelonDark()
+                        snackBar.show()
                     }
                 })
                 
-                           }
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
+            }
         }
 
     }

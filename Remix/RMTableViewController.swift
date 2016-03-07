@@ -180,6 +180,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 manager.downloadImageWithURL(url3, options: .RetryFailed, progress: nil, completed: { (image, error, type, isSuccessful, url) -> Void in
                     self.locationButton.setImage(image, forState: .Normal)
                 })
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
         }
     }
@@ -228,6 +232,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                     self.registeredActivitiesIds.append(order.objectForKey("ParentActivityObjectId") as! String)
                 }
                 self.setUpFloatingScrollView()
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
         }
     }
@@ -355,48 +363,56 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         query.whereKey("isVisibleOnMainList", equalTo: true)
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
-            if activities.count > 0 {
-                self.tableView.tableHeaderView?.hidden = false
-                for activity in activities {
-                    if activity.objectForKey("isFloatingActivity") as! Bool == false {
-                        
-                        let coverImg = activity.objectForKey("CoverImg") as! BmobFile
-                        let imageURL = NSURL(string:coverImg.url)!
-                        
-                        let dateString = activity.objectForKey("Date") as! String
-                        let monthName = dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2]
-                        
-                        if self.isMonthAdded(monthName) == false {
-                            self.monthNameStrings.append(monthName)
-                            self.activities.append([activity as! BmobObject])
-                            self.coverImgURLs.append([imageURL])
-                            print(self.monthNameStrings)
-                        } else {
+            if error == nil {
+                if activities.count > 0 {
+                    self.tableView.tableHeaderView?.hidden = false
+                    for activity in activities {
+                        if activity.objectForKey("isFloatingActivity") as! Bool == false {
                             
-                            if let index = self.activities.indexOf({
+                            let coverImg = activity.objectForKey("CoverImg") as! BmobFile
+                            let imageURL = NSURL(string:coverImg.url)!
+                            
+                            let dateString = activity.objectForKey("Date") as! String
+                            let monthName = dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2]
+                            
+                            if self.isMonthAdded(monthName) == false {
+                                self.monthNameStrings.append(monthName)
+                                self.activities.append([activity as! BmobObject])
+                                self.coverImgURLs.append([imageURL])
+                                print(self.monthNameStrings)
+                            } else {
                                 
-                                ($0[0].objectForKey("Date") as! String).componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2] == monthName})
-                            {
-                                self.activities[index].append(activity as! BmobObject)
-                                self.coverImgURLs[index].append(imageURL)
+                                if let index = self.activities.indexOf({
+                                    
+                                    ($0[0].objectForKey("Date") as! String).componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2] == monthName})
+                                {
+                                    self.activities[index].append(activity as! BmobObject)
+                                    self.coverImgURLs[index].append(imageURL)
+                                }
+                                
                             }
                             
+                            
+                        }else{
+                            print("NO")
+                            self.floatingActivities.append(activity as! BmobObject)
                         }
-                        
-
-                    }else{
-                        print("NO")
-                        self.floatingActivities.append(activity as! BmobObject)
                     }
+                    self.fetchOrdersInformation()
+                    self.tableView.reloadData()
+                    
+                }else{
+                    self.tableView.contentOffset = CGPointMake(0, 0 - self.tableView.contentInset.top)
+                    self.tableView.tableHeaderView?.hidden = true
+                    self.tableView.reloadData()
                 }
-                self.fetchOrdersInformation()
-                self.tableView.reloadData()
-              
+
             }else{
-                self.tableView.contentOffset = CGPointMake(0, 0 - self.tableView.contentInset.top)
-                self.tableView.tableHeaderView?.hidden = true
-                self.tableView.reloadData()
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
+
         }
         
                 fetchLikedActivitiesList()
@@ -448,9 +464,17 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         if let parentActivityId = headerAds[(sender.view?.tag)!].objectForKey("ParentActivityObjectId") as? String {
             let query = BmobQuery(className: "Activity")
             query.getObjectInBackgroundWithId(parentActivityId, block: { (activity, error) -> Void in
-                let activityView = RMActivityViewController(url: NSURL(string: activity.objectForKey("URL") as! String))
-                activityView.activity = activity
-                self.navigationController?.pushViewController(activityView, animated: true)
+                if error == nil {
+                    let activityView = RMActivityViewController(url: NSURL(string: activity.objectForKey("URL") as! String))
+                    activityView.activity = activity
+                    self.navigationController?.pushViewController(activityView, animated: true)
+
+                }else{
+                    let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                    snackBar.backgroundColor = FlatWatermelonDark()
+                    snackBar.show()
+                }
+
             })
             
         }else{
@@ -479,7 +503,12 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             if error == nil {
                 self.activities[self.indexPathForSelectedActivity.section][self.indexPathForSelectedActivity.row] = activity
                 self.tableView.reloadRowsAtIndexPaths([self.indexPathForSelectedActivity], withRowAnimation: .Automatic)
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
+
         }
     }
     
@@ -600,19 +629,27 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             query.whereKey("isVisibleToUsers", equalTo: true)
             query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
             query.findObjectsInBackgroundWithBlock({ (promotions, error) -> Void in
-                if promotions.count > 0{
-                    print("PROMO")
-                    for promotion in promotions {
-                        self.bannerAds.append(promotion as! BmobObject)
+                if error == nil {
+                    if promotions.count > 0{
+                        print("PROMO")
+                        for promotion in promotions {
+                            self.bannerAds.append(promotion as! BmobObject)
+                        }
+                        self.randomAdIndex = Int(arc4random_uniform(UInt32(self.bannerAds.count)))
+                        let adImageURL = NSURL(string:(self.bannerAds[self.randomAdIndex].objectForKey("AdImage") as! BmobFile).url)
+                        
+                        cell.adImageView.sd_setImageWithURL(adImageURL, placeholderImage: UIImage(named: "SDPlaceholder"))
+                        tableView.userInteractionEnabled = true
+                    }else{
+                        tableView.userInteractionEnabled = false
                     }
-                     self.randomAdIndex = Int(arc4random_uniform(UInt32(self.bannerAds.count)))
-                    let adImageURL = NSURL(string:(self.bannerAds[self.randomAdIndex].objectForKey("AdImage") as! BmobFile).url)
-    
-                    cell.adImageView.sd_setImageWithURL(adImageURL, placeholderImage: UIImage(named: "SDPlaceholder"))
-                    tableView.userInteractionEnabled = true
                 }else{
-                    tableView.userInteractionEnabled = false
+                    let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                    snackBar.backgroundColor = FlatWatermelonDark()
+                    snackBar.show()
                 }
+
+                
             })
             return cell
         }else {
@@ -652,6 +689,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                             let url = NSURL(string: (org.objectForKey("Logo") as! BmobFile).url)
                             cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                         }
+                    }else{
+                        let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                        snackBar.backgroundColor = FlatWatermelonDark()
+                        snackBar.show()
                     }
                 })
                 print("sdfsdf")
@@ -702,6 +743,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                         let url = NSURL(string: (org.objectForKey("Logo") as! BmobFile).url)
                         cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                     }
+                }else{
+                    let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                    snackBar.backgroundColor = FlatWatermelonDark()
+                    snackBar.show()
                 }
             })
             if likedActivitiesIds.contains(_objId) {
@@ -731,8 +776,15 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
             let objectId = bannerAds[randomAdIndex].objectId
             query.getObjectInBackgroundWithId(objectId) { (ad, error) -> Void in
-                ad.incrementKey("PageView", byAmount: 1)
-                ad.updateInBackground()
+                if error == nil {
+                    ad.incrementKey("PageView", byAmount: 1)
+                    ad.updateInBackground()
+
+                }else{
+                    let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                    snackBar.backgroundColor = FlatWatermelonDark()
+                    snackBar.show()
+                }
             }
             let adTargetURL = NSURL(string:(self.bannerAds[Int(self.randomAdIndex)].objectForKey("URL") as! String))
             

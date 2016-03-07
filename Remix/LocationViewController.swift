@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import TTGSnackbar
 
 class LocationViewController: UITableViewController {
     
@@ -32,27 +32,33 @@ class LocationViewController: UITableViewController {
             query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
             query.whereKey("isVisibleToUsers", equalTo: true)
             query.findObjectsInBackgroundWithBlock { (locationObjects, error) -> Void in
-                if locationObjects.count > 0 {
-                    for location in locationObjects {
-                        var imageURLs:[NSURL] = []
-                        for key in self.photoKeys {
-                            
-                            if let imageFile = location.objectForKey(key) as? BmobFile {
-                                let imageURL = NSURL(string: imageFile.url)!
-
-                                imageURLs.append(imageURL)
-                            }
-                        }
-
-                        self.photoURLArray.append(imageURLs)
-                        self.locationObjects.append(location as! BmobObject)
-                        
-                       
-                    }
-                    print(self.photoURLArray)
-                    self.tableView.reloadData()
-                }
                 
+                if error == nil {
+                    if locationObjects.count > 0 {
+                        for location in locationObjects {
+                            var imageURLs:[NSURL] = []
+                            for key in self.photoKeys {
+                                
+                                if let imageFile = location.objectForKey(key) as? BmobFile {
+                                    let imageURL = NSURL(string: imageFile.url)!
+                                    
+                                    imageURLs.append(imageURL)
+                                }
+                            }
+                            
+                            self.photoURLArray.append(imageURLs)
+                            self.locationObjects.append(location as! BmobObject)
+                            
+                            
+                        }
+                        print(self.photoURLArray)
+                        self.tableView.reloadData()
+                    }
+                }else{
+                    let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                    snackBar.backgroundColor = FlatWatermelonDark()
+                    snackBar.show()
+                }
                
             }
             
@@ -123,8 +129,15 @@ class LocationViewController: UITableViewController {
             let objectId = locationObjects[indexPath.row].objectId
             sharedOneSignalInstance.sendTag(objectId, value: "LocationVisited")
             query.getObjectInBackgroundWithId(objectId) { (locationObject, error) -> Void in
-                locationObject.incrementKey("PageView", byAmount: 1)
-                locationObject.updateInBackground()
+                if error == nil {
+                    locationObject.incrementKey("PageView", byAmount: 1)
+                    locationObject.updateInBackground()
+                }else{
+                    let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                    snackBar.backgroundColor = FlatWatermelonDark()
+                    snackBar.show()
+                }
+
             }
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             if let url = locationObjects[indexPath.row].objectForKey("URL") as? String {

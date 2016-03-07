@@ -8,7 +8,7 @@
 
 import UIKit
 import MWPhotoBrowser
-
+import TTGSnackbar
 class GalleryViewController: UITableViewController {
     
     var photoURLArray: [[[NSURL]]] = []
@@ -42,41 +42,48 @@ class GalleryViewController: UITableViewController {
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.findObjectsInBackgroundWithBlock { (galleryObjects, error) -> Void in
-            if galleryObjects.count > 0 {
-                for gallery in galleryObjects {
-                    var imageURLs:[NSURL] = []
-                    for key in self.photoKeys {
-                        
-                        if let imageFile = gallery.objectForKey(key) as? BmobFile {
-                        let imageURL = NSURL(string: imageFile.url)!
-                        imageURLs.append(imageURL)
-                        }
-                    }
-      
-                    
-                    let dateString = gallery.objectForKey("Date") as! String
-                    let monthName = dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2]
-                    if self.isMonthAdded(monthName) == false {
-                        self.monthNameStrings.append(monthName)
-                        self.galleryObjects.append([gallery as! BmobObject])
-                        self.photoURLArray.append([imageURLs])
-                    } else {
-                        
-                        if let index = self.galleryObjects.indexOf({
+            if error == nil {
+                if galleryObjects.count > 0 {
+                    for gallery in galleryObjects {
+                        var imageURLs:[NSURL] = []
+                        for key in self.photoKeys {
                             
-                            ($0[0].objectForKey("Date") as! String).componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2] == monthName})
-                        {
-                            self.galleryObjects[index].append(gallery as! BmobObject)
-                            self.photoURLArray[index].append(imageURLs)
+                            if let imageFile = gallery.objectForKey(key) as? BmobFile {
+                                let imageURL = NSURL(string: imageFile.url)!
+                                imageURLs.append(imageURL)
+                            }
                         }
                         
+                        
+                        let dateString = gallery.objectForKey("Date") as! String
+                        let monthName = dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2]
+                        if self.isMonthAdded(monthName) == false {
+                            self.monthNameStrings.append(monthName)
+                            self.galleryObjects.append([gallery as! BmobObject])
+                            self.photoURLArray.append([imageURLs])
+                        } else {
+                            
+                            if let index = self.galleryObjects.indexOf({
+                                
+                                ($0[0].objectForKey("Date") as! String).componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2] == monthName})
+                            {
+                                self.galleryObjects[index].append(gallery as! BmobObject)
+                                self.photoURLArray[index].append(imageURLs)
+                            }
+                            
+                        }
+                        
+                        
+                        
+                        self.tableView.reloadData()
                     }
-                    
-                    
-                    
-                    self.tableView.reloadData()
                 }
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
+           
         }
 
     }
@@ -152,7 +159,12 @@ class GalleryViewController: UITableViewController {
                     let url = NSURL(string: (org.objectForKey("Logo") as! BmobFile).url)
                     cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                 }
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
+
         })
         
         cell.timeLabel.text = galleryObjects[indexPath.section][indexPath.row].objectForKey("Date") as? String
@@ -167,8 +179,16 @@ class GalleryViewController: UITableViewController {
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         let objectId = galleryObjects[indexPath.section][indexPath.row].objectId
         query.getObjectInBackgroundWithId(objectId) { (galleryObject, error) -> Void in
-            galleryObject.incrementKey("PageView", byAmount: 1)
-            galleryObject.updateInBackground()
+            if error == nil {
+                galleryObject.incrementKey("PageView", byAmount: 1)
+                galleryObject.updateInBackground()
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
+            }
+
+        
         }
         
         if let URLString = galleryObjects[indexPath.section][indexPath.row].objectForKey("URL") as? String {

@@ -8,7 +8,7 @@
 
 import UIKit
 import SDWebImage
-
+import TTGSnackbar
 protocol RMActivityViewControllerDelegate{
     func reloadRowForActivity(activity: BmobObject)
 }
@@ -80,7 +80,12 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
                     print(order.objectId)
                     self.registeredActivitiesIds.append(order.objectForKey("ParentActivityObjectId") as! String)
                 }
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
+
         }
     }
     
@@ -217,10 +222,25 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
                 let query = BmobQuery(className: "Activity")
                 query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
                 query.getObjectInBackgroundWithId(activity.objectId, block: { (activity, error) -> Void in
-                    activity.incrementKey("LikesNumber", byAmount: 1)
-                    activity.updateInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
-                         self.delegate.reloadRowForActivity(self.activity)
-                    })
+                    if error == nil {
+                        activity.incrementKey("LikesNumber", byAmount: 1)
+                        activity.updateInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
+                            if error == nil {
+                                self.delegate.reloadRowForActivity(self.activity)
+                            }else{
+                                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                                snackBar.backgroundColor = FlatWatermelonDark()
+                                snackBar.show()
+                            }
+                            
+                        })
+
+                    }else{
+                        let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                        snackBar.backgroundColor = FlatWatermelonDark()
+                        snackBar.show()
+                    }
+
                 })
                 
             }
@@ -232,10 +252,24 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
                 let query = BmobQuery(className: "Activity")
                 query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
                 query.getObjectInBackgroundWithId(activity.objectId, block: { (activity, error) -> Void in
-                    activity.decrementKey("LikesNumber", byAmount: 1)
-                    activity.updateInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
-                        self.delegate.reloadRowForActivity(self.activity)
-                    })
+                    if error == nil {
+                        activity.decrementKey("LikesNumber", byAmount: 1)
+                        activity.updateInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
+                            if error == nil {
+                                 self.delegate.reloadRowForActivity(self.activity)
+                            }else{
+                                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                                snackBar.backgroundColor = FlatWatermelonDark()
+                                snackBar.show()
+                            }
+                           
+                        })
+                    }else{
+                        let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                        snackBar.backgroundColor = FlatWatermelonDark()
+                        snackBar.show()
+                    }
+                   
                 })
                 
                 
@@ -245,7 +279,14 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
         print(self.likedActivitiesIds)
         CURRENT_USER.setObject(self.likedActivitiesIds, forKey: "LikedActivities")
         CURRENT_USER.updateInBackgroundWithResultBlock { (isSuccessful, error) -> Void in
-            self.delegate.reloadRowForActivity(self.activity)
+            if error == nil {
+                self.delegate.reloadRowForActivity(self.activity)
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
+            }
+
         }
         
         

@@ -9,6 +9,8 @@
 import UIKit
 import MessageUI
 import SDWebImage
+import TTGSnackbar
+
 
 class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, ModalTransitionDelegate, ZCSAvatarCaptureControllerDelegate {
    
@@ -73,6 +75,10 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             if isSuccessful {
                 CURRENT_USER.setObject(newAvatar, forKey: "Avatar")
                 CURRENT_USER.updateInBackground()
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
         }
         

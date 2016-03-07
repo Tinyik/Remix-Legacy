@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 import MessageUI
-
+import TTGSnackbar
 class CTFilteredViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ActivityFilterDelegate, UIGestureRecognizerDelegate, MGSwipeTableCellDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, MFMailComposeViewControllerDelegate, RMActivityViewControllerDelegate {
   
     @IBOutlet weak var tableView: UITableView!
@@ -83,36 +83,43 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
         query.whereKey("isFloatingActivity", equalTo: false)
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
-            if activities.count > 0 {
-                for activity in activities {
-                    
-                    let coverImg = activity.objectForKey("CoverImg") as! BmobFile
-                    let imageURL = NSURL(string:coverImg.url)!
-                    
-                    let dateString = activity.objectForKey("Date") as! String
-                    let monthName = dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2]
-                    
-                    
-                    if self.isMonthAdded(monthName) == false {
-                        self.monthNameStrings.append(monthName)
-                        self.activities.append([activity as! BmobObject])
-                        self.coverImgURLs.append([imageURL])
-                    } else {
+            
+            if error == nil {
+                if activities.count > 0 {
+                    for activity in activities {
                         
-                        if let index = self.activities.indexOf({
+                        let coverImg = activity.objectForKey("CoverImg") as! BmobFile
+                        let imageURL = NSURL(string:coverImg.url)!
+                        
+                        let dateString = activity.objectForKey("Date") as! String
+                        let monthName = dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2]
+                        
+                        
+                        if self.isMonthAdded(monthName) == false {
+                            self.monthNameStrings.append(monthName)
+                            self.activities.append([activity as! BmobObject])
+                            self.coverImgURLs.append([imageURL])
+                        } else {
                             
-                            ($0[0].objectForKey("Date") as! String).componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2] == monthName})
-                        {
-                            self.activities[index].append(activity as! BmobObject)
-                            self.coverImgURLs[index].append(imageURL)
+                            if let index = self.activities.indexOf({
+                                
+                                ($0[0].objectForKey("Date") as! String).componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2] == monthName})
+                            {
+                                self.activities[index].append(activity as! BmobObject)
+                                self.coverImgURLs[index].append(imageURL)
+                            }
+                            
                         }
                         
+                        
+                        
+                        self.tableView.reloadData()
                     }
-                    
-                    
-                    
-                    self.tableView.reloadData()
                 }
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
         }
         
@@ -134,6 +141,10 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
             if error == nil {
                 self.activities[self.indexPathForSelectedActivity.section][self.indexPathForSelectedActivity.row] = activity
                 self.tableView.reloadRowsAtIndexPaths([self.indexPathForSelectedActivity], withRowAnimation: .Automatic)
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
         }
     }
@@ -266,6 +277,10 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
                         let url = NSURL(string: (org.objectForKey("Logo") as! BmobFile).url)
                         cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                     }
+                }else{
+                    let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                    snackBar.backgroundColor = FlatWatermelonDark()
+                    snackBar.show()
                 }
             })
             if likedActivitiesIds.contains(_objId) {
@@ -313,6 +328,10 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
                     let url = NSURL(string: (org.objectForKey("Logo") as! BmobFile).url)
                     cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                 }
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
         })
         if likedActivitiesIds.contains(_objId) {
@@ -340,8 +359,15 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         let objectId = activities[indexPath.section][indexPath.row].objectId
         query.getObjectInBackgroundWithId(objectId) { (activity, error) -> Void in
-            activity.incrementKey("PageView", byAmount: 1)
-            activity.updateInBackground()
+            if error == nil {
+                activity.incrementKey("PageView", byAmount: 1)
+                activity.updateInBackground()
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
+            }
+            
         }
        
         let activityView = RMActivityViewController(url: NSURL(string: activities[indexPath.section][indexPath.row].objectForKey("URL") as! String)!)

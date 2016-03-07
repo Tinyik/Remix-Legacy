@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import TTGSnackbar
 
 class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     
@@ -84,6 +84,10 @@ class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNE
                 print("READY")
                 print(self.parentActivities.count)
              self.tableView.reloadData()
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
             
         }
@@ -169,8 +173,16 @@ class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNE
         let query = BmobQuery(className: "Activity")
         let objectId = parentActivities[indexPath.row].objectId
         query.getObjectInBackgroundWithId(objectId) { (activity, error) -> Void in
-            activity.incrementKey("PageView", byAmount: 1)
-            activity.updateInBackground()
+            if error == nil {
+                activity.incrementKey("PageView", byAmount: 1)
+                activity.updateInBackground()
+ 
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
+            }
+            
         }
         
             let activityView = RMActivityViewController(url: NSURL(string: parentActivities[indexPath.row].objectForKey("URL") as! String)!)

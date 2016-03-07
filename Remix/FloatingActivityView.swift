@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import TTGSnackbar
 extension UIView {
     class func loadFromNibNamed(nibNamed: String, bundle : NSBundle? = nil) -> UIView? {
         return UINib(
@@ -119,6 +119,10 @@ class FloatingActivityView: UIView, BmobPayDelegate {
                     print(order.objectId)
                     self.registeredActivitiesIds.append(order.objectForKey("ParentActivityObjectId") as! String)
                 }
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
         }
     }

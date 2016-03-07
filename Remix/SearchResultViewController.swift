@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import MessageUI
+import TTGSnackbar
 
 class SearchResultViewController: UITableViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, MGSwipeTableCellDelegate, MFMailComposeViewControllerDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, RMActivityViewControllerDelegate {
     
@@ -56,17 +57,24 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.findObjectsInBackgroundWithBlock { (labels, error) -> Void in
-            if labels.count > 0{
-                for label in labels {
-                    let labelName = label.objectForKey("Label") as! String
-               
-                    let labelFile = label.objectForKey("Image") as! BmobFile
-                    let labelImageURL = NSURL(string: labelFile.url)!
-                    self.labelNames.append(labelName)
-                    self.labelImageURLs.append(labelImageURL)
-                    self.trendingLabelsCollectionView.reloadData()
+            if error == nil {
+                if labels.count > 0{
+                    for label in labels {
+                        let labelName = label.objectForKey("Label") as! String
+                        
+                        let labelFile = label.objectForKey("Image") as! BmobFile
+                        let labelImageURL = NSURL(string: labelFile.url)!
+                        self.labelNames.append(labelName)
+                        self.labelImageURLs.append(labelImageURL)
+                        self.trendingLabelsCollectionView.reloadData()
+                    }
                 }
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
+            
         }
     }
     
@@ -80,25 +88,32 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("isFloatingActivity", equalTo: false)
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
-            if activities.count > 0 {
-                for activity in activities {
-                    let coverImg = activity.objectForKey("CoverImg") as! BmobFile
-                    let imageURL = NSURL(string:coverImg.url)!
-
-                    let org = activity.objectForKey("Org") as! String
-                    let title = activity.objectForKey("Title") as! String
-                    let description = activity.objectForKey("Description") as! String
-                    
-                    if org.rangeOfString(self.searchBar.text!, options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil) != nil || title.rangeOfString(self.searchBar.text!, options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil) != nil || description.rangeOfString(self.searchBar.text!, options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil) != nil  {
-                        self.activities.append(activity as! BmobObject)
-                        self.coverImgURLs.append(imageURL)
+            if error == nil{
+                if activities.count > 0 {
+                    for activity in activities {
+                        let coverImg = activity.objectForKey("CoverImg") as! BmobFile
+                        let imageURL = NSURL(string:coverImg.url)!
+                        
+                        let org = activity.objectForKey("Org") as! String
+                        let title = activity.objectForKey("Title") as! String
+                        let description = activity.objectForKey("Description") as! String
+                        
+                        if org.rangeOfString(self.searchBar.text!, options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil) != nil || title.rangeOfString(self.searchBar.text!, options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil) != nil || description.rangeOfString(self.searchBar.text!, options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil) != nil  {
+                            self.activities.append(activity as! BmobObject)
+                            self.coverImgURLs.append(imageURL)
+                        }
+                        
                     }
-                    
                 }
+                
+                self.tableView.reloadData()
+                self.tableView.reloadEmptyDataSet()
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
-            
-            self.tableView.reloadData()
-            self.tableView.reloadEmptyDataSet()
+           
         }
         
        fetchLikedActivitiesList()
@@ -174,7 +189,12 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
                         let url = NSURL(string: (org.objectForKey("Logo") as! BmobFile).url)
                         cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                     }
+                }else{
+                    let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                    snackBar.backgroundColor = FlatWatermelonDark()
+                    snackBar.show()
                 }
+
             })
             if likedActivitiesIds.contains(_objId) {
                 cell.isLiked = true
@@ -221,7 +241,12 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
                     let url = NSURL(string: (org.objectForKey("Logo") as! BmobFile).url)
                     cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                 }
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
+
         })
         if likedActivitiesIds.contains(_objId) {
             cell.isLiked = true
@@ -240,7 +265,12 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
             if error == nil {
                 self.activities[self.indexPathForSelectedActivity.row] = activity
                 self.tableView.reloadRowsAtIndexPaths([self.indexPathForSelectedActivity], withRowAnimation: .Automatic)
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
+
         }
     }
     
@@ -317,8 +347,15 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
             query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
             let objectId = activities[indexPath.row].objectId
             query.getObjectInBackgroundWithId(objectId) { (activity, error) -> Void in
-                activity.incrementKey("PageView", byAmount: 1)
-                activity.updateInBackground()
+                if error == nil {
+                    activity.incrementKey("PageView", byAmount: 1)
+                    activity.updateInBackground()
+                }else{
+                    let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                    snackBar.backgroundColor = FlatWatermelonDark()
+                    snackBar.show()
+                }
+
             }
             let activityView = RMActivityViewController(url: NSURL(string: activities[indexPath.row].objectForKey("URL") as! String)!)
             activityView.activity = activities[indexPath.row]

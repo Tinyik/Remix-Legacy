@@ -9,7 +9,7 @@
 import UIKit
 import MessageUI
 import CBZSplashView
-
+import TTGSnackbar
 protocol RMSwipeBetweenViewControllersDelegate {
     func refreshViewContentForCityChange()
 }
@@ -117,6 +117,10 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
             CURRENT_USER.updateInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
                 if error == nil {
                     sharedOneSignalInstance.sendTag("City", value: REMIX_CITY_NAME)
+                }else{
+                    let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                    snackBar.backgroundColor = FlatWatermelonDark()
+                    snackBar.show()
                 }
             })
             self.rm_delegate.refreshViewContentForCityChange()
@@ -132,6 +136,10 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
             CURRENT_USER.updateInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
                 if error == nil {
                     sharedOneSignalInstance.sendTag("City", value: REMIX_CITY_NAME)
+                }else{
+                    let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                    snackBar.backgroundColor = FlatWatermelonDark()
+                    snackBar.show()
                 }
             })
             self.rm_delegate.refreshViewContentForCityChange()

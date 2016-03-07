@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TTGSnackbar
 
 class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextFieldDelegate {
 
@@ -142,7 +143,12 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
                     naviController.rm_delegate2 = vc3 as! RMSwipeBetweenViewControllersDelegate
                     self.tr_presentViewController(naviController, method: TRPresentTransitionMethod.Fade)
 
+                }else{
+                    let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                    snackBar.backgroundColor = FlatWatermelonDark()
+                    snackBar.show()
                 }
+
             })
         }else{
             

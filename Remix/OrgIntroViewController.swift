@@ -9,7 +9,7 @@
 import UIKit
 import MWPhotoBrowser
 import MessageUI
-
+import TTGSnackbar
 
 class OrgIntroViewController: UIViewController, MWPhotoBrowserDelegate, MFMailComposeViewControllerDelegate {
 
@@ -37,66 +37,74 @@ class OrgIntroViewController: UIViewController, MWPhotoBrowserDelegate, MFMailCo
         let query = BmobQuery(className: "Organization")
         query.whereKey("Name", equalTo: orgName)
         query.findObjectsInBackgroundWithBlock { (organizations, error) -> Void in
-            for organization in organizations {
-                if let _recipient = organization.objectForKey("Emails") as? NSArray {
-                self.emailRecipient = _recipient as! [String]
-                }
-                if let _contact = organization.objectForKey("Contact") as? String {
-                    self.phoneNumber = _contact
-                }
-                if let _contactName = organization.objectForKey("ContactName") as? String {
-                    self.contactName = _contactName
-                }
-                if let image1 = organization.objectForKey("IntroImage1") as? BmobFile {
-                    let url = NSURL(string: image1.url)
-                    self.mainImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
-                }
-                if let image2 = organization.objectForKey("IntroImage2") as? BmobFile {
-                    let url = NSURL(string: image2.url)
-                    self.secondImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
-                }
-                if let title1 = organization.objectForKey("IntroTitle1") as? String {
-                    self.firstLabel.text = title1
-                }
-                if let title2 = organization.objectForKey("IntroTitle2") as? String {
-                   self.secondLabel.text = title2
+           
+            if error == nil {
+                for organization in organizations {
+                    if let _recipient = organization.objectForKey("Emails") as? NSArray {
+                        self.emailRecipient = _recipient as! [String]
+                    }
+                    if let _contact = organization.objectForKey("Contact") as? String {
+                        self.phoneNumber = _contact
+                    }
+                    if let _contactName = organization.objectForKey("ContactName") as? String {
+                        self.contactName = _contactName
+                    }
+                    if let image1 = organization.objectForKey("IntroImage1") as? BmobFile {
+                        let url = NSURL(string: image1.url)
+                        self.mainImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
+                    }
+                    if let image2 = organization.objectForKey("IntroImage2") as? BmobFile {
+                        let url = NSURL(string: image2.url)
+                        self.secondImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
+                    }
+                    if let title1 = organization.objectForKey("IntroTitle1") as? String {
+                        self.firstLabel.text = title1
+                    }
+                    if let title2 = organization.objectForKey("IntroTitle2") as? String {
+                        self.secondLabel.text = title2
+                        
+                    }
+                    if let para1 = organization.objectForKey("IntroParagraph1") as? String {
+                        let paragraphStyle = NSMutableParagraphStyle()
+                        paragraphStyle.lineSpacing = 7
+                        let attribute = [NSParagraphStyleAttributeName: paragraphStyle]
+                        self.firstTextView.attributedText = NSAttributedString(string: para1, attributes: attribute)
+                        self.firstTextView.font = UIFont.systemFontOfSize(15)
+                        self.firstTextView.selectable = false
+                        self.firstTextView.editable = false
+                        
+                        
+                    }else{
+                        self.scrollView.scrollEnabled = false
+                    }
+                    if let para2 = organization.objectForKey("IntroParagraph2") as? String {
+                        let paragraphStyle = NSMutableParagraphStyle()
+                        paragraphStyle.lineSpacing = 7
+                        let attribute = [NSParagraphStyleAttributeName: paragraphStyle]
+                        self.secondTextView.attributedText = NSAttributedString(string: para2, attributes: attribute)
+                        self.secondTextView.font = UIFont.systemFontOfSize(15)
+                        self.secondTextView.selectable = false
+                        self.secondTextView.editable = false
+                        
+                    }
                     
-                }
-                if let para1 = organization.objectForKey("IntroParagraph1") as? String {
-                    let paragraphStyle = NSMutableParagraphStyle()
-                    paragraphStyle.lineSpacing = 7
-                    let attribute = [NSParagraphStyleAttributeName: paragraphStyle]
-                    self.firstTextView.attributedText = NSAttributedString(string: para1, attributes: attribute)
-                     self.firstTextView.font = UIFont.systemFontOfSize(15)
-                    self.firstTextView.selectable = false
-                    self.firstTextView.editable = false
                     
+                    // Calculate scroll content height
+                    var contentRect = CGRectZero
+                    for view in self.scrollContentView.subviews {
+                        view.layoutIfNeeded()
+                        contentRect = CGRectUnion(contentRect, view.frame)
+                    }
                     
-                }else{
-                    self.scrollView.scrollEnabled = false
+                    let bottomMargin: CGFloat = 30
+                    self.scrollContentHeight.constant = contentRect.size.height + bottomMargin
                 }
-                if let para2 = organization.objectForKey("IntroParagraph2") as? String {
-                    let paragraphStyle = NSMutableParagraphStyle()
-                    paragraphStyle.lineSpacing = 7
-                    let attribute = [NSParagraphStyleAttributeName: paragraphStyle]
-                    self.secondTextView.attributedText = NSAttributedString(string: para2, attributes: attribute)
-                    self.secondTextView.font = UIFont.systemFontOfSize(15)
-                    self.secondTextView.selectable = false
-                    self.secondTextView.editable = false
-                   
-                }
-                
-                
-                // Calculate scroll content height
-                var contentRect = CGRectZero
-                for view in self.scrollContentView.subviews {
-                    view.layoutIfNeeded()
-                    contentRect = CGRectUnion(contentRect, view.frame)
-                }
-                
-                let bottomMargin: CGFloat = 30
-                self.scrollContentHeight.constant = contentRect.size.height + bottomMargin
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
+
         }
     }
     
@@ -117,7 +125,12 @@ class OrgIntroViewController: UIViewController, MWPhotoBrowserDelegate, MFMailCo
                 }
                 
                
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
+
         
         }
 

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import TTGSnackbar
 class CommentsTableViewController: UITableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
 
     weak var modalDelegate: ModalViewControllerDelegate?
@@ -41,10 +41,17 @@ class CommentsTableViewController: UITableViewController, DZNEmptyDataSetSource,
                 let query = BmobQuery(className: "Comments")
         query.whereKey("ParentActivityObjectId", equalTo: presentingActivity.objectId)
         query.findObjectsInBackgroundWithBlock { (comments, error) -> Void in
-            for comment in comments {
-                self.activityComments.append(comment as! BmobObject)
+            if error == nil {
+                for comment in comments {
+                    self.activityComments.append(comment as! BmobObject)
+                }
+                self.tableView.reloadData()
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
-            self.tableView.reloadData()
+           
         }
     }
     
@@ -109,6 +116,10 @@ class CommentsTableViewController: UITableViewController, DZNEmptyDataSetSource,
                     cell.avatarView.image = UIImage(named: "DefaultAvatar")
                 }
                
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
         }
         return cell

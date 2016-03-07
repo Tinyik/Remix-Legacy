@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import TTGSnackbar
 protocol ActivityFilterDelegate {
     func filterQueryWithCategoryOrLabelName(name: String)
     func setParallaxHeaderImage(headerImageURL: NSURL)
@@ -74,15 +74,18 @@ class CategoryViewController: UITableViewController {
         let query = BmobQuery(className: "Category")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.findObjectsInBackgroundWithBlock { (categories, error) -> Void in
-            for category in categories {
-                let databaseName = category.objectForKey("Name") as! String
-                self.cloudCoverTitles.append(databaseName)
-                let url = NSURL(string: (category.objectForKey("CoverImage") as! BmobFile).url)
-                self.coverImageURLs.append(url!)
-                let displayName = category.objectForKey("DisplayName") as! String
-                self.coverTitles.append(displayName)
+            if error == nil {
+                for category in categories {
+                    let databaseName = category.objectForKey("Name") as! String
+                    self.cloudCoverTitles.append(databaseName)
+                    let url = NSURL(string: (category.objectForKey("CoverImage") as! BmobFile).url)
+                    self.coverImageURLs.append(url!)
+                    let displayName = category.objectForKey("DisplayName") as! String
+                    self.coverTitles.append(displayName)
+                }
+                self.tableView.reloadData()
             }
-            self.tableView.reloadData()
+            
         }
     }
     
@@ -125,6 +128,10 @@ class CategoryViewController: UITableViewController {
                     category.incrementKey("PageView", byAmount: 1)
                     category.updateInBackground()
                 }
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
         }
         self.categoryName = cloudCoverTitles[indexPath.row]

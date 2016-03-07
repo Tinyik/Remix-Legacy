@@ -8,6 +8,7 @@
 
 import UIKit
 import MessageUI
+import TTGSnackbar
 
 protocol OrganizationViewDelegate {
     func filterQueryWithOrganizationName(name: String)
@@ -55,19 +56,26 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.findObjectsInBackgroundWithBlock { (organizations, error) -> Void in
-            if self.refreshCtrl.refreshing {
-               self.refreshCtrl.endRefreshing()
+            if error == nil {
+                if self.refreshCtrl.refreshing {
+                    self.refreshCtrl.endRefreshing()
+                }
+                for org in organizations {
+                    let name = org.objectForKey("Name") as! String
+                    let logoFile = org.objectForKey("Logo") as! BmobFile
+                    let logoURL = NSURL(string: logoFile.url)!
+                    self.names.append(name)
+                    self.logoURLs.append(logoURL)
+                }
+                if self.orgsCollectionView != nil {
+                    self.orgsCollectionView.reloadData()
+                }
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
-            for org in organizations {
-                let name = org.objectForKey("Name") as! String
-                let logoFile = org.objectForKey("Logo") as! BmobFile
-                let logoURL = NSURL(string: logoFile.url)!
-                self.names.append(name)
-                self.logoURLs.append(logoURL)
-            }
-            if self.orgsCollectionView != nil {
-            self.orgsCollectionView.reloadData()
-            }
+
         }
     }
     
@@ -276,34 +284,41 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.findObjectsInBackgroundWithBlock { (organizations, error) -> Void in
-            if self.refreshCtrl.refreshing {
-                self.refreshCtrl.endRefreshing()
-            }
-            
-            
-            for org in organizations {
-                let name = org.objectForKey("Name") as! String
-                if (name.rangeOfString(self.searchBar.text!, options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil) != nil) {
-                    let logoFile = org.objectForKey("Logo") as! BmobFile
-                    let logoURL = NSURL(string: logoFile.url)!
-                    self.names.append(name)
-                    self.logoURLs.append(logoURL)
-                }else{
-                    if let wechat = org.objectForKey("WechatId") as? String {
-                        if (wechat.rangeOfString(self.searchBar.text!, options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil) != nil) {
-                            let logoFile = org.objectForKey("Logo") as! BmobFile
-                            let logoURL = NSURL(string: logoFile.url)!
-                            self.names.append(name)
-                            self.logoURLs.append(logoURL)
-                        }
-                    }
+            if error == nil {
+                if self.refreshCtrl.refreshing {
+                    self.refreshCtrl.endRefreshing()
                 }
                 
+                
+                for org in organizations {
+                    let name = org.objectForKey("Name") as! String
+                    if (name.rangeOfString(self.searchBar.text!, options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil) != nil) {
+                        let logoFile = org.objectForKey("Logo") as! BmobFile
+                        let logoURL = NSURL(string: logoFile.url)!
+                        self.names.append(name)
+                        self.logoURLs.append(logoURL)
+                    }else{
+                        if let wechat = org.objectForKey("WechatId") as? String {
+                            if (wechat.rangeOfString(self.searchBar.text!, options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil) != nil) {
+                                let logoFile = org.objectForKey("Logo") as! BmobFile
+                                let logoURL = NSURL(string: logoFile.url)!
+                                self.names.append(name)
+                                self.logoURLs.append(logoURL)
+                            }
+                        }
+                    }
+                    
+                    
+                }
+                
+                if self.orgsCollectionView != nil {
+                    self.orgsCollectionView.reloadData()
+                }
 
-            }
-            
-            if self.orgsCollectionView != nil {
-                self.orgsCollectionView.reloadData()
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
         }
 
