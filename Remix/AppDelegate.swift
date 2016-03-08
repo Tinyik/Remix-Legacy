@@ -121,32 +121,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(url.query)
         //FIXMIE: URL Scheme
         
-        if url.scheme == "remix" && url.host?.characters.count > 0 && url.path?.characters.count == 0 && url.query == nil {
+        if url.scheme == "remix" && url.host?.containsString("www.") == true{
+            
             if BmobUser.getCurrentUser() != nil {
-                let query = BmobQuery(className: "Activity")
-                var activity = BmobObject()
-                query.getObjectInBackgroundWithId(url.host!, block: { (_activity, error) -> Void in
-                    if error == nil {
-                        activity = _activity as! BmobObject
-                        let activityView = RMActivityViewController(url: NSURL(string: activity.objectForKey("URL") as! String))
-                        activityView.activity = activity
-                        activityView.toolBar.likeButton.hidden = true
-                        (self.window?.rootViewController as! RMSwipeBetweenViewControllers).pushViewController(activityView, animated: true)
-                        
+                if url.path != "" {
+                    print("NOTNILLPATH")
+                    print(url.path)
+                    let targetURL = url.host! + url.path!
+                    let webView = RxWebViewController(url: NSURL(string: "http://" + targetURL))
+                    (self.window?.rootViewController as! RMSwipeBetweenViewControllers).pushViewController(webView, animated: true)
+                }else{
+                    print("NILPATH")
+                    print(url.host!)
+                    let webView = RxWebViewController(url: NSURL(string: "http://" + url.host!))
+                    if let vc = self.window?.rootViewController as? RMSwipeBetweenViewControllers {
+                        vc.pushViewController(webView, animated: true)
                     }else{
-                        let alert = UIAlertController(title: "Remix提示", message: "_(´ཀ`」 ∠)_ 这里没有找到你想要的活动😢，看看Remix别的活动吧~", preferredStyle: .Alert)
+                        let alert = UIAlertController(title: "Remix提示", message: "请重启Remix后再次打开此链接。", preferredStyle: .Alert)
                         let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
                         alert.addAction(action)
                         self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
                     }
-                })
-
+                    
+                }
+                
             }else{
-                let alert = UIAlertController(title: "Remix提示", message: "这个活动这么精彩，赶紧登录Remix来报名吧~", preferredStyle: .Alert)
+                let alert = UIAlertController(title: "Remix提示", message: "(:3[____] 登录Remix来查看网页的详细信息。", preferredStyle: .Alert)
                 let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
                 alert.addAction(action)
                 self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+                
             }
+
+            //
+            
             
         }else if url.scheme == "remix" && url.host?.characters.count > 0 && url.path?.characters.count > 0 && url.query?.characters.count > 0 {
             if BmobUser.getCurrentUser() != nil {
@@ -177,33 +185,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 alert.addAction(action)
                 self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
             }
-        }else if url.scheme == "remix" && url.host?.containsString("www.") == true{
+        }else if url.scheme == "remix" && url.host?.characters.count > 0 && url.path?.characters.count == 0 && url.query == nil {
             if BmobUser.getCurrentUser() != nil {
-                if url.path != "" {
-                    print("NOTNILLPATH")
-                    print(url.path)
-                    let targetURL = url.host! + url.path!
-                    let webView = RxWebViewController(url: NSURL(string: "http://" + targetURL))
-                    (self.window?.rootViewController as! RMSwipeBetweenViewControllers).pushViewController(webView, animated: true)
-                }else{
-                    print("NILPATH")
-                    print(url.host!)
-                    let webView = RxWebViewController(url: NSURL(string: "http://" + url.host!))
-                    (self.window?.rootViewController as! RMSwipeBetweenViewControllers).pushViewController(webView, animated: true)
-                }
+                let query = BmobQuery(className: "Activity")
+                var activity = BmobObject()
+                query.getObjectInBackgroundWithId(url.host!, block: { (_activity, error) -> Void in
+                    if error == nil {
+                        activity = _activity as! BmobObject
+                        let activityView = RMActivityViewController(url: NSURL(string: activity.objectForKey("URL") as! String))
+                        activityView.activity = activity
+                        activityView.toolBar.likeButton.hidden = true
+                        if let vc = self.window?.rootViewController as? RMSwipeBetweenViewControllers {
+                            vc.pushViewController(activityView, animated: true)
+                        }else{
+                            let alert = UIAlertController(title: "Remix提示", message: "请重启Remix后再次打开此链接。", preferredStyle: .Alert)
+                            let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+                            alert.addAction(action)
+                            self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+                        }
 
+                        
+                    }else{
+                        let alert = UIAlertController(title: "Remix提示", message: "_(´ཀ`」 ∠)_ 这里没有找到你想要的活动😢，看看Remix别的活动吧~", preferredStyle: .Alert)
+                        let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+                        alert.addAction(action)
+                        self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+                    }
+                    
+                })
+                
+                
             }else{
-                let alert = UIAlertController(title: "Remix提示", message: "(:3[____] 登录Remix来查看网页的详细信息。", preferredStyle: .Alert)
+                let alert = UIAlertController(title: "Remix提示", message: "这个活动这么精彩，赶紧登录Remix来报名吧~", preferredStyle: .Alert)
                 let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
                 alert.addAction(action)
                 self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
-
             }
-        
-        
+
         }
         
-        
+    
         return true
     }
 }

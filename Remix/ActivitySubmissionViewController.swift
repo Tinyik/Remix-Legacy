@@ -126,8 +126,11 @@ class ActivitySubmissionViewController: FormViewController {
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.tintColor = FlatBlueDark()
-        self.navigationController?.navigationBar.barTintColor = .whiteColor()
+        if isModal == false {
+            self.navigationController?.navigationBar.tintColor = FlatBlueDark()
+            self.navigationController?.navigationBar.barTintColor = .whiteColor()
+        }
+
     }
     
     func popCurrentVC() {
@@ -156,7 +159,7 @@ class ActivitySubmissionViewController: FormViewController {
             }
          
         }else{
-            if attr["Org"]! == nil || attr["URL"]! == nil || attr["Contact"]! == nil || attr["ContactName"]! == nil {
+            if attr["Org"]! == nil || attr["URL"]! == nil || attr["Description"]! == nil || attr["Contact"]! == nil || attr["ContactName"]! == nil {
                 return false
             }
             if attr["isRecurring"]! as! Bool == true {
@@ -341,7 +344,7 @@ class ActivitySubmissionViewController: FormViewController {
                 newActivity.setObject(selectedCities, forKey: "Cities")
                 newActivity.saveInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
                     if error == nil {
-                        sharedOneSignalInstance.sendTag(attr["Title"] as! String, value: "ActivitySubmitted")
+                        sharedOneSignalInstance.sendTag(attr["Description"] as! String, value: "ActivitySubmitted")
                         let alert = UIAlertController(title: "Remix提示", message: "活动添加成功。谢谢你对Remix的支持_(:з」∠)_。审核通过后我们将给你发送推送消息。", preferredStyle: .Alert)
                         let action = UIAlertAction(title: "好的", style: .Default, handler: { (action) -> Void in
                             self.popCurrentVC()

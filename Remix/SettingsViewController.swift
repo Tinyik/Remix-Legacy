@@ -28,6 +28,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         self.navigationController?.navigationBar.translucent = false
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: "popCurrentVC")
+        self.navigationController?.navigationBar.tintColor = .blackColor()
         blurredAvatarView.contentMode = .ScaleAspectFill
         blurredAvatarView.clipsToBounds = true
         firstTableView.scrollEnabled = true
@@ -96,10 +97,11 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
+        let emptyCell = tableView.dequeueReusableCellWithIdentifier("detailedIdentifier") as! DetailedSettingsCell
+
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("detailedIdentifier") as! DetailedSettingsCell
-            if indexPath.row == 1 {
+            if indexPath.row == 2 {
            
                 cell.titleLabel.text = "向我们推荐活动"
                  cell.titleLabel.textColor = FlatRed()
@@ -110,10 +112,15 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
                 let cell2 = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") as! SettingsCell
                 cell2.label.text = "我的订单"
                 return cell2
-            }else{
+            }else if indexPath.row == 3{
                 cell.titleLabel.text = "向我们推荐好店/地点"
                 cell.titleLabel.textColor = FlatRed()
                 cell.detailsLabel.text = "你的推荐将出现在首页地点推荐中。"
+                return cell
+            }else if indexPath.row == 1{
+                cell.titleLabel.text = "我发起的活动"
+                cell.titleLabel.textColor = FlatRed()
+                cell.detailsLabel.text = "在这里你将能管理、联系活动报名者和提取报名费到你的账户。"
                 return cell
             }
             
@@ -133,18 +140,20 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
     
+        if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") as! SettingsCell
             switch indexPath.row {
             case 0: cell.label.text = "清除缓存"
             case 1: cell.label.text = "显示使用指南"
             case 2: cell.label.text = "退出登录"
-
+                
             default: break
             }
             
             return cell
+        }
         
-        
+       return emptyCell
 }
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -160,6 +169,10 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return 4
+        }
+        
        return 3
 }
     
@@ -182,16 +195,19 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if indexPath.section == 0 {
             switch indexPath.row {
+            case 1 : let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+                     let manVC = storyBoard.instantiateViewControllerWithIdentifier("ManVC")
+                     self.navigationController?.pushViewController(manVC, animated: true)
             case 0 : let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
                 let ordersVC = storyBoard.instantiateViewControllerWithIdentifier("OrdersVC")
                 self.navigationController?.pushViewController(ordersVC, animated: true)
                 
-            case 1:
+            case 2:
                 let subm = ActivitySubmissionViewController()
                 subm.isModal = false
                 self.navigationController?.pushViewController(subm, animated: true)
                 
-            case 2:
+            case 3:
                 let subm = LocationSubmissionViewController()
                 subm.isModal = false
                 self.navigationController?.pushViewController(subm, animated: true)

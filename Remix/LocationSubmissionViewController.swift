@@ -97,8 +97,10 @@ class LocationSubmissionViewController: FormViewController {
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.tintColor = FlatBlueDark()
-        self.navigationController?.navigationBar.barTintColor = .whiteColor()
+        if isModal == false {
+            self.navigationController?.navigationBar.tintColor = FlatBlueDark()
+            self.navigationController?.navigationBar.barTintColor = .whiteColor()
+        }
     }
     
     func popCurrentVC() {

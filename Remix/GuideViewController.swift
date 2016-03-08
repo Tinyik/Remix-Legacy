@@ -57,7 +57,8 @@ class GuideViewController: UIViewController, GHWalkThroughViewDataSource, GHWalk
     print("Dismiss")
         if CURRENT_USER == nil {
         let rootVC = storyboard.instantiateViewControllerWithIdentifier("RegLoginVC") as! RegLoginViewController
-        self.presentViewController(rootVC, animated: false, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
+        UIApplication.sharedApplication().delegate?.window!!.rootViewController = rootVC
         }else{
             self.dismissViewControllerAnimated(true, completion: nil)
         }

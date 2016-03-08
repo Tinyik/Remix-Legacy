@@ -73,7 +73,6 @@
 		1897827E1C63C8F500458515 /* RMTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1897827D1C63C8F500458515 /* RMTableViewCell.swift */; };
 		189782841C63CA6900458515 /* RMTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189782831C63CA6900458515 /* RMTableViewController.swift */; };
 		189782861C63DEAC00458515 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189782851C63DEAC00458515 /* CategoryViewController.swift */; };
-		189782881C63E0D600458515 /* RMNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189782871C63E0D600458515 /* RMNavigationController.swift */; };
 		18984F8F1C8472A300821477 /* RMToolBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18984F8E1C8472A300821477 /* RMToolBarView.xib */; };
 		18984F911C8473C400821477 /* RMToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18984F901C8473C400821477 /* RMToolBarView.swift */; };
 		1898CA3D1C68AD15009D3261 /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1898CA3B1C68AD15009D3261 /* ParallaxHeaderView.m */; };
@@ -132,6 +131,10 @@
 		18C79D7D1C8215FF004AAA44 /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C79D7C1C8215FF004AAA44 /* OrdersViewController.swift */; };
 		18C79D801C83221A004AAA44 /* RKSwipeBetweenViewControllers.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C79D7F1C83221A004AAA44 /* RKSwipeBetweenViewControllers.m */; };
 		18C79D861C83EDCF004AAA44 /* RMPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C79D851C83EDCF004AAA44 /* RMPageViewController.swift */; };
+		18C97F671C8DE132000B4EC9 /* ManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C97F661C8DE132000B4EC9 /* ManagementViewController.swift */; };
+		18C97F691C8DE14E000B4EC9 /* CandidatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C97F681C8DE14E000B4EC9 /* CandidatesViewController.swift */; };
+		18C97F6B1C8DE164000B4EC9 /* CandidateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C97F6A1C8DE164000B4EC9 /* CandidateCell.swift */; };
+		18C97F6D1C8DE580000B4EC9 /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C97F6C1C8DE580000B4EC9 /* ActivityCell.swift */; };
 		18C9A1E71C67B99200A80A22 /* TTUITableViewZoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C9A1E61C67B99200A80A22 /* TTUITableViewZoomController.m */; };
 		18C9A1F71C687DA200A80A22 /* UIImageView+BetterFace.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C9A1F61C687DA200A80A22 /* UIImageView+BetterFace.m */; };
 		18D731B41C719B1800DECA1E /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D731B31C719B1800DECA1E /* GuideViewController.swift */; };
@@ -140,8 +143,6 @@
 		18E239301C80392800363655 /* SettingsInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2392F1C80392800363655 /* SettingsInputViewController.swift */; };
 		18E239321C805E1600363655 /* FloatingActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E239311C805E1600363655 /* FloatingActivityView.swift */; };
 		18E239341C805E2D00363655 /* FloatingActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E239331C805E2D00363655 /* FloatingActivityView.xib */; };
-		18E6209F1C8B38CC00B85941 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6209E1C8B38CC00B85941 /* BannerView.swift */; };
-		18E620A11C8B38E300B85941 /* BannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E620A01C8B38E300B85941 /* BannerView.xib */; };
 		18E620A41C8C160E00B85941 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E620A31C8C160E00B85941 /* Eureka.framework */; };
 		18E620A61C8C194C00B85941 /* ActivitySubmissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E620A51C8C194C00B85941 /* ActivitySubmissionViewController.swift */; };
 		18E620AA1C8C591000B85941 /* FloatLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E620A91C8C591000B85941 /* FloatLabelTextField.swift */; };
@@ -268,7 +269,6 @@
 		1897827D1C63C8F500458515 /* RMTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMTableViewCell.swift; sourceTree = "<group>"; };
 		189782831C63CA6900458515 /* RMTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RMTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		189782851C63DEAC00458515 /* CategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
-		189782871C63E0D600458515 /* RMNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMNavigationController.swift; sourceTree = "<group>"; };
 		18984F8E1C8472A300821477 /* RMToolBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMToolBarView.xib; sourceTree = "<group>"; };
 		18984F901C8473C400821477 /* RMToolBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMToolBarView.swift; sourceTree = "<group>"; };
 		1898CA3B1C68AD15009D3261 /* ParallaxHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxHeaderView.m; sourceTree = "<group>"; };
@@ -335,6 +335,10 @@
 		18C79D7E1C83221A004AAA44 /* RKSwipeBetweenViewControllers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKSwipeBetweenViewControllers.h; sourceTree = "<group>"; };
 		18C79D7F1C83221A004AAA44 /* RKSwipeBetweenViewControllers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKSwipeBetweenViewControllers.m; sourceTree = "<group>"; };
 		18C79D851C83EDCF004AAA44 /* RMPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMPageViewController.swift; sourceTree = "<group>"; };
+		18C97F661C8DE132000B4EC9 /* ManagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagementViewController.swift; sourceTree = "<group>"; };
+		18C97F681C8DE14E000B4EC9 /* CandidatesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidatesViewController.swift; sourceTree = "<group>"; };
+		18C97F6A1C8DE164000B4EC9 /* CandidateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateCell.swift; sourceTree = "<group>"; };
+		18C97F6C1C8DE580000B4EC9 /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
 		18C9A1E51C67B99200A80A22 /* TTUITableViewZoomController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTUITableViewZoomController.h; sourceTree = "<group>"; };
 		18C9A1E61C67B99200A80A22 /* TTUITableViewZoomController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTUITableViewZoomController.m; sourceTree = "<group>"; };
 		18C9A1EF1C687CA000A80A22 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
@@ -348,8 +352,6 @@
 		18E2392F1C80392800363655 /* SettingsInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SettingsInputViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18E239311C805E1600363655 /* FloatingActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FloatingActivityView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18E239331C805E2D00363655 /* FloatingActivityView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FloatingActivityView.xib; sourceTree = "<group>"; };
-		18E6209E1C8B38CC00B85941 /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
-		18E620A01C8B38E300B85941 /* BannerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BannerView.xib; sourceTree = "<group>"; };
 		18E620A31C8C160E00B85941 /* Eureka.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Eureka.framework; path = "Pods/../build/Debug-iphoneos/Eureka.framework"; sourceTree = "<group>"; };
 		18E620A51C8C194C00B85941 /* ActivitySubmissionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ActivitySubmissionViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18E620A91C8C591000B85941 /* FloatLabelTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatLabelTextField.swift; sourceTree = "<group>"; };
@@ -600,11 +602,10 @@
 				189782511C63C7EF00458515 /* Main.storyboard */,
 				1824544F1C7FA16C00CF0CC6 /* VersionCheck.swift */,
 				18E239331C805E2D00363655 /* FloatingActivityView.xib */,
-				18E6209E1C8B38CC00B85941 /* BannerView.swift */,
-				18E620A01C8B38E300B85941 /* BannerView.xib */,
 				18E239311C805E1600363655 /* FloatingActivityView.swift */,
 				18E684B11C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift */,
 				18E620A51C8C194C00B85941 /* ActivitySubmissionViewController.swift */,
+				18C97F651C8DE0D3000B4EC9 /* New Group */,
 				18E620AD1C8D5F9600B85941 /* LocationSubmissionViewController.swift */,
 				1898CA4A1C6900B8009D3261 /* RegLoginViewController.swift */,
 				180199551C79E25F00A6C7E4 /* TermsAndConditionsViewController.swift */,
@@ -812,7 +813,6 @@
 			isa = PBXGroup;
 			children = (
 				1897824D1C63C7EF00458515 /* AppDelegate.swift */,
-				189782871C63E0D600458515 /* RMNavigationController.swift */,
 				189782561C63C7EF00458515 /* LaunchScreen.storyboard */,
 				189782591C63C7EF00458515 /* Info.plist */,
 			);
@@ -867,6 +867,17 @@
 				18C79D7F1C83221A004AAA44 /* RKSwipeBetweenViewControllers.m */,
 			);
 			name = SwipeBetweenVC;
+			sourceTree = "<group>";
+		};
+		18C97F651C8DE0D3000B4EC9 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				18C97F661C8DE132000B4EC9 /* ManagementViewController.swift */,
+				18C97F681C8DE14E000B4EC9 /* CandidatesViewController.swift */,
+				18C97F6C1C8DE580000B4EC9 /* ActivityCell.swift */,
+				18C97F6A1C8DE164000B4EC9 /* CandidateCell.swift */,
+			);
+			name = "New Group";
 			sourceTree = "<group>";
 		};
 		18C9A1E81C68794D00A80A22 /* ZoomCell */ = {
@@ -1062,7 +1073,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18E620A11C8B38E300B85941 /* BannerView.xib in Resources */,
 				181F2B2C1C6A2D8D00FC237D /* backItemImage@2x.png in Resources */,
 				1857B5341C856BB000D00A9E /* PKImageBundle.bundle in Resources */,
 				181F2B2D1C6A2D8D00FC237D /* backItemImage_hl@2x.png in Resources */,
@@ -1200,7 +1210,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				189782881C63E0D600458515 /* RMNavigationController.swift in Sources */,
 				189F45011C88CF6800EE1B3B /* RMWebViewController.swift in Sources */,
 				182454501C7FA16C00CF0CC6 /* VersionCheck.swift in Sources */,
 				180199541C79C14700A6C7E4 /* TrendingViewController.swift in Sources */,
@@ -1222,6 +1231,7 @@
 				181F2B2F1C6A2D8D00FC237D /* NJKWebViewProgressView.m in Sources */,
 				1898CA911C69B599009D3261 /* TRTransitionAnimations.swift in Sources */,
 				181F2B1F1C69DB8A00FC237D /* LikedViewController.swift in Sources */,
+				18C97F6D1C8DE580000B4EC9 /* ActivityCell.swift in Sources */,
 				1898CA901C69B599009D3261 /* TransitionAnimationHelper.swift in Sources */,
 				18BCA02A1C6E3FE600DF3EC7 /* CommunityViewController.swift in Sources */,
 				189782861C63DEAC00458515 /* CategoryViewController.swift in Sources */,
@@ -1245,6 +1255,7 @@
 				1899E9CD1C67108A00ADC2AC /* GalleryViewController.swift in Sources */,
 				1898CA8E1C69B599009D3261 /* SlideTransitionAnimation.swift in Sources */,
 				18B317C61C6B243900336A92 /* DeviceInformation.swift in Sources */,
+				18C97F691C8DE14E000B4EC9 /* CandidatesViewController.swift in Sources */,
 				1899E9B51C66360E00ADC2AC /* AdvertiseCell.swift in Sources */,
 				1899E9BD1C663E3B00ADC2AC /* MGSwipeTableCell.m in Sources */,
 				1898CA8B1C69B599009D3261 /* PageTransitionAnimation.swift in Sources */,
@@ -1256,6 +1267,7 @@
 				18E684B51C87243300C32C3D /* UIScrollView+EmptyDataSet.m in Sources */,
 				18E620A61C8C194C00B85941 /* ActivitySubmissionViewController.swift in Sources */,
 				187AE32E1C65ECBB00B255FF /* SettingsViewController.swift in Sources */,
+				18C97F6B1C8DE164000B4EC9 /* CandidateCell.swift in Sources */,
 				1899E9BC1C663E3B00ADC2AC /* MGSwipeButton.m in Sources */,
 				1898CA811C69B599009D3261 /* UINavigationController+TRPushPop.swift in Sources */,
 				18E620AA1C8C591000B85941 /* FloatLabelTextField.swift in Sources */,
@@ -1266,7 +1278,6 @@
 				1857B5301C85623900D00A9E /* CommentInputViewController.swift in Sources */,
 				1857B52C1C855A7000D00A9E /* CommentsTableViewController.swift in Sources */,
 				1898CA8A1C69B599009D3261 /* OMINTransitionAnimation.swift in Sources */,
-				18E6209F1C8B38CC00B85941 /* BannerView.swift in Sources */,
 				18E239321C805E1600363655 /* FloatingActivityView.swift in Sources */,
 				18BCA03D1C6F827900DF3EC7 /* LabelFilteredViewController.swift in Sources */,
 				1897827E1C63C8F500458515 /* RMTableViewCell.swift in Sources */,
@@ -1285,6 +1296,7 @@
 				1897824E1C63C7EF00458515 /* AppDelegate.swift in Sources */,
 				18E239301C80392800363655 /* SettingsInputViewController.swift in Sources */,
 				181F2B301C6A2D8D00FC237D /* RxWebViewController.m in Sources */,
+				18C97F671C8DE132000B4EC9 /* ManagementViewController.swift in Sources */,
 				1898CA8C1C69B599009D3261 /* PopTipTransitionAnimation.swift in Sources */,
 				18BCA02F1C6E48D400DF3EC7 /* LocationFullCoverCell.swift in Sources */,
 				1898CA861C69B599009D3261 /* DefaultPushTransitionAnimation.swift in Sources */,

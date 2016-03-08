@@ -130,6 +130,7 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
                     CURRENT_USER = user
                     self.view.removeKeyboardControl()
                     REMIX_CITY_NAME = CURRENT_USER.objectForKey("City") as! String
+                    sharedOneSignalInstance.sendTag("ObjectId", value: CURRENT_USER.objectId)
                     sharedOneSignalInstance.sendTag("City", value: REMIX_CITY_NAME)
                     let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
                     let vc1 = storyBoard.instantiateViewControllerWithIdentifier("MainVC")
@@ -141,8 +142,7 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
                     naviController.buttonText = ["活动", "分类", "组织"]
                     naviController.rm_delegate = vc1 as! RMSwipeBetweenViewControllersDelegate
                     naviController.rm_delegate2 = vc3 as! RMSwipeBetweenViewControllersDelegate
-                    self.tr_presentViewController(naviController, method: TRPresentTransitionMethod.Fade)
-
+                    UIApplication.sharedApplication().delegate?.window!!.rootViewController = naviController
                 }else{
                     let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
                     snackBar.backgroundColor = FlatWatermelonDark()
@@ -202,6 +202,7 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
                 }
                 REMIX_CITY_NAME = CURRENT_USER.objectForKey("City") as! String
                 sharedOneSignalInstance.sendTag("City", value: REMIX_CITY_NAME)
+                sharedOneSignalInstance.sendTag("ObjectId", value: CURRENT_USER.objectId)
                 let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
                 let vc1 = storyBoard.instantiateViewControllerWithIdentifier("MainVC")
                 let vc2 = storyBoard.instantiateViewControllerWithIdentifier("CategoryVC")
@@ -212,7 +213,7 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
                 naviController.buttonText = ["活动", "分类", "组织"]
                 naviController.rm_delegate = vc1 as! RMSwipeBetweenViewControllersDelegate
                 naviController.rm_delegate2 = vc3 as! RMSwipeBetweenViewControllersDelegate
-                self.tr_presentViewController(naviController, method: TRPresentTransitionMethod.Fade)
+                UIApplication.sharedApplication().delegate?.window!!.rootViewController = naviController
                 
             }else{
                 let alert = UIAlertController(title: nil, message: "验证码似乎不正确哦😣", preferredStyle: .Alert)
