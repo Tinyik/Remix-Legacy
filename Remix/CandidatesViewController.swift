@@ -10,7 +10,7 @@ import UIKit
 import MessageUI
 import SDWebImage
 
-class CandidatesViewController: UITableViewController, MFMailComposeViewControllerDelegate{
+class CandidatesViewController: UITableViewController, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate{
     
     var objectId: String = ""
     var coverImgURL: NSURL!
@@ -19,14 +19,73 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
     var parentActivity: BmobObject!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "查看活动页面", style: .Plain, target: self, action: "showActivityPage")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "实用工具", style: .Plain, target: self, action: "showUtilities")
         fetchCloudData()
         setUpParallaxHeaderView()
         
     }
     
-    func showActivityPage() {
+    func showUtilities() {
+        let sheet = LCActionSheet(title: nil, buttonTitles: ["群发Remix推送消息", "群发邮件", "群发短信", "导出报名信息为表格"], redButtonIndex: -1) { (buttonIndex) -> Void in
+            if buttonIndex == 0 {
+                
+            }
+            if buttonIndex == 1 {
+                self.sendGroupEmails()
+            }
+            
+            if buttonIndex == 2 {
+                self.sendGroupMessages()
+            }
+            
+            if buttonIndex == 3 {
+                self.exportAsCSV()
+            }
+           
+        }
         
+        sheet.show()
+    }
+    
+    func exportAsCSV() {
+        var docPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let filePath = docPath.stringByAppendingString("Participants.csv")
+        let writer = CHCSVWriter(forWritingToCSVFile: filePath)
+        writer.writeField("sdfsdfsdf")
+    }
+    
+    func sendGroupEmails() {
+        if MFMailComposeViewController.canSendMail() {
+            let controller = MFMailComposeViewController()
+            var recipients: [String] = []
+            for customer in customers {
+                recipients.append(customer.email)
+            }
+            controller.setToRecipients(recipients)
+            controller.mailComposeDelegate = self
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
+    }
+    
+    func sendGroupMessages() {
+        if MFMessageComposeViewController.canSendText() {
+            let controller = MFMessageComposeViewController()
+            var recipients: [String] = []
+            for customer in customers {
+                recipients.append(customer.mobilePhoneNumber)
+            }
+            controller.recipients = recipients
+            controller.messageComposeDelegate = self
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
+    }
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func fetchCloudData() {
@@ -81,6 +140,13 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "报名者一览"
+        }
+        return nil
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
