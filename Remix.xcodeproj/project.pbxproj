@@ -28,6 +28,9 @@
 		1841F87A1C7739020046D57F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F8791C7739020046D57F /* libiconv.tbd */; };
 		1841F87C1C7739150046D57F /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F87B1C7739150046D57F /* libstdc++.tbd */; };
 		1841F87E1C774F890046D57F /* OrgIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F87D1C774F890046D57F /* OrgIntroViewController.swift */; };
+		184824FA1C8EFDBC00CCB9CF /* NotifInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184824F91C8EFDBC00CCB9CF /* NotifInputViewController.swift */; };
+		184824FD1C8F023700CCB9CF /* UITextView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 184824FC1C8F023700CCB9CF /* UITextView+Placeholder.m */; };
+		184824FF1C8F48FB00CCB9CF /* WithdrawInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184824FE1C8F48FB00CCB9CF /* WithdrawInputViewController.swift */; };
 		184857141C63E5BC004E516A /* CTTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184857131C63E5BC004E516A /* CTTableViewCell.swift */; };
 		184857181C63EB26004E516A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 184857171C63EB26004E516A /* CoreLocation.framework */; };
 		1848571A1C63EB30004E516A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 184857191C63EB30004E516A /* Security.framework */; };
@@ -67,13 +70,6 @@
 		187AE3321C66128C00B255FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 187AE3311C66128C00B255FF /* Assets.xcassets */; };
 		187F037C1C8EB9D800328279 /* ActivityHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187F037B1C8EB9D800328279 /* ActivityHeaderView.swift */; };
 		187F037E1C8EB9E700328279 /* ActivityHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 187F037D1C8EB9E700328279 /* ActivityHeaderView.xib */; };
-		187F03811C8EE2D800328279 /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 187F03801C8EE2D800328279 /* CHCSVParser.m */; };
-		187F03901C8EEAD900328279 /* RSCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 187F03851C8EEAD900328279 /* RSCell.m */; };
-		187F03911C8EEAD900328279 /* RSStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 187F03871C8EEAD900328279 /* RSStyle.m */; };
-		187F03921C8EEAD900328279 /* RSworkBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 187F03891C8EEAD900328279 /* RSworkBook.m */; };
-		187F03931C8EEAD900328279 /* RSworkSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 187F038B1C8EEAD900328279 /* RSworkSheet.m */; };
-		187F03941C8EEAD900328279 /* RSworkSheetRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 187F038D1C8EEAD900328279 /* RSworkSheetRow.m */; };
-		187F03951C8EEAD900328279 /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 187F038F1C8EEAD900328279 /* UIColor-Expanded.m */; };
 		1897824E1C63C7EF00458515 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1897824D1C63C7EF00458515 /* AppDelegate.swift */; };
 		189782531C63C7EF00458515 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 189782511C63C7EF00458515 /* Main.storyboard */; };
 		189782581C63C7EF00458515 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 189782561C63C7EF00458515 /* LaunchScreen.storyboard */; };
@@ -217,6 +213,10 @@
 		1841F8791C7739020046D57F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		1841F87B1C7739150046D57F /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		1841F87D1C774F890046D57F /* OrgIntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = OrgIntroViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		184824F91C8EFDBC00CCB9CF /* NotifInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifInputViewController.swift; sourceTree = "<group>"; };
+		184824FB1C8F023700CCB9CF /* UITextView+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Placeholder.h"; sourceTree = "<group>"; };
+		184824FC1C8F023700CCB9CF /* UITextView+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Placeholder.m"; sourceTree = "<group>"; };
+		184824FE1C8F48FB00CCB9CF /* WithdrawInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawInputViewController.swift; sourceTree = "<group>"; };
 		184857131C63E5BC004E516A /* CTTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTTableViewCell.swift; sourceTree = "<group>"; };
 		184857171C63EB26004E516A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		184857191C63EB30004E516A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -271,20 +271,6 @@
 		187AE3311C66128C00B255FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		187F037B1C8EB9D800328279 /* ActivityHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityHeaderView.swift; sourceTree = "<group>"; };
 		187F037D1C8EB9E700328279 /* ActivityHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityHeaderView.xib; sourceTree = "<group>"; };
-		187F037F1C8EE2D800328279 /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCSVParser.h; sourceTree = "<group>"; };
-		187F03801C8EE2D800328279 /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCSVParser.m; sourceTree = "<group>"; };
-		187F03841C8EEAD900328279 /* RSCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSCell.h; sourceTree = "<group>"; };
-		187F03851C8EEAD900328279 /* RSCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSCell.m; sourceTree = "<group>"; };
-		187F03861C8EEAD900328279 /* RSStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSStyle.h; sourceTree = "<group>"; };
-		187F03871C8EEAD900328279 /* RSStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSStyle.m; sourceTree = "<group>"; };
-		187F03881C8EEAD900328279 /* RSworkBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSworkBook.h; sourceTree = "<group>"; };
-		187F03891C8EEAD900328279 /* RSworkBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSworkBook.m; sourceTree = "<group>"; };
-		187F038A1C8EEAD900328279 /* RSworkSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSworkSheet.h; sourceTree = "<group>"; };
-		187F038B1C8EEAD900328279 /* RSworkSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSworkSheet.m; sourceTree = "<group>"; };
-		187F038C1C8EEAD900328279 /* RSworkSheetRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSworkSheetRow.h; sourceTree = "<group>"; };
-		187F038D1C8EEAD900328279 /* RSworkSheetRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSworkSheetRow.m; sourceTree = "<group>"; };
-		187F038E1C8EEAD900328279 /* UIColor-Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor-Expanded.h"; sourceTree = "<group>"; };
-		187F038F1C8EEAD900328279 /* UIColor-Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor-Expanded.m"; sourceTree = "<group>"; };
 		1897824A1C63C7EF00458515 /* Remix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Remix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1897824D1C63C7EF00458515 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		189782521C63C7EF00458515 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -606,34 +592,6 @@
 			path = SocialSDKXib;
 			sourceTree = "<group>";
 		};
-		187F03821C8EE2DD00328279 /* CSVParser */ = {
-			isa = PBXGroup;
-			children = (
-				187F037F1C8EE2D800328279 /* CHCSVParser.h */,
-				187F03801C8EE2D800328279 /* CHCSVParser.m */,
-			);
-			name = CSVParser;
-			sourceTree = "<group>";
-		};
-		187F03831C8EEAC400328279 /* XLSHelper */ = {
-			isa = PBXGroup;
-			children = (
-				187F03841C8EEAD900328279 /* RSCell.h */,
-				187F03851C8EEAD900328279 /* RSCell.m */,
-				187F03861C8EEAD900328279 /* RSStyle.h */,
-				187F03871C8EEAD900328279 /* RSStyle.m */,
-				187F03881C8EEAD900328279 /* RSworkBook.h */,
-				187F03891C8EEAD900328279 /* RSworkBook.m */,
-				187F038A1C8EEAD900328279 /* RSworkSheet.h */,
-				187F038B1C8EEAD900328279 /* RSworkSheet.m */,
-				187F038C1C8EEAD900328279 /* RSworkSheetRow.h */,
-				187F038D1C8EEAD900328279 /* RSworkSheetRow.m */,
-				187F038E1C8EEAD900328279 /* UIColor-Expanded.h */,
-				187F038F1C8EEAD900328279 /* UIColor-Expanded.m */,
-			);
-			name = XLSHelper;
-			sourceTree = "<group>";
-		};
 		189782411C63C7EF00458515 = {
 			isa = PBXGroup;
 			children = (
@@ -807,8 +765,8 @@
 			isa = PBXGroup;
 			children = (
 				18B317C51C6B243900336A92 /* DeviceInformation.swift */,
-				187F03831C8EEAC400328279 /* XLSHelper */,
-				187F03821C8EE2DD00328279 /* CSVParser */,
+				184824FB1C8F023700CCB9CF /* UITextView+Placeholder.h */,
+				184824FC1C8F023700CCB9CF /* UITextView+Placeholder.m */,
 				18E620A81C8C590100B85941 /* EurekaHelper */,
 				180C08B11C8AFE780025136D /* EmptyDataSet */,
 				18E684AB1C86EE4200C32C3D /* LCActionSheet */,
@@ -938,7 +896,9 @@
 			isa = PBXGroup;
 			children = (
 				18C97F661C8DE132000B4EC9 /* ManagementViewController.swift */,
+				184824F91C8EFDBC00CCB9CF /* NotifInputViewController.swift */,
 				18BC022E1C8E971000FBC162 /* UserHeaderView.swift */,
+				184824FE1C8F48FB00CCB9CF /* WithdrawInputViewController.swift */,
 				18BC02321C8EA5D500FBC162 /* UserFooterView.xib */,
 				187F037B1C8EB9D800328279 /* ActivityHeaderView.swift */,
 				18BC02341C8EA5E400FBC162 /* UserFooterView.swift */,
@@ -1294,17 +1254,13 @@
 				18C79D7A1C8215BD004AAA44 /* ActivityOrderCell.swift in Sources */,
 				18BC022F1C8E971000FBC162 /* UserHeaderView.swift in Sources */,
 				18E2392C1C8029D300363655 /* PersonalInfoViewController.swift in Sources */,
-				187F03941C8EEAD900328279 /* RSworkSheetRow.m in Sources */,
-				187F03931C8EEAD900328279 /* RSworkSheet.m in Sources */,
 				1898CA4B1C6900B8009D3261 /* RegLoginViewController.swift in Sources */,
-				187F03911C8EEAD900328279 /* RSStyle.m in Sources */,
 				1898CA881C69B599009D3261 /* FadeTransitionAnimation.swift in Sources */,
 				1899E9BF1C66F75600ADC2AC /* RMFullCoverCell.swift in Sources */,
 				1841F87E1C774F890046D57F /* OrgIntroViewController.swift in Sources */,
 				1898CA891C69B599009D3261 /* IBanTangTransitionAnimation.swift in Sources */,
 				18C9A1F71C687DA200A80A22 /* UIImageView+BetterFace.m in Sources */,
 				18B317C01C6B06EC00336A92 /* GHWalkThroughPageCell.m in Sources */,
-				187F03901C8EEAD900328279 /* RSCell.m in Sources */,
 				1898CA921C69B599009D3261 /* TwitterTransitionAnimation.swift in Sources */,
 				187F037C1C8EB9D800328279 /* ActivityHeaderView.swift in Sources */,
 				1898CA7E1C69B599009D3261 /* TRViewControllerTransitionDelegate.swift in Sources */,
@@ -1329,7 +1285,6 @@
 				18BCA0381C6F5AEA00DF3EC7 /* SearchResultViewController.swift in Sources */,
 				1877459F1C6AF492000427C7 /* DetailedSettingsCell.swift in Sources */,
 				1898CA5F1C6990E1009D3261 /* DAKeyboardControl.m in Sources */,
-				187F03951C8EEAD900328279 /* UIColor-Expanded.m in Sources */,
 				1898CA7F1C69B599009D3261 /* UIViewController+TRPresent.swift in Sources */,
 				18BC02351C8EA5E400FBC162 /* UserFooterView.swift in Sources */,
 				1898CA951C69B599009D3261 /* TRViewControllerAnimatedTransitioning.swift in Sources */,
@@ -1338,7 +1293,6 @@
 				1898CA401C68ADCF009D3261 /* UIImage+ImageEffects.m in Sources */,
 				1899E9CD1C67108A00ADC2AC /* GalleryViewController.swift in Sources */,
 				1898CA8E1C69B599009D3261 /* SlideTransitionAnimation.swift in Sources */,
-				187F03921C8EEAD900328279 /* RSworkBook.m in Sources */,
 				18B317C61C6B243900336A92 /* DeviceInformation.swift in Sources */,
 				18C97F691C8DE14E000B4EC9 /* CandidatesViewController.swift in Sources */,
 				1899E9B51C66360E00ADC2AC /* AdvertiseCell.swift in Sources */,
@@ -1346,6 +1300,7 @@
 				1898CA8B1C69B599009D3261 /* PageTransitionAnimation.swift in Sources */,
 				181F2B2E1C6A2D8D00FC237D /* NJKWebViewProgress.m in Sources */,
 				18C79D801C83221A004AAA44 /* RKSwipeBetweenViewControllers.m in Sources */,
+				184824FD1C8F023700CCB9CF /* UITextView+Placeholder.m in Sources */,
 				1857B5361C856BB400D00A9E /* ZCSAvatarCaptureController.m in Sources */,
 				18E684B21C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift in Sources */,
 				1898CA931C69B599009D3261 /* TransitionTreasury.swift in Sources */,
@@ -1359,6 +1314,7 @@
 				18C79D861C83EDCF004AAA44 /* RMPageViewController.swift in Sources */,
 				18B317C41C6B183000336A92 /* OrgFilteredViewController.swift in Sources */,
 				184857141C63E5BC004E516A /* CTTableViewCell.swift in Sources */,
+				184824FA1C8EFDBC00CCB9CF /* NotifInputViewController.swift in Sources */,
 				18E2392E1C802A1800363655 /* InfoCell.swift in Sources */,
 				1857B5301C85623900D00A9E /* CommentInputViewController.swift in Sources */,
 				1857B52C1C855A7000D00A9E /* CommentsTableViewController.swift in Sources */,
@@ -1376,6 +1332,7 @@
 				1898CA8F1C69B599009D3261 /* TaaskyFlipTransitionAnimation.swift in Sources */,
 				1899E9CB1C67106600ADC2AC /* GalleryCell.swift in Sources */,
 				18BCA0311C6E48ED00DF3EC7 /* LocationTableViewCell.swift in Sources */,
+				184824FF1C8F48FB00CCB9CF /* WithdrawInputViewController.swift in Sources */,
 				1898CA841C69B599009D3261 /* UITabBarController+TRTransition.swift in Sources */,
 				180199561C79E25F00A6C7E4 /* TermsAndConditionsViewController.swift in Sources */,
 				1897824E1C63C7EF00458515 /* AppDelegate.swift in Sources */,
@@ -1383,7 +1340,6 @@
 				181F2B301C6A2D8D00FC237D /* RxWebViewController.m in Sources */,
 				18C97F671C8DE132000B4EC9 /* ManagementViewController.swift in Sources */,
 				1898CA8C1C69B599009D3261 /* PopTipTransitionAnimation.swift in Sources */,
-				187F03811C8EE2D800328279 /* CHCSVParser.m in Sources */,
 				18BCA02F1C6E48D400DF3EC7 /* LocationFullCoverCell.swift in Sources */,
 				1898CA861C69B599009D3261 /* DefaultPushTransitionAnimation.swift in Sources */,
 				18D731B41C719B1800DECA1E /* GuideViewController.swift in Sources */,

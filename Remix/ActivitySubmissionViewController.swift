@@ -127,7 +127,7 @@ class ActivitySubmissionViewController: FormViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         if isModal == false {
-            self.navigationController?.navigationBar.tintColor = FlatBlueDark()
+            self.navigationController?.navigationBar.tintColor = .blackColor()
             self.navigationController?.navigationBar.barTintColor = .whiteColor()
         }
 
@@ -216,6 +216,9 @@ class ActivitySubmissionViewController: FormViewController {
                         selectedCities.append(option)
                     }
                 }
+                
+                    newActivity.setObject(true, forKey: "UnderReview")
+                    newActivity.setObject(false, forKey: "hasWithdrawn")
                     newActivity.setObject(BmobUser.getCurrentUser().objectId, forKey: "Submitter")
                     newActivity.setObject(attr["ItemName"]! as! String, forKey: "ItemName")
                     newActivity.setObject("主办方提交:" + (attr["Title"]! as! String), forKey: "Title")
@@ -306,6 +309,9 @@ class ActivitySubmissionViewController: FormViewController {
                         selectedCities.append(option)
                     }
                 }
+                
+                newActivity.setObject(true, forKey: "UnderReview")
+                newActivity.setObject(false, forKey: "hasWithdrawn")
                 newActivity.setObject(BmobUser.getCurrentUser().objectId, forKey: "Submitter")
                 newActivity.setObject("用户提交", forKey: "Title")
                 selectedCities.insert("全国", atIndex: 0)

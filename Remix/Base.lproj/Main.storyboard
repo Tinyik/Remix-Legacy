@@ -1456,7 +1456,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6q-eP-keW">
-                                                    <rect key="frame" x="25" y="37" width="254" height="21"/>
+                                                    <rect key="frame" x="25" y="37" width="317" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.47857481060606055" green="0.47857481060606055" blue="0.47857481060606055" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -3092,13 +3092,13 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="请在此输入你的评论" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="XH4-rO-Alc">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="XH4-rO-Alc">
                                 <rect key="frame" x="0.0" y="83" width="375" height="163"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="163" id="CI4-Nh-OSn"/>
                                 </constraints>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -3990,11 +3990,15 @@
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wbf-He-dXD">
-                                            <rect key="frame" x="12" y="125" width="98" height="21"/>
+                                            <rect key="frame" x="12" y="123" width="106" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" red="0.85043728351593018" green="0.21816034615039825" blue="0.15920260548591614" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDc-Fe-JXN">
+                                            <rect key="frame" x="281" y="116" width="67" height="30"/>
+                                            <state key="normal" title="下架活动"/>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="6V7-EA-fnF" firstAttribute="leading" secondItem="yS1-3k-R8t" secondAttribute="leading" id="22N-Qb-JT8"/>
@@ -4009,6 +4013,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="actionButton" destination="CDc-Fe-JXN" id="vjr-No-1T4"/>
                                     <outlet property="containerView" destination="6V7-EA-fnF" id="3nL-iH-3gG"/>
                                     <outlet property="orderNoLabel" destination="aoz-UU-2jH" id="iIl-X4-cmb"/>
                                     <outlet property="orgLabel" destination="d3B-t8-Ae5" id="Yh7-HZ-pjF"/>
@@ -4085,6 +4090,112 @@
             </objects>
             <point key="canvasLocation" x="3411.5" y="1400.5"/>
         </scene>
+        <!--发送Remix推送消息-->
+        <scene sceneID="0mH-3j-cKU">
+            <objects>
+                <viewController storyboardIdentifier="NotifInputVC" title="发送Remix推送消息" id="XEz-78-Zcg" customClass="NotifInputViewController" customModule="Remix" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ObU-cu-zzj"/>
+                        <viewControllerLayoutGuide type="bottom" id="2W6-oN-h7j"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KNE-2b-wLp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="yO1-mQ-rS4">
+                                <rect key="frame" x="0.0" y="152" width="375" height="163"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gss-0Z-OwY">
+                                <rect key="frame" x="0.0" y="339" width="375" height="60"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="NotifDemo" translatesAutoresizingMaskIntoConstraints="NO" id="nV1-ao-aeV">
+                                <rect key="frame" x="0.0" y="58" width="375" height="69"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Demo:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xx-wO-pQf">
+                                <rect key="frame" x="14" y="34" width="52" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.34937263257575757" green="0.34937263257575757" blue="0.34937263257575757" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5s3-vj-YSF">
+                                <rect key="frame" x="31" y="425" width="312" height="44"/>
+                                <color key="backgroundColor" red="0.85043728351593018" green="0.21816034615039825" blue="0.15920260548591614" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="提交">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="submitNotifRequest:" destination="XEz-78-Zcg" eventType="touchUpInside" id="LnQ-Uz-oHW"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97015072599999996" green="0.97015072599999996" blue="0.97015072599999996" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="notifInputView" destination="yO1-mQ-rS4" id="vES-BQ-jzG"/>
+                        <outlet property="urlInputView" destination="gss-0Z-OwY" id="5aO-i9-J14"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k1B-Ub-bfg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3829.5" y="1400.5"/>
+        </scene>
+        <!--提现-->
+        <scene sceneID="uCr-1y-JAm">
+            <objects>
+                <viewController storyboardIdentifier="WithdrawInputVC" title="提现" id="aOB-cL-a7J" customClass="WithdrawInputViewController" customModule="Remix" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1Tc-EQ-htT"/>
+                        <viewControllerLayoutGuide type="bottom" id="rJx-in-stS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8j6-8E-3F7" customClass="UIControl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" background="TextFieldBG" translatesAutoresizingMaskIntoConstraints="NO" id="rRL-Fl-1Rw">
+                                <rect key="frame" x="16" y="40" width="343" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="BXy-pQ-7Y6"/>
+                                </constraints>
+                                <color key="textColor" red="0.2766729798" green="0.2766729798" blue="0.2766729798" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="请在此输入你的支付宝帐号。款项将在两个工作日内到达。" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NIP-he-Ulq">
+                                <rect key="frame" x="16" y="92" width="343" height="43.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.4675465593" green="0.4675465593" blue="0.4675465593" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rRL-Fl-1Rw" firstAttribute="leading" secondItem="8j6-8E-3F7" secondAttribute="leadingMargin" id="A9f-Ow-5wE"/>
+                            <constraint firstItem="rRL-Fl-1Rw" firstAttribute="trailing" secondItem="8j6-8E-3F7" secondAttribute="trailingMargin" id="WIu-4v-jo6"/>
+                            <constraint firstItem="rRL-Fl-1Rw" firstAttribute="top" secondItem="1Tc-EQ-htT" secondAttribute="bottom" constant="20" id="zIS-OR-CjR"/>
+                        </constraints>
+                        <connections>
+                            <action selector="backGroundTap:" destination="aOB-cL-a7J" eventType="touchUpInside" id="ZDx-mc-wWf"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" id="e6a-1R-T4m"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="inputField" destination="rRL-Fl-1Rw" id="VgS-Cj-NJL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="veQ-3U-B0D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4293.5" y="1384.5"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Community" width="138" height="78"/>
@@ -4097,6 +4208,7 @@
         <image name="LoginBG" width="726" height="1298"/>
         <image name="LoginButton" width="393" height="99"/>
         <image name="Logo" width="381" height="187"/>
+        <image name="NotifDemo" width="828" height="150"/>
         <image name="Placeholder" width="108" height="96"/>
         <image name="TextFieldBG" width="326" height="45"/>
         <image name="Trending" width="252" height="252"/>

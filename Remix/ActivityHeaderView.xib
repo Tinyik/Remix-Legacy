@@ -58,6 +58,9 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="blurredCoverView" destination="lTg-dA-WLB" id="KY4-J6-h07"/>
+                <outlet property="cashButton" destination="ea5-xf-HR3" id="Zht-hA-IcR"/>
+                <outlet property="ordersNumberLabel" destination="KSL-Fa-VmX" id="Xyf-1O-jXG"/>
+                <outlet property="revenueLabel" destination="can-Q5-hEV" id="qvX-yQ-lms"/>
             </connections>
             <point key="canvasLocation" x="321.5" y="184"/>
         </view>

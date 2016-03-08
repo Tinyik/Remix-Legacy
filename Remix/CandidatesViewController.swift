@@ -14,21 +14,36 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
     
     var objectId: String = ""
     var coverImgURL: NSURL!
+    var revenue: Double = 0
     var orders: [BmobObject] = []
     var customers: [BmobUser] = []
     var parentActivity: BmobObject!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "实用工具", style: .Plain, target: self, action: "showUtilities")
+        let b1 = UIBarButtonItem(title: "活动页面", style: .Plain, target: self, action: "showActivity")
+        let b2 = UIBarButtonItem(title: "管理", style: .Plain, target: self, action: "showUtilities")
         fetchCloudData()
-        setUpParallaxHeaderView()
+        self.navigationItem.rightBarButtonItems = [b2,b1]
         
+        
+    }
+    
+    func showActivity() {
+        let activityView = RMActivityViewController(url:NSURL(string: self.parentActivity.objectForKey("URL") as! String)!)
+        activityView.toolBar.likeButton.hidden = true
+        activityView.shouldApplyWhiteTint = false
+        activityView.activity = self.parentActivity
+        self.navigationController?.pushViewController(activityView, animated: true)
     }
     
     func showUtilities() {
         let sheet = LCActionSheet(title: nil, buttonTitles: ["群发Remix推送消息", "群发邮件", "群发短信", "导出报名信息为表格"], redButtonIndex: -1) { (buttonIndex) -> Void in
+        
             if buttonIndex == 0 {
-                
+                let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+                let vc = storyboard.instantiateViewControllerWithIdentifier("NotifInputVC") as! NotifInputViewController
+                vc.objectId = self.objectId
+                self.navigationController?.pushViewController(vc, animated: true)
             }
             if buttonIndex == 1 {
                 self.sendGroupEmails()
@@ -39,7 +54,7 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
             }
             
             if buttonIndex == 3 {
-                self.exportAsCSV()
+                self.exportToMail()
             }
            
         }
@@ -47,11 +62,55 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
         sheet.show()
     }
     
-    func exportAsCSV() {
-        var docPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-        let filePath = docPath.stringByAppendingString("Participants.csv")
-        let writer = CHCSVWriter(forWritingToCSVFile: filePath)
-        writer.writeField("sdfsdfsdf")
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.translucent = false
+    }
+    
+    func exportToMail() {
+        if MFMailComposeViewController.canSendMail() {
+            var emails: [String] = []
+            var phoneNumbers: [String] = []
+            var names: [String] = []
+            var remarks: [String] = []
+            var wechats: [String] = []
+            var schools: [String] = []
+            var weibos: [String] = []
+            for o in orders{
+                if let r = o.objectForKey("Remarks") as? String {
+                    remarks.append(r)
+                }else{
+                    remarks.append("无")
+                }
+            }
+            for c in customers {
+                emails.append(c.email)
+                phoneNumbers.append(c.mobilePhoneNumber)
+                names.append(c.objectForKey("LegalName") as! String)
+                schools.append(c.objectForKey("School") as! String)
+                if let wechat = c.objectForKey("Wechat") as? String {
+                    wechats.append(wechat)
+                }else{
+                    wechats.append("无")
+                }
+                
+                if let weibo = c.objectForKey("Weibo") as? String {
+                    weibos.append(weibo)
+                }else{
+                    weibos.append("无")
+                }
+            }
+            let controller = MFMailComposeViewController()
+            controller.mailComposeDelegate = self
+            var bodyTitle = "//在电脑端查看即可正常显示\n\n\n     姓名     学校     手机号     邮箱     微信     备注\n\n"
+            for var i = 0; i < customers.count; ++i {
+                bodyTitle = bodyTitle +  "\n     " + names[i] + "     " + schools[i] + "     " + phoneNumbers[i] + "     " + emails[i] + "     " + wechats[i] + "     " + remarks[i]
+            }
+            controller.setSubject("活动报名情况")
+            controller.setMessageBody(bodyTitle, isHTML: false)
+            self.presentViewController(controller, animated: true, completion: nil)
+            
+        }
     }
     
     func sendGroupEmails() {
@@ -91,6 +150,7 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
     func fetchCloudData() {
         orders = []
         customers = []
+        revenue = 0
         let query = BmobQuery(className: "Orders")
         query.whereKey("ParentActivityObjectId", equalTo: objectId)
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
@@ -106,7 +166,10 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
                             self.tableView.reloadData()
                         }
                     })
+                    
+                    self.revenue += order.objectForKey("Amount") as! Double
                 }
+              self.setUpParallaxHeaderView()
             }
         }
     }
@@ -116,10 +179,68 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
         let headerView = UIView.loadFromNibNamed("ActivityHeaderView") as! ActivityHeaderView
         headerView.activity = parentActivity
         headerView.coverImgURL = coverImgURL
+        headerView.cashButton.addTarget(self, action: "withdrawCash", forControlEvents: .TouchUpInside)
+        headerView.ordersNumberLabel.text = String(orders.count)
+        headerView.revenueLabel.text = String(Int(revenue))
         headerView.fetchActivityInfo()
         let _headerView = ParallaxHeaderView.parallaxHeaderViewWithSubView(headerView) as! ParallaxHeaderView
         self.tableView.tableHeaderView = _headerView
         
+    }
+    
+    func withdrawCash() {
+        if checkEligibility() {
+            if parentActivity.objectForKey("hasWithdrawn") as! Bool == false{
+                let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+                let vc = storyboard.instantiateViewControllerWithIdentifier("WithdrawInputVC")
+                self.navigationController?.pushViewController(vc, animated: true)
+            }else{
+                let alert = UIAlertController(title: "Remix提示", message: "当前活动已提现。若款项未到账请联系Remix客服。", preferredStyle: .Alert)
+                let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+                alert.addAction(action)
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    func checkEligibility() -> Bool {
+        if parentActivity.objectForKey("isVisibleToUsers") as! Bool == true && parentActivity.objectForKey("UnderReview") as! Bool == false {
+            print("you")
+            if parentActivity.objectForKey("hasWithdrawn") as! Bool == false {
+                let alert = UIAlertController(title: "Remix提示", message: "当前活动正在接受报名, 无法提现。请先对活动进行下架操作。", preferredStyle: .Alert)
+                let action = UIAlertAction(title: "好的", style: .Default, handler: { (action) -> Void in
+                    self.navigationController?.popViewControllerAnimated(true)
+                })
+                alert.addAction(action)
+                self.presentViewController(alert, animated: true, completion: nil)
+            }else{
+                let alert = UIAlertController(title: "Remix提示", message: "当前活动无法提现。如有疑问请联系Remix客服。", preferredStyle: .Alert)
+                let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+                alert.addAction(action)
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+           
+            return false
+        }else if parentActivity.objectForKey("isVisibleToUsers") as! Bool == false && parentActivity.objectForKey("UnderReview") as! Bool == true{
+            if parentActivity.objectForKey("hasWithdrawn") as! Bool == false {
+                let alert = UIAlertController(title: "Remix提示", message: "当前活动仍在审核中, 无法进行提现操作。", preferredStyle: .Alert)
+                let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+                alert.addAction(action)
+                self.presentViewController(alert, animated: true, completion: nil)
+            }else{
+                let alert = UIAlertController(title: "Remix提示", message: "当前活动无法提现。如有疑问请联系Remix客服。", preferredStyle: .Alert)
+                let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+                alert.addAction(action)
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+          
+            return false
+        }
+        
+        
+
+        
+        return true
     }
 
     

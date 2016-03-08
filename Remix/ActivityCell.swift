@@ -18,9 +18,11 @@ class ActivityCell: UITableViewCell {
     @IBOutlet weak var orgLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var orderNoLabel: UILabel!
-
+    @IBOutlet weak var actionButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
+        themeImg.contentMode = .ScaleAspectFill
+        themeImg.clipsToBounds = true
         // Initialization code
     }
 

@@ -80,16 +80,24 @@ class ManagementViewController: UITableViewController, DZNEmptyDataSetDelegate, 
                 
             }
         }
-        if selectedActivity.objectForKey("isVisibleToUsers") as! Bool == true {
+        if selectedActivity.objectForKey("isVisibleToUsers") as! Bool == true && selectedActivity.objectForKey("UnderReview") as! Bool == false {
             cell.statusIndicator.text = "审核已通过"
-        }else{
+            cell.actionButton.setTitle("下架活动", forState: .Normal)
+            cell.actionButton.addTarget(self, action: "expireActivity", forControlEvents: .TouchUpInside)
+        }else if selectedActivity.objectForKey("isVisibleToUsers") as! Bool == false && selectedActivity.objectForKey("UnderReview") as! Bool == true{
             cell.statusIndicator.text = "审核中"
+            cell.actionButton.hidden = true
+        }else if selectedActivity.objectForKey("isVisibleToUsers") as! Bool == false && selectedActivity.objectForKey("UnderReview") as! Bool == false{
+            cell.statusIndicator.text = "活动已下架"
+            cell.actionButton.hidden = true
         }
         cell.orderNoLabel.text = "活动唯一识别码: " + selectedActivity.objectId
         return cell
     }
 
-    
+    func expireActivity() {
+        
+    }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CommentInputViewController: UIViewController, UITextViewDelegate {
+class CommentInputViewController: UIViewController {
 
     var presentingActivity: BmobObject!
     
@@ -18,7 +18,7 @@ class CommentInputViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.text = presentingActivity.objectForKey("Title") as? String
-        inputTextView.delegate = self
+        inputTextView.placeholder = "请在此输入你的评论"
         // Do any additional setup after loading the view.
     }
 
@@ -49,22 +49,5 @@ class CommentInputViewController: UIViewController, UITextViewDelegate {
         
     }
     
-    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
-        
-            textView.text = ""
-            textView.textColor = .blackColor()
-        
-        return true
-    }
     
-    
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-        if text == "\n" {
-            textView.resignFirstResponder()
-            return false
-        }
-        
-        return true
-    }
-   
 }

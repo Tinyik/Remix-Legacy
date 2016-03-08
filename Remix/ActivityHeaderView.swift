@@ -11,8 +11,16 @@ import SDWebImage
 
 class ActivityHeaderView: UIView {
     @IBOutlet weak var blurredCoverView: UIImageView!
+    @IBOutlet weak var ordersNumberLabel: UILabel!
+    @IBOutlet weak var revenueLabel: UILabel!
+    @IBOutlet weak var cashButton: UIButton!
+    
     var activity: BmobObject!
     var coverImgURL: NSURL!
+    
+    
+    
+    
     override func awakeFromNib() {
         print("AWAKE")
         blurredCoverView.contentMode = .ScaleAspectFill
