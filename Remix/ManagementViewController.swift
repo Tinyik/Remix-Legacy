@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ManagementViewController: UITableViewController {
+class ManagementViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     
     var coverImgURLs: [NSURL]! = []
     var parentActivities: [BmobObject] = []
@@ -16,6 +16,10 @@ class ManagementViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchCloudData()
+        self.title = "我发起的活动"
+        self.tableView.emptyDataSetSource = self
+        self.tableView.emptyDataSetDelegate = self
+        self.tableView.tableFooterView = UIView()
         
     }
     
@@ -92,7 +96,44 @@ class ManagementViewController: UITableViewController {
         let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let candidateVC = storyBoard.instantiateViewControllerWithIdentifier("CandidateVC") as! CandidatesViewController
         candidateVC.objectId = parentActivities[indexPath.row].objectId
+        candidateVC.coverImgURL = coverImgURLs[indexPath.row]
+        candidateVC.parentActivity = parentActivities[indexPath.row]
         self.navigationController?.pushViewController(candidateVC, animated: true)
+    }
+    
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(17)]
+        return NSAttributedString(string: "你还没有发起过活动。\n", attributes: attrDic)
+    }
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(15)]
+        return NSAttributedString(string: "发起活动后，在这里你可以管理参与者并与他们取得联系。", attributes: attrDic)
+    }
+    
+    func buttonTitleForEmptyDataSet(scrollView: UIScrollView!, forState state: UIControlState) -> NSAttributedString! {
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(16), NSForegroundColorAttributeName: FlatRed()]
+        return NSAttributedString(string: "发起活动", attributes: attrDic)
+    }
+    
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+        return false
+    }
+    
+    func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
+        return UIColor(red: 0.97255, green: 0.97255, blue: 0.97255, alpha: 1)
+    }
+    
+    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+        return UIImage(named: "NoData")
+    }
+    
+    func emptyDataSet(scrollView: UIScrollView!, didTapButton button: UIButton!) {
+        let subm = ActivitySubmissionViewController()
+        let navi = UINavigationController(rootViewController: subm)
+        self.presentViewController(navi, animated: true, completion: nil)
+        
     }
 
 }

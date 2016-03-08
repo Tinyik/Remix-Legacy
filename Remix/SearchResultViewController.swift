@@ -442,6 +442,10 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
         
         sheet.show()
     }
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 
     
    }

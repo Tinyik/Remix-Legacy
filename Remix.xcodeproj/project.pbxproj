@@ -65,6 +65,8 @@
 		187AE32E1C65ECBB00B255FF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187AE32D1C65ECBB00B255FF /* SettingsViewController.swift */; };
 		187AE3301C65F69200B255FF /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187AE32F1C65F69200B255FF /* SettingsCell.swift */; };
 		187AE3321C66128C00B255FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 187AE3311C66128C00B255FF /* Assets.xcassets */; };
+		187F037C1C8EB9D800328279 /* ActivityHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187F037B1C8EB9D800328279 /* ActivityHeaderView.swift */; };
+		187F037E1C8EB9E700328279 /* ActivityHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 187F037D1C8EB9E700328279 /* ActivityHeaderView.xib */; };
 		1897824E1C63C7EF00458515 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1897824D1C63C7EF00458515 /* AppDelegate.swift */; };
 		189782531C63C7EF00458515 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 189782511C63C7EF00458515 /* Main.storyboard */; };
 		189782581C63C7EF00458515 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 189782561C63C7EF00458515 /* LaunchScreen.storyboard */; };
@@ -118,6 +120,11 @@
 		18B317C41C6B183000336A92 /* OrgFilteredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B317C31C6B183000336A92 /* OrgFilteredViewController.swift */; };
 		18B317C61C6B243900336A92 /* DeviceInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B317C51C6B243900336A92 /* DeviceInformation.swift */; };
 		18B317C71C6B46D300336A92 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C9A1F31C687CB900A80A22 /* QuartzCore.framework */; };
+		18BC022D1C8E90E300FBC162 /* CandidateDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BC022C1C8E90E300FBC162 /* CandidateDetailViewController.swift */; };
+		18BC022F1C8E971000FBC162 /* UserHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BC022E1C8E971000FBC162 /* UserHeaderView.swift */; };
+		18BC02311C8E973300FBC162 /* UserHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18BC02301C8E973300FBC162 /* UserHeaderView.xib */; };
+		18BC02331C8EA5D500FBC162 /* UserFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18BC02321C8EA5D500FBC162 /* UserFooterView.xib */; };
+		18BC02351C8EA5E400FBC162 /* UserFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BC02341C8EA5E400FBC162 /* UserFooterView.swift */; };
 		18BCA02A1C6E3FE600DF3EC7 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BCA0291C6E3FE600DF3EC7 /* CommunityViewController.swift */; };
 		18BCA02D1C6E489400DF3EC7 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BCA02C1C6E489400DF3EC7 /* LocationViewController.swift */; };
 		18BCA02F1C6E48D400DF3EC7 /* LocationFullCoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BCA02E1C6E48D400DF3EC7 /* LocationFullCoverCell.swift */; };
@@ -255,6 +262,8 @@
 		187AE32D1C65ECBB00B255FF /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SettingsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		187AE32F1C65F69200B255FF /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		187AE3311C66128C00B255FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		187F037B1C8EB9D800328279 /* ActivityHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityHeaderView.swift; sourceTree = "<group>"; };
+		187F037D1C8EB9E700328279 /* ActivityHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityHeaderView.xib; sourceTree = "<group>"; };
 		1897824A1C63C7EF00458515 /* Remix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Remix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1897824D1C63C7EF00458515 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		189782521C63C7EF00458515 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -321,6 +330,11 @@
 		18B317BF1C6B06EC00336A92 /* GHWalkThroughView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHWalkThroughView.m; sourceTree = "<group>"; };
 		18B317C31C6B183000336A92 /* OrgFilteredViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = OrgFilteredViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18B317C51C6B243900336A92 /* DeviceInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInformation.swift; sourceTree = "<group>"; };
+		18BC022C1C8E90E300FBC162 /* CandidateDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateDetailViewController.swift; sourceTree = "<group>"; };
+		18BC022E1C8E971000FBC162 /* UserHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserHeaderView.swift; sourceTree = "<group>"; };
+		18BC02301C8E973300FBC162 /* UserHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserHeaderView.xib; sourceTree = "<group>"; };
+		18BC02321C8EA5D500FBC162 /* UserFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserFooterView.xib; sourceTree = "<group>"; };
+		18BC02341C8EA5E400FBC162 /* UserFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFooterView.swift; sourceTree = "<group>"; };
 		18BCA0291C6E3FE600DF3EC7 /* CommunityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CommunityViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18BCA02C1C6E489400DF3EC7 /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LocationViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18BCA02E1C6E48D400DF3EC7 /* LocationFullCoverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationFullCoverCell.swift; sourceTree = "<group>"; };
@@ -605,7 +619,7 @@
 				18E239311C805E1600363655 /* FloatingActivityView.swift */,
 				18E684B11C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift */,
 				18E620A51C8C194C00B85941 /* ActivitySubmissionViewController.swift */,
-				18C97F651C8DE0D3000B4EC9 /* New Group */,
+				18C97F651C8DE0D3000B4EC9 /* ManagementInterface */,
 				18E620AD1C8D5F9600B85941 /* LocationSubmissionViewController.swift */,
 				1898CA4A1C6900B8009D3261 /* RegLoginViewController.swift */,
 				180199551C79E25F00A6C7E4 /* TermsAndConditionsViewController.swift */,
@@ -869,15 +883,22 @@
 			name = SwipeBetweenVC;
 			sourceTree = "<group>";
 		};
-		18C97F651C8DE0D3000B4EC9 /* New Group */ = {
+		18C97F651C8DE0D3000B4EC9 /* ManagementInterface */ = {
 			isa = PBXGroup;
 			children = (
 				18C97F661C8DE132000B4EC9 /* ManagementViewController.swift */,
+				18BC022E1C8E971000FBC162 /* UserHeaderView.swift */,
+				18BC02321C8EA5D500FBC162 /* UserFooterView.xib */,
+				187F037B1C8EB9D800328279 /* ActivityHeaderView.swift */,
+				18BC02341C8EA5E400FBC162 /* UserFooterView.swift */,
+				187F037D1C8EB9E700328279 /* ActivityHeaderView.xib */,
+				18BC02301C8E973300FBC162 /* UserHeaderView.xib */,
+				18BC022C1C8E90E300FBC162 /* CandidateDetailViewController.swift */,
 				18C97F681C8DE14E000B4EC9 /* CandidatesViewController.swift */,
 				18C97F6C1C8DE580000B4EC9 /* ActivityCell.swift */,
 				18C97F6A1C8DE164000B4EC9 /* CandidateCell.swift */,
 			);
-			name = "New Group";
+			name = ManagementInterface;
 			sourceTree = "<group>";
 		};
 		18C9A1E81C68794D00A80A22 /* ZoomCell */ = {
@@ -1077,11 +1098,14 @@
 				1857B5341C856BB000D00A9E /* PKImageBundle.bundle in Resources */,
 				181F2B2D1C6A2D8D00FC237D /* backItemImage_hl@2x.png in Resources */,
 				187745901C6ACB1D000427C7 /* UMSCommentInputController.xib in Resources */,
+				18BC02331C8EA5D500FBC162 /* UserFooterView.xib in Resources */,
+				187F037E1C8EB9E700328279 /* ActivityHeaderView.xib in Resources */,
 				187745961C6ACB1D000427C7 /* UMSShareListController.xib in Resources */,
 				18984F8F1C8472A300821477 /* RMToolBarView.xib in Resources */,
 				187745931C6ACB1D000427C7 /* UMShareEditViewControlleriPad.xib in Resources */,
 				1877458F1C6ACB1D000427C7 /* UMSCommentDetailController.xib in Resources */,
 				187745921C6ACB1D000427C7 /* UMShareEditViewController.xib in Resources */,
+				18BC02311C8E973300FBC162 /* UserHeaderView.xib in Resources */,
 				1877458D1C6ACB1D000427C7 /* UMSocialLocalizable.strings in Resources */,
 				187745951C6ACB1D000427C7 /* UMSnsAccountViewController.xib in Resources */,
 				187745971C6ACB1D000427C7 /* UMSocialSDKResourcesNew.bundle in Resources */,
@@ -1217,6 +1241,7 @@
 				1898CA941C69B599009D3261 /* TRStatusBarStyle.swift in Sources */,
 				1899E9C91C670FFB00ADC2AC /* GalleryTableViewCell.swift in Sources */,
 				18C79D7A1C8215BD004AAA44 /* ActivityOrderCell.swift in Sources */,
+				18BC022F1C8E971000FBC162 /* UserHeaderView.swift in Sources */,
 				18E2392C1C8029D300363655 /* PersonalInfoViewController.swift in Sources */,
 				1898CA4B1C6900B8009D3261 /* RegLoginViewController.swift in Sources */,
 				1898CA881C69B599009D3261 /* FadeTransitionAnimation.swift in Sources */,
@@ -1226,9 +1251,11 @@
 				18C9A1F71C687DA200A80A22 /* UIImageView+BetterFace.m in Sources */,
 				18B317C01C6B06EC00336A92 /* GHWalkThroughPageCell.m in Sources */,
 				1898CA921C69B599009D3261 /* TwitterTransitionAnimation.swift in Sources */,
+				187F037C1C8EB9D800328279 /* ActivityHeaderView.swift in Sources */,
 				1898CA7E1C69B599009D3261 /* TRViewControllerTransitionDelegate.swift in Sources */,
 				18BCA0361C6EE29F00DF3EC7 /* RMActivityViewController.swift in Sources */,
 				181F2B2F1C6A2D8D00FC237D /* NJKWebViewProgressView.m in Sources */,
+				18BC022D1C8E90E300FBC162 /* CandidateDetailViewController.swift in Sources */,
 				1898CA911C69B599009D3261 /* TRTransitionAnimations.swift in Sources */,
 				181F2B1F1C69DB8A00FC237D /* LikedViewController.swift in Sources */,
 				18C97F6D1C8DE580000B4EC9 /* ActivityCell.swift in Sources */,
@@ -1248,6 +1275,7 @@
 				1877459F1C6AF492000427C7 /* DetailedSettingsCell.swift in Sources */,
 				1898CA5F1C6990E1009D3261 /* DAKeyboardControl.m in Sources */,
 				1898CA7F1C69B599009D3261 /* UIViewController+TRPresent.swift in Sources */,
+				18BC02351C8EA5E400FBC162 /* UserFooterView.swift in Sources */,
 				1898CA951C69B599009D3261 /* TRViewControllerAnimatedTransitioning.swift in Sources */,
 				18BCA02D1C6E489400DF3EC7 /* LocationViewController.swift in Sources */,
 				18E620AC1C8C591800B85941 /* CustomCells.swift in Sources */,

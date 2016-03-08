@@ -1861,7 +1861,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hN2-gM-1bZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1966.5" y="342.5"/>
+            <point key="canvasLocation" x="1898.5" y="621.5"/>
         </scene>
         <!--Terms And Conditions View Controller-->
         <scene sceneID="Xe1-N3-Uit">
@@ -3363,7 +3363,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g9D-o0-MoV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2506.5" y="1510.5"/>
+            <point key="canvasLocation" x="2511.5" y="1400.5"/>
         </scene>
         <!--Label Filtered View Controller-->
         <scene sceneID="cYV-ak-CxN">
@@ -3900,7 +3900,6 @@
         <!--Management View Controller-->
         <scene sceneID="Pzo-o8-QxI">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Q3R-kS-zWT" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="ManVC" id="H99-qo-PRh" customClass="ManagementViewController" customModule="Remix" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="FfF-2g-yDI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -4027,8 +4026,63 @@
                     </tableView>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q3R-kS-zWT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3006.5" y="1379.5"/>
+            <point key="canvasLocation" x="2978.5" y="1400.5"/>
+        </scene>
+        <!--Candidate Detail View Controller-->
+        <scene sceneID="4IH-dl-mfE">
+            <objects>
+                <tableViewController storyboardIdentifier="CandidateDetailVC" id="Gvw-oa-8VJ" customClass="CandidateDetailViewController" customModule="Remix" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="B15-FL-kLc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" rowHeight="60" id="6i4-2i-tQv" customClass="InfoCell" customModule="Remix" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="49.5" width="375" height="60"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6i4-2i-tQv" id="aky-IF-8Je">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3zY-Km-MFS">
+                                            <rect key="frame" x="20" y="19" width="42" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q7C-sf-IN9">
+                                            <rect key="frame" x="294.5" y="20" width="39.5" height="19.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.4265309343" green="0.4265309343" blue="0.4265309343" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="3zY-Km-MFS" firstAttribute="leading" secondItem="aky-IF-8Je" secondAttribute="leading" constant="20" id="Wm1-KE-CVD"/>
+                                        <constraint firstItem="Q7C-sf-IN9" firstAttribute="centerY" secondItem="aky-IF-8Je" secondAttribute="centerY" id="cPZ-SI-gAC"/>
+                                        <constraint firstItem="3zY-Km-MFS" firstAttribute="centerY" secondItem="aky-IF-8Je" secondAttribute="centerY" id="gwR-AG-gcT"/>
+                                        <constraint firstAttribute="trailing" secondItem="Q7C-sf-IN9" secondAttribute="trailing" constant="8" id="hxl-pl-8CL"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="detailLabel" destination="Q7C-sf-IN9" id="zsL-Yn-u31"/>
+                                    <outlet property="titleLabel" destination="3zY-Km-MFS" id="R6v-1x-OZn"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Gvw-oa-8VJ" id="dFB-Lz-S13"/>
+                            <outlet property="delegate" destination="Gvw-oa-8VJ" id="3YF-Wk-Vkn"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="D4i-hm-anu"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="do7-U8-hhA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3411.5" y="1400.5"/>
         </scene>
     </scenes>
     <resources>

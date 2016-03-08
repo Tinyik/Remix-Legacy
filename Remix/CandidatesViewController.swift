@@ -7,18 +7,28 @@
 //
 
 import UIKit
+import MessageUI
+import SDWebImage
 
-class CandidatesViewController: UITableViewController {
+class CandidatesViewController: UITableViewController, MFMailComposeViewControllerDelegate{
     
     var objectId: String = ""
+    var coverImgURL: NSURL!
     var orders: [BmobObject] = []
-    var customers: [BmobObject] = []
+    var customers: [BmobUser] = []
+    var parentActivity: BmobObject!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "查看活动页面", style: .Plain, target: self, action: "showActivityPage")
         fetchCloudData()
+        setUpParallaxHeaderView()
         
     }
-
+    
+    func showActivityPage() {
+        
+    }
+    
     func fetchCloudData() {
         orders = []
         customers = []
@@ -33,13 +43,37 @@ class CandidatesViewController: UITableViewController {
                     query2.getObjectInBackgroundWithId(order.objectForKey("CustomerObjectId") as! String, block: { (user, error) -> Void in
                         print("USER")
                         if error == nil {
-                            self.customers.append(user)
+                            self.customers.append(user as! BmobUser)
                             self.tableView.reloadData()
                         }
                     })
                 }
             }
         }
+    }
+    
+    
+    func setUpParallaxHeaderView() {
+        let headerView = UIView.loadFromNibNamed("ActivityHeaderView") as! ActivityHeaderView
+        headerView.activity = parentActivity
+        headerView.coverImgURL = coverImgURL
+        headerView.fetchActivityInfo()
+        let _headerView = ParallaxHeaderView.parallaxHeaderViewWithSubView(headerView) as! ParallaxHeaderView
+        self.tableView.tableHeaderView = _headerView
+        
+    }
+
+    
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        let header: ParallaxHeaderView = tableView.tableHeaderView as! ParallaxHeaderView
+        header.layoutHeaderViewForScrollViewOffset(scrollView.contentOffset)
+        
+        //        self.tableView.tableHeaderView = header
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        (tableView.tableHeaderView as! ParallaxHeaderView).refreshBlurViewForNewImage()
+        super.viewDidAppear(animated)
     }
     
     // MARK: - Table view data source
@@ -58,56 +92,21 @@ class CandidatesViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") as! CandidateCell
         cell.nameLabel.text = customers[indexPath.row].objectForKey("LegalName") as? String
-        cell.detailLabel.text = customers[indexPath.row].objectForKey("email") as? String
+        cell.detailLabel.text = customers[indexPath.row].email
         let url = NSURL(string: (customers[indexPath.row].objectForKey("Avatar") as! BmobFile).url)
         cell.avatarView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "DefaultAvatar"))
         return cell
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let detailVC = storyBoard.instantiateViewControllerWithIdentifier("CandidateDetailVC") as! CandidateDetailViewController
+        detailVC.customer = customers[indexPath.row]
+        detailVC.order = orders[indexPath.row]
+        self.navigationController?.pushViewController(detailVC, animated: true)
+        
     }
-    */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }
