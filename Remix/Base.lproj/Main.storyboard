@@ -4229,15 +4229,19 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="请在此输入你的支付宝帐号。款项将在两个工作日内到达。如需指定其他转账方式请联系客服。" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NIP-he-Ulq">
-                                <rect key="frame" x="17" y="88" width="341" height="45.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请在此输入你的支付宝帐号。款项将在两个工作日内到达。如需指定其他转账方式请联系客服。" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NIP-he-Ulq">
+                                <rect key="frame" x="17" y="95" width="341" height="33.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.4675465593" green="0.4675465593" blue="0.4675465593" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7l3-Qb-gsT">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7l3-Qb-gsT">
                                 <rect key="frame" x="38" y="221" width="299" height="46"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="hTv-64-Zvt"/>
+                                    <constraint firstAttribute="width" constant="299" id="w17-Gy-aLD"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="联系客服">
                                     <color key="titleColor" red="0.97483926238363106" green="0.99215686274509807" blue="0.97029604431777139" alpha="1" colorSpace="calibratedRGB"/>
@@ -4249,8 +4253,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="NIP-he-Ulq" firstAttribute="leading" secondItem="8j6-8E-3F7" secondAttribute="leading" constant="17" id="5iF-dD-zlo"/>
                             <constraint firstItem="rRL-Fl-1Rw" firstAttribute="leading" secondItem="8j6-8E-3F7" secondAttribute="leadingMargin" id="A9f-Ow-5wE"/>
+                            <constraint firstItem="7l3-Qb-gsT" firstAttribute="centerX" secondItem="8j6-8E-3F7" secondAttribute="centerX" id="WCL-xZ-dWe"/>
                             <constraint firstItem="rRL-Fl-1Rw" firstAttribute="trailing" secondItem="8j6-8E-3F7" secondAttribute="trailingMargin" id="WIu-4v-jo6"/>
+                            <constraint firstItem="NIP-he-Ulq" firstAttribute="top" secondItem="rRL-Fl-1Rw" secondAttribute="bottom" constant="15" id="f38-d8-7lX"/>
+                            <constraint firstAttribute="trailing" secondItem="NIP-he-Ulq" secondAttribute="trailing" constant="17" id="nvc-9g-q8p"/>
+                            <constraint firstItem="7l3-Qb-gsT" firstAttribute="top" secondItem="NIP-he-Ulq" secondAttribute="bottom" constant="92.5" id="wfz-ml-Bct"/>
                             <constraint firstItem="rRL-Fl-1Rw" firstAttribute="top" secondItem="1Tc-EQ-htT" secondAttribute="bottom" constant="20" id="zIS-OR-CjR"/>
                         </constraints>
                         <connections>
