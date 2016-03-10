@@ -219,6 +219,8 @@ class ActivitySubmissionViewController: FormViewController {
                 
                     newActivity.setObject(true, forKey: "UnderReview")
                     newActivity.setObject(false, forKey: "hasWithdrawn")
+                    newActivity.setObject(false, forKey: "hasRequestedWithdrawal")
+                    newActivity.setObject(true, forKey: "isHeldBySubmitter")
                     newActivity.setObject(BmobUser.getCurrentUser().objectId, forKey: "Submitter")
                     newActivity.setObject(attr["ItemName"]! as! String, forKey: "ItemName")
                     newActivity.setObject("主办方提交:" + (attr["Title"]! as! String), forKey: "Title")
@@ -241,11 +243,12 @@ class ActivitySubmissionViewController: FormViewController {
                         let dateString = monthName + " " + String(day) + " " + String(year)
                         newActivity.setObject(dateString, forKey: "Date")
                         
-                    }else{
-                        let dateString = attr["Frequency"]! as! String
-                        newActivity.setObject(dateString, forKey: "Date")
                     }
+                }else{
+                    let dateString = attr["Frequency"]! as! String
+                    newActivity.setObject(dateString, forKey: "Date")
                 }
+
                 if attr["UserRemarks"]! != nil {
                     newActivity.setObject(attr["UserRemarks"]! as! String, forKey: "UserRemarks")
                 }
@@ -267,11 +270,16 @@ class ActivitySubmissionViewController: FormViewController {
                             newActivity.saveInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
                                 if error == nil {
                                     sharedOneSignalInstance.sendTag(attr["Title"] as! String, value: "ActivitySubmitted")
-                                    let alert = UIAlertController(title: "Remix提示", message: "活动添加成功。谢谢你对Remix的支持_(:з」∠)_。审核通过后我们将给你发送推送消息。", preferredStyle: .Alert)
-                                    let action = UIAlertAction(title: "好的", style: .Default, handler: { (action) -> Void in
+                                    let alert = UIAlertController(title: "Remix提示", message: "活动添加成功。谢谢你对Remix的支持_(:з」∠)_。审核通过后我们将给你发送推送消息。你可以在 \"个人中心 - 我发起的活动\"中查看审核状态并管理活动报名者。", preferredStyle: .Alert)
+                                    let cancel = UIAlertAction(title: "好的", style: .Cancel, handler: { (action) -> Void in
                                         self.popCurrentVC()
                                     })
+                                    let action = UIAlertAction(title: "立即查看", style: .Default, handler: { (action) -> Void in
+                                        self.popCurrentVC()
+                                        (UIApplication.sharedApplication().keyWindow?.rootViewController as! RMSwipeBetweenViewControllers).presentSettingsVCFromNaviController()
+                                    })
                                     alert.addAction(action)
+                                    alert.addAction(cancel)
                                     self.presentViewController(alert, animated: true, completion: nil)
 
                                 }else{
@@ -312,6 +320,8 @@ class ActivitySubmissionViewController: FormViewController {
                 
                 newActivity.setObject(true, forKey: "UnderReview")
                 newActivity.setObject(false, forKey: "hasWithdrawn")
+                newActivity.setObject(false, forKey: "hasRequestedWithdrawal")
+                newActivity.setObject(false, forKey: "isHeldBySubmitter")
                 newActivity.setObject(BmobUser.getCurrentUser().objectId, forKey: "Submitter")
                 newActivity.setObject("用户提交", forKey: "Title")
                 selectedCities.insert("全国", atIndex: 0)
@@ -334,10 +344,11 @@ class ActivitySubmissionViewController: FormViewController {
                         let dateString = monthName + " " + String(day) + " " + String(year)
                         newActivity.setObject(dateString, forKey: "Date")
                         
-                    }else{
-                        let dateString = attr["Frequency"]! as! String
-                        newActivity.setObject(dateString, forKey: "Date")
                     }
+                    
+                }else{
+                    let dateString = attr["Frequency"]! as! String
+                    newActivity.setObject(dateString, forKey: "Date")
                 }
                 if attr["Description"]! != nil {
                     newActivity.setObject(attr["Description"]! as! String, forKey: "Description")

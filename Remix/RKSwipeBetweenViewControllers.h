@@ -168,4 +168,5 @@
 - (void)recommendActivityAndLocation;
 - (void)switchRemixCity;
 - (void)tapSegmentButtonAction:(UIButton *)button;
+- (void)presentSettingsVCFromNaviController;
 @end

@@ -67,7 +67,7 @@ class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNE
     
     func findParentActivities() {
         let query = BmobQuery(className: "Activity")
-        query.whereKey("isVisibleToUsers", equalTo: true)
+        // Both visible and invisible activities should be processed.
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
             if error == nil {
                 print(self.parentActivityIds)

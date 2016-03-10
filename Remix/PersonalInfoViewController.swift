@@ -83,7 +83,7 @@ class PersonalInfoViewController: UITableViewController {
         case 2: cell.titleLabel.text = "昵称"
         cell.editingPropertyKey = "username"
         cell.placeHolder = "Remix昵称"
-        cell.explanationText = "昵称将是Remix中他人识别你的标志。"
+        cell.explanationText = "昵称将是他人在活动评论中看到的名字。"
 
         if let userName = CURRENT_USER.objectForKey("username") as? String {
             cell.detailLabel.text = userName

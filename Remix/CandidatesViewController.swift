@@ -9,6 +9,7 @@
 import UIKit
 import MessageUI
 import SDWebImage
+import TTGSnackbar
 
 class CandidatesViewController: UITableViewController, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate{
     
@@ -20,12 +21,40 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
     var parentActivity: BmobObject!
     override func viewDidLoad() {
         super.viewDidLoad()
+        let refreshCtrl = UIRefreshControl()
+        refreshCtrl.addTarget(self, action: "refreshAllData", forControlEvents: .ValueChanged)
+        self.refreshControl = refreshCtrl
         let b1 = UIBarButtonItem(title: "活动页面", style: .Plain, target: self, action: "showActivity")
         let b2 = UIBarButtonItem(title: "管理", style: .Plain, target: self, action: "showUtilities")
-        fetchCloudData()
         self.navigationItem.rightBarButtonItems = [b2,b1]
+        refreshAllData()
+    }
+    
+    func refreshAllData() {
+        let query = BmobQuery(className: "Activity")
+        query.getObjectInBackgroundWithId(objectId) { (activity, error) -> Void in
+            if error == nil {
+                self.parentActivity = activity
+            }
+        }
+            fetchCloudData()
+    
         
-        
+    }
+    
+    func refreshActivityStatus() {
+        let query = BmobQuery(className: "Activity")
+        query.getObjectInBackgroundWithId(objectId) { (activity, error) -> Void in
+            if error == nil {
+                self.parentActivity = activity
+            }else{
+                let snackBar = TTGSnackbar.init(message: "数据价值失败。请检查网络连接后重试", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
+                self.navigationController?.popViewControllerAnimated(true)
+            }
+        }
+
     }
     
     func showActivity() {
@@ -64,6 +93,7 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        refreshActivityStatus()
         self.navigationController?.navigationBar.translucent = false
     }
     
@@ -154,6 +184,9 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
         let query = BmobQuery(className: "Orders")
         query.whereKey("ParentActivityObjectId", equalTo: objectId)
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
+            if self.refreshControl?.refreshing == true {
+                self.refreshControl?.endRefreshing()
+            }
             if error == nil {
                 for order in orders {
                     print("ORDER")
@@ -175,30 +208,69 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
     }
     
     
+    
     func setUpParallaxHeaderView() {
         let headerView = UIView.loadFromNibNamed("ActivityHeaderView") as! ActivityHeaderView
         headerView.activity = parentActivity
         headerView.coverImgURL = coverImgURL
         headerView.cashButton.addTarget(self, action: "withdrawCash", forControlEvents: .TouchUpInside)
-        headerView.ordersNumberLabel.text = String(orders.count)
-        headerView.revenueLabel.text = String(Int(revenue))
+        let numberFont = UIFont(name: "AvenirNext-UltraLight", size: 80)
+        let attrDic1 = [NSFontAttributeName:numberFont!]
+        let ordersString = NSMutableAttributedString(string: String(orders.count), attributes: attrDic1)
+        let unitFont = UIFont.systemFontOfSize(18)
+        let attrDic2 = [NSFontAttributeName:unitFont]
+        let unitString = NSMutableAttributedString(string: "人", attributes: attrDic2)
+        ordersString.appendAttributedString(unitString)
+        headerView.ordersNumberLabel.attributedText = ordersString
+        let revenueString = NSMutableAttributedString(string: String(Int(revenue)), attributes: attrDic1)
+        let currencyString = NSMutableAttributedString(string: "元", attributes: attrDic2)
+        revenueString.appendAttributedString(currencyString)
+        headerView.revenueLabel.attributedText = revenueString
         headerView.fetchActivityInfo()
-        let _headerView = ParallaxHeaderView.parallaxHeaderViewWithSubView(headerView) as! ParallaxHeaderView
-        self.tableView.tableHeaderView = _headerView
+        self.tableView.tableHeaderView = headerView
         
     }
     
     func withdrawCash() {
+        refreshActivityStatus()
         if checkEligibility() {
-            if parentActivity.objectForKey("hasWithdrawn") as! Bool == false{
-                let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-                let vc = storyboard.instantiateViewControllerWithIdentifier("WithdrawInputVC")
-                self.navigationController?.pushViewController(vc, animated: true)
+            if parentActivity.objectForKey("hasRequestedWithdrawal") as! Bool == false {
+                if parentActivity.objectForKey("hasWithdrawn") as! Bool == false{
+                    let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+                    let vc = storyboard.instantiateViewControllerWithIdentifier("WithdrawInputVC") as! WithdrawInputViewController
+                    vc.hasRequestedWithdrawal = false
+                    vc.activityObjectId = self.objectId
+                    vc.amount = self.revenue
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }else{
+                    let alert = UIAlertController(title: "Remix提示", message: "当前活动已提现。若款项未到账请联系Remix客服。", preferredStyle: .Alert)
+                    let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+                    alert.addAction(action)
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+
             }else{
-                let alert = UIAlertController(title: "Remix提示", message: "当前活动已提现。若款项未到账请联系Remix客服。", preferredStyle: .Alert)
-                let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
-                alert.addAction(action)
-                self.presentViewController(alert, animated: true, completion: nil)
+                if parentActivity.objectForKey("hasWithdrawn") as! Bool == false{
+                    let alert = UIAlertController(title: "Remix提示", message: "当前活动已申请提现。需要更改申请提现目标账户吗？", preferredStyle: .Alert)
+                    let cancel = UIAlertAction(title: "否", style: .Cancel, handler: nil)
+                    let action = UIAlertAction(title: "是", style: .Default, handler: { (action) -> Void in
+                        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+                        let vc = storyboard.instantiateViewControllerWithIdentifier("WithdrawInputVC") as! WithdrawInputViewController
+                        vc.hasRequestedWithdrawal = true
+                        vc.activityObjectId = self.objectId
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    })
+                    alert.addAction(action)
+                    alert.addAction(cancel)
+                    self.presentViewController(alert, animated: true, completion: nil)
+
+                }else{
+                    let alert = UIAlertController(title: "Remix提示", message: "当前活动已提现。若款项未到账请联系Remix客服。", preferredStyle: .Alert)
+                    let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+                    alert.addAction(action)
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+
             }
         }
     }
@@ -244,17 +316,17 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
     }
 
     
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
-        let header: ParallaxHeaderView = tableView.tableHeaderView as! ParallaxHeaderView
-        header.layoutHeaderViewForScrollViewOffset(scrollView.contentOffset)
-        
-        //        self.tableView.tableHeaderView = header
-    }
+//    override func scrollViewDidScroll(scrollView: UIScrollView) {
+//        let header: ParallaxHeaderView = tableView.tableHeaderView as! ParallaxHeaderView
+//        header.layoutHeaderViewForScrollViewOffset(scrollView.contentOffset)
+//        
+//        //        self.tableView.tableHeaderView = header
+//    }
     
-    override func viewDidAppear(animated: Bool) {
-        (tableView.tableHeaderView as! ParallaxHeaderView).refreshBlurViewForNewImage()
-        super.viewDidAppear(animated)
-    }
+//    override func viewDidAppear(animated: Bool) {
+//        (tableView.tableHeaderView as! ParallaxHeaderView).refreshBlurViewForNewImage()
+//        super.viewDidAppear(animated)
+//    }
     
     // MARK: - Table view data source
 
@@ -279,7 +351,8 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") as! CandidateCell
         cell.nameLabel.text = customers[indexPath.row].objectForKey("LegalName") as? String
-        cell.detailLabel.text = customers[indexPath.row].email
+        cell.detailLabel.text = "订单号: " + orders[indexPath.row].objectId
+        cell.detailLabel.textColor = FlatGrayDark()
         let url = NSURL(string: (customers[indexPath.row].objectForKey("Avatar") as! BmobFile).url)
         cell.avatarView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "DefaultAvatar"))
         return cell

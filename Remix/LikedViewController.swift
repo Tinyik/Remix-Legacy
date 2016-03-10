@@ -17,6 +17,10 @@ class LikedViewController: CTFilteredViewController {
         self.title = "我喜欢的活动"
     }
     
+    override func configureRightBarButtonItem() {
+        //Do nothing
+    }
+    
     override func setUpParallaxHeaderView() {
         let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(likedHeaderImage, forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, 175)) as! ParallaxHeaderView
         self.tableView.tableHeaderView = headerView

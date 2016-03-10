@@ -16,18 +16,39 @@ class ManagementViewController: UITableViewController, DZNEmptyDataSetDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchCloudData()
+        let refreshCtrl = UIRefreshControl(frame: CGRectMake(0,0,40,40))
+        refreshCtrl.addTarget(self, action: "refresh", forControlEvents: .ValueChanged)
+        self.refreshControl = refreshCtrl
         self.title = "我发起的活动"
         self.tableView.emptyDataSetSource = self
         self.tableView.emptyDataSetDelegate = self
         self.tableView.tableFooterView = UIView()
-        
+        self.tableView.separatorStyle = .None
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提现记录", style: .Plain, target: self, action: "showWithdrawalRecord")
+    }
+    
+    func refresh() {
+        self.refreshControl?.beginRefreshing()
+        fetchCloudData()
+    }
+    
+    func showWithdrawalRecord() {
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let vc = storyboard.instantiateViewControllerWithIdentifier("WithdrawalVC")
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func fetchCloudData() {
+        coverImgURLs = []
+        parentActivities = []
         let query = BmobQuery(className: "Activity")
         query.whereKey("Submitter", equalTo: CURRENT_USER.objectId)
+        query.whereKey("isHeldBySubmitter", equalTo: true)
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
             if error == nil {
+                if self.refreshControl?.refreshing == true {
+                    self.refreshControl?.endRefreshing()
+                }
                 for activity in activities {
                     self.parentActivities.append(activity as! BmobObject)
                     self.coverImgURLs.append(NSURL(string: (activity.objectForKey("CoverImg") as! BmobFile).url)!)
@@ -43,9 +64,18 @@ class ManagementViewController: UITableViewController, DZNEmptyDataSetDelegate, 
         return 1
     }
 
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return parentActivities.count
+    }
+    
+    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        if section == 0 {
+            return "把你的活动推文\"阅读原文\"链接或网页URL设定为\"remix://\" + \"活动唯一标识码\", 读者在手机上点击后即可自动跳转至Remix活动页面进行报名。"
+        }
+        
+        return nil
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
@@ -63,6 +93,8 @@ class ManagementViewController: UITableViewController, DZNEmptyDataSetDelegate, 
         }else{
             cell.titleLabel.text = selectedActivity.objectForKey("Title") as? String
         }
+        cell.objectId = selectedActivity.objectId
+        cell.parentViewController = self
         cell.timeLabel.text = selectedActivity.objectForKey("Date") as? String
         cell.orgLabel.text = selectedActivity.objectForKey("Org") as? String
         if let price = selectedActivity.objectForKey("Price") as? Double {
@@ -82,31 +114,36 @@ class ManagementViewController: UITableViewController, DZNEmptyDataSetDelegate, 
         }
         if selectedActivity.objectForKey("isVisibleToUsers") as! Bool == true && selectedActivity.objectForKey("UnderReview") as! Bool == false {
             cell.statusIndicator.text = "审核已通过"
-            cell.actionButton.setTitle("下架活动", forState: .Normal)
-            cell.actionButton.addTarget(self, action: "expireActivity", forControlEvents: .TouchUpInside)
+            cell.activityStatus = "Visible"
+            cell.actionButton.hidden = false
         }else if selectedActivity.objectForKey("isVisibleToUsers") as! Bool == false && selectedActivity.objectForKey("UnderReview") as! Bool == true{
             cell.statusIndicator.text = "审核中"
             cell.actionButton.hidden = true
         }else if selectedActivity.objectForKey("isVisibleToUsers") as! Bool == false && selectedActivity.objectForKey("UnderReview") as! Bool == false{
             cell.statusIndicator.text = "活动已下架"
-            cell.actionButton.hidden = true
+            cell.actionButton.hidden = false
+            cell.activityStatus = "Invisible"
         }
-        cell.orderNoLabel.text = "活动唯一识别码: " + selectedActivity.objectId
+        cell.orderNoLabel.text = "活动唯一标识码: " + selectedActivity.objectId
         return cell
     }
 
-    func expireActivity() {
-        
-    }
-
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let candidateVC = storyBoard.instantiateViewControllerWithIdentifier("CandidateVC") as! CandidatesViewController
-        candidateVC.objectId = parentActivities[indexPath.row].objectId
-        candidateVC.coverImgURL = coverImgURLs[indexPath.row]
-        candidateVC.parentActivity = parentActivities[indexPath.row]
-        self.navigationController?.pushViewController(candidateVC, animated: true)
+        if parentActivities[indexPath.row].objectForKey("UnderReview") as! Bool == true {
+            let alert = UIAlertController(title: "Remix提示", message: "╮(╯▽╰)╭活动仍在审核中，暂时无法查看报名情况与其他相关信息, 半小时后再来看看吧~", preferredStyle: .Alert)
+            let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+            alert.addAction(action)
+            self.presentViewController(alert, animated: true, completion: nil)
+        }else{
+            let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+            let candidateVC = storyBoard.instantiateViewControllerWithIdentifier("CandidateVC") as! CandidatesViewController
+            candidateVC.objectId = parentActivities[indexPath.row].objectId
+            candidateVC.coverImgURL = coverImgURLs[indexPath.row]
+            candidateVC.parentActivity = parentActivities[indexPath.row]
+            self.navigationController?.pushViewController(candidateVC, animated: true)
+        }
     }
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {

@@ -26,8 +26,15 @@ class GalleryViewController: UITableViewController {
         self.title = "往期活动"
         fetchCloudData()
         setUpParallaxHeaderView()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "添加报道", style: .Plain, target: self, action: "addGallery")
             
           }
+    
+    func addGallery() {
+        let subm = GallerySubmissionViewController()
+        let navi = UINavigationController(rootViewController: subm)
+        self.presentViewController(navi, animated: true, completion: nil)
+    }
 
     func setUpParallaxHeaderView() {
         let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(UIImage(named: "Gallery"), forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, 175)) as! ParallaxHeaderView
