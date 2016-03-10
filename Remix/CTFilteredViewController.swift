@@ -398,7 +398,6 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
         let header: ParallaxHeaderView = tableView.tableHeaderView as! ParallaxHeaderView
         header.layoutHeaderViewForScrollViewOffset(scrollView.contentOffset)
         
-//        self.tableView.tableHeaderView = header
     }
     
     //DZNEmptyDataSet

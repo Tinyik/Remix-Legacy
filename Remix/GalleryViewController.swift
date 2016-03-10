@@ -216,9 +216,9 @@ class GalleryViewController: UITableViewController {
     }
     
     override func scrollViewDidScroll(scrollView: UIScrollView) {
+       
         let header: ParallaxHeaderView = tableView.tableHeaderView as! ParallaxHeaderView
         header.layoutHeaderViewForScrollViewOffset(scrollView.contentOffset)
-        
         
     }
     
