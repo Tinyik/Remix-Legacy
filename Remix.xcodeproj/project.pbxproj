@@ -121,6 +121,8 @@
 		18A443921C64F5BB00FEB149 /* OrgsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A443911C64F5BB00FEB149 /* OrgsViewController.swift */; };
 		18AA6BE01C90949C00BDD39B /* WithdrawalRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AA6BDF1C90949C00BDD39B /* WithdrawalRecordViewController.swift */; };
 		18AA6BE21C91123400BDD39B /* RecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AA6BE11C91123400BDD39B /* RecordCell.swift */; };
+		18AA6BE41C91433700BDD39B /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AA6BE31C91433700BDD39B /* SettingsHeaderView.swift */; };
+		18AA6BE81C91444600BDD39B /* SettingsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18AA6BE71C91444600BDD39B /* SettingsHeaderView.xib */; };
 		18B317C01C6B06EC00336A92 /* GHWalkThroughPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B317BD1C6B06EC00336A92 /* GHWalkThroughPageCell.m */; };
 		18B317C11C6B06EC00336A92 /* GHWalkThroughView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B317BF1C6B06EC00336A92 /* GHWalkThroughView.m */; };
 		18B317C41C6B183000336A92 /* OrgFilteredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B317C31C6B183000336A92 /* OrgFilteredViewController.swift */; };
@@ -337,6 +339,8 @@
 		18A443911C64F5BB00FEB149 /* OrgsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = OrgsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18AA6BDF1C90949C00BDD39B /* WithdrawalRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawalRecordViewController.swift; sourceTree = "<group>"; };
 		18AA6BE11C91123400BDD39B /* RecordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordCell.swift; sourceTree = "<group>"; };
+		18AA6BE31C91433700BDD39B /* SettingsHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
+		18AA6BE71C91444600BDD39B /* SettingsHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsHeaderView.xib; sourceTree = "<group>"; };
 		18B317BC1C6B06EC00336A92 /* GHWalkThroughPageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHWalkThroughPageCell.h; sourceTree = "<group>"; };
 		18B317BD1C6B06EC00336A92 /* GHWalkThroughPageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHWalkThroughPageCell.m; sourceTree = "<group>"; };
 		18B317BE1C6B06EC00336A92 /* GHWalkThroughView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHWalkThroughView.h; sourceTree = "<group>"; };
@@ -904,7 +908,9 @@
 			children = (
 				18C97F661C8DE132000B4EC9 /* ManagementViewController.swift */,
 				184824F91C8EFDBC00CCB9CF /* NotifInputViewController.swift */,
+				18AA6BE31C91433700BDD39B /* SettingsHeaderView.swift */,
 				18AA6BDF1C90949C00BDD39B /* WithdrawalRecordViewController.swift */,
+				18AA6BE71C91444600BDD39B /* SettingsHeaderView.xib */,
 				18AA6BE11C91123400BDD39B /* RecordCell.swift */,
 				18BC022E1C8E971000FBC162 /* UserHeaderView.swift */,
 				184824FE1C8F48FB00CCB9CF /* WithdrawInputViewController.swift */,
@@ -1118,6 +1124,7 @@
 				1857B5341C856BB000D00A9E /* PKImageBundle.bundle in Resources */,
 				181F2B2D1C6A2D8D00FC237D /* backItemImage_hl@2x.png in Resources */,
 				187745901C6ACB1D000427C7 /* UMSCommentInputController.xib in Resources */,
+				18AA6BE81C91444600BDD39B /* SettingsHeaderView.xib in Resources */,
 				18BC02331C8EA5D500FBC162 /* UserFooterView.xib in Resources */,
 				187F037E1C8EB9E700328279 /* ActivityHeaderView.xib in Resources */,
 				187745961C6ACB1D000427C7 /* UMSShareListController.xib in Resources */,
@@ -1254,6 +1261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18AA6BE41C91433700BDD39B /* SettingsHeaderView.swift in Sources */,
 				189F45011C88CF6800EE1B3B /* RMWebViewController.swift in Sources */,
 				182454501C7FA16C00CF0CC6 /* VersionCheck.swift in Sources */,
 				180199541C79C14700A6C7E4 /* TrendingViewController.swift in Sources */,

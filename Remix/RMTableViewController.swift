@@ -206,6 +206,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     }
     
     override func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        
         if scrollView == headerScrollView {
         let pageNumber = round(scrollView.contentOffset.x / scrollView.frame.size.width)
         pageControl.currentPage = Int(pageNumber)
