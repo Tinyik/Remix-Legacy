@@ -11,23 +11,37 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jbs-NV-8mh">
-                    <rect key="frame" x="8" y="29" width="170" height="42"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jbs-NV-8mh">
+                    <rect key="frame" x="20" y="29" width="157.5" height="42"/>
                     <color key="backgroundColor" red="0.054901960780000002" green="0.058823529409999999" blue="0.066666666669999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="42" id="wUi-AD-v9h"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <state key="normal" title="发送短信">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vMn-hw-jie">
-                    <rect key="frame" x="197" y="29" width="170" height="42"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vMn-hw-jie">
+                    <rect key="frame" x="197.5" y="29" width="157.5" height="42"/>
                     <color key="backgroundColor" red="0.85043728351593018" green="0.21816034615039825" blue="0.15920260548591614" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="42" id="TTs-9f-G9B"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <state key="normal" title="拨打电话">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                 </button>
             </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="vMn-hw-jie" secondAttribute="trailing" constant="20" id="48k-1V-lEx"/>
+                <constraint firstItem="vMn-hw-jie" firstAttribute="width" secondItem="Jbs-NV-8mh" secondAttribute="width" id="L7u-S3-kOH"/>
+                <constraint firstItem="vMn-hw-jie" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="amB-JU-yKO"/>
+                <constraint firstItem="vMn-hw-jie" firstAttribute="leading" secondItem="Jbs-NV-8mh" secondAttribute="trailing" constant="20" id="klO-KK-fzt"/>
+                <constraint firstItem="Jbs-NV-8mh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="lJg-Xy-JBf"/>
+                <constraint firstItem="Jbs-NV-8mh" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="tzE-Dg-gTF"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

@@ -11,30 +11,50 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="195"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rc2-gw-m83">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rc2-gw-m83">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="195"/>
                 </imageView>
-                <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gsh-2p-fbw">
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gsh-2p-fbw">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="195"/>
-                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="pc8-cX-qBj">
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="pc8-cX-qBj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="195"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TAi-7D-egj">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TAi-7D-egj">
                                 <rect key="frame" x="137" y="35" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="1Ms-Yv-KBF"/>
+                                    <constraint firstAttribute="width" constant="100" id="K6d-JC-SvD"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="01h-zW-Cjt">
-                                <rect key="frame" x="111" y="154" width="153" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="01h-zW-Cjt">
+                                <rect key="frame" x="166.5" y="154" width="42" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.90823972225189209" green="0.92638683319091797" blue="0.9317171573638916" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="01h-zW-Cjt" firstAttribute="top" secondItem="TAi-7D-egj" secondAttribute="bottom" constant="19" id="7xd-C6-gzi"/>
+                            <constraint firstItem="TAi-7D-egj" firstAttribute="centerX" secondItem="pc8-cX-qBj" secondAttribute="centerX" id="AEv-08-qmA"/>
+                            <constraint firstItem="01h-zW-Cjt" firstAttribute="centerX" secondItem="pc8-cX-qBj" secondAttribute="centerX" id="LBf-qS-jRr"/>
+                            <constraint firstItem="TAi-7D-egj" firstAttribute="top" secondItem="pc8-cX-qBj" secondAttribute="top" constant="35" id="pjL-5q-qhz"/>
+                        </constraints>
                     </view>
                     <blurEffect style="dark"/>
                 </visualEffectView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Gsh-2p-fbw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="B3h-nl-ADL"/>
+                <constraint firstItem="Gsh-2p-fbw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="HRF-ig-BtM"/>
+                <constraint firstItem="rc2-gw-m83" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Is9-N1-lFA"/>
+                <constraint firstAttribute="trailing" secondItem="Gsh-2p-fbw" secondAttribute="trailing" id="VW5-Oc-wQW"/>
+                <constraint firstAttribute="bottom" secondItem="Gsh-2p-fbw" secondAttribute="bottom" id="WMm-UV-HoK"/>
+                <constraint firstAttribute="bottom" secondItem="rc2-gw-m83" secondAttribute="bottom" id="Z7E-Ec-Jls"/>
+                <constraint firstItem="rc2-gw-m83" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="kyb-7t-9b4"/>
+                <constraint firstAttribute="trailing" secondItem="rc2-gw-m83" secondAttribute="trailing" id="pga-mz-S2e"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
