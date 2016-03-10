@@ -8,15 +8,24 @@
 
 import UIKit
 
-class WithdrawalRecordViewController: UITableViewController {
+class WithdrawalRecordViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     
     var records: [BmobObject] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchCloudData()
+        self.title = "提现记录"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "联系客服", style: .Plain, target: self, action: "contactRemixService")
         self.tableView.separatorStyle = .None
+        self.tableView.tableFooterView = UIView()
+        self.tableView.emptyDataSetDelegate = self
+        self.tableView.emptyDataSetSource = self
         
  
+    }
+    
+    func contactRemixService() {
+        UIApplication.sharedApplication().openURL(NSURL(string: "tel://18149770476")!)
     }
     
     func fetchCloudData() {
@@ -86,4 +95,41 @@ class WithdrawalRecordViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(17)]
+        return NSAttributedString(string: "你还没有发起过提现申请。\n", attributes: attrDic)
+    }
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(15)]
+        return NSAttributedString(string: "活动结束后，你可以将活动报名费提取到指定的支付宝或银行账户。你可以:", attributes: attrDic)
+    }
+    
+    func buttonTitleForEmptyDataSet(scrollView: UIScrollView!, forState state: UIControlState) -> NSAttributedString! {
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(16), NSForegroundColorAttributeName: FlatRed()]
+        return NSAttributedString(string: "发起活动", attributes: attrDic)
+    }
+    
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+        return false
+    }
+    
+    func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
+        return UIColor(red: 0.97255, green: 0.97255, blue: 0.97255, alpha: 1)
+    }
+    
+    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+        return UIImage(named: "NoData")
+    }
+
+    
+    
+    func emptyDataSet(scrollView: UIScrollView!, didTapButton button: UIButton!) {
+        let subm = ActivitySubmissionViewController()
+        let navi = UINavigationController(rootViewController: subm)
+        self.presentViewController(navi, animated: true, completion: nil)
+        
+    }
+
 }

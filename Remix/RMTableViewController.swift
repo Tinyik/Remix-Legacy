@@ -919,7 +919,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(15)]
-        return NSAttributedString(string: "快点击左上角向我们推荐活动，成为邦主吧！如果你想离开这里, 你也可以：", attributes: attrDic)
+        return NSAttributedString(string: "快点击左上角向Remix推荐活动，成为邦主吧！如果你想离开这里, 你也可以：", attributes: attrDic)
     }
     
     func buttonTitleForEmptyDataSet(scrollView: UIScrollView!, forState state: UIControlState) -> NSAttributedString! {

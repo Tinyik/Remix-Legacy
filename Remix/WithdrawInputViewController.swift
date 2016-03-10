@@ -16,6 +16,7 @@ class WithdrawInputViewController: UIViewController {
     var hasRequestedWithdrawal: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "输入提现账户"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提交", style: .Plain, target: self, action: "submitWithdralRequest")
         // Do any additional setup after loading the view.
     }

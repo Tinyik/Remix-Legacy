@@ -11,7 +11,7 @@ import MessageUI
 import SDWebImage
 import TTGSnackbar
 
-class CandidatesViewController: UITableViewController, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate{
+class CandidatesViewController: UITableViewController, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate{
     
     var objectId: String = ""
     var coverImgURL: NSURL!
@@ -21,6 +21,9 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
     var parentActivity: BmobObject!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.emptyDataSetSource = self
+        self.tableView.emptyDataSetDelegate = self
+        self.tableView.tableFooterView = UIView()
         let refreshCtrl = UIRefreshControl()
         refreshCtrl.addTarget(self, action: "refreshAllData", forControlEvents: .ValueChanged)
         self.refreshControl = refreshCtrl
@@ -367,6 +370,42 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
         self.navigationController?.pushViewController(detailVC, animated: true)
         
     }
+    
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(17)]
+        return NSAttributedString(string: "\n\n\n\n\n\n\n\n\n\n\n\n当前活动还没有人报名。(・_・ヾ\n", attributes: attrDic)
+    }
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(15)]
+        return NSAttributedString(string: "有人报名后，你可以在这里管理参与者并与他们取得联系。快试试: ", attributes: attrDic)
+    }
+    
+    func buttonTitleForEmptyDataSet(scrollView: UIScrollView!, forState state: UIControlState) -> NSAttributedString! {
+        let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(16), NSForegroundColorAttributeName: FlatRed()]
+        return NSAttributedString(string: "分享这个活动给好友", attributes: attrDic)
+    }
+    
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
+    func emptyDataSet(scrollView: UIScrollView!, didTapButton button: UIButton!) {
+        let coverImageURL = NSURL(string: (parentActivity.objectForKey("CoverImg") as! BmobFile).url)
+        let shareText = "Remix活动推荐: " + (parentActivity.objectForKey("Title") as! String)
+        let manager = SDWebImageManager()
+        manager.downloadImageWithURL(coverImageURL, options: .RetryFailed, progress: nil, completed: { (coverImage, error, cache, finished, url) -> Void in
+            if error == nil {
+                let url = self.parentActivity.objectForKey("URL") as! String
+                let handler = UMSocialWechatHandler.setWXAppId("wx6e2c22b24588e0e1", appSecret: "e085edb726c5b92bf443f1e3da3f838e", url: url)
+                UMSocialSnsService.presentSnsIconSheetView(self, appKey: "56ba8fa2e0f55a1071000931", shareText: shareText, shareImage: coverImage, shareToSnsNames: [UMShareToWechatSession,UMShareToWechatTimeline, UMShareToQQ, UMShareToQzone, UMShareToTwitter], delegate: nil)
+            }
+        })
+
+        
+    }
+
 
     
 }

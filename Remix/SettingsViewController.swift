@@ -26,6 +26,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "个人中心"
         self.navigationController?.navigationBar.translucent = false
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: "popCurrentVC")
         self.navigationController?.navigationBar.tintColor = .blackColor()
@@ -104,7 +105,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             let cell = tableView.dequeueReusableCellWithIdentifier("detailedIdentifier") as! DetailedSettingsCell
             if indexPath.row == 2 {
            
-                cell.titleLabel.text = "向我们推荐活动"
+                cell.titleLabel.text = "向Remix推荐活动"
                  cell.titleLabel.textColor = FlatRed()
                 cell.detailsLabel.text = "审核通过后你的推荐将出现在首页。"
               
@@ -114,7 +115,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
                 cell2.label.text = "我的订单"
                 return cell2
             }else if indexPath.row == 3{
-                cell.titleLabel.text = "向我们推荐好店/地点"
+                cell.titleLabel.text = "向Remix推荐好店/地点"
                 cell.titleLabel.textColor = FlatRed()
                 cell.detailsLabel.text = "你的推荐将出现在首页地点推荐中。"
                 return cell

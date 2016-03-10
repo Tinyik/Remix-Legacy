@@ -16,6 +16,7 @@ class CandidateDetailViewController: UITableViewController, MFMessageComposeView
     var order: BmobObject!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = customer.objectForKey("LegalName") as! String
         let press = UITapGestureRecognizer(target: self, action: "copyInfo:")
         self.tableView.addGestureRecognizer(press)
         setUpParallaxHeaderView()

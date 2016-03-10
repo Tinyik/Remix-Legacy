@@ -42,7 +42,7 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
     
     override func recommendActivityAndLocation() {
         print("Clikced")
-        let sheet = LCActionSheet(title: "添加活动或地点至Remix。审核通过后其他用户将看到你的推荐。", buttonTitles: ["添加一条活动", "推荐一家店或地点", "入驻Remix"], redButtonIndex: -1) { (buttonIndex) -> Void in
+        let sheet = LCActionSheet(title: "添加活动或地点至Remix。审核通过后其他用户将看到你的推荐。", buttonTitles: ["添加一条活动", "推荐一家店或地点", "添加往期活动报道", "入驻Remix"], redButtonIndex: -1) { (buttonIndex) -> Void in
             if buttonIndex == 0 {
                  let submVC = ActivitySubmissionViewController()
                  let navigationController = UINavigationController(rootViewController: submVC)
@@ -57,6 +57,12 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
             }
             
             if buttonIndex == 2 {
+                let submVC = GallerySubmissionViewController()
+                let navigationController = UINavigationController(rootViewController: submVC)
+                self.presentViewController(navigationController, animated: true, completion: nil)
+            }
+            
+            if buttonIndex == 3 {
                 if MFMailComposeViewController.canSendMail() {
                     let composer = MFMailComposeViewController()
                     composer.mailComposeDelegate = self

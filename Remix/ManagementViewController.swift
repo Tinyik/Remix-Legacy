@@ -88,11 +88,7 @@ class ManagementViewController: UITableViewController, DZNEmptyDataSetDelegate, 
         print("lkjllskdf")
         selectedActivity = parentActivities[indexPath.row]
         cell.themeImg.sd_setImageWithURL(coverImgURLs[indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
-        if let _itemName = selectedActivity.objectForKey("ItemName") as? String {
-            cell.titleLabel.text = _itemName
-        }else{
-            cell.titleLabel.text = selectedActivity.objectForKey("Title") as? String
-        }
+        cell.titleLabel.text = (selectedActivity.objectForKey("Title") as? String)?.stringByReplacingOccurrencesOfString("主办方提交:", withString: "")
         cell.objectId = selectedActivity.objectId
         cell.parentViewController = self
         cell.timeLabel.text = selectedActivity.objectForKey("Date") as? String
