@@ -75,7 +75,9 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
     func setUpParallaxHeaderView() {
         let _headerView = ParallaxHeaderView.parallaxHeaderViewWithSubView(headerView) as! ParallaxHeaderView
         self.tableView.tableHeaderView = _headerView
-       
+        
+        // Fixes header width problem
+        _headerView.layoutHeaderViewForScrollViewOffset(tableView.contentOffset)
     }
 
     
