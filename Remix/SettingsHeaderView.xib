@@ -11,34 +11,60 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ld0-5I-NMZ">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ld0-5I-NMZ">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                 </imageView>
-                <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tlw-lv-sx8">
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tlw-lv-sx8">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
-                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="Edj-8n-pUP">
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Edj-8n-pUP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3b6-aW-1NE">
-                                <rect key="frame" x="135" y="18" width="100" height="100"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3b6-aW-1NE">
+                                <rect key="frame" x="137" y="18" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="ROM-A9-puG"/>
+                                    <constraint firstAttribute="width" constant="100" id="g2r-Jl-YrF"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6c6-kq-erc">
-                                <rect key="frame" x="94" y="126" width="186" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6c6-kq-erc">
+                                <rect key="frame" x="166" y="126" width="42" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.93041745580808077" green="0.93041745580808077" blue="0.93041745580808077" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cfc-Mn-kYM">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cfc-Mn-kYM">
                                 <rect key="frame" x="147" y="156" width="80" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="cSI-Aj-FId"/>
+                                    <constraint firstAttribute="height" constant="34" id="nRr-6b-1WT"/>
+                                </constraints>
                                 <state key="normal" image="InfoSetting"/>
                             </button>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="cfc-Mn-kYM" firstAttribute="centerX" secondItem="Edj-8n-pUP" secondAttribute="centerX" id="07b-eK-6bk"/>
+                            <constraint firstItem="3b6-aW-1NE" firstAttribute="top" secondItem="Edj-8n-pUP" secondAttribute="top" constant="18" id="RN3-53-uUw"/>
+                            <constraint firstItem="cfc-Mn-kYM" firstAttribute="top" secondItem="6c6-kq-erc" secondAttribute="bottom" constant="9.5" id="gGh-vF-tE9"/>
+                            <constraint firstItem="6c6-kq-erc" firstAttribute="top" secondItem="3b6-aW-1NE" secondAttribute="bottom" constant="8" id="nm6-jQ-RbG"/>
+                            <constraint firstItem="3b6-aW-1NE" firstAttribute="centerX" secondItem="Edj-8n-pUP" secondAttribute="centerX" id="spj-Nj-sdc"/>
+                            <constraint firstItem="6c6-kq-erc" firstAttribute="centerX" secondItem="Edj-8n-pUP" secondAttribute="centerX" id="zsw-xV-LEA"/>
+                        </constraints>
                     </view>
                     <blurEffect style="dark"/>
                 </visualEffectView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Ld0-5I-NMZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="2Xc-t3-gU9"/>
+                <constraint firstAttribute="trailing" secondItem="Ld0-5I-NMZ" secondAttribute="trailing" id="Ljz-i1-p7T"/>
+                <constraint firstItem="Ld0-5I-NMZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Q3j-Q2-MKo"/>
+                <constraint firstItem="tlw-lv-sx8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="UbF-eC-4Ne"/>
+                <constraint firstItem="tlw-lv-sx8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="V7f-Rj-FOG"/>
+                <constraint firstAttribute="trailing" secondItem="tlw-lv-sx8" secondAttribute="trailing" id="W55-dW-24c"/>
+                <constraint firstAttribute="bottom" secondItem="tlw-lv-sx8" secondAttribute="bottom" id="g8X-5B-SKL"/>
+                <constraint firstAttribute="bottom" secondItem="Ld0-5I-NMZ" secondAttribute="bottom" id="pjg-iB-y9l"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
