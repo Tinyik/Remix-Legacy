@@ -89,7 +89,6 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
         let query = BmobQuery(className: "Activity")
         query.whereKey("Category", containedIn: [filterName])
         query.whereKey("isVisibleToUsers", equalTo: true)
-        query.whereKey("isVisibleOnMainList", equalTo: true)
         query.whereKey("isFloatingActivity", equalTo: false)
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in

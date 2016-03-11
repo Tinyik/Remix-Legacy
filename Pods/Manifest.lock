@@ -10,6 +10,7 @@ PODS:
     - DACircularProgress (~> 2.3)
     - MBProgressHUD (~> 0.9)
     - SDWebImage (!= 3.7.2, ~> 3.7)
+  - QRCoder (0.2.0)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
@@ -20,6 +21,7 @@ DEPENDENCIES:
   - ChameleonFramework/Swift
   - Eureka (~> 1.3)
   - MWPhotoBrowser
+  - QRCoder
   - TTGSnackbar
 
 SPEC CHECKSUMS:
@@ -29,6 +31,7 @@ SPEC CHECKSUMS:
   Eureka: 2f1921d3162491921d2fef3b516bc4ef93a05122
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MWPhotoBrowser: ba0d0c09ffda3a7ea10093518738c502c1c7141c
+  QRCoder: d9431c26635e42aef746063f9c7951539a0e3c49
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   TTGSnackbar: 894b05212357acb4202329dd380c048a707d533e
 

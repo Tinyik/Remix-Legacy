@@ -44,6 +44,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>QRCoder.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -58,6 +63,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>14E6E2E2484806AB62B60CA2EAD41F9B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2A6C9FFE530EED7B25A14DFFFD8396B6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,7 +92,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8A0B2C9CF4B076602617C6E2532A5EBA</key>
+		<key>792B0AC461655567AEDFA6B584CFE472</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,12 +107,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DD90A95A699A3E8B5F4E185DEE123A77</key>
+		<key>E61CE3B6DFA1FE6B3E296965C76C0E10</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E61CE3B6DFA1FE6B3E296965C76C0E10</key>
+		<key>FAF01750C828829EA8BE25C60B7B9633</key>
 		<dict>
 			<key>primary</key>
 			<true/>

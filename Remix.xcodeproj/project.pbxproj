@@ -24,6 +24,7 @@
 		1824544E1C7F977A00CF0CC6 /* AlipaySDK.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 182454481C7F96F500CF0CC6 /* AlipaySDK.bundle */; };
 		182454501C7FA16C00CF0CC6 /* VersionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824544F1C7FA16C00CF0CC6 /* VersionCheck.swift */; };
 		183984FB1C92FA4600B8EB8B /* OrganizationSubmissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183984FA1C92FA4600B8EB8B /* OrganizationSubmissionViewController.swift */; };
+		183984FD1C92FC6A00B8EB8B /* QRCoder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183984FC1C92FC6A00B8EB8B /* QRCoder.framework */; };
 		1841F8771C7733A60046D57F /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F8711C7733A60046D57F /* libSocialWechat.a */; };
 		1841F8781C7733A60046D57F /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F8721C7733A60046D57F /* libWeChatSDK.a */; };
 		1841F87A1C7739020046D57F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F8791C7739020046D57F /* libiconv.tbd */; };
@@ -211,6 +212,7 @@
 		1824544A1C7F96F500CF0CC6 /* BmobPay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BmobPay.framework; sourceTree = "<group>"; };
 		1824544F1C7FA16C00CF0CC6 /* VersionCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionCheck.swift; sourceTree = "<group>"; };
 		183984FA1C92FA4600B8EB8B /* OrganizationSubmissionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationSubmissionViewController.swift; sourceTree = "<group>"; };
+		183984FC1C92FC6A00B8EB8B /* QRCoder.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QRCoder.framework; path = "Pods/../build/Debug-iphoneos/QRCoder.framework"; sourceTree = "<group>"; };
 		1841F8711C7733A60046D57F /* libSocialWechat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialWechat.a; sourceTree = "<group>"; };
 		1841F8721C7733A60046D57F /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		1841F8731C7733A60046D57F /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
@@ -408,6 +410,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				183984FD1C92FC6A00B8EB8B /* QRCoder.framework in Frameworks */,
 				18E620A41C8C160E00B85941 /* Eureka.framework in Frameworks */,
 				1824544E1C7F977A00CF0CC6 /* AlipaySDK.bundle in Frameworks */,
 				182454411C7F833800CF0CC6 /* PassKit.framework in Frameworks */,
@@ -981,6 +984,7 @@
 		CCC49B28BC1297BAC2F5C421 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				183984FC1C92FC6A00B8EB8B /* QRCoder.framework */,
 				18E620A31C8C160E00B85941 /* Eureka.framework */,
 				18E684C51C88657800C32C3D /* OneSignal.framework */,
 				182454401C7F833800CF0CC6 /* PassKit.framework */,

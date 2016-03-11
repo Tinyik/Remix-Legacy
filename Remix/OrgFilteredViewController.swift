@@ -91,7 +91,6 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.whereKey("Org", equalTo: orgName)
         query.whereKey("isVisibleToUsers", equalTo: true)
-        query.whereKey("isVisibleOnMainList", equalTo: true)
         query.whereKey("isFloatingActivity", equalTo: false)
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
            

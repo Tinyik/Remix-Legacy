@@ -90,6 +90,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Remix/Eureka.framework"
   install_framework "Pods-Remix/MBProgressHUD.framework"
   install_framework "Pods-Remix/MWPhotoBrowser.framework"
+  install_framework "Pods-Remix/QRCoder.framework"
   install_framework "Pods-Remix/SDWebImage.framework"
   install_framework "Pods-Remix/TTGSnackbar.framework"
 fi
@@ -100,6 +101,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Remix/Eureka.framework"
   install_framework "Pods-Remix/MBProgressHUD.framework"
   install_framework "Pods-Remix/MWPhotoBrowser.framework"
+  install_framework "Pods-Remix/QRCoder.framework"
   install_framework "Pods-Remix/SDWebImage.framework"
   install_framework "Pods-Remix/TTGSnackbar.framework"
 fi
