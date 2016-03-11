@@ -23,6 +23,7 @@
 		1824544D1C7F96F500CF0CC6 /* BmobPay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1824544A1C7F96F500CF0CC6 /* BmobPay.framework */; };
 		1824544E1C7F977A00CF0CC6 /* AlipaySDK.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 182454481C7F96F500CF0CC6 /* AlipaySDK.bundle */; };
 		182454501C7FA16C00CF0CC6 /* VersionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824544F1C7FA16C00CF0CC6 /* VersionCheck.swift */; };
+		183984FB1C92FA4600B8EB8B /* OrganizationSubmissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183984FA1C92FA4600B8EB8B /* OrganizationSubmissionViewController.swift */; };
 		1841F8771C7733A60046D57F /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F8711C7733A60046D57F /* libSocialWechat.a */; };
 		1841F8781C7733A60046D57F /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F8721C7733A60046D57F /* libWeChatSDK.a */; };
 		1841F87A1C7739020046D57F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F8791C7739020046D57F /* libiconv.tbd */; };
@@ -209,6 +210,7 @@
 		182454491C7F96F500CF0CC6 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		1824544A1C7F96F500CF0CC6 /* BmobPay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BmobPay.framework; sourceTree = "<group>"; };
 		1824544F1C7FA16C00CF0CC6 /* VersionCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionCheck.swift; sourceTree = "<group>"; };
+		183984FA1C92FA4600B8EB8B /* OrganizationSubmissionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationSubmissionViewController.swift; sourceTree = "<group>"; };
 		1841F8711C7733A60046D57F /* libSocialWechat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialWechat.a; sourceTree = "<group>"; };
 		1841F8721C7733A60046D57F /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		1841F8731C7733A60046D57F /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
@@ -636,6 +638,7 @@
 				18E239311C805E1600363655 /* FloatingActivityView.swift */,
 				18E684B11C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift */,
 				18E620A51C8C194C00B85941 /* ActivitySubmissionViewController.swift */,
+				183984FA1C92FA4600B8EB8B /* OrganizationSubmissionViewController.swift */,
 				184825001C8FF6F400CCB9CF /* GallerySubmissionViewController.swift */,
 				18C97F651C8DE0D3000B4EC9 /* ManagementInterface */,
 				18E620AD1C8D5F9600B85941 /* LocationSubmissionViewController.swift */,
@@ -1269,6 +1272,7 @@
 				1898CA941C69B599009D3261 /* TRStatusBarStyle.swift in Sources */,
 				1899E9C91C670FFB00ADC2AC /* GalleryTableViewCell.swift in Sources */,
 				18C79D7A1C8215BD004AAA44 /* ActivityOrderCell.swift in Sources */,
+				183984FB1C92FA4600B8EB8B /* OrganizationSubmissionViewController.swift in Sources */,
 				18BC022F1C8E971000FBC162 /* UserHeaderView.swift in Sources */,
 				18AA6BE01C90949C00BDD39B /* WithdrawalRecordViewController.swift in Sources */,
 				18E2392C1C8029D300363655 /* PersonalInfoViewController.swift in Sources */,
