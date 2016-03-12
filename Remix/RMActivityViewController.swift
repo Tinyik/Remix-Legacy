@@ -192,6 +192,11 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
             return false
         }
         
+        if CURRENT_USER.objectForKey("Sex") == nil || CURRENT_USER.objectForKey("Sex") as! String == "" {
+            return false
+        }
+
+        
         if CURRENT_USER.objectForKey("School") == nil || CURRENT_USER.objectForKey("School") as! String == ""{
             return false
         }

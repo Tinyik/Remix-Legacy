@@ -42,7 +42,7 @@ class PersonalInfoViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if section == 0 {
-            return 4
+            return 5
         }else {
             return 2
         }
@@ -67,20 +67,34 @@ class PersonalInfoViewController: UITableViewController {
         }else{
             cell.detailLabel.text = "必填"
             }
-        case 1: cell.titleLabel.text = "学校或单位"
-                cell.editingPropertyKey = "School"
-                cell.placeHolder = "学校或单位"
-                cell.explanationText = "学校信息将被活动主办方用于统计参与者数据和进行资源配置。"
-        if let school = CURRENT_USER.objectForKey("School") as? String {
-            cell.detailLabel.text = school
-            cell.currentValue = school
-            if school == "" {
+        case 0: cell.titleLabel.text = "姓名"
+        cell.editingPropertyKey = "LegalName"
+        cell.placeHolder = "姓名"
+        cell.explanationText = "姓名将被活动主办方用于进行签到与联络。"
+        
+        if let legalName = CURRENT_USER.objectForKey("LegalName") as? String {
+            cell.detailLabel.text = legalName
+            cell.currentValue = legalName
+            if legalName == "" {
                 cell.detailLabel.text = "必填"
             }
         }else{
             cell.detailLabel.text = "必填"
             }
-        case 2: cell.titleLabel.text = "昵称"
+        case 1: cell.titleLabel.text = "性别"
+                cell.editingPropertyKey = "Sex"
+                cell.placeHolder = "性别"
+                cell.explanationText = "这将利于主办方进行统计和资源分配。"
+        if let sex = CURRENT_USER.objectForKey("Sex") as? String {
+            cell.detailLabel.text = sex
+            cell.currentValue = sex
+            if sex == "" {
+                cell.detailLabel.text = "必填"
+            }
+        }else{
+            cell.detailLabel.text = "必填"
+            }
+        case 3: cell.titleLabel.text = "昵称"
         cell.editingPropertyKey = "username"
         cell.placeHolder = "Remix昵称"
         cell.explanationText = "昵称将是他人在活动评论中看到的名字。"
@@ -94,7 +108,7 @@ class PersonalInfoViewController: UITableViewController {
         }else{
             cell.detailLabel.text = "必填"
             }
-        case 3: cell.titleLabel.text = "邮箱"
+        case 4: cell.titleLabel.text = "邮箱"
         cell.editingPropertyKey = "email"
         cell.placeHolder = "常用邮箱"
         cell.explanationText = "邮箱地址信息将被活动主办方用于联络与信息更新。"

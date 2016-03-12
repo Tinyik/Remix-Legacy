@@ -15,7 +15,7 @@ protocol RMSwipeBetweenViewControllersDelegate {
 }
 
 class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailComposeViewControllerDelegate, LCActionSheetDelegate {
-
+    
     var cityNameArray: [String] = []
     var rm_delegate: RMSwipeBetweenViewControllersDelegate!
     var rm_delegate2: RMSwipeBetweenViewControllersDelegate!
@@ -37,48 +37,83 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
         dispatch_after(delayTime, dispatch_get_main_queue()) {
             splashView.startAnimation()
         }
-
+        
     }
     
     override func recommendActivityAndLocation() {
         print("Clikced")
+        
         let sheet = LCActionSheet(title: "添加活动或地点至Remix。审核通过后其他用户将看到你的推荐。", buttonTitles: ["添加一条活动", "推荐一家店或地点", "添加往期活动报道", "入驻Remix"], redButtonIndex: -1) { (buttonIndex) -> Void in
-            if buttonIndex == 0 {
-                 let submVC = ActivitySubmissionViewController()
-                 let navigationController = UINavigationController(rootViewController: submVC)
-                 self.presentViewController(navigationController, animated: true, completion: nil)
-            }
-            
-            if buttonIndex == 1 {
-                let submVC = LocationSubmissionViewController()
-                let navigationController = UINavigationController(rootViewController: submVC)
-                self.presentViewController(navigationController, animated: true, completion: nil)
-
-            }
-            
-            if buttonIndex == 2 {
-                let submVC = GallerySubmissionViewController()
-                let navigationController = UINavigationController(rootViewController: submVC)
-                self.presentViewController(navigationController, animated: true, completion: nil)
-            }
-            
-            if buttonIndex == 3 {
-                if MFMailComposeViewController.canSendMail() {
-                    let composer = MFMailComposeViewController()
-                    composer.mailComposeDelegate = self
-                    let subjectString = NSString(format: "Remix平台组织入驻申请")
-                    let bodyString = NSString(format: "简介:\n\n\n\n\n\n-----\n组织所在城市: \n组织成立时间: \n组织名称:\n微信公众号ID:\n负责人联系方式:\n组织性质及分类:\n-----")
-                    composer.setMessageBody(bodyString as String, isHTML: false)
-                    composer.setSubject(subjectString as String)
-                    composer.setToRecipients(["fongtinyik@gmail.com", "remixapp@163.com"])
-                    self.presentViewController(composer, animated: true, completion: nil)
+            if self.checkPersonalInfoIntegrity() {
+                if buttonIndex == 0 {
+                    let submVC = ActivitySubmissionViewController()
+                    let navigationController = UINavigationController(rootViewController: submVC)
+                    self.presentViewController(navigationController, animated: true, completion: nil)
                 }
-
+                
+                if buttonIndex == 1 {
+                    let submVC = LocationSubmissionViewController()
+                    let navigationController = UINavigationController(rootViewController: submVC)
+                    self.presentViewController(navigationController, animated: true, completion: nil)
+                    
+                }
+                
+                if buttonIndex == 2 {
+                    let submVC = GallerySubmissionViewController()
+                    let navigationController = UINavigationController(rootViewController: submVC)
+                    self.presentViewController(navigationController, animated: true, completion: nil)
+                }
+                
+                if buttonIndex == 3 {
+                    let submVC = OrganizationSubmissionViewController()
+                    let navigationController = UINavigationController(rootViewController: submVC)
+                    self.presentViewController(navigationController, animated: true, completion: nil)
+                    
+                }
+            }else{
+                let alert = UIAlertController(title: "完善信息", message: "(●'◡'●)ﾉ♥请先进入账户设置完善个人信息后再提交活动或地点", preferredStyle: .Alert)
+                let action = UIAlertAction(title: "去设置", style: .Default, handler: { (action) -> Void in
+                    self.presentSettingsVCFromNaviController()
+                })
+                let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+                alert.addAction(action)
+                alert.addAction(cancel)
+                self.presentViewController(alert, animated: true, completion: nil)
+                
             }
+            
         }
         
         sheet.show()
+        
     }
+    
+    func checkPersonalInfoIntegrity() -> Bool {
+        
+        if CURRENT_USER.objectForKey("LegalName") == nil || CURRENT_USER.objectForKey("LegalName") as! String == "" {
+            return false
+        }
+        
+        if CURRENT_USER.objectForKey("Sex") == nil || CURRENT_USER.objectForKey("Sex") as! String == "" {
+            return false
+        }
+        
+        
+        if CURRENT_USER.objectForKey("School") == nil || CURRENT_USER.objectForKey("School") as! String == ""{
+            return false
+        }
+        
+        if CURRENT_USER.objectForKey("username") == nil || CURRENT_USER.objectForKey("username") as! String == ""{
+            return false
+        }
+        
+        if CURRENT_USER.objectForKey("email") == nil || CURRENT_USER.objectForKey("email") as! String == ""{
+            return false
+        }
+        
+        return true
+    }
+    
     
     override func switchRemixCity() {
         cityNameArray = []
@@ -108,7 +143,7 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
                 self.presentViewController(alert, animated: true, completion: nil)
             }
         }
-       
+        
     }
     
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
@@ -116,7 +151,7 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
     }
     
     func actionSheet(actionSheet: LCActionSheet!, didClickedButtonAtIndex buttonIndex: Int) {
-       
+        
         if buttonIndex == cityNameArray.count {
             REMIX_CITY_NAME = "全国"
             CURRENT_USER.setObject(REMIX_CITY_NAME, forKey: "City")
