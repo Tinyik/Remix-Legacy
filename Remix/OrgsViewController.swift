@@ -116,8 +116,10 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
      func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = orgsCollectionView.dequeueReusableCellWithReuseIdentifier("reuseIdentifier", forIndexPath: indexPath) as! OrgCell
-        cell.logoImageView.sd_setImageWithURL(logoURLs[indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
-        cell.orgNameLabel.text = names[indexPath.row]
+        if logoURLs.count > indexPath.row {
+            cell.logoImageView.sd_setImageWithURL(logoURLs[indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
+            cell.orgNameLabel.text = names[indexPath.row]
+        }
         
         
         return cell

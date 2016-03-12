@@ -25,6 +25,11 @@ class OrganizationSubmissionViewController: FormViewController {
         TextAreaRow.defaultCellSetup = { cell, row in cell.textView.alpha = 0.7 }
         self.navigationController?.hidesNavigationBarHairline = true
         self.title = "入驻Remix"
+        if isModal == true {
+            let statusBarView = UIView(frame: CGRectMake(0,0,DEVICE_SCREEN_WIDTH,20))
+            statusBarView.backgroundColor = FlatBlueDark()
+            self.navigationController?.view.addSubview(statusBarView)
+        }
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提交", style: .Plain, target: self, action: "submitOrganization")
         if isModal == true {
@@ -168,6 +173,9 @@ class OrganizationSubmissionViewController: FormViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        if isModal == true {
+            self.navigationController?.hidesBarsOnSwipe = true
+        }
         self.navigationController?.navigationBar.tintColor = .whiteColor()
         self.navigationController?.navigationBar.barTintColor = FlatBlueDark()
     }
@@ -177,9 +185,12 @@ class OrganizationSubmissionViewController: FormViewController {
         if isModal == false {
             self.navigationController?.navigationBar.tintColor = .blackColor()
             self.navigationController?.navigationBar.barTintColor = .whiteColor()
+        }else{
+            self.navigationController?.hidesBarsOnSwipe = false
         }
         
     }
+
     
     func popCurrentVC() {
         self.dismissViewControllerAnimated(true, completion: nil)

@@ -68,12 +68,7 @@ class LikedViewController: CTFilteredViewController {
                         }
                         self.tableView.reloadData()
                     }
-                }else{
-                    let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
-                    snackBar.backgroundColor = FlatWatermelonDark()
-                    snackBar.show()
                 }
-
                
                 
             })

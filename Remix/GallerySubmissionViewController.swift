@@ -23,6 +23,9 @@ class GallerySubmissionViewController: FormViewController {
         TextAreaRow.defaultCellSetup = { cell, row in cell.textView.alpha = 0.7 }
         self.navigationController?.hidesNavigationBarHairline = true
         self.title = "提交活动报道"
+        let statusBarView = UIView(frame: CGRectMake(0,0,DEVICE_SCREEN_WIDTH,20))
+        statusBarView.backgroundColor = FlatBlueDark()
+        self.navigationController?.view.addSubview(statusBarView)
         self.navigationController?.navigationBar.barTintColor = FlatBlueDark()
         self.navigationController?.navigationBar.tintColor = .whiteColor()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
@@ -136,13 +139,14 @@ class GallerySubmissionViewController: FormViewController {
         
     }
     
-    override func viewDidAppear(animated: Bool) {
-        if let headerView = tableView!.tableHeaderView as? ParallaxHeaderView {
-            headerView.refreshBlurViewForNewImage()
-        }
-        
-        super.viewDidAppear(animated)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.hidesBarsOnSwipe = true
+        self.navigationController?.navigationBar.tintColor = .whiteColor()
+        self.navigationController?.navigationBar.barTintColor = FlatBlueDark()
     }
+    
+
     
     func checkInformationIntegrity() -> Bool {
         let attr = form.values(includeHidden: false)

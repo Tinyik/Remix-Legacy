@@ -25,6 +25,9 @@ class LocationSubmissionViewController: FormViewController {
         self.navigationController?.hidesNavigationBarHairline = true
         self.title = "提交地点至Remix"
         if isModal == true {
+            let statusBarView = UIView(frame: CGRectMake(0,0,DEVICE_SCREEN_WIDTH,20))
+            statusBarView.backgroundColor = FlatBlueDark()
+            self.navigationController?.view.addSubview(statusBarView)
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: "popCurrentVC")
             self.navigationController?.navigationBar.translucent = false
             
@@ -91,6 +94,9 @@ class LocationSubmissionViewController: FormViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        if isModal == true {
+            self.navigationController?.hidesBarsOnSwipe = true
+        }
         self.navigationController?.navigationBar.tintColor = .whiteColor()
         self.navigationController?.navigationBar.barTintColor = FlatBlueDark()
     }
@@ -100,7 +106,10 @@ class LocationSubmissionViewController: FormViewController {
         if isModal == false {
             self.navigationController?.navigationBar.tintColor = .blackColor()
             self.navigationController?.navigationBar.barTintColor = .whiteColor()
+        }else{
+            self.navigationController?.hidesBarsOnSwipe = false
         }
+        
     }
     
     func popCurrentVC() {

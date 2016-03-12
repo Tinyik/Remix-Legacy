@@ -13,6 +13,9 @@ class ScannerViewController: QRCodeScannerViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "扫描主办方活动二维码签到"
+        self.navigationItem.leftBarButtonItem?.tintColor = .blackColor()
+        self.navigationController?.navigationBar.tintColor = .blackColor()
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: "popCurrentVC")
         
     }

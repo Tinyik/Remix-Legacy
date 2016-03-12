@@ -667,10 +667,9 @@
 				18E620A51C8C194C00B85941 /* ActivitySubmissionViewController.swift */,
 				183984FA1C92FA4600B8EB8B /* OrganizationSubmissionViewController.swift */,
 				184825001C8FF6F400CCB9CF /* GallerySubmissionViewController.swift */,
-				183985001C93C56400B8EB8B /* ScannerViewController.swift */,
-				183984FE1C92FE0300B8EB8B /* QRCodeViewController.swift */,
-				18C97F651C8DE0D3000B4EC9 /* ManagementInterface */,
 				18E620AD1C8D5F9600B85941 /* LocationSubmissionViewController.swift */,
+				18D78E201C9472AF00911600 /* QRCode */,
+				18C97F651C8DE0D3000B4EC9 /* ManagementInterface */,
 				1898CA4A1C6900B8009D3261 /* RegLoginViewController.swift */,
 				180199551C79E25F00A6C7E4 /* TermsAndConditionsViewController.swift */,
 				180C089F1C8ADBC50025136D /* File.swift */,
@@ -986,6 +985,15 @@
 				18C9A1F61C687DA200A80A22 /* UIImageView+BetterFace.m */,
 			);
 			name = FaceAware;
+			sourceTree = "<group>";
+		};
+		18D78E201C9472AF00911600 /* QRCode */ = {
+			isa = PBXGroup;
+			children = (
+				183985001C93C56400B8EB8B /* ScannerViewController.swift */,
+				183984FE1C92FE0300B8EB8B /* QRCodeViewController.swift */,
+			);
+			name = QRCode;
 			sourceTree = "<group>";
 		};
 		18E620A81C8C590100B85941 /* EurekaHelper */ = {
