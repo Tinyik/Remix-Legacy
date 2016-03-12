@@ -110,7 +110,7 @@ class CandidateDetailViewController: UITableViewController, MFMessageComposeView
         if section == 2 {
             return 1
         }
-        return 4
+        return 5
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -134,11 +134,13 @@ class CandidateDetailViewController: UITableViewController, MFMessageComposeView
             switch indexPath.row {
             case 0: cell.titleLabel.text = "姓名"
             cell.detailLabel.text = customer.objectForKey("LegalName") as? String
-            case 1: cell.titleLabel.text = "学校或单位"
+            case 1: cell.titleLabel.text = "性别"
+            cell.detailLabel.text = customer.objectForKey("Sex") as? String
+            case 2: cell.titleLabel.text = "学校或单位"
             cell.detailLabel.text = customer.objectForKey("School") as? String
-            case 2: cell.titleLabel.text = "手机号"
+            case 3: cell.titleLabel.text = "手机号"
             cell.detailLabel.text = customer.mobilePhoneNumber
-            case 3: cell.titleLabel.text = "邮箱"
+            case 4: cell.titleLabel.text = "邮箱"
             cell.detailLabel.text = customer.email
             default: break
             }

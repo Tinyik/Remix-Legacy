@@ -71,6 +71,17 @@ class SettingsInputViewController: UIViewController, SettingInputViewDelegate, U
     
     func saveEditedInformation() {
         inputField.resignFirstResponder()
+        if editingKey == "Sex" {
+            print(inputField.text)
+            if inputField.text != "男" && inputField.text != "女" && inputField.text != "保密" {
+                let alert = UIAlertController(title: "提示", message: "请输入\"男\", \"女\", 或\"保密\"。", preferredStyle: .Alert)
+                let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+                alert.addAction(action)
+                self.presentViewController(alert, animated: true, completion: nil)
+                return
+            }
+        }
+ 
         CURRENT_USER.setObject(inputField.text, forKey: editingKey)
         CURRENT_USER.updateInBackgroundWithResultBlock { (isSuccessful, error) -> Void in
             if isSuccessful == true {
