@@ -39,6 +39,9 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        let statusBarView = UIView(frame: CGRectMake(0,0,DEVICE_SCREEN_WIDTH,20))
+//        statusBarView.backgroundColor = FlatBlueDark()
+//        self.view.addSubview(statusBarView)
         self.navigationController?.navigationBar.translucent = true
         if shouldApplyWhiteTint == true {
         self.navigationController?.navigationBar.tintColor = .whiteColor()
@@ -70,6 +73,14 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
         fetchOrdersInformation()
     }
     
+//    override func viewWillAppear(animated: Bool) {
+//        super.viewWillAppear(animated)
+//        self.navigationController?.hidesBarsOnSwipe = true
+//    }
+//    override func viewWillDisappear(animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        self.navigationController?.hidesBarsOnSwipe = false
+//    }
     
     func fetchOrdersInformation() {
         let query = BmobQuery(className: "Orders")
@@ -377,6 +388,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
         newOrder.setObject(ongoingTransactionId, forKey: "ParentActivityObjectId")
         newOrder.setObject(ongoingTransactionPrice, forKey: "Amount")
         newOrder.setObject(CURRENT_USER.objectId, forKey: "CustomerObjectId")
+        newOrder.setObject(false, forKey: "CheckIn")
         newOrder.setObject(ongoingTransactionRemarks, forKey: "Remarks")
         newOrder.setObject(true, forKey: "isVisibleToUsers")
         newOrder.saveInBackgroundWithResultBlock { (isSuccessful, error) -> Void in

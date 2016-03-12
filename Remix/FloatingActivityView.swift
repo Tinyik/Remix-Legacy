@@ -216,6 +216,7 @@ class FloatingActivityView: UIView, BmobPayDelegate {
         let newOrder = BmobObject(className: "Orders")
         newOrder.setObject(ongoingTransactionId, forKey: "ParentActivityObjectId")
         newOrder.setObject(ongoingTransactionPrice, forKey: "Amount")
+        newOrder.setObject(false, forKey: "CheckIn")
         newOrder.setObject(CURRENT_USER.objectId, forKey: "CustomerObjectId")
         newOrder.setObject(ongoingTransactionRemarks, forKey: "Remarks")
         newOrder.setObject(true, forKey: "isVisibleToUsers")

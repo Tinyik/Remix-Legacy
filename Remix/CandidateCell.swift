@@ -11,6 +11,7 @@ import UIKit
 class CandidateCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var avatarView: UIImageView!
     @IBOutlet weak var detailLabel: UILabel!
     

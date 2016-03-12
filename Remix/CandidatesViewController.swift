@@ -69,23 +69,31 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
     }
     
     func showUtilities() {
-        let sheet = LCActionSheet(title: nil, buttonTitles: ["群发Remix推送消息", "群发邮件", "群发短信", "导出报名信息为表格"], redButtonIndex: -1) { (buttonIndex) -> Void in
-        
+        let sheet = LCActionSheet(title: nil, buttonTitles: ["扫码签到", "群发Remix推送消息", "群发邮件", "群发短信", "导出报名信息为表格"], redButtonIndex: -1) { (buttonIndex) -> Void in
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+            
             if buttonIndex == 0 {
-                let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+                let vc = storyboard.instantiateViewControllerWithIdentifier("CodeVC") as! QRCodeViewController
+                vc.activityObjectId = self.objectId
+                let navi = UINavigationController(rootViewController: vc)
+                self.presentViewController(navi, animated: true, completion: nil)
+            }
+            
+            if buttonIndex == 1 {
                 let vc = storyboard.instantiateViewControllerWithIdentifier("NotifInputVC") as! NotifInputViewController
                 vc.objectId = self.objectId
                 self.navigationController?.pushViewController(vc, animated: true)
             }
-            if buttonIndex == 1 {
+            if buttonIndex == 2 {
                 self.sendGroupEmails()
             }
             
-            if buttonIndex == 2 {
+            if buttonIndex == 3 {
                 self.sendGroupMessages()
             }
             
-            if buttonIndex == 3 {
+            if buttonIndex == 4 {
                 self.exportToMail()
             }
            
@@ -356,6 +364,13 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
         cell.nameLabel.text = customers[indexPath.row].objectForKey("LegalName") as? String
         cell.detailLabel.text = "订单号: " + orders[indexPath.row].objectId
         cell.detailLabel.textColor = FlatGrayDark()
+        if orders[indexPath.row].objectForKey("CheckIn") as! Bool == false {
+            cell.statusLabel.text = "未签到"
+            cell.statusLabel.textColor = FlatGrayDark()
+        }else{
+            cell.statusLabel.text = "已签到"
+            cell.statusLabel.textColor = FlatRed()
+        }
         let url = NSURL(string: (customers[indexPath.row].objectForKey("Avatar") as! BmobFile).url)
         cell.avatarView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "DefaultAvatar"))
         return cell

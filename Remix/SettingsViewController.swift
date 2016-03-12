@@ -27,6 +27,7 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
         self.title = "个人中心"
         self.navigationController?.navigationBar.translucent = false
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: "popCurrentVC")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "扫一扫", style: .Plain, target: self, action: "showScanner")
         self.navigationController?.navigationBar.tintColor = .blackColor()
         self.navigationController?.hidesNavigationBarHairline = true
         self.headerView.settingsButton.addTarget(self, action: "showPersonalInfo", forControlEvents: .TouchUpInside)
@@ -80,6 +81,13 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
         _headerView.layoutHeaderViewForScrollViewOffset(tableView.contentOffset)
     }
 
+    func showScanner() {
+
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let vc = storyboard.instantiateViewControllerWithIdentifier("ScannerVC")
+        let navi = UINavigationController(rootViewController: vc)
+        self.presentViewController(navi, animated: true, completion: nil)
+    }
     
     func showPersonalInfo() {
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
@@ -121,27 +129,31 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
         
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("detailedIdentifier") as! DetailedSettingsCell
-            if indexPath.row == 2 {
+            if indexPath.row == 3 {
                 
                 cell.titleLabel.text = "向Remix推荐活动"
                 cell.titleLabel.textColor = FlatRed()
                 cell.detailsLabel.text = "审核通过后你的推荐将出现在首页。"
                 
                 return cell
-            }else if indexPath.row == 0 {
+            }else if indexPath.row == 1 {
                 let cell2 = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") as! SettingsCell
                 cell2.label.text = "我的订单"
                 return cell2
-            }else if indexPath.row == 3{
+            }else if indexPath.row == 4{
                 cell.titleLabel.text = "向Remix推荐好店/地点"
                 cell.titleLabel.textColor = FlatRed()
                 cell.detailsLabel.text = "你的推荐将出现在首页地点推荐中。"
                 return cell
-            }else if indexPath.row == 1{
+            }else if indexPath.row == 2{
                 cell.titleLabel.text = "我发起的活动"
                 cell.titleLabel.textColor = FlatRed()
                 cell.detailsLabel.text = "在这里你将能管理、联系活动报名者和提取报名费到你的账户。"
                 return cell
+            }else if indexPath.row == 0 {
+                let cell2 = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") as! SettingsCell
+                cell2.label.text = "REMIX PASS"
+                return cell2
             }
             
             
@@ -190,7 +202,7 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 4
+            return 5
         }
         
         return 3
@@ -214,25 +226,20 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if indexPath.section == 0 {
+            let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
             switch indexPath.row {
-            case 1 : let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-            let manVC = storyBoard.instantiateViewControllerWithIdentifier("ManVC")
-            self.navigationController?.pushViewController(manVC, animated: true)
-            case 0 : let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-            let ordersVC = storyBoard.instantiateViewControllerWithIdentifier("OrdersVC")
-            self.navigationController?.pushViewController(ordersVC, animated: true)
-                
-            case 2:
-                let subm = ActivitySubmissionViewController()
-                subm.isModal = false
-                self.navigationController?.pushViewController(subm, animated: true)
-                
-            case 3:
-                let subm = LocationSubmissionViewController()
-                subm.isModal = false
-                self.navigationController?.pushViewController(subm, animated: true)
-                
-                
+            case 0 : let passVC = storyBoard.instantiateViewControllerWithIdentifier("PassVC")
+                     self.navigationController?.pushViewController(passVC, animated: true)
+            case 2 : let manVC = storyBoard.instantiateViewControllerWithIdentifier("ManVC")
+                     self.navigationController?.pushViewController(manVC, animated: true)
+            case 1 : let ordersVC = storyBoard.instantiateViewControllerWithIdentifier("OrdersVC")
+                     self.navigationController?.pushViewController(ordersVC, animated: true)
+            case 3:  let subm = ActivitySubmissionViewController()
+                     subm.isModal = false
+                     self.navigationController?.pushViewController(subm, animated: true)
+            case 4:  let subm = LocationSubmissionViewController()
+                     subm.isModal = false
+                     self.navigationController?.pushViewController(subm, animated: true)
             default: break
             }
         }

@@ -162,7 +162,12 @@ class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNE
                 
             }
         }
-        cell.orderNoLabel.text = "订单号: " + selectedOrder.objectId
+        if selectedOrder.objectForKey("CheckIn") as! Bool == false {
+            cell.orderNoLabel.text = "订单号: " + selectedOrder.objectId
+        }else{
+            cell.orderNoLabel.textColor = FlatRed()
+            cell.orderNoLabel.text = "已签到"
+        }
         cell.contactButton.addTarget(self, action: "contactOrganization", forControlEvents: .TouchUpInside)
         cell.deleteButton.addTarget(self, action: "removeOrderFromApplication", forControlEvents: .TouchUpInside)
         return cell
@@ -195,6 +200,13 @@ class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNE
     
     //DZNEmptyDataSet
     
+    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        if section == 0 {
+            return "到达活动现场后，扫描主办方活动二维码即可进行签到并获取相应积分奖励。"
+        }
+        
+        return nil
+    }
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         

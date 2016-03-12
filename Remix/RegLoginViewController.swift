@@ -200,6 +200,14 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
                     CURRENT_USER.setObject("全国", forKey: "City")
                     CURRENT_USER.updateInBackground()
                 }
+                if _user.objectForKey("Credit") == nil {
+                    CURRENT_USER.setObject(0, forKey: "Credit")
+                    CURRENT_USER.updateInBackground()
+                }
+                if _user.objectForKey("Balance") == nil {
+                    CURRENT_USER.setObject(0, forKey: "Balance")
+                    CURRENT_USER.updateInBackground()
+                }
                 REMIX_CITY_NAME = CURRENT_USER.objectForKey("City") as! String
                 sharedOneSignalInstance.sendTag("City", value: REMIX_CITY_NAME)
                 sharedOneSignalInstance.sendTag("ObjectId", value: CURRENT_USER.objectId)
