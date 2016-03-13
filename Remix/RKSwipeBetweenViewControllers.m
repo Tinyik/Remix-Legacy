@@ -254,13 +254,7 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
 //It extracts the xcoordinate from the center point and instructs the selection bar to move accordingly
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat xFromCenter = self.view.frame.size.width-scrollView.contentOffset.x; //%%% positive for right
-//    CGFloat red1, red2, green1, green2, blue1, blue2, alpha1, alpha2;
-//    [themeColor_1 getRed: &red1 green: &green1 blue: &blue1 alpha: &alpha1];
-//    [themeColor_2 getRed: &red2 green: &green2 blue: &blue2 alpha: &alpha2];
-//    CGFloat scrollPercentage = scrollView.contentOffset.x/self.view.frame.size.width - 1;
-//    NSLog(@"%f", scrollView.contentOffset.x);
-//    UIColor *newColor = [[UIColor alloc] initWithRed:red1*(1-scrollPercentage)+red2*scrollPercentage green:green1*(1-scrollPercentage)+green2*scrollPercentage blue:blue1*(1-scrollPercentage)+blue2*scrollPercentage alpha:1];
-//    self.navigationBar.barTintColor = newColor;
+
     NSInteger xCoor = X_BUFFER+selectionBar.frame.size.width*self.currentPageIndex-X_OFFSET;
     
     selectionBar.frame = CGRectMake(xCoor-xFromCenter/[viewControllerArray count], selectionBar.frame.origin.y, selectionBar.frame.size.width, selectionBar.frame.size.height);

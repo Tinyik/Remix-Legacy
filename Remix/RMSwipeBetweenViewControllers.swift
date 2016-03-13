@@ -43,7 +43,7 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
     override func recommendActivityAndLocation() {
         print("Clikced")
         
-        let sheet = LCActionSheet(title: "添加活动或地点至Remix。审核通过后其他用户将看到你的推荐。", buttonTitles: ["添加一条活动", "推荐一家店或地点", "添加往期活动报道", "入驻Remix"], redButtonIndex: -1) { (buttonIndex) -> Void in
+        let sheet = LCActionSheet(title: "添加活动或地点至Remix。审核通过后其他用户将看到你的推荐。", buttonTitles: ["添加一条活动", "推荐一家店或地点", "添加往期活动报道", "🔥立即入驻Remix🔥"], redButtonIndex: 3) { (buttonIndex) -> Void in
             if self.checkPersonalInfoIntegrity() {
                 if buttonIndex == 0 {
                     let submVC = ActivitySubmissionViewController()
@@ -65,9 +65,18 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
                 }
                 
                 if buttonIndex == 3 {
-                    let submVC = OrganizationSubmissionViewController()
-                    let navigationController = UINavigationController(rootViewController: submVC)
-                    self.presentViewController(navigationController, animated: true, completion: nil)
+                    let sheet2 = LCActionSheet(title: "请选择组织入驻信息填写方式。", buttonTitles: ["App内直接填写", "下载PDF申请表"], redButtonIndex: -1, clicked: { (index) -> Void in
+                        if index == 0 {
+                            let submVC = OrganizationSubmissionViewController()
+                            let navigationController = UINavigationController(rootViewController: submVC)
+                            self.presentViewController(navigationController, animated: true, completion: nil)
+                        }
+                        
+                        if index == 1 {
+                            UIApplication.sharedApplication().openURL(NSURL(string: "http://www.remixapp.cn/wp-content/uploads/2016/03/Remix-%E5%B9%B3%E5%8F%B0%E5%85%A5%E9%A9%BB%E7%94%B3%E8%AF%B7%E8%A1%A8.pdf")!)
+                        }
+                    })
+                    sheet2.show()
                     
                 }
             }else{
