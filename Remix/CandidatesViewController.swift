@@ -76,6 +76,7 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
             if buttonIndex == 0 {
                 let vc = storyboard.instantiateViewControllerWithIdentifier("CodeVC") as! QRCodeViewController
                 vc.activityObjectId = self.objectId
+                vc.backgroundURL = self.coverImgURL
                 let navi = UINavigationController(rootViewController: vc)
                 self.presentViewController(navi, animated: true, completion: nil)
             }
