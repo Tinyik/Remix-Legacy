@@ -104,8 +104,6 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
         return 0
     }
     
-
-    
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         

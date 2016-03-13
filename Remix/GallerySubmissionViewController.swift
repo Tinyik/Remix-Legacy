@@ -262,7 +262,7 @@ class GallerySubmissionViewController: FormViewController {
             }
             
         }else{
-            let snackBar = TTGSnackbar.init(message: "活动提交失败，请检查信息是否已填写完整。", duration: .Middle)
+            let snackBar = TTGSnackbar.init(message: "活动报道提交失败，请检查信息是否已填写完整。", duration: .Middle)
             snackBar.backgroundColor = FlatWatermelonDark()
             snackBar.alpha = 0.9
             snackBar.show()

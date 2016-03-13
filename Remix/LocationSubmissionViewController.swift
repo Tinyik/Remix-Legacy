@@ -252,7 +252,7 @@ class LocationSubmissionViewController: FormViewController {
             }
 
         }else{
-            let snackBar = TTGSnackbar.init(message: "活动提交失败，请检查信息是否已填写完整。", duration: .Middle)
+            let snackBar = TTGSnackbar.init(message: "地点信息提交失败，请检查信息是否已填写完整。", duration: .Middle)
             snackBar.backgroundColor = FlatWatermelonDark()
             snackBar.alpha = 0.9
             snackBar.show()
@@ -305,7 +305,7 @@ class LocationSubmissionViewController: FormViewController {
                 for city in cities {
                     self.cities.append(city.objectForKey("CityName") as! String)
                 }
-                self.form +++ SelectableSection<ImageCheckRow<String>, String>("所在城市", selectionType: .MultipleSelection)
+                self.form +++ SelectableSection<ImageCheckRow<String>, String>("所在城市(可多选)", selectionType: .MultipleSelection)
                 for option in self.cities {
                     self.form.last! <<< ImageCheckRow<String>(option){ lrow in
                         lrow.title = "   " + option

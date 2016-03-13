@@ -25,6 +25,7 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
         super.viewDidLoad()
         setUpParallaxHeaderView()
         self.title = "个人中心"
+        self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 55, bottom: 0, right: 0)
         self.navigationController?.navigationBar.translucent = false
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: "popCurrentVC")
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "扫一扫", style: .Plain, target: self, action: "showScanner")
@@ -134,21 +135,24 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
                 cell.titleLabel.text = "向Remix推荐活动"
                 cell.titleLabel.textColor = FlatRed()
                 cell.detailsLabel.text = "审核通过后你的推荐将出现在首页。"
-                
+                cell.icon.image = UIImage(named: "SubmActivity")
                 return cell
             }else if indexPath.row == 1 {
                 let cell2 = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") as! SettingsCell
                 cell2.label.text = "我的订单"
+                cell2.icon.image = UIImage(named: "Orders")
                 return cell2
             }else if indexPath.row == 4{
                 cell.titleLabel.text = "向Remix推荐好店/地点"
                 cell.titleLabel.textColor = FlatRed()
                 cell.detailsLabel.text = "你的推荐将出现在首页地点推荐中。"
+                cell.icon.image = UIImage(named: "SubmLocation")
                 return cell
             }else if indexPath.row == 2{
                 cell.titleLabel.text = "我发起的活动"
                 cell.titleLabel.textColor = FlatRed()
                 cell.detailsLabel.text = "在这里你将能管理、联系活动报名者和提取报名费到你的账户。"
+                cell.icon.image = UIImage(named: "MyActivity")
                 return cell
             }else if indexPath.row == 0 {
                 let cell2 = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") as! SettingsCell
@@ -163,8 +167,11 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
             let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") as! SettingsCell
             switch indexPath.row {
             case 0: cell.label.text = "告诉朋友"
+                    cell.icon.image = UIImage(named: "Share")
             case 1: cell.label.text = "反馈"
+                    cell.icon.image = UIImage(named: "Feedback")
             case 2: cell.label.text = "入驻Remix"
+                    cell.icon.image = UIImage(named: "Join")
             default: break
             }
             
@@ -176,8 +183,11 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
             let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") as! SettingsCell
             switch indexPath.row {
             case 0: cell.label.text = "清除缓存"
+                    cell.icon.image = UIImage(named: "ClearCache")
             case 1: cell.label.text = "显示使用指南"
+                    cell.icon.image = UIImage(named: "Manual")
             case 2: cell.label.text = "退出登录"
+                    cell.icon.image = UIImage(named: "Logout")
                 
             default: break
             }

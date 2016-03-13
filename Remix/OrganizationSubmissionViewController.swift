@@ -14,6 +14,7 @@ import TTGSnackbar
 class OrganizationSubmissionViewController: FormViewController {
 
     var cities: [String] = []
+    let orgNatures = ["公益性学生组织", "公益性社会组织", "社会企业", "学生公司"]
     var isModal = true
     
     override func viewDidLoad() {
@@ -47,28 +48,42 @@ class OrganizationSubmissionViewController: FormViewController {
             <<< TextFloatLabelRow("WechatId") {
                 $0.title = "微信号 (如果有)"
             }
-            <<< TextFloatLabelRow("Intro") {
+            <<< TextFloatLabelRow("BriefIntro") {
                 $0.title = "一句话简介"
             }
-        +++
+
+        
+        form +++ SelectableSection<ImageCheckRow<String>, String>() { section in
+            section.header = HeaderFooterView(title: "组织性质(单选)")
+        }
+        
+        for option in orgNatures {
+            form.last! <<< ImageCheckRow<String>(option){ lrow in
+                lrow.title = option
+                lrow.selectableValue = option
+                lrow.tag = option
+                lrow.value = nil
+            }
+        }
+        form +++
         Section("组织公开介绍")
-            <<< TextFloatLabelRow("Title1") {
+            <<< TextFloatLabelRow("IntroTitle1") {
                 $0.title = "主标题一"
             }
-            <<< TextAreaRow("Paragraph1") {
+            <<< TextAreaRow("IntroParagraph1") {
                 $0.placeholder = "段落一"
             }
-            <<< ImageRow("Image1") {
+            <<< ImageRow("IntroImage1") {
                 $0.title = "段落图一     >>>"
             }
-            <<< TextFloatLabelRow("Title2") {
+            <<< TextFloatLabelRow("IntroTitle2") {
                 $0.title = "主标题二"
             }
 
-            <<< TextAreaRow("Paragraph2") {
+            <<< TextAreaRow("IntroParagraph2") {
                 $0.placeholder = "段落二"
             }
-            <<< ImageRow("Image2") {
+            <<< ImageRow("IntroImage2") {
                 $0.title = "段落图二     >>>"
             }
         +++
@@ -76,7 +91,7 @@ class OrganizationSubmissionViewController: FormViewController {
             <<< ImageRow("Logo") {
                 $0.title = "正方形组织Logo图     >>>"
             }
-            <<< ImageRow("CoverImg") {
+            <<< ImageRow("HomePageCoverImage") {
                 $0.title = "组织首页封面图     >>>"
             }
        
@@ -92,7 +107,7 @@ class OrganizationSubmissionViewController: FormViewController {
                 for city in cities {
                     self.cities.append(city.objectForKey("CityName") as! String)
                 }
-                self.form +++ SelectableSection<ImageCheckRow<String>, String>("所在城市", selectionType: .MultipleSelection)
+                self.form +++ SelectableSection<ImageCheckRow<String>, String>("所在城市(可多选)", selectionType: .MultipleSelection)
                 for option in self.cities {
                     self.form.last! <<< ImageCheckRow<String>(option){ lrow in
                         lrow.title = "   " + option
@@ -110,12 +125,12 @@ class OrganizationSubmissionViewController: FormViewController {
                         $0.placeholder = "姓名"
                         
                     }
-                    <<< PhoneRow("PhoneNumber") {
+                    <<< PhoneRow("Contact") {
                         $0.title = "手机号"
                         $0.placeholder = "手机号"
                         
                     }
-                    <<< EmailRow("Email") {
+                    <<< EmailRow("Emails") {
                         $0.title = "邮箱"
                         $0.placeholder = "邮箱"
                     }
@@ -133,14 +148,81 @@ class OrganizationSubmissionViewController: FormViewController {
         let attr = form.values(includeHidden: false)
         for (key, value) in attr {
             if cities.contains(key) == false {
-                if attr[key]! == nil {
-                    return false
+                if orgNatures.contains(key) == false {
+                    if key != "WechatId" {
+                        if attr[key]! == nil {
+                            return false
+                        }
+                    }
                 }
             }
         }
         return true
     }
     
+    func submitOrganization() {
+        let attr = form.values(includeHidden: false)
+        if checkInformationIntegrity() {
+            var selectedCities: [String] = []
+            let newOrg = BmobObject(className: "Organization")
+            for (key, value) in attr {
+                if let pic = value as? UIImage {
+                    let imageData = UIImageJPEGRepresentation(pic as! UIImage, 0.5)
+                    let newImage = BmobFile(fileName: "CoverImg.jpg", withFileData: imageData!)
+                    if newImage.save() {
+                        newOrg.setObject(newImage, forKey: key)
+                    }
+                }
+                
+                if cities.contains(key) == false {
+                    if orgNatures.contains(key) == false{
+                        if let str = value as? String {
+                            if key == "Emails" {
+                                newOrg.setObject([str], forKey: "Emails")
+                            }else if key == "Name"{
+                                newOrg.setObject("用户提交" + str, forKey: key)
+                            }else{
+                                newOrg.setObject(str, forKey: key)
+                            }
+                        }
+
+                    }else{
+                        if attr[key]! != nil {
+                            newOrg.setObject(key as! String, forKey: "Nature")
+                        }
+                    }
+                
+                }else{
+                    if attr[key]! != nil{
+                        selectedCities.append(key)
+                    }
+                }
+            }
+                 selectedCities.insert("全国", atIndex: 0)
+                 newOrg.setObject(selectedCities, forKey: "Cities")
+                 newOrg.setObject(0, forKey: "PageView")
+                 newOrg.setObject(false, forKey: "isVisibleToUsers")
+            
+                 newOrg.saveInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
+                    if error == nil {
+                        sharedOneSignalInstance.sendTag(attr["Name"] as! String, value: "OrgSubmitted")
+                        let alert = UIAlertController(title: "Remix提示", message: "组织信息提交成功。谢谢你对Remix的支持_(:з」∠)_。审核通过后我们将给你发送推送消息。", preferredStyle: .Alert)
+                        let action = UIAlertAction(title: "好的", style: .Default, handler: { (action) -> Void in
+                            self.popCurrentVC()
+                        })
+                        alert.addAction(action)
+                        self.presentViewController(alert, animated: true, completion: nil)
+
+                    }
+                 })
+        }else{
+            let snackBar = TTGSnackbar.init(message: "组织信息提交失败，请检查信息是否已填写完整。", duration: .Middle)
+            snackBar.backgroundColor = FlatWatermelonDark()
+            snackBar.alpha = 0.9
+            snackBar.show()
+        }
+
+    }
     func setUpParallaxHeaderView() {
         let manager = SDWebImageManager()
         let query = BmobQuery(className: "UIRemoteConfig")

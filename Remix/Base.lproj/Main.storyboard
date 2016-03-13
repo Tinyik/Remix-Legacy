@@ -1386,14 +1386,18 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="我关注的活动" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="63S-HG-GKX">
-                                            <rect key="frame" x="26" y="23" width="175" height="21"/>
+                                            <rect key="frame" x="55" y="23" width="175" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ClearCache" translatesAutoresizingMaskIntoConstraints="NO" id="JbL-zG-U0Q">
+                                            <rect key="frame" x="12" y="21" width="27" height="27"/>
+                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="icon" destination="JbL-zG-U0Q" id="tfy-NI-fi6"/>
                                     <outlet property="label" destination="63S-HG-GKX" id="gea-wS-vfC"/>
                                 </connections>
                             </tableViewCell>
@@ -1405,21 +1409,25 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O3L-VR-Rfu">
-                                            <rect key="frame" x="25" y="8" width="175" height="21"/>
+                                            <rect key="frame" x="55" y="8" width="175" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIG-tR-b4U">
-                                            <rect key="frame" x="25" y="37" width="317" height="21"/>
+                                            <rect key="frame" x="55" y="37" width="296" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" red="0.47857481060000001" green="0.47857481060000001" blue="0.47857481060000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ClearCache" translatesAutoresizingMaskIntoConstraints="NO" id="C4a-ff-abF">
+                                            <rect key="frame" x="12" y="20" width="27" height="27"/>
+                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="detailsLabel" destination="xIG-tR-b4U" id="mJV-ck-Mje"/>
+                                    <outlet property="icon" destination="C4a-ff-abF" id="LEl-bM-UPR"/>
                                     <outlet property="titleLabel" destination="O3L-VR-Rfu" id="kzb-UA-cqv"/>
                                 </connections>
                             </tableViewCell>
@@ -4383,6 +4391,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ClearCache" width="177" height="177"/>
         <image name="Community" width="16" height="16"/>
         <image name="DetailButton" width="138" height="78"/>
         <image name="Fire" width="1729" height="1729"/>

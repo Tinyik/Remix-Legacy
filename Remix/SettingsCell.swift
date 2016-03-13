@@ -11,7 +11,7 @@ import UIKit
 class SettingsCell: UITableViewCell {
 
     @IBOutlet weak var label: UILabel!
-    
+    @IBOutlet weak var icon: UIImageView!
     
     override func awakeFromNib() {
         
