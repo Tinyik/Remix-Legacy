@@ -129,6 +129,18 @@ class OrganizationSubmissionViewController: FormViewController {
         
     }
     
+    func checkInformationIntegrity() -> Bool {
+        let attr = form.values(includeHidden: false)
+        for (key, value) in attr {
+            if cities.contains(key) == false {
+                if attr[key]! == nil {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+    
     func setUpParallaxHeaderView() {
         let manager = SDWebImageManager()
         let query = BmobQuery(className: "UIRemoteConfig")

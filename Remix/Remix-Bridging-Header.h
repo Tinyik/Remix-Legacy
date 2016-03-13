@@ -28,4 +28,4 @@
 #import "UITextView+Placeholder.h"
 #import <ChameleonFramework/Chameleon.h>
 #import <CBZSplashView/CBZSplashView.h>
-#import <TTGSnackBar/TTGSnackBar.h>
+#import <TTGSnackbar/TTGSnackbar.h>
