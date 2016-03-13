@@ -157,6 +157,7 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
             }else if indexPath.row == 0 {
                 let cell2 = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") as! SettingsCell
                 cell2.label.text = "REMIX PASS"
+                cell2.icon.image = UIImage(named: "Pass")
                 return cell2
             }
             

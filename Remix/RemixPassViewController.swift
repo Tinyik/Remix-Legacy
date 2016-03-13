@@ -12,6 +12,7 @@ class RemixPassViewController: UITableViewController, DZNEmptyDataSetDelegate, D
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "REMIX PASS"
         setUpParallaxHeaderView()
     }
 
@@ -22,7 +23,6 @@ class RemixPassViewController: UITableViewController, DZNEmptyDataSetDelegate, D
         self.tableView.tableFooterView = UIView()
         self.tableView.emptyDataSetDelegate = self
         self.tableView.emptyDataSetSource = self
-        self.title = "REMIX PASS"
         let _headerView = ParallaxHeaderView.parallaxHeaderViewWithSubView(headerView) as! ParallaxHeaderView
         self.tableView.tableHeaderView = _headerView
     }
