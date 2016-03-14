@@ -25,6 +25,8 @@ class RemixPassViewController: UITableViewController, DZNEmptyDataSetDelegate, D
         self.tableView.emptyDataSetSource = self
         let _headerView = ParallaxHeaderView.parallaxHeaderViewWithSubView(headerView) as! ParallaxHeaderView
         self.tableView.tableHeaderView = _headerView
+        
+        _headerView.layoutHeaderViewForScrollViewOffset(tableView.contentOffset)
     }
     
     override func scrollViewDidScroll(scrollView: UIScrollView) {
