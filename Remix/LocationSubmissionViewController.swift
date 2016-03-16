@@ -220,6 +220,12 @@ class LocationSubmissionViewController: FormViewController {
                 newActivity.saveInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
                     if error == nil {
                         sharedOneSignalInstance.sendTag(attr["Title"] as! String, value: "LocationSubmitted")
+                        let c = CURRENT_USER.objectForKey("Credit") as! Int
+                        CURRENT_USER.setObject(c+50, forKey: "Credit")
+                        CURRENT_USER.updateInBackground()
+                        let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
+                        notif.promptUserCreditUpdate("50", inContext: "添加地点")
+
                         let alert = UIAlertController(title: "Remix提示", message: "地点添加成功。谢谢你对Remix的支持_(:з」∠)_。审核通过后我们将给你发送推送消息。", preferredStyle: .Alert)
                         let action = UIAlertAction(title: "好的", style: .Default, handler: { (action) -> Void in
                             self.popCurrentVC()
@@ -237,6 +243,12 @@ class LocationSubmissionViewController: FormViewController {
                 newActivity.saveInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
                     if error == nil {
                         sharedOneSignalInstance.sendTag(attr["Title"] as! String, value: "LocationSubmitted")
+                        let c = CURRENT_USER.objectForKey("Credit") as! Int
+                        CURRENT_USER.setObject(c+50, forKey: "Credit")
+                        CURRENT_USER.updateInBackground()
+                        let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
+                        notif.promptUserCreditUpdate("50", inContext: "添加地点")
+
                         let alert = UIAlertController(title: "Remix提示", message: "地点添加成功。谢谢你对Remix的支持_(:з」∠)_。审核通过后我们将给你发送推送消息。", preferredStyle: .Alert)
                         let action = UIAlertAction(title: "好的", style: .Default, handler: { (action) -> Void in
                             self.popCurrentVC()

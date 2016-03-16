@@ -206,6 +206,12 @@ class OrganizationSubmissionViewController: FormViewController {
                  newOrg.saveInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
                     if error == nil {
                         sharedOneSignalInstance.sendTag(attr["Name"] as! String, value: "OrgSubmitted")
+                        let c = CURRENT_USER.objectForKey("Credit") as! Int
+                        CURRENT_USER.setObject(c+100, forKey: "Credit")
+                        CURRENT_USER.updateInBackground()
+                        let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
+                        notif.promptUserCreditUpdate("100", inContext: "提交组织信息")
+
                         let alert = UIAlertController(title: "Remix提示", message: "组织信息提交成功。谢谢你对Remix的支持_(:з」∠)_。审核通过后我们将给你发送推送消息。", preferredStyle: .Alert)
                         let action = UIAlertAction(title: "好的", style: .Default, handler: { (action) -> Void in
                             self.popCurrentVC()

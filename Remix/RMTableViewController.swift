@@ -76,7 +76,6 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         updateLaunchedTimes()
-      
         //Just to get around the not-in-hierarchy issue by adding a bit of delay here.
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             if launchedTimes % 3 == 0 || launchedTimes == 2 {

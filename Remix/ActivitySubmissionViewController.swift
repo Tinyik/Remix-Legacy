@@ -101,10 +101,13 @@ class ActivitySubmissionViewController: FormViewController {
                 $0.title = "活动频率, 如: 每周六， 每月五号"
                 $0.hidden = "$isRecurring == false"
             }
-
+            <<< TextRow("Duration") {
+                $0.title = "活动大致时长(分钟)"
+                $0.hidden = "$isCoordinator == false"
+            }
         
             <<< ImageRow("CoverImg"){
-                $0.title = "封面图片"
+                $0.title = "封面图片    >>>"
                 $0.hidden = "$isCoordinator == false"
             }
             <<< TextAreaRow("Description") {
@@ -153,7 +156,7 @@ class ActivitySubmissionViewController: FormViewController {
     func checkInformationIntegrity() -> Bool {
         let attr = form.values(includeHidden: false)
         if attr["isCoordinator"]! as! Bool == true{
-            if attr["Title"]! == nil || attr["Org"]! == nil || attr["URL"]! == nil || attr["Description"]! == nil || attr["CoverImg"]! == nil || attr["ItemName"]! == nil {
+            if attr["Title"]! == nil || attr["Org"]! == nil || attr["URL"]! == nil || attr["Description"]! == nil || attr["CoverImg"]! == nil || attr["ItemName"]! == nil || attr["Duration"]! == nil {
             
             return false
             
@@ -241,6 +244,7 @@ class ActivitySubmissionViewController: FormViewController {
                     newActivity.setObject(String(attr["URL"]! as! NSURL), forKey: "URL")
                     newActivity.setObject(attr["Price"]! as! Double, forKey: "Price")
                     newActivity.setObject(attr["Description"]! as! String, forKey: "Description")
+                    newActivity.setObject(attr["Duration"] as! String, forKey: "Duration")
                     newActivity.setObject(BmobUser.getCurrentUser().mobilePhoneNumber, forKey: "Contact")
                     newActivity.setObject(BmobUser.getCurrentUser().objectForKey("LegalName") as! String, forKey: "ContactName")
                     newActivity.setObject(0, forKey: "LikesNumber")
@@ -283,6 +287,11 @@ class ActivitySubmissionViewController: FormViewController {
                             newActivity.saveInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
                                 if error == nil {
                                     sharedOneSignalInstance.sendTag(attr["Title"] as! String, value: "ActivitySubmitted")
+                                    let c = CURRENT_USER.objectForKey("Credit") as! Int
+                                    CURRENT_USER.setObject(c+50, forKey: "Credit")
+                                    CURRENT_USER.updateInBackground()
+                                    let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
+                                    notif.promptUserCreditUpdate("50", inContext: "组织活动")
                                     let alert = UIAlertController(title: "Remix提示", message: "活动添加成功。谢谢你对Remix的支持_(:з」∠)_。审核通过后我们将给你发送推送消息。你可以在 \"个人中心 - 我发起的活动\"中查看审核状态并管理活动报名者。", preferredStyle: .Alert)
                                     let cancel = UIAlertAction(title: "好的", style: .Cancel, handler: { (action) -> Void in
                                         self.popCurrentVC()
@@ -375,6 +384,11 @@ class ActivitySubmissionViewController: FormViewController {
                 newActivity.saveInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
                     if error == nil {
                         sharedOneSignalInstance.sendTag(attr["Description"] as! String, value: "ActivitySubmitted")
+                        let c = CURRENT_USER.objectForKey("Credit") as! Int
+                        CURRENT_USER.setObject(c+50, forKey: "Credit")
+                        CURRENT_USER.updateInBackground()
+                        let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
+                        notif.promptUserCreditUpdate("50", inContext: "添加活动")
                         let alert = UIAlertController(title: "Remix提示", message: "活动添加成功。谢谢你对Remix的支持_(:з」∠)_。审核通过后我们将给你发送推送消息。", preferredStyle: .Alert)
                         let action = UIAlertAction(title: "好的", style: .Default, handler: { (action) -> Void in
                             self.popCurrentVC()

@@ -227,6 +227,11 @@ class FloatingActivityView: UIView, BmobPayDelegate {
         newOrder.saveInBackgroundWithResultBlock { (isSuccessful, error) -> Void in
             if isSuccessful {
                 sharedOneSignalInstance.sendTag(self.ongoingTransactionId, value: "PaySuccess")
+                let c = CURRENT_USER.objectForKey("Credit") as! Int
+                CURRENT_USER.setObject(c+(self.activity.objectForKey("Duration") as! Int)*100, forKey: "Credit")
+                CURRENT_USER.updateInBackground()
+                let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
+                notif.promptUserCreditUpdate(String((self.activity.objectForKey("Duration") as! Int)*100), inContext: "报名活动")
                 self.fetchOrdersInformation()
                 let alert = UIAlertController(title: "支付状态", message: "报名成功！Remix已经把你的基本信息发送给了活动主办方。请进入 \"我的订单\" 查看", preferredStyle: .Alert)
                 let cancel = UIAlertAction(title: "继续逛逛", style: .Cancel, handler: nil)

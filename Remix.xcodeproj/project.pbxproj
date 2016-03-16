@@ -54,6 +54,8 @@
 		1848572C1C63EB93004E516A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1848572B1C63EB93004E516A /* AVFoundation.framework */; };
 		1848572E1C63EB99004E516A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1848572D1C63EB99004E516A /* MediaPlayer.framework */; };
 		184857301C63EC01004E516A /* BmobSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1848572F1C63EC01004E516A /* BmobSDK.framework */; };
+		184EDFA91C997BD9004F3D7D /* NotifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184EDFA81C997BD9004F3D7D /* NotifView.swift */; };
+		184EDFAB1C997BE7004F3D7D /* NotifView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184EDFAA1C997BE7004F3D7D /* NotifView.xib */; };
 		1854897C1C67288200A8E5C1 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1854897B1C67288200A8E5C1 /* ImageIO.framework */; };
 		1857B52C1C855A7000D00A9E /* CommentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1857B52B1C855A7000D00A9E /* CommentsTableViewController.swift */; };
 		1857B52E1C855A8900D00A9E /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1857B52D1C855A8900D00A9E /* CommentCell.swift */; };
@@ -253,6 +255,8 @@
 		1848572B1C63EB93004E516A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		1848572D1C63EB99004E516A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		1848572F1C63EC01004E516A /* BmobSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BmobSDK.framework; sourceTree = "<group>"; };
+		184EDFA81C997BD9004F3D7D /* NotifView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifView.swift; sourceTree = "<group>"; };
+		184EDFAA1C997BE7004F3D7D /* NotifView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotifView.xib; sourceTree = "<group>"; };
 		1854897B1C67288200A8E5C1 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		1857B52B1C855A7000D00A9E /* CommentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewController.swift; sourceTree = "<group>"; };
 		1857B52D1C855A8900D00A9E /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
@@ -665,6 +669,8 @@
 				18198D551C944B0C00A7AD78 /* RemixPass */,
 				18E684B11C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift */,
 				18E620A51C8C194C00B85941 /* ActivitySubmissionViewController.swift */,
+				184EDFA81C997BD9004F3D7D /* NotifView.swift */,
+				184EDFAA1C997BE7004F3D7D /* NotifView.xib */,
 				183984FA1C92FA4600B8EB8B /* OrganizationSubmissionViewController.swift */,
 				184825001C8FF6F400CCB9CF /* GallerySubmissionViewController.swift */,
 				18E620AD1C8D5F9600B85941 /* LocationSubmissionViewController.swift */,
@@ -1164,6 +1170,7 @@
 				181F2B2C1C6A2D8D00FC237D /* backItemImage@2x.png in Resources */,
 				1857B5341C856BB000D00A9E /* PKImageBundle.bundle in Resources */,
 				181F2B2D1C6A2D8D00FC237D /* backItemImage_hl@2x.png in Resources */,
+				184EDFAB1C997BE7004F3D7D /* NotifView.xib in Resources */,
 				187745901C6ACB1D000427C7 /* UMSCommentInputController.xib in Resources */,
 				18AA6BE81C91444600BDD39B /* SettingsHeaderView.xib in Resources */,
 				18BC02331C8EA5D500FBC162 /* UserFooterView.xib in Resources */,
@@ -1417,6 +1424,7 @@
 				184825011C8FF6F400CCB9CF /* GallerySubmissionViewController.swift in Sources */,
 				1898CA871C69B599009D3261 /* ElevateTransitionAnimation.swift in Sources */,
 				18A443901C64EEAC00FEB149 /* OrgCell.swift in Sources */,
+				184EDFA91C997BD9004F3D7D /* NotifView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
