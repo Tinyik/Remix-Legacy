@@ -19,7 +19,7 @@ class RMFirstFilteredViewController: CTFilteredViewController {
     
     override func setUpParallaxHeaderView() {
         let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(UIImage(named: "SDPlaceholder"), forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, 175)) as! ParallaxHeaderView
-        let url = NSURL(string: (APPLICATION_UI_REMOTE_CONFIG.objectForKey("Filter_1_HeaderImage") as? BmobFile)!.url)
+        let url = NSURL(string: (APPLICATION_UI_REMOTE_CONFIG.objectForKey("Filter_1_HeaderImage") as? AVFile)!.url)
         let manager = SDWebImageManager()
         manager.downloadImageWithURL(url, options: .RetryFailed, progress: nil, completed: { (image, error, type, isSuccessful, url) -> Void in
             headerView.headerImage = image
@@ -37,7 +37,7 @@ class RMFirstFilteredViewController: CTFilteredViewController {
         activities = []
         
         fetchLikedActivitiesList()
-        var query = BmobQuery(className: "Activity")
+        var query = AVQuery(className: "Activity")
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("isVisibleOnFilterList_1", equalTo: true)
@@ -47,7 +47,7 @@ class RMFirstFilteredViewController: CTFilteredViewController {
                 if activities.count > 0 {
                     for activity in activities {
                         
-                        let coverImg = activity.objectForKey("CoverImg") as! BmobFile
+                        let coverImg = activity.objectForKey("CoverImg") as! AVFile
                         let imageURL = NSURL(string:coverImg.url)!
                         
                         let dateString = activity.objectForKey("Date") as! String
@@ -56,7 +56,7 @@ class RMFirstFilteredViewController: CTFilteredViewController {
                         
                         if self.isMonthAdded(monthName) == false {
                             self.monthNameStrings.append(monthName)
-                            self.activities.append([activity as! BmobObject])
+                            self.activities.append([activity as! AVObject])
                             self.coverImgURLs.append([imageURL])
                         } else {
                             
@@ -64,7 +64,7 @@ class RMFirstFilteredViewController: CTFilteredViewController {
                                 
                                 ($0[0].objectForKey("Date") as! String).componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2] == monthName})
                             {
-                                self.activities[index].append(activity as! BmobObject)
+                                self.activities[index].append(activity as! AVObject)
                                 self.coverImgURLs[index].append(imageURL)
                             }
                             

@@ -15,8 +15,8 @@ import TTGSnackbar
 let DEVICE_SCREEN_WIDTH = UIScreen.mainScreen().bounds.width
 let DEVICE_SCREEN_HEIGHT = UIScreen.mainScreen().bounds.height
 let COMMENTS_TABLE_VIEW_VISIBLE_HEIGHT: CGFloat = 450
-var APPLICATION_UI_REMOTE_CONFIG: BmobObject!
-var CURRENT_USER: BmobUser!
+var APPLICATION_UI_REMOTE_CONFIG: AVObject!
+var CURRENT_USER: AVUser!
 var REMIX_CITY_NAME: String!
 
 var naviController: RMSwipeBetweenViewControllers!
@@ -41,15 +41,15 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     var promoSnackbar: TTGSnackbar!
     var isRefreshing: Bool = false
     var coverImgURLs: [[NSURL]] = []
-    var activities: [[BmobObject]] = []
-    var headerAds: [BmobObject] = []
-    var floatingActivities: [BmobObject] = []
+    var activities: [[AVObject]] = []
+    var headerAds: [AVObject] = []
+    var floatingActivities: [AVObject] = []
     var registeredActivitiesIds: [String] = []
     var monthNameStrings: [String] = []
     var dateLabel: UILabel!
     var likedActivitiesIds: [String] = []
     var adTargetURLs: [NSURL] = []
-    var bannerAds: [BmobObject]!
+    var bannerAds: [AVObject]!
     var randomAdIndex = Int()
     var pageControl = UIPageControl(frame: CGRectMake(80, 240, 200, 50))
     var trackingAreas: [UIButton]! = []
@@ -144,17 +144,17 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     }
     
     func loadRemoteUIConfigurations() {
-        let query = BmobQuery(className: "UIRemoteConfig")
-        query.getObjectInBackgroundWithId("Cd3f1112") { (config, error) -> Void in
+        let query = AVQuery(className: "UIRemoteConfig")
+        query.getObjectInBackgroundWithId("56ea40b6f3609a00544ed773") { (config, error) -> Void in
             self.setUpTapTrackingArea() //FIXME: I don't know why but in viewDidLoad() keywindow? always return nil.
             if error == nil {
                 APPLICATION_UI_REMOTE_CONFIG = config
                 self.filterLabel_1.text = config.objectForKey("FilterLabel_1_Text") as? String
                 self.filterLabel_2.text = config.objectForKey("FilterLabel_2_Text") as? String
                 self.locationLabel.text = config.objectForKey("LocationLabel_Text") as? String
-                let url1 = NSURL(string: (config.objectForKey("FilterButton_1_Image") as? BmobFile)!.url)
-                let url2 = NSURL(string: (config.objectForKey("FilterButton_2_Image") as? BmobFile)!.url)
-                let url3 = NSURL(string: (config.objectForKey("LocationButton_Image") as? BmobFile)!.url)
+                let url1 = NSURL(string: (config.objectForKey("FilterButton_1_Image") as? AVFile)!.url)
+                let url2 = NSURL(string: (config.objectForKey("FilterButton_2_Image") as? AVFile)!.url)
+                let url3 = NSURL(string: (config.objectForKey("LocationButton_Image") as? AVFile)!.url)
                 if config.objectForKey("shouldShowSnackbar") as! Bool == true {
                     if launchedTimes % 3 != 0 && launchedTimes != 2 && launchedTimes != 1 {
                         let url = config.objectForKey("SnackbarURL") as! String
@@ -223,7 +223,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     
     func fetchOrdersInformation() {
         registeredActivitiesIds = []
-        let query = BmobQuery(className: "Orders")
+        let query = AVQuery(className: "Orders")
         query.whereKey("CustomerObjectId", equalTo: CURRENT_USER.objectId)
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
             if error == nil {
@@ -247,7 +247,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         }
         var imageURLs: [NSURL] = []
         for activity in floatingActivities {
-            let imageURL = NSURL(string: (activity.objectForKey("CoverImg") as! BmobFile).url)
+            let imageURL = NSURL(string: (activity.objectForKey("CoverImg") as! AVFile).url)
             imageURLs.append(imageURL!)
 
         }
@@ -295,7 +295,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     func fetchCloudAdvertisement() {
         adTargetURLs = []
         headerAds = []
-        let query = BmobQuery(className: "HeaderPromotion")
+        let query = AVQuery(className: "HeaderPromotion")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         print(REMIX_CITY_NAME)
@@ -307,12 +307,12 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 }
                 var adImageURLs: [NSURL] = []
                 for ad in ads{
-                    let adImageURL = NSURL(string: (ad.objectForKey("AdImage") as! BmobFile).url)
+                    let adImageURL = NSURL(string: (ad.objectForKey("AdImage") as! AVFile).url)
                     if let urlString = ad.objectForKey("URL") as? String {
                         self.adTargetURLs.append(NSURL(string: urlString)!)
                     }
                     adImageURLs.append(adImageURL!)
-                    self.headerAds.append(ad as! BmobObject)
+                    self.headerAds.append(ad as! AVObject)
                 }
                 
                 
@@ -358,7 +358,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         activities = []
         floatingActivities = []
         
-        let query = BmobQuery(className: "Activity")
+        let query = AVQuery(className: "Activity")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("isVisibleOnMainList", equalTo: true)
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
@@ -369,7 +369,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                     for activity in activities {
                         if activity.objectForKey("isFloatingActivity") as! Bool == false {
                             
-                            let coverImg = activity.objectForKey("CoverImg") as! BmobFile
+                            let coverImg = activity.objectForKey("CoverImg") as! AVFile
                             let imageURL = NSURL(string:coverImg.url)!
                             
                             let dateString = activity.objectForKey("Date") as! String
@@ -377,7 +377,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                             
                             if self.isMonthAdded(monthName) == false {
                                 self.monthNameStrings.append(monthName)
-                                self.activities.append([activity as! BmobObject])
+                                self.activities.append([activity as! AVObject])
                                 self.coverImgURLs.append([imageURL])
                                 print(self.monthNameStrings)
                             } else {
@@ -386,7 +386,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                                     
                                     ($0[0].objectForKey("Date") as! String).componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2] == monthName})
                                 {
-                                    self.activities[index].append(activity as! BmobObject)
+                                    self.activities[index].append(activity as! AVObject)
                                     self.coverImgURLs[index].append(imageURL)
                                 }
                                 
@@ -395,7 +395,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                             
                         }else{
                             print("NO")
-                            self.floatingActivities.append(activity as! BmobObject)
+                            self.floatingActivities.append(activity as! AVObject)
                         }
                     }
                     self.fetchOrdersInformation()
@@ -462,7 +462,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         }
         
         if let parentActivityId = headerAds[(sender.view?.tag)!].objectForKey("ParentActivityObjectId") as? String {
-            let query = BmobQuery(className: "Activity")
+            let query = AVQuery(className: "Activity")
             query.getObjectInBackgroundWithId(parentActivityId, block: { (activity, error) -> Void in
                 if error == nil {
                     let activityView = RMActivityViewController(url: NSURL(string: activity.objectForKey("URL") as! String))
@@ -495,9 +495,9 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         
     }
     
-    func reloadRowForActivity(activity: BmobObject) {
+    func reloadRowForActivity(activity: AVObject) {
         fetchLikedActivitiesList()
-        let query = BmobQuery(className: "Activity")
+        let query = AVQuery(className: "Activity")
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.getObjectInBackgroundWithId(activity.objectId) { (activity, error) -> Void in
             if error == nil {
@@ -625,7 +625,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         if tableView == adTableView {
             self.bannerAds = []
             let cell = tableView.dequeueReusableCellWithIdentifier("adCellReuseIdentifier", forIndexPath: indexPath) as! AdvertiseCell
-            let query = BmobQuery(className: "BannerPromotion")
+            let query = AVQuery(className: "BannerPromotion")
             query.whereKey("isVisibleToUsers", equalTo: true)
             query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
             query.findObjectsInBackgroundWithBlock({ (promotions, error) -> Void in
@@ -633,10 +633,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                     if promotions.count > 0{
                         print("PROMO")
                         for promotion in promotions {
-                            self.bannerAds.append(promotion as! BmobObject)
+                            self.bannerAds.append(promotion as! AVObject)
                         }
                         self.randomAdIndex = Int(arc4random_uniform(UInt32(self.bannerAds.count)))
-                        let adImageURL = NSURL(string:(self.bannerAds[self.randomAdIndex].objectForKey("AdImage") as! BmobFile).url)
+                        let adImageURL = NSURL(string:(self.bannerAds[self.randomAdIndex].objectForKey("AdImage") as! AVFile).url)
                         
                         cell.adImageView.sd_setImageWithURL(adImageURL, placeholderImage: UIImage(named: "SDPlaceholder"))
                         tableView.userInteractionEnabled = true
@@ -681,12 +681,12 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                   cell.fullImageView.sd_setImageWithURL(coverImgURLs[indexPath.section][indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
                 let _objId = activities[indexPath.section][indexPath.row].objectId
                 cell.objectId = _objId
-                let query = BmobQuery(className: "Organization")
+                let query = AVQuery(className: "Organization")
                 query.whereKey("Name", equalTo: cell.orgLabel.text)
                 query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
                     if error == nil {
                         for org in organizations {
-                            let url = NSURL(string: (org.objectForKey("Logo") as! BmobFile).url)
+                            let url = NSURL(string: (org.objectForKey("Logo") as! AVFile).url)
                             cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                         }
                     }else{
@@ -735,12 +735,12 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         cell.themeImg.sd_setImageWithURL(coverImgURLs[indexPath.section][indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
         let _objId = activities[indexPath.section][indexPath.row].objectId
         cell.objectId = _objId
-            let query = BmobQuery(className: "Organization")
+            let query = AVQuery(className: "Organization")
             query.whereKey("Name", equalTo: cell.orgLabel.text)
             query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
                 if error == nil {
                     for org in organizations {
-                        let url = NSURL(string: (org.objectForKey("Logo") as! BmobFile).url)
+                        let url = NSURL(string: (org.objectForKey("Logo") as! AVFile).url)
                         cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                     }
                 }else{
@@ -772,13 +772,13 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         }
         if tableView == adTableView {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            let query = BmobQuery(className: "BannerPromotion")
+            let query = AVQuery(className: "BannerPromotion")
             query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
             let objectId = bannerAds[randomAdIndex].objectId
             query.getObjectInBackgroundWithId(objectId) { (ad, error) -> Void in
                 if error == nil {
                     ad.incrementKey("PageView", byAmount: 1)
-                    ad.updateInBackground()
+                    ad.saveInBackground()
 
                 }else{
                     let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
@@ -798,13 +798,13 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         if tableView == self.tableView {
             
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            let query = BmobQuery(className: "Activity")
+            let query = AVQuery(className: "Activity")
             query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
             let objectId = activities[indexPath.section][indexPath.row].objectId
             query.getObjectInBackgroundWithId(objectId) { (activity, error) -> Void in
                 if error == nil {
                 activity.incrementKey("PageView", byAmount: 1)
-                activity.updateInBackground()
+                activity.saveInBackground()
                 }else{
                     let alert = UIAlertController(title: "Remix提示", message: "出错了！ |ﾟДﾟ)))请检查你的网络连接后重试。", preferredStyle: .Alert)
                     let action = UIAlertAction(title: "好的", style: .Default, handler: nil)

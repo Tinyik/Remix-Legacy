@@ -48,12 +48,12 @@ class ActivityCell: UITableViewCell {
     func expireActivity() {
         let alert = UIAlertController(title: "Remix提示", message: "确定要下架这个活动吗？下架后他人将无法报名参加这个活动。这个活动将仍显示在\"我发起的活动\"历史纪录中。", preferredStyle: .Alert)
         let action = UIAlertAction(title: "确定", style: .Destructive) { (action) -> Void in
-            let query = BmobQuery(className: "Activity")
+            let query = AVQuery(className: "Activity")
             query.getObjectInBackgroundWithId(self.objectId, block: { (activity, error) -> Void in
                 if error == nil {
                     activity.setObject(false, forKey: "isVisibleToUsers")
                     activity.setObject(false, forKey: "isRegistrationOpen")
-                    activity.updateInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
+                    activity.saveInBackgroundWithBlock({ (isSuccessful, error) -> Void in
                         if error == nil {
                             self.parentViewController.refresh()
                             let alert = UIAlertController(title: "Remix提示", message: "活动已下架。现在你可以申请提取活动报名费到账户。", preferredStyle: .Alert)

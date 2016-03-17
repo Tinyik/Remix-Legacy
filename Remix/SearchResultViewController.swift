@@ -19,7 +19,7 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
     var labelImageURLs: [NSURL] = []
     var labelImageURL: NSURL!
     var labelNames: [String] = []
-    var activities: [BmobObject] = []
+    var activities: [AVObject] = []
     var coverImgURLs: [NSURL] = []
     var likedActivitiesIds: [String] = []
     
@@ -53,7 +53,7 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
     }
     
     func fetchTrendingLabels() {
-        let query = BmobQuery(className: "TrendingLabel")
+        let query = AVQuery(className: "TrendingLabel")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.findObjectsInBackgroundWithBlock { (labels, error) -> Void in
@@ -62,7 +62,7 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
                     for label in labels {
                         let labelName = label.objectForKey("Label") as! String
                         
-                        let labelFile = label.objectForKey("Image") as! BmobFile
+                        let labelFile = label.objectForKey("Image") as! AVFile
                         let labelImageURL = NSURL(string: labelFile.url)!
                         self.labelNames.append(labelName)
                         self.labelImageURLs.append(labelImageURL)
@@ -84,14 +84,14 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
     func fetchSearchResults() {
         activities = []
         coverImgURLs = []
-        let query = BmobQuery(className: "Activity")
+        let query = AVQuery(className: "Activity")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("isFloatingActivity", equalTo: false)
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
             if error == nil{
                 if activities.count > 0 {
                     for activity in activities {
-                        let coverImg = activity.objectForKey("CoverImg") as! BmobFile
+                        let coverImg = activity.objectForKey("CoverImg") as! AVFile
                         let imageURL = NSURL(string:coverImg.url)!
                         
                         let org = activity.objectForKey("Org") as! String
@@ -99,7 +99,7 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
                         let description = activity.objectForKey("Description") as! String
                         
                         if org.rangeOfString(self.searchBar.text!, options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil) != nil || title.rangeOfString(self.searchBar.text!, options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil) != nil || description.rangeOfString(self.searchBar.text!, options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil) != nil  {
-                            self.activities.append(activity as! BmobObject)
+                            self.activities.append(activity as! AVObject)
                             self.coverImgURLs.append(imageURL)
                         }
                         
@@ -181,12 +181,12 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
             cell.fullImageView.sd_setImageWithURL(coverImgURLs[indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
             let _objId = activities[indexPath.row].objectId
             cell.objectId = _objId
-            let query = BmobQuery(className: "Organization")
+            let query = AVQuery(className: "Organization")
             query.whereKey("Name", equalTo: cell.orgLabel.text)
             query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
                 if error == nil {
                     for org in organizations {
-                        let url = NSURL(string: (org.objectForKey("Logo") as! BmobFile).url)
+                        let url = NSURL(string: (org.objectForKey("Logo") as! AVFile).url)
                         cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                     }
                 }else{
@@ -233,12 +233,12 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
         cell.themeImg.sd_setImageWithURL(coverImgURLs[indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
         let _objId = activities[indexPath.row].objectId
         cell.objectId = _objId
-        let query = BmobQuery(className: "Organization")
+        let query = AVQuery(className: "Organization")
         query.whereKey("Name", equalTo: cell.orgLabel.text)
         query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
             if error == nil {
                 for org in organizations {
-                    let url = NSURL(string: (org.objectForKey("Logo") as! BmobFile).url)
+                    let url = NSURL(string: (org.objectForKey("Logo") as! AVFile).url)
                     cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                 }
             }else{
@@ -257,9 +257,9 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
 
     }
     
-    func reloadRowForActivity(activity: BmobObject) {
+    func reloadRowForActivity(activity: AVObject) {
         fetchLikedActivitiesList()
-        let query = BmobQuery(className: "Activity")
+        let query = AVQuery(className: "Activity")
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.getObjectInBackgroundWithId(activity.objectId) { (activity, error) -> Void in
             if error == nil {
@@ -343,13 +343,13 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
         searchBar.resignFirstResponder()
         if tableView == self.tableView {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            var query = BmobQuery(className: "Activity")
+            var query = AVQuery(className: "Activity")
             query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
             let objectId = activities[indexPath.row].objectId
             query.getObjectInBackgroundWithId(objectId) { (activity, error) -> Void in
                 if error == nil {
                     activity.incrementKey("PageView", byAmount: 1)
-                    activity.updateInBackground()
+                    activity.saveInBackground()
                 }else{
                     let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
                     snackBar.backgroundColor = FlatWatermelonDark()

@@ -15,12 +15,12 @@ class RemixPassView: UIView {
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var creditLabel: UILabel!
     @IBOutlet weak var passNumberLabel: UILabel!
-    var user: BmobUser!
+    var user: AVUser!
 //    let alphebat = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
     func fetchUserInfo() {
         backgroundView.contentMode = .ScaleAspectFill
         holderLabel.textColor = UIColor(red: 1, green: 225/255, blue: 72/255, alpha: 1)
-        if let avatar = user.objectForKey("Avatar") as? BmobFile {
+        if let avatar = user.objectForKey("Avatar") as? AVFile {
             let url = NSURL(string: avatar.url)
             backgroundView.sd_setImageWithURL(url)
         }else{

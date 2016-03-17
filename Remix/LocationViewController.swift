@@ -12,7 +12,7 @@ import TTGSnackbar
 class LocationViewController: UITableViewController {
     
     var photoURLArray: [[NSURL]] = []
-    var locationObjects: [BmobObject] = []
+    var locationObjects: [AVObject] = []
     let photoKeys = ["Pic0", "Pic1", "Pic2", "Pic3", "Pic4", "Pic5", "Pic6", "Pic7", "Pic8"]
     
     override func viewDidLoad() {
@@ -33,7 +33,7 @@ class LocationViewController: UITableViewController {
     
     func fetchCloudData() {
         
-        let query = BmobQuery(className: "Location")
+        let query = AVQuery(className: "Location")
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.findObjectsInBackgroundWithBlock { (locationObjects, error) -> Void in
@@ -44,7 +44,7 @@ class LocationViewController: UITableViewController {
                         var imageURLs:[NSURL] = []
                         for key in self.photoKeys {
                             
-                            if let imageFile = location.objectForKey(key) as? BmobFile {
+                            if let imageFile = location.objectForKey(key) as? AVFile {
                                 let imageURL = NSURL(string: imageFile.url)!
                                 
                                 imageURLs.append(imageURL)
@@ -52,7 +52,7 @@ class LocationViewController: UITableViewController {
                         }
                         
                         self.photoURLArray.append(imageURLs)
-                        self.locationObjects.append(location as! BmobObject)
+                        self.locationObjects.append(location as! AVObject)
                         
                         
                     }
@@ -129,14 +129,14 @@ class LocationViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         
-        let query = BmobQuery(className: "Location")
+        let query = AVQuery(className: "Location")
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         let objectId = locationObjects[indexPath.row].objectId
         sharedOneSignalInstance.sendTag(objectId, value: "LocationVisited")
         query.getObjectInBackgroundWithId(objectId) { (locationObject, error) -> Void in
             if error == nil {
                 locationObject.incrementKey("PageView", byAmount: 1)
-                locationObject.updateInBackground()
+                locationObject.saveInBackground()
             }else{
                 let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
                 snackBar.backgroundColor = FlatWatermelonDark()

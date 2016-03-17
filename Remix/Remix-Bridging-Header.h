@@ -2,7 +2,8 @@
 //  Use this file to import your target's public headers that you would like to expose to Swift.
 //
 
-#import <BmobSDK/Bmob.h>
+//#import <BmobSDK/Bmob.h>
+#import <AVOSCloud/AVOSCloud.h>
 #import <BmobPay/BmobPay.h>
 #import <OneSignal/OneSignal.h>
 #import "UIScrollView+EmptyDataSet.h"

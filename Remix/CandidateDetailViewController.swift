@@ -12,8 +12,8 @@ import TTGSnackbar
 
 class CandidateDetailViewController: UITableViewController, MFMessageComposeViewControllerDelegate {
     
-    var customer: BmobUser!
-    var order: BmobObject!
+    var customer: AVUser!
+    var order: AVObject!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = customer.objectForKey("LegalName") as! String

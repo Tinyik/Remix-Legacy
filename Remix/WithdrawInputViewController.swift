@@ -25,22 +25,22 @@ class WithdrawInputViewController: UIViewController {
         if hasRequestedWithdrawal == false {
             let alert = UIAlertController(title: "Remix提示", message: "你是否确认提款至支付宝账户: " + inputField.text! + "?", preferredStyle: .Alert)
             let action = UIAlertAction(title: "好的", style: .Default, handler: { (action) -> Void in
-                let newRequest = BmobObject(className: "WithdrawalRequest")
+                let newRequest = AVObject(className: "WithdrawalRequest")
                 newRequest.setObject(false, forKey: "isResponded")
                 newRequest.setObject(self.inputField.text, forKey: "TargetAccount")
                 newRequest.setObject(self.amount, forKey: "Amount")
                 newRequest.setObject(CURRENT_USER.objectId, forKey: "Submitter")
                 newRequest.setObject(self.activityObjectId, forKey: "ActivityObjectId")
                 newRequest.setObject(CURRENT_USER.mobilePhoneNumber, forKey: "Contact")
-                newRequest.saveInBackgroundWithResultBlock { (isSuccessful, error) -> Void in
+                newRequest.saveInBackgroundWithBlock { (isSuccessful, error) -> Void in
                     if error == nil {
                     
-                        let query = BmobQuery(className: "Activity")
+                        let query = AVQuery(className: "Activity")
                         query.getObjectInBackgroundWithId(self.activityObjectId, block: { (activity, error) -> Void in
                             if error == nil {
                            
                                 activity.setObject(true, forKey: "hasRequestedWithdrawal")
-                                activity.updateInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
+                                activity.saveInBackgroundWithBlock({ (isSuccessful, error) -> Void in
                                     if error == nil {
                                    
                                         let alert = UIAlertController(title: "Remix提示", message: "提现申请已提交。我们将尽快受理你的申请。", preferredStyle: .Alert)
@@ -66,14 +66,14 @@ class WithdrawInputViewController: UIViewController {
         }else{
             let alert = UIAlertController(title: "Remix提示", message: "你是否确认更改提款账户为: " + inputField.text! + "?", preferredStyle: .Alert)
             let action = UIAlertAction(title: "好的", style: .Default, handler: { (action) -> Void in
-                let query = BmobQuery(className: "WithdrawalRequest")
+                let query = AVQuery(className: "WithdrawalRequest")
                 query.whereKey("ActivityObjectId", equalTo: self.activityObjectId)
                 query.findObjectsInBackgroundWithBlock({ (requests, error) -> Void in
                     if error == nil {
                         if requests.count == 1 {
-                            if (requests[0] as! BmobObject).objectForKey("isResponded") as! Bool == false{
-                                (requests[0] as! BmobObject).setObject(self.inputField.text, forKey: "TargetAccount")
-                                (requests[0] as! BmobObject).updateInBackgroundWithResultBlock({ (isSuccessfor, error) -> Void in
+                            if (requests[0] as! AVObject).objectForKey("isResponded") as! Bool == false{
+                                (requests[0] as! AVObject).setObject(self.inputField.text, forKey: "TargetAccount")
+                                (requests[0] as! AVObject).saveInBackgroundWithBlock({ (isSuccessfor, error) -> Void in
                                     if error == nil {
                               
                                         let alert = UIAlertController(title: "Remix提示", message: "提现申请修改成功。我们将尽快受理你的申请。", preferredStyle: .Alert)

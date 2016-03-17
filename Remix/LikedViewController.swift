@@ -36,7 +36,7 @@ class LikedViewController: CTFilteredViewController {
         
     
         
-        var query = BmobQuery(className: "Activity")
+        var query = AVQuery(className: "Activity")
     
         fetchLikedActivitiesList()
         
@@ -45,7 +45,7 @@ class LikedViewController: CTFilteredViewController {
             query.getObjectInBackgroundWithId(likedActivityId, block: { (activity, error) -> Void in
                 if error == nil {
                     if activity != nil {
-                        let coverImg = activity.objectForKey("CoverImg") as! BmobFile
+                        let coverImg = activity.objectForKey("CoverImg") as! AVFile
                         let imageURL = NSURL(string:coverImg.url)!
                         
                         let dateString = activity.objectForKey("Date") as! String
@@ -53,7 +53,7 @@ class LikedViewController: CTFilteredViewController {
                         
                         if self.isMonthAdded(monthName) == false {
                             self.monthNameStrings.append(monthName)
-                            self.activities.append([activity as BmobObject])
+                            self.activities.append([activity as AVObject])
                             self.coverImgURLs.append([imageURL])
                         } else {
                             
@@ -61,7 +61,7 @@ class LikedViewController: CTFilteredViewController {
                                 
                                 ($0[0].objectForKey("Date") as! String).componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2] == monthName})
                             {
-                                self.activities[index].append(activity as BmobObject)
+                                self.activities[index].append(activity as AVObject)
                                 self.coverImgURLs[index].append(imageURL)
                             }
                             

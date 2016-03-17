@@ -148,7 +148,7 @@ class LocationSubmissionViewController: FormViewController {
     func submitLocation() {
         let attr = self.form.values()
         if checkInformationIntegrity() {
-            let newActivity = BmobObject(className: "Location")
+            let newActivity = AVObject(className: "Location")
             if attr["isCoordinator"]! as! Bool == true {
                
                 var selectedCities: [String] = []
@@ -159,7 +159,7 @@ class LocationSubmissionViewController: FormViewController {
                     }
                 }
                 selectedCities.insert("全国", atIndex: 0)
-                newActivity.setObject(BmobUser.getCurrentUser().objectId, forKey: "Submitter")
+                newActivity.setObject(AVUser.currentUser().objectId, forKey: "Submitter")
                 newActivity.setObject("店主提交: " + (attr["Title"]! as! String), forKey: "Title")
                 newActivity.setObject(attr["Org"] as! String, forKey: "Org")
                 newActivity.setObject(String(attr["URL"]! as! NSURL), forKey: "URL")
@@ -185,7 +185,7 @@ class LocationSubmissionViewController: FormViewController {
                
             }else{
                 var selectedCities: [String] = []
-                let newActivity = BmobObject(className: "Location")
+                let newActivity = AVObject(className: "Location")
                 newActivity.setObject(false, forKey: "isVisibleToUsers")
                 for option in cities {
                     if attr[option]! != nil{
@@ -193,7 +193,7 @@ class LocationSubmissionViewController: FormViewController {
                     }
                 }
                 selectedCities.insert("全国", atIndex: 0)
-                newActivity.setObject(BmobUser.getCurrentUser().objectId, forKey: "Submitter")
+                newActivity.setObject(AVUser.currentUser().objectId, forKey: "Submitter")
                 newActivity.setObject("用户提交: " + (attr["Title"]! as! String), forKey: "Title")
                 newActivity.setObject(attr["Org"] as! String, forKey: "Org")
                 newActivity.setObject(String(attr["URL"]! as! NSURL), forKey: "URL")
@@ -210,19 +210,19 @@ class LocationSubmissionViewController: FormViewController {
                 for var i = 0; i <= 8; ++i {
                     if let image = attr["Pic" + String(i)]! as? UIImage {
                         let imageData = UIImageJPEGRepresentation(image, 0.5)
-                        let imageFile = BmobFile(fileName: "Image.jpg", withFileData: imageData)
+                        let imageFile = AVFile(name: "Image.jpg", data: imageData)
                         if imageFile.save() {
                             newActivity.setObject(imageFile, forKey: "Pic" + String(i))
                         }
                         
                     }
                 }
-                newActivity.saveInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
+                newActivity.saveInBackgroundWithBlock({ (isSuccessful, error) -> Void in
                     if error == nil {
                         sharedOneSignalInstance.sendTag(attr["Title"] as! String, value: "LocationSubmitted")
                         let c = CURRENT_USER.objectForKey("Credit") as! Int
                         CURRENT_USER.setObject(c+50, forKey: "Credit")
-                        CURRENT_USER.updateInBackground()
+                        CURRENT_USER.saveInBackground()
                         let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
                         notif.promptUserCreditUpdate("50", inContext: "添加地点")
 
@@ -240,12 +240,12 @@ class LocationSubmissionViewController: FormViewController {
                     }
                 })
             }else{
-                newActivity.saveInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
+                newActivity.saveInBackgroundWithBlock({ (isSuccessful, error) -> Void in
                     if error == nil {
                         sharedOneSignalInstance.sendTag(attr["Title"] as! String, value: "LocationSubmitted")
                         let c = CURRENT_USER.objectForKey("Credit") as! Int
                         CURRENT_USER.setObject(c+50, forKey: "Credit")
-                        CURRENT_USER.updateInBackground()
+                        CURRENT_USER.saveInBackground()
                         let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
                         notif.promptUserCreditUpdate("50", inContext: "添加地点")
 
@@ -282,10 +282,10 @@ class LocationSubmissionViewController: FormViewController {
     
     func setUpParallaxHeaderView() {
         let manager = SDWebImageManager()
-        let query = BmobQuery(className: "UIRemoteConfig")
+        let query = AVQuery(className: "UIRemoteConfig")
         query.getObjectInBackgroundWithId("Cd3f1112") { (remix, error) -> Void in
             if error == nil {
-                let url = NSURL(string: (remix.objectForKey("LocationSubm_Image") as! BmobFile).url)
+                let url = NSURL(string: (remix.objectForKey("LocationSubm_Image") as! AVFile).url)
                 manager.downloadImageWithURL(url, options: .RetryFailed, progress: nil) { (image, error, type, bool, url) -> Void in
                     let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(image, forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.width/2)) as! ParallaxHeaderView
                     self.tableView!.tableHeaderView = headerView
@@ -310,7 +310,7 @@ class LocationSubmissionViewController: FormViewController {
     }
     
     func fetchCloudData() {
-        let query = BmobQuery(className: "SupportedCities")
+        let query = AVQuery(className: "SupportedCities")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.findObjectsInBackgroundWithBlock({ (cities, error) -> Void in
             if error == nil {

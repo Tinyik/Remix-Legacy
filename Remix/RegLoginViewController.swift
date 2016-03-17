@@ -57,7 +57,6 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
         
         phoneNumberField = UITextField(frame: CGRectMake(10.0, 6.0, phoneNumberFieldWidth, 40.0))
         phoneNumberField.returnKeyType = .Send
-//        phoneNumberField.backgroundColor = UIColor(patternImage: UIImage(named: "PhoneBG")!)
         phoneNumberField.backgroundColor = UIColor(white: 0, alpha: 0.45)
         phoneNumberField.layer.cornerRadius = 20
         phoneNumberField.attributedPlaceholder = NSAttributedString(string: "输入手机号", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
@@ -68,7 +67,6 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
         
         captchaField = UITextField(frame: CGRectMake(10.0, 53.0, 178, 40.0))
         captchaField.returnKeyType = .Done
-//        captchaField.backgroundColor = UIColor(patternImage: UIImage(named: "CodeBG")!)
         captchaField.backgroundColor = UIColor(white: 0, alpha: 0.45)
         captchaField.layer.cornerRadius = 20
         captchaField.attributedPlaceholder = NSAttributedString(string: "输入验证码", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
@@ -125,7 +123,7 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
     
     func inputCaptcha() {
         if phoneNumberField.text == "AppStoreDEMO" {
-            BmobUser.loginInbackgroundWithAccount("appstoredemo", andPassword: "demo", block: { (user, error) -> Void in
+            AVUser.logInWithUsernameInBackground("appstoredemo", password: "demo", block: { (user, error) -> Void in
                 if error == nil {
                     CURRENT_USER = user
                     self.view.removeKeyboardControl()
@@ -151,8 +149,8 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
 
             })
         }else{
-            
-       BmobSMS.requestSMSCodeInBackgroundWithPhoneNumber(phoneNumberField.text, andTemplate: nil) { (number, error) -> Void in
+    
+       AVOSCloud.requestSmsCodeWithPhoneNumber(phoneNumberField.text, callback: { (isSuccessful, error) -> Void in
         if error == nil {
             self.nextStepButton.userInteractionEnabled = false
             self.phoneNumberField.resignFirstResponder()
@@ -167,6 +165,7 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
             }
 
         }else{
+            print(error.description)
             let alert = UIAlertController(title: nil, message: "诶？手机号格式好像有错误😣", preferredStyle: .Alert)
             let okButton = UIAlertAction(title: "重试", style: .Cancel, handler: nil)
             alert.addAction(okButton)
@@ -174,7 +173,7 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
 
         }
         
-        }
+            })
         }
         
     }
@@ -192,21 +191,21 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
     }
     
     func verifyCaptcha() {
-        BmobUser.signOrLoginInbackgroundWithMobilePhoneNumber(phoneNumberField.text, andSMSCode: captchaField.text) { (_user, error) -> Void in
+        AVUser.signUpOrLoginWithMobilePhoneNumberInBackground(phoneNumberField.text, smsCode: captchaField.text) { (_user, error) -> Void in
             if error == nil {
                 self.view.removeKeyboardControl()
                 CURRENT_USER = _user
                 if _user.objectForKey("City") == nil {
                     CURRENT_USER.setObject("全国", forKey: "City")
-                    CURRENT_USER.updateInBackground()
+                    CURRENT_USER.saveInBackground()
                 }
                 if _user.objectForKey("Credit") == nil {
                     CURRENT_USER.setObject(0, forKey: "Credit")
-                    CURRENT_USER.updateInBackground()
+                    CURRENT_USER.saveInBackground()
                 }
                 if _user.objectForKey("Balance") == nil {
                     CURRENT_USER.setObject(0, forKey: "Balance")
-                    CURRENT_USER.updateInBackground()
+                    CURRENT_USER.saveInBackground()
                 }
                 REMIX_CITY_NAME = CURRENT_USER.objectForKey("City") as! String
                 sharedOneSignalInstance.sendTag("City", value: REMIX_CITY_NAME)

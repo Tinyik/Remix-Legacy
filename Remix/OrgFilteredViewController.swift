@@ -16,7 +16,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
     @IBOutlet weak var tableView: UITableView!
     
     var coverImgURLs: [[NSURL]] = []
-    var activities: [[BmobObject]] = []
+    var activities: [[AVObject]] = []
     var monthNameStrings: [String] = []
     var dateLabel: UILabel!
     var likedActivitiesIds: [String] = []
@@ -87,7 +87,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         activities = []
         
         
-        let query = BmobQuery(className: "Activity")
+        let query = AVQuery(className: "Activity")
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.whereKey("Org", equalTo: orgName)
         query.whereKey("isVisibleToUsers", equalTo: true)
@@ -98,7 +98,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
                 if activities.count > 0 {
                     for activity in activities {
                         
-                        let coverImg = activity.objectForKey("CoverImg") as! BmobFile
+                        let coverImg = activity.objectForKey("CoverImg") as! AVFile
                         let imageURL = NSURL(string:coverImg.url)!
                         
                         let dateString = activity.objectForKey("Date") as! String
@@ -107,7 +107,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
                         
                         if self.isMonthAdded(monthName) == false {
                             self.monthNameStrings.append(monthName)
-                            self.activities.append([activity as! BmobObject])
+                            self.activities.append([activity as! AVObject])
                             self.coverImgURLs.append([imageURL])
                         } else {
                             
@@ -115,7 +115,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
                                 
                                 ($0[0].objectForKey("Date") as! String).componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2] == monthName})
                             {
-                                self.activities[index].append(activity as! BmobObject)
+                                self.activities[index].append(activity as! AVObject)
                                 self.coverImgURLs[index].append(imageURL)
                             }
                             
@@ -141,9 +141,9 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
    
-    func reloadRowForActivity(activity: BmobObject) {
+    func reloadRowForActivity(activity: AVObject) {
         fetchLikedActivitiesList()
-        let query = BmobQuery(className: "Activity")
+        let query = AVQuery(className: "Activity")
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.getObjectInBackgroundWithId(activity.objectId) { (activity, error) -> Void in
             if error == nil {
@@ -175,7 +175,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func setParallaxHeaderImage() {
-        let query = BmobQuery(className: "Organization")
+        let query = AVQuery(className: "Organization")
         query.whereKey("Name", equalTo: orgName)
         query.findObjectsInBackgroundWithBlock { (organizations, error) -> Void in
             if error == nil {
@@ -197,7 +197,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
                         
                     }
 
-                    if let urlString = org.objectForKey("HomePageCoverImage") as? BmobFile {
+                    if let urlString = org.objectForKey("HomePageCoverImage") as? AVFile {
                         let url = NSURL(string: urlString.url)
                         let manager = SDWebImageManager()
                         manager.downloadImageWithURL(url, options: .RetryFailed, progress: nil) { (image, error, cachetype, finished, url) -> Void in
@@ -211,7 +211,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
                             }
                         }
                     }else {
-                        if let urlString = org.objectForKey("Logo") as? BmobFile {
+                        if let urlString = org.objectForKey("Logo") as? AVFile {
                             let url = NSURL(string: urlString.url)
                             let manager = SDWebImageManager()
                             manager.downloadImageWithURL(url, options: .RetryFailed, progress: nil) { (image, error, cachetype, finished, url) -> Void in
@@ -341,12 +341,12 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
             cell.fullImageView.sd_setImageWithURL(coverImgURLs[indexPath.section][indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
             let _objId = activities[indexPath.section][indexPath.row].objectId
             cell.objectId = _objId
-            let query = BmobQuery(className: "Organization")
+            let query = AVQuery(className: "Organization")
             query.whereKey("Name", equalTo: cell.orgLabel.text)
             query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
                 if error == nil {
                     for org in organizations {
-                        let url = NSURL(string: (org.objectForKey("Logo") as! BmobFile).url)
+                        let url = NSURL(string: (org.objectForKey("Logo") as! AVFile).url)
                         cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                     }
                 }else{
@@ -392,12 +392,12 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
         cell.themeImg.sd_setImageWithURL(coverImgURLs[indexPath.section][indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
         let _objId = activities[indexPath.section][indexPath.row].objectId
         cell.objectId = _objId
-        let query = BmobQuery(className: "Organization")
+        let query = AVQuery(className: "Organization")
         query.whereKey("Name", equalTo: cell.orgLabel.text)
         query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
             if error == nil {
                 for org in organizations {
-                    let url = NSURL(string: (org.objectForKey("Logo") as! BmobFile).url)
+                    let url = NSURL(string: (org.objectForKey("Logo") as! AVFile).url)
                     cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                 }
             }else{
@@ -418,13 +418,13 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let query = BmobQuery(className: "Activity")
+        let query = AVQuery(className: "Activity")
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         let objectId = activities[indexPath.section][indexPath.row].objectId
         query.getObjectInBackgroundWithId(objectId) { (activity, error) -> Void in
             if error == nil {
                 activity.incrementKey("PageView", byAmount: 1)
-                activity.updateInBackground()
+                activity.saveInBackground()
             }else{
                 let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
                 snackBar.backgroundColor = FlatWatermelonDark()

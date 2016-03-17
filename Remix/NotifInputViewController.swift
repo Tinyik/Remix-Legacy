@@ -22,14 +22,14 @@ class NotifInputViewController: UIViewController, UITextViewDelegate {
 
     
     @IBAction func submitNotifRequest(sender: AnyObject) {
-        let newRequest = BmobObject(className: "NotificationRequest")
+        let newRequest = AVObject(className: "NotificationRequest")
         newRequest.setObject(objectId, forKey: "ActivityObjectId")
-        newRequest.setObject(CURRENT_USER.objectId, forKey: "RequestSubmitter")
+        newRequest.setObject(CURRENT_USER.objectId, forKey: "Submitter")
         newRequest.setObject(notifInputView.text, forKey: "Message")
         if urlInputView.text != nil {
             newRequest.setObject(urlInputView.text, forKey: "TargetURL")
         }
-        newRequest.saveInBackgroundWithResultBlock { (isSuccessful, error) -> Void in
+        newRequest.saveInBackgroundWithBlock { (isSuccessful, error) -> Void in
             if error == nil {
                 let alert = UIAlertController(title: "申请已提交", message: "我们将在30分钟内为你送出该条推送消息。", preferredStyle: .Alert)
                  let action = UIAlertAction(title: "好的", style: .Default, handler: { (action) -> Void in

@@ -131,7 +131,7 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
             self.cityLabel.sizeToFit()
         }
         self.view.userInteractionEnabled = false
-        let query = BmobQuery(className: "SupportedCities")
+        let query = AVQuery(className: "SupportedCities")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.findObjectsInBackgroundWithBlock { (cities, error) -> Void in
             self.cityLabel.text = REMIX_CITY_NAME
@@ -164,7 +164,7 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
         if buttonIndex == cityNameArray.count {
             REMIX_CITY_NAME = "全国"
             CURRENT_USER.setObject(REMIX_CITY_NAME, forKey: "City")
-            CURRENT_USER.updateInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
+            CURRENT_USER.saveInBackgroundWithBlock({ (isSuccessful, error) -> Void in
                 if error == nil {
                     sharedOneSignalInstance.sendTag("City", value: REMIX_CITY_NAME)
                 }else{
@@ -183,7 +183,7 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
         }else if buttonIndex != cityNameArray.count + 2{
             REMIX_CITY_NAME = cityNameArray[buttonIndex]
             CURRENT_USER.setObject(REMIX_CITY_NAME, forKey: "City")
-            CURRENT_USER.updateInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
+            CURRENT_USER.saveInBackgroundWithBlock({ (isSuccessful, error) -> Void in
                 if error == nil {
                     sharedOneSignalInstance.sendTag("City", value: REMIX_CITY_NAME)
                 }else{

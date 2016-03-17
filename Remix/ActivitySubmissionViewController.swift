@@ -13,7 +13,7 @@ import SDWebImage
 
 class ActivitySubmissionViewController: FormViewController {
     
-    var cates: [BmobObject] = []
+    var cates: [AVObject] = []
     var cities: [String] = []
     var isModal = true
     override func viewDidLoad() {
@@ -217,7 +217,7 @@ class ActivitySubmissionViewController: FormViewController {
                 print(attr)
                 var selectedCates: [String] = []
                 var selectedCities: [String] = []
-                let newActivity = BmobObject(className: "Activity")
+                let newActivity = AVObject(className: "Activity")
                 newActivity.setObject(false, forKey: "isVisibleToUsers")
                 for option in cates {
                     if attr[option.objectForKey("DisplayName") as! String]! != nil{
@@ -237,7 +237,7 @@ class ActivitySubmissionViewController: FormViewController {
                     newActivity.setObject(false, forKey: "hasWithdrawn")
                     newActivity.setObject(false, forKey: "hasRequestedWithdrawal")
                     newActivity.setObject(true, forKey: "isHeldBySubmitter")
-                    newActivity.setObject(BmobUser.getCurrentUser().objectId, forKey: "Submitter")
+                    newActivity.setObject(AVUser.currentUser().objectId, forKey: "Submitter")
                     newActivity.setObject(attr["ItemName"]! as! String, forKey: "ItemName")
                     newActivity.setObject("主办方提交:" + (attr["Title"]! as! String), forKey: "Title")
                     newActivity.setObject(attr["Org"] as! String, forKey: "Org")
@@ -245,8 +245,8 @@ class ActivitySubmissionViewController: FormViewController {
                     newActivity.setObject(attr["Price"]! as! Double, forKey: "Price")
                     newActivity.setObject(attr["Description"]! as! String, forKey: "Description")
                     newActivity.setObject(attr["Duration"] as! String, forKey: "Duration")
-                    newActivity.setObject(BmobUser.getCurrentUser().mobilePhoneNumber, forKey: "Contact")
-                    newActivity.setObject(BmobUser.getCurrentUser().objectForKey("LegalName") as! String, forKey: "ContactName")
+                    newActivity.setObject(AVUser.currentUser().mobilePhoneNumber, forKey: "Contact")
+                    newActivity.setObject(AVUser.currentUser().objectForKey("LegalName") as! String, forKey: "ContactName")
                     newActivity.setObject(0, forKey: "LikesNumber")
                     newActivity.setObject(0, forKey: "PageView")
                 if attr["isRecurring"]! as! Bool == false {
@@ -280,16 +280,16 @@ class ActivitySubmissionViewController: FormViewController {
                 newActivity.setObject(selectedCities, forKey: "Cities")
                 if attr["CoverImg"]! != nil {
                     let imageData = UIImageJPEGRepresentation(attr["CoverImg"]! as! UIImage, 0.5)
-                    let newImage = BmobFile(fileName: "CoverImg.jpg", withFileData: imageData!)
-                    newImage.saveInBackground { (isSuccessful, error) -> Void in
+                    let newImage = AVFile(name: "CoverImg.jpg", data: imageData!)
+                    newImage.saveInBackgroundWithBlock { (isSuccessful, error) -> Void in
                         if isSuccessful {
                             newActivity.setObject(newImage, forKey: "CoverImg")
-                            newActivity.saveInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
+                            newActivity.saveInBackgroundWithBlock({ (isSuccessful, error) -> Void in
                                 if error == nil {
                                     sharedOneSignalInstance.sendTag(attr["Title"] as! String, value: "ActivitySubmitted")
                                     let c = CURRENT_USER.objectForKey("Credit") as! Int
                                     CURRENT_USER.setObject(c+50, forKey: "Credit")
-                                    CURRENT_USER.updateInBackground()
+                                    CURRENT_USER.saveInBackground()
                                     let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
                                     notif.promptUserCreditUpdate("50", inContext: "组织活动")
                                     let alert = UIAlertController(title: "Remix提示", message: "活动添加成功。谢谢你对Remix的支持_(:з」∠)_。审核通过后我们将给你发送推送消息。你可以在 \"个人中心 - 我发起的活动\"中查看审核状态并管理活动报名者。", preferredStyle: .Alert)
@@ -312,6 +312,7 @@ class ActivitySubmissionViewController: FormViewController {
 
                             })
                         }else{
+
                             let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
                             snackBar.backgroundColor = FlatWatermelonDark()
                             snackBar.show()
@@ -324,7 +325,7 @@ class ActivitySubmissionViewController: FormViewController {
 
                 var selectedCates: [String] = []
                 var selectedCities: [String] = []
-                let newActivity = BmobObject(className: "Activity")
+                let newActivity = AVObject(className: "Activity")
                 newActivity.setObject(false, forKey: "isVisibleToUsers")
                 for option in cates {
                     if attr[option.objectForKey("DisplayName") as! String]! != nil{
@@ -344,7 +345,7 @@ class ActivitySubmissionViewController: FormViewController {
                 newActivity.setObject(false, forKey: "hasWithdrawn")
                 newActivity.setObject(false, forKey: "hasRequestedWithdrawal")
                 newActivity.setObject(false, forKey: "isHeldBySubmitter")
-                newActivity.setObject(BmobUser.getCurrentUser().objectId, forKey: "Submitter")
+                newActivity.setObject(AVUser.currentUser().objectId, forKey: "Submitter")
                 newActivity.setObject("用户提交", forKey: "Title")
                 selectedCities.insert("全国", atIndex: 0)
                 newActivity.setObject(selectedCates, forKey: "Category")
@@ -381,12 +382,12 @@ class ActivitySubmissionViewController: FormViewController {
                 
                 newActivity.setObject(selectedCates, forKey: "Category")
                 newActivity.setObject(selectedCities, forKey: "Cities")
-                newActivity.saveInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
+                newActivity.saveInBackgroundWithBlock({ (isSuccessful, error) -> Void in
                     if error == nil {
                         sharedOneSignalInstance.sendTag(attr["Description"] as! String, value: "ActivitySubmitted")
                         let c = CURRENT_USER.objectForKey("Credit") as! Int
                         CURRENT_USER.setObject(c+50, forKey: "Credit")
-                        CURRENT_USER.updateInBackground()
+                        CURRENT_USER.saveInBackground()
                         let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
                         notif.promptUserCreditUpdate("50", inContext: "添加活动")
                         let alert = UIAlertController(title: "Remix提示", message: "活动添加成功。谢谢你对Remix的支持_(:з」∠)_。审核通过后我们将给你发送推送消息。", preferredStyle: .Alert)
@@ -417,10 +418,10 @@ class ActivitySubmissionViewController: FormViewController {
 
     func setUpParallaxHeaderView() {
             let manager = SDWebImageManager()
-            let query = BmobQuery(className: "UIRemoteConfig")
+            let query = AVQuery(className: "UIRemoteConfig")
             query.getObjectInBackgroundWithId("Cd3f1112") { (remix, error) -> Void in
                 if error == nil {
-                    let url = NSURL(string: (remix.objectForKey("ActivitySubm_Image") as! BmobFile).url)
+                    let url = NSURL(string: (remix.objectForKey("ActivitySubm_Image") as! AVFile).url)
                     manager.downloadImageWithURL(url, options: .RetryFailed, progress: nil) { (image, error, type, bool, url) -> Void in
                         let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(image, forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.width/2)) as! ParallaxHeaderView
                         self.tableView!.tableHeaderView = headerView
@@ -437,12 +438,12 @@ class ActivitySubmissionViewController: FormViewController {
        
     }
     func fetchCloudData() {
-        let query = BmobQuery(className: "Category")
+        let query = AVQuery(className: "Category")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.findObjectsInBackgroundWithBlock { (cates, error) -> Void in
             if error == nil {
                 for cate in cates {
-                    self.cates.append(cate as! BmobObject)
+                    self.cates.append(cate as! AVObject)
                 }
                 
                 self.form +++ SelectableSection<ImageCheckRow<String>, String>("活动分类（可多选）", selectionType: .MultipleSelection)
@@ -458,7 +459,7 @@ class ActivitySubmissionViewController: FormViewController {
                     $0.title = "其他类别"
                     
                 }
-            let query = BmobQuery(className: "SupportedCities")
+            let query = AVQuery(className: "SupportedCities")
                 query.whereKey("isVisibleToUsers", equalTo: true)
                 query.findObjectsInBackgroundWithBlock({ (cities, error) -> Void in
                     if error == nil {

@@ -10,7 +10,7 @@ import UIKit
 
 class WithdrawalRecordViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     
-    var records: [BmobObject] = []
+    var records: [AVObject] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchCloudData()
@@ -30,14 +30,14 @@ class WithdrawalRecordViewController: UITableViewController, DZNEmptyDataSetDele
     
     func fetchCloudData() {
         records = []
-        let query = BmobQuery(className: "WithdrawalRequest")
+        let query = AVQuery(className: "WithdrawalRequest")
         query.whereKey("Submitter", equalTo: CURRENT_USER.objectId)
         query.findObjectsInBackgroundWithBlock { (records, error) -> Void in
             if error == nil {
            
                 for record in records {
                  
-                    self.records.append(record as! BmobObject)
+                    self.records.append(record as! AVObject)
                 }
                 self.tableView.reloadData()
             }

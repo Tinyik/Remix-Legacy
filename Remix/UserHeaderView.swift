@@ -14,7 +14,7 @@ class UserHeaderView: UIView {
     @IBOutlet weak var avatarView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     
-    var user: BmobUser!
+    var user: AVUser!
     override func awakeFromNib() {
         print("AWAKE")
         blurredAvatarView.contentMode = .ScaleAspectFill
@@ -29,7 +29,7 @@ class UserHeaderView: UIView {
     
     func fetchUserInfo() {
         userNameLabel.text = user.username
-        if let avatar = user.objectForKey("Avatar") as? BmobFile {
+        if let avatar = user.objectForKey("Avatar") as? AVFile {
             let avatarURL = NSURL(string:avatar.url)
             let manager = SDWebImageManager()
             manager.downloadImageWithURL(avatarURL, options: SDWebImageOptions.RetryFailed, progress: nil) { (avatar, error, cacheType, finished, url) -> Void in

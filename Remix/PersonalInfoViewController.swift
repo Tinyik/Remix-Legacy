@@ -94,6 +94,21 @@ class PersonalInfoViewController: UITableViewController {
         }else{
             cell.detailLabel.text = "必填"
             }
+        case 2: cell.titleLabel.text = "学校"
+        cell.editingPropertyKey = "School"
+        cell.placeHolder = "学校"
+        cell.explanationText = "学校信息将被主办方进行参与者统计。"
+        
+        if let school = CURRENT_USER.objectForKey("School") as? String {
+            cell.detailLabel.text = school
+            cell.currentValue = school
+            if school == "" {
+                cell.detailLabel.text = "必填"
+            }
+        }else{
+            cell.detailLabel.text = "必填"
+            }
+
         case 3: cell.titleLabel.text = "昵称"
         cell.editingPropertyKey = "username"
         cell.placeHolder = "Remix昵称"

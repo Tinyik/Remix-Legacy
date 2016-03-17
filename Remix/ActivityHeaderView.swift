@@ -15,7 +15,7 @@ class ActivityHeaderView: UIView {
     @IBOutlet weak var revenueLabel: UILabel!
     @IBOutlet weak var cashButton: UIButton!
     
-    var activity: BmobObject!
+    var activity: AVObject!
     var coverImgURL: NSURL!
     
     

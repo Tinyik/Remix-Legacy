@@ -34,7 +34,7 @@ class OrgIntroViewController: UIViewController, MWPhotoBrowserDelegate, MFMailCo
         super.viewDidLoad()
         setUpView()
         fetchGalleryURLs()
-        let query = BmobQuery(className: "Organization")
+        let query = AVQuery(className: "Organization")
         query.whereKey("Name", equalTo: orgName)
         query.findObjectsInBackgroundWithBlock { (organizations, error) -> Void in
            
@@ -49,11 +49,11 @@ class OrgIntroViewController: UIViewController, MWPhotoBrowserDelegate, MFMailCo
                     if let _contactName = organization.objectForKey("ContactName") as? String {
                         self.contactName = _contactName
                     }
-                    if let image1 = organization.objectForKey("IntroImage1") as? BmobFile {
+                    if let image1 = organization.objectForKey("IntroImage1") as? AVFile {
                         let url = NSURL(string: image1.url)
                         self.mainImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                     }
-                    if let image2 = organization.objectForKey("IntroImage2") as? BmobFile {
+                    if let image2 = organization.objectForKey("IntroImage2") as? AVFile {
                         let url = NSURL(string: image2.url)
                         self.secondImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                     }
@@ -110,13 +110,13 @@ class OrgIntroViewController: UIViewController, MWPhotoBrowserDelegate, MFMailCo
     
         
     func fetchGalleryURLs() {
-        let query = BmobQuery(className: "OrgGallery")
+        let query = AVQuery(className: "OrgGallery")
         query.whereKey("OrgName", equalTo: orgName)
         query.findObjectsInBackgroundWithBlock { (galleryObjects, error) -> Void in
             if error == nil {
                 for galleryObject in galleryObjects{
                     for var i = 0; i <= 30; ++i {
-                        if let pic = galleryObject.objectForKey("Pic" + String(i)) as? BmobFile{
+                        if let pic = galleryObject.objectForKey("Pic" + String(i)) as? AVFile{
                             let url = NSURL(string: pic.url)
                             self.photos.append(MWPhoto(URL: url))
                             

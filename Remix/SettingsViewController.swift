@@ -33,7 +33,7 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
         self.navigationController?.hidesNavigationBarHairline = true
         self.headerView.settingsButton.addTarget(self, action: "showPersonalInfo", forControlEvents: .TouchUpInside)
         
-        if let avatar = CURRENT_USER.objectForKey("Avatar") as? BmobFile {
+        if let avatar = CURRENT_USER.objectForKey("Avatar") as? AVFile {
             let avatarURL = NSURL(string:avatar.url)
             let manager = SDWebImageManager()
             manager.downloadImageWithURL(avatarURL, options: SDWebImageOptions.RetryFailed, progress: nil) { (avatar, error, cacheType, finished, url) -> Void in
@@ -99,11 +99,11 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
     func imageSelected(image: UIImage!) {
         self.headerView.blurredAvatarView.image = image
         let avatarData = UIImageJPEGRepresentation(image, 0.05)
-        let newAvatar = BmobFile(fileName: "Avatar.jpg", withFileData: avatarData!)
-        newAvatar.saveInBackground { (isSuccessful, error) -> Void in
+        let newAvatar = AVFile(name: "Avatar.jpg", data: avatarData!)
+        newAvatar.saveInBackgroundWithBlock { (isSuccessful, error) -> Void in
             if isSuccessful {
                 CURRENT_USER.setObject(newAvatar, forKey: "Avatar")
-                CURRENT_USER.updateInBackground()
+                CURRENT_USER.saveInBackground()
             }else{
                 let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
                 snackBar.backgroundColor = FlatWatermelonDark()
@@ -289,7 +289,7 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
             case 1:  let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let guideViewController = storyboard.instantiateViewControllerWithIdentifier("GuideViewController") as! GuideViewController
             self.presentViewController(guideViewController, animated: true, completion: nil)
-            case 2: BmobUser.logout()
+            case 2: AVUser.logOut()
             let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
             let regLoginController = storyBoard.instantiateViewControllerWithIdentifier("RegLoginVC")
             self.tr_presentViewController(regLoginController, method: TRPresentTransitionMethod.Fade)

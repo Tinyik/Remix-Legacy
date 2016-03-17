@@ -13,10 +13,10 @@ class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNE
     
     var coverImgURLs: [NSURL]!
     var parentActivityIds: [String]!
-    var parentActivities: [BmobObject]!
-    var selectedActivity: BmobObject!
-    var selectedOrder: BmobObject!
-    var orders: [BmobObject]!
+    var parentActivities: [AVObject]!
+    var selectedActivity: AVObject!
+    var selectedOrder: AVObject!
+    var orders: [AVObject]!
     var contactNumber: String!
     
 
@@ -47,7 +47,7 @@ class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNE
         orders = []
         coverImgURLs = []
         
-        let query = BmobQuery(className: "Orders")
+        let query = AVQuery(className: "Orders")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("CustomerObjectId", equalTo: CURRENT_USER.objectId)
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
@@ -55,7 +55,7 @@ class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNE
             if error == nil {
                 for order in orders {
                     self.parentActivityIds.append(order.objectForKey("ParentActivityObjectId") as! String)
-                    self.orders.append(order as! BmobObject)
+                    self.orders.append(order as! AVObject)
                     
                 }
                 print("ddd")
@@ -66,7 +66,7 @@ class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNE
     }
     
     func findParentActivities() {
-        let query = BmobQuery(className: "Activity")
+        let query = AVQuery(className: "Activity")
         // Both visible and invisible activities should be processed.
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
             if error == nil {
@@ -74,8 +74,8 @@ class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNE
                 for activity in activities {
                     
                     if self.parentActivityIds.contains(activity.objectId) {
-                        self.coverImgURLs.append(NSURL(string: (activity.objectForKey("CoverImg") as! BmobFile).url)!)
-                        self.parentActivities.append(activity as! BmobObject)
+                        self.coverImgURLs.append(NSURL(string: (activity.objectForKey("CoverImg") as! AVFile).url)!)
+                        self.parentActivities.append(activity as! AVObject)
                         print("Added")
                     }else{
                         print("NOTCONTAIN")
@@ -97,7 +97,7 @@ class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNE
         let alert = UIAlertController(title: nil, message: "确认要移除这份订单吗？你的订单记录将仍保留在云端。若要取消报名，请联系主办方。", preferredStyle: .Alert)
         let action = UIAlertAction(title: "确认", style: .Destructive) { (action) -> Void in
           self.selectedOrder.setObject(false, forKey: "isVisibleToUsers")
-          self.selectedOrder.updateInBackground()
+          self.selectedOrder.saveInBackground()
           self.fetchCloudData()
         }
         let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
@@ -175,12 +175,12 @@ class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNE
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let query = BmobQuery(className: "Activity")
+        let query = AVQuery(className: "Activity")
         let objectId = parentActivities[indexPath.row].objectId
         query.getObjectInBackgroundWithId(objectId) { (activity, error) -> Void in
             if error == nil {
                 activity.incrementKey("PageView", byAmount: 1)
-                activity.updateInBackground()
+                activity.saveInBackground()
  
             }else{
                 let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)

@@ -10,7 +10,7 @@ import UIKit
 
 class CommentInputViewController: UIViewController {
 
-    var presentingActivity: BmobObject!
+    var presentingActivity: AVObject!
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var inputTextView: UITextView!
@@ -23,12 +23,12 @@ class CommentInputViewController: UIViewController {
     }
 
     @IBAction func addComment() {
-        let newComment = BmobObject(className: "Comments")
+        let newComment = AVObject(className: "Comments")
         newComment.setObject(presentingActivity.objectId, forKey: "ParentActivityObjectId")
         newComment.setObject(CURRENT_USER.objectId, forKey: "UserObjectId")
         newComment.setObject(inputTextView.text, forKey: "Content")
         newComment.setObject(true, forKey: "isVisibleToUsers")
-        newComment.saveInBackgroundWithResultBlock { (isSuccessful, error) -> Void in
+        newComment.saveInBackgroundWithBlock { (isSuccessful, error) -> Void in
             if isSuccessful {
                 let alert = UIAlertController(title: nil, message: "评论添加成功", preferredStyle: .Alert)
                 let action = UIAlertAction(title: "好的", style: .Default, handler: { (action) -> Void in

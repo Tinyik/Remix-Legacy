@@ -13,7 +13,7 @@ class GalleryViewController: UITableViewController {
     
     var photoURLArray: [[[NSURL]]] = []
     var mwPhotos: [MWPhoto] = []
-    var galleryObjects: [[BmobObject]] = []
+    var galleryObjects: [[AVObject]] = []
     var monthNameStrings: [String] = []
     var dateLabel: UILabel!
     let photoKeys = ["Pic0", "Pic1", "Pic2", "Pic3", "Pic4", "Pic5", "Pic6", "Pic7", "Pic8"]
@@ -45,7 +45,7 @@ class GalleryViewController: UITableViewController {
     // MARK: - Table view data source
     
     func fetchCloudData() {
-        let query = BmobQuery(className: "Gallery")
+        let query = AVQuery(className: "Gallery")
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.findObjectsInBackgroundWithBlock { (galleryObjects, error) -> Void in
@@ -55,7 +55,7 @@ class GalleryViewController: UITableViewController {
                         var imageURLs:[NSURL] = []
                         for key in self.photoKeys {
                             
-                            if let imageFile = gallery.objectForKey(key) as? BmobFile {
+                            if let imageFile = gallery.objectForKey(key) as? AVFile {
                                 let imageURL = NSURL(string: imageFile.url)!
                                 imageURLs.append(imageURL)
                             }
@@ -66,7 +66,7 @@ class GalleryViewController: UITableViewController {
                         let monthName = dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2]
                         if self.isMonthAdded(monthName) == false {
                             self.monthNameStrings.append(monthName)
-                            self.galleryObjects.append([gallery as! BmobObject])
+                            self.galleryObjects.append([gallery as! AVObject])
                             self.photoURLArray.append([imageURLs])
                         } else {
                             
@@ -74,7 +74,7 @@ class GalleryViewController: UITableViewController {
                                 
                                 ($0[0].objectForKey("Date") as! String).componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0] + " " + dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[2] == monthName})
                             {
-                                self.galleryObjects[index].append(gallery as! BmobObject)
+                                self.galleryObjects[index].append(gallery as! AVObject)
                                 self.photoURLArray[index].append(imageURLs)
                             }
                             
@@ -158,12 +158,12 @@ class GalleryViewController: UITableViewController {
         cell.desLabel.text = galleryObjects[indexPath.section][indexPath.row].objectForKey("Description") as? String
         cell.parentViewController = self
         cell.orgLabel.text = galleryObjects[indexPath.section][indexPath.row].objectForKey("Org") as? String
-        let query = BmobQuery(className: "Organization")
+        let query = AVQuery(className: "Organization")
         query.whereKey("Name", equalTo: cell.orgLabel.text)
         query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
             if error == nil {
                 for org in organizations {
-                    let url = NSURL(string: (org.objectForKey("Logo") as! BmobFile).url)
+                    let url = NSURL(string: (org.objectForKey("Logo") as! AVFile).url)
                     cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                 }
             }else{
@@ -182,13 +182,13 @@ class GalleryViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         // FIXME: 非空判断
-        let query = BmobQuery(className: "Gallery")
+        let query = AVQuery(className: "Gallery")
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         let objectId = galleryObjects[indexPath.section][indexPath.row].objectId
         query.getObjectInBackgroundWithId(objectId) { (galleryObject, error) -> Void in
             if error == nil {
                 galleryObject.incrementKey("PageView", byAmount: 1)
-                galleryObject.updateInBackground()
+                galleryObject.saveInBackground()
             }else{
                 let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
                 snackBar.backgroundColor = FlatWatermelonDark()

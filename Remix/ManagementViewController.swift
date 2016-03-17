@@ -11,8 +11,8 @@ import UIKit
 class ManagementViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     
     var coverImgURLs: [NSURL]! = []
-    var parentActivities: [BmobObject] = []
-    var selectedActivity: BmobObject!
+    var parentActivities: [AVObject] = []
+    var selectedActivity: AVObject!
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchCloudData()
@@ -41,7 +41,7 @@ class ManagementViewController: UITableViewController, DZNEmptyDataSetDelegate, 
     func fetchCloudData() {
         coverImgURLs = []
         parentActivities = []
-        let query = BmobQuery(className: "Activity")
+        let query = AVQuery(className: "Activity")
         query.whereKey("Submitter", equalTo: CURRENT_USER.objectId)
         query.whereKey("isHeldBySubmitter", equalTo: true)
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
@@ -50,8 +50,8 @@ class ManagementViewController: UITableViewController, DZNEmptyDataSetDelegate, 
                     self.refreshControl?.endRefreshing()
                 }
                 for activity in activities {
-                    self.parentActivities.append(activity as! BmobObject)
-                    self.coverImgURLs.append(NSURL(string: (activity.objectForKey("CoverImg") as! BmobFile).url)!)
+                    self.parentActivities.append(activity as! AVObject)
+                    self.coverImgURLs.append(NSURL(string: (activity.objectForKey("CoverImg") as! AVFile).url)!)
                 
                 }
                 self.tableView.reloadData()

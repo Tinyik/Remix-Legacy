@@ -12,9 +12,9 @@ class CommentsTableViewController: UITableViewController, DZNEmptyDataSetSource,
 
     weak var modalDelegate: ModalViewControllerDelegate?
     
-    var presentingActivity: BmobObject!
+    var presentingActivity: AVObject!
     var parentActivityVC: RMActivityViewController!
-    var activityComments: [BmobObject] = []
+    var activityComments: [AVObject] = []
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,12 +38,12 @@ class CommentsTableViewController: UITableViewController, DZNEmptyDataSetSource,
     
     func fetchCloudData() {
         activityComments = []
-                let query = BmobQuery(className: "Comments")
+                let query = AVQuery(className: "Comments")
         query.whereKey("ParentActivityObjectId", equalTo: presentingActivity.objectId)
         query.findObjectsInBackgroundWithBlock { (comments, error) -> Void in
             if error == nil {
                 for comment in comments {
-                    self.activityComments.append(comment as! BmobObject)
+                    self.activityComments.append(comment as! AVObject)
                 }
                 self.tableView.reloadData()
             }else{
@@ -104,12 +104,12 @@ class CommentsTableViewController: UITableViewController, DZNEmptyDataSetSource,
         let dateString = String(activityComments[indexPath.row].createdAt)
         cell.timeLabel.text = dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0]
         let userId = activityComments[indexPath.row].objectForKey("UserObjectId") as! String
-        let query = BmobQuery(className: "_User")
+        let query = AVQuery(className: "_User")
         query.getObjectInBackgroundWithId(userId) { (user, error) -> Void in
             if error == nil {
                 cell.usernameLabel.textColor = FlatRed()
-                cell.usernameLabel.text = (user as! BmobUser).username
-                if let _avatar = user.objectForKey("Avatar") as? BmobFile {
+                cell.usernameLabel.text = (user as! AVUser).username
+                if let _avatar = user.objectForKey("Avatar") as? AVFile {
                     let avatarURL = NSURL(string: _avatar.url)
                     cell.avatarView.sd_setImageWithURL(avatarURL, placeholderImage: UIImage(named: "DefaultAvatar"))
                 }else{

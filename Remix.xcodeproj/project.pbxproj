@@ -31,6 +31,7 @@
 		183984FD1C92FC6A00B8EB8B /* QRCoder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183984FC1C92FC6A00B8EB8B /* QRCoder.framework */; };
 		183984FF1C92FE0300B8EB8B /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183984FE1C92FE0300B8EB8B /* QRCodeViewController.swift */; };
 		183985011C93C56400B8EB8B /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183985001C93C56400B8EB8B /* ScannerViewController.swift */; };
+		183CB2151C99BB4700D3D89E /* AVOSCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183CB2141C99BB4700D3D89E /* AVOSCloud.framework */; };
 		1841F8771C7733A60046D57F /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F8711C7733A60046D57F /* libSocialWechat.a */; };
 		1841F8781C7733A60046D57F /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F8721C7733A60046D57F /* libWeChatSDK.a */; };
 		1841F87A1C7739020046D57F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F8791C7739020046D57F /* libiconv.tbd */; };
@@ -53,7 +54,6 @@
 		1848572A1C63EB88004E516A /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 184857291C63EB88004E516A /* libsqlite3.tbd */; };
 		1848572C1C63EB93004E516A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1848572B1C63EB93004E516A /* AVFoundation.framework */; };
 		1848572E1C63EB99004E516A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1848572D1C63EB99004E516A /* MediaPlayer.framework */; };
-		184857301C63EC01004E516A /* BmobSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1848572F1C63EC01004E516A /* BmobSDK.framework */; };
 		184EDFA91C997BD9004F3D7D /* NotifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184EDFA81C997BD9004F3D7D /* NotifView.swift */; };
 		184EDFAB1C997BE7004F3D7D /* NotifView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184EDFAA1C997BE7004F3D7D /* NotifView.xib */; };
 		1854897C1C67288200A8E5C1 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1854897B1C67288200A8E5C1 /* ImageIO.framework */; };
@@ -227,6 +227,7 @@
 		183984FC1C92FC6A00B8EB8B /* QRCoder.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QRCoder.framework; path = "Pods/../build/Debug-iphoneos/QRCoder.framework"; sourceTree = "<group>"; };
 		183984FE1C92FE0300B8EB8B /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		183985001C93C56400B8EB8B /* ScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
+		183CB2141C99BB4700D3D89E /* AVOSCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloud.framework; sourceTree = "<group>"; };
 		1841F8711C7733A60046D57F /* libSocialWechat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialWechat.a; sourceTree = "<group>"; };
 		1841F8721C7733A60046D57F /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		1841F8731C7733A60046D57F /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
@@ -254,7 +255,6 @@
 		184857291C63EB88004E516A /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		1848572B1C63EB93004E516A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		1848572D1C63EB99004E516A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		1848572F1C63EC01004E516A /* BmobSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BmobSDK.framework; sourceTree = "<group>"; };
 		184EDFA81C997BD9004F3D7D /* NotifView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifView.swift; sourceTree = "<group>"; };
 		184EDFAA1C997BE7004F3D7D /* NotifView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotifView.xib; sourceTree = "<group>"; };
 		1854897B1C67288200A8E5C1 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
@@ -345,7 +345,7 @@
 		1898CA7C1C69B599009D3261 /* TRStatusBarStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRStatusBarStyle.swift; sourceTree = "<group>"; };
 		1898CA7D1C69B599009D3261 /* TRViewControllerAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRViewControllerAnimatedTransitioning.swift; sourceTree = "<group>"; };
 		1899E9B41C66360E00ADC2AC /* AdvertiseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvertiseCell.swift; sourceTree = "<group>"; };
-		1899E9B71C663E3B00ADC2AC /* Remix-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Remix-Bridging-Header.h"; sourceTree = "<group>"; };
+		1899E9B71C663E3B00ADC2AC /* Remix-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "Remix-Bridging-Header.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		1899E9B81C663E3B00ADC2AC /* MGSwipeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSwipeButton.h; sourceTree = "<group>"; };
 		1899E9B91C663E3B00ADC2AC /* MGSwipeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeButton.m; sourceTree = "<group>"; };
 		1899E9BA1C663E3B00ADC2AC /* MGSwipeTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSwipeTableCell.h; sourceTree = "<group>"; };
@@ -443,7 +443,6 @@
 				1824544D1C7F96F500CF0CC6 /* BmobPay.framework in Frameworks */,
 				184857241C63EB68004E516A /* SystemConfiguration.framework in Frameworks */,
 				1841F8771C7733A60046D57F /* libSocialWechat.a in Frameworks */,
-				184857301C63EC01004E516A /* BmobSDK.framework in Frameworks */,
 				184857221C63EB5A004E516A /* CoreTelephony.framework in Frameworks */,
 				187745701C6AC572000427C7 /* libMobClickLibrary.a in Frameworks */,
 				184857201C63EB50004E516A /* CFNetwork.framework in Frameworks */,
@@ -455,6 +454,7 @@
 				1848571A1C63EB30004E516A /* Security.framework in Frameworks */,
 				184857181C63EB26004E516A /* CoreLocation.framework in Frameworks */,
 				C65AC89D9691BD7F666EED10 /* Pods_Remix.framework in Frameworks */,
+				183CB2151C99BB4700D3D89E /* AVOSCloud.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,11 +572,11 @@
 				184857251C63EB73004E516A /* libz.1.2.5.tbd */,
 				1877456D1C6AC572000427C7 /* libMobClickLibrary.a */,
 				1877456E1C6AC572000427C7 /* MobClick.h */,
+				183CB2141C99BB4700D3D89E /* AVOSCloud.framework */,
 				182454481C7F96F500CF0CC6 /* AlipaySDK.bundle */,
 				182454491C7F96F500CF0CC6 /* AlipaySDK.framework */,
 				1824544A1C7F96F500CF0CC6 /* BmobPay.framework */,
 				1877456F1C6AC572000427C7 /* MobClickSocialAnalytics.h */,
-				1848572F1C63EC01004E516A /* BmobSDK.framework */,
 				184857231C63EB68004E516A /* SystemConfiguration.framework */,
 				184857211C63EB5A004E516A /* CoreTelephony.framework */,
 				1848571F1C63EB50004E516A /* CFNetwork.framework */,

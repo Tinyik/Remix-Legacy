@@ -16,9 +16,9 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
     var objectId: String = ""
     var coverImgURL: NSURL!
     var revenue: Double = 0
-    var orders: [BmobObject] = []
-    var customers: [BmobUser] = []
-    var parentActivity: BmobObject!
+    var orders: [AVObject] = []
+    var customers: [AVUser] = []
+    var parentActivity: AVObject!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.emptyDataSetSource = self
@@ -34,7 +34,7 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
     }
     
     func refreshAllData() {
-        let query = BmobQuery(className: "Activity")
+        let query = AVQuery(className: "Activity")
         query.getObjectInBackgroundWithId(objectId) { (activity, error) -> Void in
             if error == nil {
                 self.parentActivity = activity
@@ -46,7 +46,7 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
     }
     
     func refreshActivityStatus() {
-        let query = BmobQuery(className: "Activity")
+        let query = AVQuery(className: "Activity")
         query.getObjectInBackgroundWithId(objectId) { (activity, error) -> Void in
             if error == nil {
                 self.parentActivity = activity
@@ -193,7 +193,7 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
         orders = []
         customers = []
         revenue = 0
-        let query = BmobQuery(className: "Orders")
+        let query = AVQuery(className: "Orders")
         query.whereKey("ParentActivityObjectId", equalTo: objectId)
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
             if self.refreshControl?.refreshing == true {
@@ -202,12 +202,12 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
             if error == nil {
                 for order in orders {
                     print("ORDER")
-                    self.orders.append(order as! BmobObject)
-                    let query2 = BmobQuery(className: "_User")
+                    self.orders.append(order as! AVObject)
+                    let query2 = AVQuery(className: "_User")
                     query2.getObjectInBackgroundWithId(order.objectForKey("CustomerObjectId") as! String, block: { (user, error) -> Void in
                         print("USER")
                         if error == nil {
-                            self.customers.append(user as! BmobUser)
+                            self.customers.append(user as! AVUser)
                             self.tableView.reloadData()
                         }
                     })
@@ -372,7 +372,7 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
             cell.statusLabel.text = "已签到"
             cell.statusLabel.textColor = FlatRed()
         }
-        let url = NSURL(string: (customers[indexPath.row].objectForKey("Avatar") as! BmobFile).url)
+        let url = NSURL(string: (customers[indexPath.row].objectForKey("Avatar") as! AVFile).url)
         cell.avatarView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "DefaultAvatar"))
         return cell
     }
@@ -408,7 +408,7 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
     }
     
     func emptyDataSet(scrollView: UIScrollView!, didTapButton button: UIButton!) {
-        let coverImageURL = NSURL(string: (parentActivity.objectForKey("CoverImg") as! BmobFile).url)
+        let coverImageURL = NSURL(string: (parentActivity.objectForKey("CoverImg") as! AVFile).url)
         let shareText = "Remix活动推荐: " + (parentActivity.objectForKey("Title") as! String)
         let manager = SDWebImageManager()
         manager.downloadImageWithURL(coverImageURL, options: .RetryFailed, progress: nil, completed: { (coverImage, error, cache, finished, url) -> Void in

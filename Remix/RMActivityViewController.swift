@@ -10,14 +10,14 @@ import UIKit
 import SDWebImage
 import TTGSnackbar
 protocol RMActivityViewControllerDelegate{
-    func reloadRowForActivity(activity: BmobObject)
+    func reloadRowForActivity(activity: AVObject)
 }
 
 class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate, BmobPayDelegate, ModalTransitionDelegate {
    
     var tr_presentTransition: TRViewControllerTransitionDelegate?
     var delegate: RMActivityViewControllerDelegate!
-    var activity: BmobObject!
+    var activity: AVObject!
     var shouldApplyWhiteTint = true
     var isLiked: Bool = false {
         didSet {
@@ -83,7 +83,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
 //    }
     
     func fetchOrdersInformation() {
-        let query = BmobQuery(className: "Orders")
+        let query = AVQuery(className: "Orders")
         query.whereKey("CustomerObjectId", equalTo: CURRENT_USER.objectId)
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
             if error == nil {
@@ -235,12 +235,12 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
                 likedActivitiesIds.append(activity.objectId)
                 toolBar.likesNumberLabel.text = String(Int(toolBar.likesNumberLabel.text!.stringByReplacingOccurrencesOfString("人已喜欢", withString: ""))!+1) + "人已喜欢"
                 sharedOneSignalInstance.sendTag(self.activity.objectId, value: "Liked")
-                let query = BmobQuery(className: "Activity")
+                let query = AVQuery(className: "Activity")
                 query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
                 query.getObjectInBackgroundWithId(activity.objectId, block: { (activity, error) -> Void in
                     if error == nil {
                         activity.incrementKey("LikesNumber", byAmount: 1)
-                        activity.updateInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
+                        activity.saveInBackgroundWithBlock({ (isSuccessful, error) -> Void in
                             if error == nil {
                                 self.delegate.reloadRowForActivity(self.activity)
                             }else{
@@ -265,12 +265,12 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
             if likedActivitiesIds.contains(activity.objectId) == true {
                 likedActivitiesIds.removeAtIndex(likedActivitiesIds.indexOf(activity.objectId)!)
                 toolBar.likesNumberLabel.text = String(Int(toolBar.likesNumberLabel.text!.stringByReplacingOccurrencesOfString("人已喜欢", withString: ""))!-1) + "人已喜欢"
-                let query = BmobQuery(className: "Activity")
+                let query = AVQuery(className: "Activity")
                 query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
                 query.getObjectInBackgroundWithId(activity.objectId, block: { (activity, error) -> Void in
                     if error == nil {
-                        activity.decrementKey("LikesNumber", byAmount: 1)
-                        activity.updateInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
+                        activity.incrementKey("LikesNumber", byAmount: -1)
+                        activity.saveInBackgroundWithBlock({ (isSuccessful, error) -> Void in
                             if error == nil {
                                  self.delegate.reloadRowForActivity(self.activity)
                             }else{
@@ -294,7 +294,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
         print("LIKED")
         print(self.likedActivitiesIds)
         CURRENT_USER.setObject(self.likedActivitiesIds, forKey: "LikedActivities")
-        CURRENT_USER.updateInBackgroundWithResultBlock { (isSuccessful, error) -> Void in
+        CURRENT_USER.saveInBackgroundWithBlock { (isSuccessful, error) -> Void in
             if error == nil {
                 self.delegate.reloadRowForActivity(self.activity)
             }else{
@@ -374,7 +374,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
     }
     
     func sharePresentingActivity() {
-        let coverImageURL = NSURL(string: (activity.objectForKey("CoverImg") as! BmobFile).url)
+        let coverImageURL = NSURL(string: (activity.objectForKey("CoverImg") as! AVFile).url)
         let shareText = "Remix活动推荐: " + (activity.objectForKey("Title") as! String)
         let manager = SDWebImageManager()
         manager.downloadImageWithURL(coverImageURL, options: .RetryFailed, progress: nil, completed: { (coverImage, error, cache, finished, url) -> Void in
@@ -389,20 +389,20 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
     
     
     func paySuccess() {
-        let newOrder = BmobObject(className: "Orders")
+        let newOrder = AVObject(className: "Orders")
         newOrder.setObject(ongoingTransactionId, forKey: "ParentActivityObjectId")
         newOrder.setObject(ongoingTransactionPrice, forKey: "Amount")
         newOrder.setObject(CURRENT_USER.objectId, forKey: "CustomerObjectId")
         newOrder.setObject(false, forKey: "CheckIn")
         newOrder.setObject(ongoingTransactionRemarks, forKey: "Remarks")
         newOrder.setObject(true, forKey: "isVisibleToUsers")
-        newOrder.saveInBackgroundWithResultBlock { (isSuccessful, error) -> Void in
+        newOrder.saveInBackgroundWithBlock { (isSuccessful, error) -> Void in
             if isSuccessful {
                 sharedOneSignalInstance.sendTag(self.ongoingTransactionId, value: "PaySuccess")
                 self.fetchOrdersInformation()
                 let c = CURRENT_USER.objectForKey("Credit") as! Int
                 CURRENT_USER.setObject(c+(self.activity.objectForKey("Duration") as! Int)*100, forKey: "Credit")
-                CURRENT_USER.updateInBackground()
+                CURRENT_USER.saveInBackground()
                 let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
                 notif.promptUserCreditUpdate(String((self.activity.objectForKey("Duration") as! Int)*100), inContext: "报名活动")
 

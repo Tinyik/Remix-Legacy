@@ -83,7 +83,7 @@ class SettingsInputViewController: UIViewController, SettingInputViewDelegate, U
         }
  
         CURRENT_USER.setObject(inputField.text, forKey: editingKey)
-        CURRENT_USER.updateInBackgroundWithResultBlock { (isSuccessful, error) -> Void in
+        CURRENT_USER.saveInBackgroundWithBlock { (isSuccessful, error) -> Void in
             if isSuccessful == true {
                 let alert = UIAlertController(title: "提示", message: "保存成功", preferredStyle: .Alert)
                 let action = UIAlertAction(title: "好的", style: .Default, handler: { (alert) -> Void in

@@ -29,7 +29,7 @@ class ScannerViewController: QRCodeScannerViewController {
     }
     
     override func processQRCodeContent(qrCodeContent: String) -> Bool {
-        let query = BmobQuery(className: "Orders")
+        let query = AVQuery(className: "Orders")
         query.whereKey("CustomerObjectId", equalTo: CURRENT_USER.objectId)
         query.whereKey("ParentActivityObjectId", equalTo: qrCodeContent.stringByReplacingOccurrencesOfString(sharedOneSignalInstance.app_id, withString: ""))
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
@@ -37,8 +37,8 @@ class ScannerViewController: QRCodeScannerViewController {
                 if orders.count == 1 {
                     for order in orders {
                         if order.objectForKey("CheckIn") as! Bool == false {
-                            (order as! BmobObject).setObject(true, forKey: "CheckIn")
-                            (order as! BmobObject).updateInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
+                            (order as! AVObject).setObject(true, forKey: "CheckIn")
+                            (order as! AVObject).saveInBackgroundWithBlock({ (isSuccessful, error) -> Void in
                                 if error == nil {
                                     // Add Credits.
                                     let alert = UIAlertController(title: "签到提示", message: "活动签到成功(｀･ω･´)相应积分和奖励已更新至你的账户。", preferredStyle: .Alert)

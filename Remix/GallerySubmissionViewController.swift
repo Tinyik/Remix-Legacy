@@ -110,10 +110,10 @@ class GallerySubmissionViewController: FormViewController {
     
     func setUpParallaxHeaderView() {
         let manager = SDWebImageManager()
-        let query = BmobQuery(className: "UIRemoteConfig")
+        let query = AVQuery(className: "UIRemoteConfig")
         query.getObjectInBackgroundWithId("Cd3f1112") { (remix, error) -> Void in
             if error == nil {
-                let url = NSURL(string: (remix.objectForKey("GallerySubm_Image") as! BmobFile).url)
+                let url = NSURL(string: (remix.objectForKey("GallerySubm_Image") as! AVFile).url)
                 manager.downloadImageWithURL(url, options: .RetryFailed, progress: nil) { (image, error, type, bool, url) -> Void in
                     let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(image, forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.width/2)) as! ParallaxHeaderView
                     self.tableView!.tableHeaderView = headerView
@@ -167,7 +167,7 @@ class GallerySubmissionViewController: FormViewController {
         let attr = form.values(includeHidden: false)
         if checkInformationIntegrity() {
             var selectedCities: [String] = []
-            let newGallery = BmobObject(className: "Gallery")
+            let newGallery = AVObject(className: "Gallery")
             newGallery.setObject(false, forKey: "isVisibleToUsers")
             for option in cities {
                 if attr[option]! != nil{
@@ -203,11 +203,11 @@ class GallerySubmissionViewController: FormViewController {
             }
             if attr["isIntendToAddPic"]! as! Bool == false{
                 let imageData = UIImageJPEGRepresentation(attr["Pic0"]! as! UIImage, 0.5)
-                let newImage = BmobFile(fileName: "Pic.jpg", withFileData: imageData!)
-                newImage.saveInBackground { (isSuccessful, error) -> Void in
+                let newImage = AVFile(name: "Pic.jpg", data: imageData!)
+                newImage.saveInBackgroundWithBlock { (isSuccessful, error) -> Void in
                     if isSuccessful {
                         newGallery.setObject(newImage, forKey: "Pic0")
-                        newGallery.saveInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
+                        newGallery.saveInBackgroundWithBlock({ (isSuccessful, error) -> Void in
                             if error == nil {
                                 sharedOneSignalInstance.sendTag(attr["Title"] as! String, value: "GallerySubmitted")
                                 let alert = UIAlertController(title: "Remix提示", message: "活动报道添加成功。谢谢你对Remix的支持_(:з」∠)_。审核通过后我们将给你发送推送消息。", preferredStyle: .Alert)
@@ -235,19 +235,19 @@ class GallerySubmissionViewController: FormViewController {
                 for var i = 0; i <= 8; ++i {
                     if let image = attr["Pic" + String(i)]! as? UIImage {
                         let imageData = UIImageJPEGRepresentation(image, 0.5)
-                        let imageFile = BmobFile(fileName: "Image.jpg", withFileData: imageData)
+                        let imageFile = AVFile(name: "Image.jpg", data: imageData)
                         if imageFile.save() {
                             newGallery.setObject(imageFile, forKey: "Pic" + String(i))
                         }
                         
                     }
                 }
-                newGallery.saveInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
+                newGallery.saveInBackgroundWithBlock({ (isSuccessful, error) -> Void in
                     if error == nil {
                         sharedOneSignalInstance.sendTag(attr["Title"] as! String, value: "GallerySubmitted")
                         let c = CURRENT_USER.objectForKey("Credit") as! Int
                         CURRENT_USER.setObject(c+50, forKey: "Credit")
-                        CURRENT_USER.updateInBackground()
+                        CURRENT_USER.saveInBackground()
                         let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
                         notif.promptUserCreditUpdate("50", inContext: "添加报道")
 
@@ -276,7 +276,7 @@ class GallerySubmissionViewController: FormViewController {
 
     }
     func fetchCloudData() {
-        let query = BmobQuery(className: "SupportedCities")
+        let query = AVQuery(className: "SupportedCities")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.findObjectsInBackgroundWithBlock({ (cities, error) -> Void in
             if error == nil {

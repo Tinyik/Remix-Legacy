@@ -24,7 +24,7 @@ class FloatingActivityView: UIView, BmobPayDelegate {
     @IBOutlet weak var priceTag: UILabel!
     @IBOutlet weak var payButton: UIButton!
     
-    var activity: BmobObject!
+    var activity: AVObject!
     var registeredActivitiesIds: [String] = []
     var parentViewController: RMTableViewController!
     var ongoingTransactionId: String!
@@ -111,7 +111,7 @@ class FloatingActivityView: UIView, BmobPayDelegate {
     
     func fetchOrdersInformation() {
         registeredActivitiesIds = []
-        let query = BmobQuery(className: "Orders")
+        let query = AVQuery(className: "Orders")
         query.whereKey("CustomerObjectId", equalTo: CURRENT_USER.objectId)
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
             if error == nil {
@@ -217,19 +217,19 @@ class FloatingActivityView: UIView, BmobPayDelegate {
     }
     
     func paySuccess() {
-        let newOrder = BmobObject(className: "Orders")
+        let newOrder = AVObject(className: "Orders")
         newOrder.setObject(ongoingTransactionId, forKey: "ParentActivityObjectId")
         newOrder.setObject(ongoingTransactionPrice, forKey: "Amount")
         newOrder.setObject(false, forKey: "CheckIn")
         newOrder.setObject(CURRENT_USER.objectId, forKey: "CustomerObjectId")
         newOrder.setObject(ongoingTransactionRemarks, forKey: "Remarks")
         newOrder.setObject(true, forKey: "isVisibleToUsers")
-        newOrder.saveInBackgroundWithResultBlock { (isSuccessful, error) -> Void in
+        newOrder.saveInBackgroundWithBlock { (isSuccessful, error) -> Void in
             if isSuccessful {
                 sharedOneSignalInstance.sendTag(self.ongoingTransactionId, value: "PaySuccess")
                 let c = CURRENT_USER.objectForKey("Credit") as! Int
                 CURRENT_USER.setObject(c+(self.activity.objectForKey("Duration") as! Int)*100, forKey: "Credit")
-                CURRENT_USER.updateInBackground()
+                CURRENT_USER.saveInBackground()
                 let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
                 notif.promptUserCreditUpdate(String((self.activity.objectForKey("Duration") as! Int)*100), inContext: "报名活动")
                 self.fetchOrdersInformation()

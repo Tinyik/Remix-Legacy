@@ -19,14 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-       
+        
         let image = UIImage(named: "back")
         sharedOneSignalInstance = OneSignal(launchOptions: launchOptions, appId: "7a1e4c8b-51f0-49f1-b50a-72cc581121a0", handleNotification: nil, autoRegister: false)
         OneSignal.defaultClient().enableInAppAlertNotification(true)
-        Bmob.registerWithAppKey("08329e2e3a8d3cdde96bf91d7459e8ab")
-      //  BmobPaySDK.registerWithAppKey("08329e2e3a8d3cdde96bf91d7459e8ab")
+       // Bmob.registerWithAppKey("08329e2e3a8d3cdde96bf91d7459e8ab")
+        AVOSCloud.setApplicationId("pMgQDhdomi8mGsWMyaVYHwfd-gzGzoHsz", clientKey: "UrHd4YHc9sjdgxNXhNbDh5dR")
+        BmobPaySDK.registerWithAppKey("08329e2e3a8d3cdde96bf91d7459e8ab")
         MobClick.startWithAppkey("56ba8fa2e0f55a1071000931", reportPolicy: BATCH, channelId: nil)
-        if BmobUser.getCurrentUser() == nil {
+        if AVUser.currentUser() == nil {
             
             let infoDictionary = NSBundle.mainBundle().infoDictionary
             let currentAppVersion = infoDictionary!["CFBundleShortVersionString"] as! String
@@ -56,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
            
             
         }else{
-        CURRENT_USER = BmobUser.getCurrentUser()
+        CURRENT_USER = AVUser.currentUser()
         let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let vc1 = storyBoard.instantiateViewControllerWithIdentifier("MainVC")
         let vc2 = storyBoard.instantiateViewControllerWithIdentifier("CategoryVC")
@@ -80,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        let currentInstallation = BmobInstallation.currentInstallation()
+        let currentInstallation = AVInstallation.currentInstallation()
         currentInstallation.setDeviceTokenFromData(deviceToken)
         currentInstallation.saveInBackground()
         
@@ -123,7 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if url.scheme == "remix" && url.host?.containsString("www.") == true{
             
-            if BmobUser.getCurrentUser() != nil {
+            if AVUser.currentUser() != nil {
                 if url.path != "" {
                     print("NOTNILLPATH")
                     print(url.path)
@@ -157,14 +158,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             
         }else if url.scheme == "remix" && url.host?.characters.count > 0 && url.path?.characters.count > 0 && url.query?.characters.count > 0 {
-            if BmobUser.getCurrentUser() != nil {
-                let newActivity = BmobObject(className: "UnderReview")
+            if AVUser.currentUser() != nil {
+                let newActivity = AVObject(className: "UnderReview")
                 newActivity.setObject(url.host, forKey: "URL")
                 newActivity.setObject(url.path, forKey: "Org")
                 newActivity.setObject(url.query, forKey: "Price")
-                newActivity.setObject(BmobUser.getCurrentUser().objectId, forKey: "UserObjectId")
-                newActivity.setObject(BmobUser.getCurrentUser().mobilePhoneNumber, forKey: "PhoneNumber")
-                newActivity.saveInBackgroundWithResultBlock({ (isSuccessul, error) -> Void in
+                newActivity.setObject(AVUser.currentUser().objectId, forKey: "UserObjectId")
+                newActivity.setObject(AVUser.currentUser().mobilePhoneNumber, forKey: "PhoneNumber")
+                newActivity.saveInBackgroundWithBlock({ (isSuccessul, error) -> Void in
                     if error == nil {
                         let alert = UIAlertController(title: "Remix提示", message: "活动添加成功。审核通过后活动将在Remix中显示。", preferredStyle: .Alert)
                         let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
@@ -186,12 +187,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
             }
         }else if url.scheme == "remix" && url.host?.characters.count > 0 && url.path?.characters.count == 0 && url.query == nil {
-            if BmobUser.getCurrentUser() != nil {
-                let query = BmobQuery(className: "Activity")
-                var activity = BmobObject()
+            if AVUser.currentUser() != nil {
+                let query = AVQuery(className: "Activity")
+                var activity = AVObject()
                 query.getObjectInBackgroundWithId(url.host!, block: { (_activity, error) -> Void in
                     if error == nil {
-                        activity = _activity as! BmobObject
+                        activity = _activity as! AVObject
                         let activityView = RMActivityViewController(url: NSURL(string: activity.objectForKey("URL") as! String))
                         activityView.activity = activity
                         activityView.toolBar.likeButton.hidden = true

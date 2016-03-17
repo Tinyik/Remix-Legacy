@@ -71,14 +71,14 @@ class CategoryViewController: UITableViewController {
     
     
     func fetchCloudData() {
-        let query = BmobQuery(className: "Category")
+        let query = AVQuery(className: "Category")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.findObjectsInBackgroundWithBlock { (categories, error) -> Void in
             if error == nil {
                 for category in categories {
                     let databaseName = category.objectForKey("Name") as! String
                     self.cloudCoverTitles.append(databaseName)
-                    let url = NSURL(string: (category.objectForKey("CoverImage") as! BmobFile).url)
+                    let url = NSURL(string: (category.objectForKey("CoverImage") as! AVFile).url)
                     self.coverImageURLs.append(url!)
                     let displayName = category.objectForKey("DisplayName") as! String
                     self.coverTitles.append(displayName)
@@ -119,14 +119,14 @@ class CategoryViewController: UITableViewController {
             shouldAskToEnableNotif = false
         }
 
-        let query = BmobQuery(className: "Category")
+        let query = AVQuery(className: "Category")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("Name", equalTo: cloudCoverTitles[indexPath.row])
         query.findObjectsInBackgroundWithBlock { (categories, error) -> Void in
             if error == nil {
                 for category in categories {
                     category.incrementKey("PageView", byAmount: 1)
-                    category.updateInBackground()
+                    category.saveInBackground()
                 }
             }else{
                 let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)

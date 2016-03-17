@@ -52,7 +52,7 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
         logoURLs = []
         names = []
         
-        let query = BmobQuery(className: "Organization")
+        let query = AVQuery(className: "Organization")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.findObjectsInBackgroundWithBlock { (organizations, error) -> Void in
@@ -62,7 +62,7 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
                 }
                 for org in organizations {
                     let name = org.objectForKey("Name") as! String
-                    let logoFile = org.objectForKey("Logo") as! BmobFile
+                    let logoFile = org.objectForKey("Logo") as! AVFile
                     let logoURL = NSURL(string: logoFile.url)!
                     self.names.append(name)
                     self.logoURLs.append(logoURL)
@@ -273,7 +273,7 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
         isSearching = true
         logoURLs = []
         names = []
-        let query = BmobQuery(className: "Organization")
+        let query = AVQuery(className: "Organization")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.findObjectsInBackgroundWithBlock { (organizations, error) -> Void in
@@ -286,14 +286,14 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
                 for org in organizations {
                     let name = org.objectForKey("Name") as! String
                     if (name.rangeOfString(self.searchBar.text!, options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil) != nil) {
-                        let logoFile = org.objectForKey("Logo") as! BmobFile
+                        let logoFile = org.objectForKey("Logo") as! AVFile
                         let logoURL = NSURL(string: logoFile.url)!
                         self.names.append(name)
                         self.logoURLs.append(logoURL)
                     }else{
                         if let wechat = org.objectForKey("WechatId") as? String {
                             if (wechat.rangeOfString(self.searchBar.text!, options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil) != nil) {
-                                let logoFile = org.objectForKey("Logo") as! BmobFile
+                                let logoFile = org.objectForKey("Logo") as! AVFile
                                 let logoURL = NSURL(string: logoFile.url)!
                                 self.names.append(name)
                                 self.logoURLs.append(logoURL)

@@ -100,7 +100,7 @@ class OrganizationSubmissionViewController: FormViewController {
     }
     
     func fetchCloudData() {
-        let query = BmobQuery(className: "SupportedCities")
+        let query = AVQuery(className: "SupportedCities")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.findObjectsInBackgroundWithBlock({ (cities, error) -> Void in
             if error == nil {
@@ -164,11 +164,11 @@ class OrganizationSubmissionViewController: FormViewController {
         let attr = form.values(includeHidden: false)
         if checkInformationIntegrity() {
             var selectedCities: [String] = []
-            let newOrg = BmobObject(className: "Organization")
+            let newOrg = AVObject(className: "Organization")
             for (key, value) in attr {
                 if let pic = value as? UIImage {
-                    let imageData = UIImageJPEGRepresentation(pic as! UIImage, 0.5)
-                    let newImage = BmobFile(fileName: "CoverImg.jpg", withFileData: imageData!)
+                    let imageData = UIImageJPEGRepresentation(pic, 0.5)
+                    let newImage = AVFile(name: "CoverImg.jpg", data: imageData!)
                     if newImage.save() {
                         newOrg.setObject(newImage, forKey: key)
                     }
@@ -203,12 +203,12 @@ class OrganizationSubmissionViewController: FormViewController {
                  newOrg.setObject(0, forKey: "PageView")
                  newOrg.setObject(false, forKey: "isVisibleToUsers")
             
-                 newOrg.saveInBackgroundWithResultBlock({ (isSuccessful, error) -> Void in
+                 newOrg.saveInBackgroundWithBlock({ (isSuccessful, error) -> Void in
                     if error == nil {
                         sharedOneSignalInstance.sendTag(attr["Name"] as! String, value: "OrgSubmitted")
                         let c = CURRENT_USER.objectForKey("Credit") as! Int
                         CURRENT_USER.setObject(c+100, forKey: "Credit")
-                        CURRENT_USER.updateInBackground()
+                        CURRENT_USER.saveInBackground()
                         let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
                         notif.promptUserCreditUpdate("100", inContext: "提交组织信息")
 
@@ -231,10 +231,10 @@ class OrganizationSubmissionViewController: FormViewController {
     }
     func setUpParallaxHeaderView() {
         let manager = SDWebImageManager()
-        let query = BmobQuery(className: "UIRemoteConfig")
+        let query = AVQuery(className: "UIRemoteConfig")
         query.getObjectInBackgroundWithId("Cd3f1112") { (remix, error) -> Void in
             if error == nil {
-                let url = NSURL(string: (remix.objectForKey("OrganizationSubm_Image") as! BmobFile).url)
+                let url = NSURL(string: (remix.objectForKey("OrganizationSubm_Image") as! AVFile).url)
                 manager.downloadImageWithURL(url, options: .RetryFailed, progress: nil) { (image, error, type, bool, url) -> Void in
                     let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(image, forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.width/2)) as! ParallaxHeaderView
                     self.tableView!.tableHeaderView = headerView
