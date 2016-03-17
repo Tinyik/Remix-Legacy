@@ -30,7 +30,7 @@ class ScannerViewController: QRCodeScannerViewController {
     
     override func processQRCodeContent(qrCodeContent: String) -> Bool {
         let query = AVQuery(className: "Orders")
-        query.whereKey("CustomerObjectId", equalTo: CURRENT_USER.objectId)
+        query.whereKey("CustomerObjectId", equalTo: AVObject(withoutDataWithObjectId: CURRENT_USER.objectId))
         query.whereKey("ParentActivityObjectId", equalTo: qrCodeContent.stringByReplacingOccurrencesOfString(sharedOneSignalInstance.app_id, withString: ""))
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
             if error == nil {

@@ -153,8 +153,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
                 
             }
-
-            //
             
             
         }else if url.scheme == "remix" && url.host?.characters.count > 0 && url.path?.characters.count > 0 && url.query?.characters.count > 0 {

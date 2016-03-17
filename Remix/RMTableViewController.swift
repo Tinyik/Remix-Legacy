@@ -224,7 +224,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     func fetchOrdersInformation() {
         registeredActivitiesIds = []
         let query = AVQuery(className: "Orders")
-        query.whereKey("CustomerObjectId", equalTo: CURRENT_USER.objectId)
+        query.whereKey("CustomerObjectId", equalTo: AVObject(withoutDataWithObjectId: CURRENT_USER.objectId))
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
             if error == nil {
                 for order in orders {

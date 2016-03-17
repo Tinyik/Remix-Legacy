@@ -39,7 +39,7 @@ class CommentsTableViewController: UITableViewController, DZNEmptyDataSetSource,
     func fetchCloudData() {
         activityComments = []
                 let query = AVQuery(className: "Comments")
-        query.whereKey("ParentActivityObjectId", equalTo: presentingActivity.objectId)
+        query.whereKey("ParentActivityObjectId", equalTo: AVObject(withoutDataWithObjectId: presentingActivity.objectId))
         query.findObjectsInBackgroundWithBlock { (comments, error) -> Void in
             if error == nil {
                 for comment in comments {

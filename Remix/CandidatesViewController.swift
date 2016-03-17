@@ -194,7 +194,7 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
         customers = []
         revenue = 0
         let query = AVQuery(className: "Orders")
-        query.whereKey("ParentActivityObjectId", equalTo: objectId)
+        query.whereKey("ParentActivityObjectId", equalTo: AVObject(withoutDataWithObjectId: objectId))
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
             if self.refreshControl?.refreshing == true {
                 self.refreshControl?.endRefreshing()

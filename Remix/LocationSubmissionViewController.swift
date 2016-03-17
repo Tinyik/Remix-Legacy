@@ -159,7 +159,7 @@ class LocationSubmissionViewController: FormViewController {
                     }
                 }
                 selectedCities.insert("全国", atIndex: 0)
-                newActivity.setObject(AVUser.currentUser().objectId, forKey: "Submitter")
+                newActivity.setObject(AVObject(withoutDataWithObjectId: AVUser.currentUser().objectId), forKey: "Submitter")
                 newActivity.setObject("店主提交: " + (attr["Title"]! as! String), forKey: "Title")
                 newActivity.setObject(attr["Org"] as! String, forKey: "Org")
                 newActivity.setObject(String(attr["URL"]! as! NSURL), forKey: "URL")
@@ -193,7 +193,7 @@ class LocationSubmissionViewController: FormViewController {
                     }
                 }
                 selectedCities.insert("全国", atIndex: 0)
-                newActivity.setObject(AVUser.currentUser().objectId, forKey: "Submitter")
+                newActivity.setObject(AVObject(withoutDataWithObjectId: AVUser.currentUser().objectId), forKey: "Submitter")
                 newActivity.setObject("用户提交: " + (attr["Title"]! as! String), forKey: "Title")
                 newActivity.setObject(attr["Org"] as! String, forKey: "Org")
                 newActivity.setObject(String(attr["URL"]! as! NSURL), forKey: "URL")

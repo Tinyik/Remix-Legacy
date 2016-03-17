@@ -24,8 +24,8 @@ class CommentInputViewController: UIViewController {
 
     @IBAction func addComment() {
         let newComment = AVObject(className: "Comments")
-        newComment.setObject(presentingActivity.objectId, forKey: "ParentActivityObjectId")
-        newComment.setObject(CURRENT_USER.objectId, forKey: "UserObjectId")
+        newComment.setObject(AVObject(withoutDataWithObjectId: presentingActivity.objectId), forKey: "ParentActivityObjectId")
+        newComment.setObject(AVObject(withoutDataWithObjectId: CURRENT_USER.objectId), forKey: "UserObjectId")
         newComment.setObject(inputTextView.text, forKey: "Content")
         newComment.setObject(true, forKey: "isVisibleToUsers")
         newComment.saveInBackgroundWithBlock { (isSuccessful, error) -> Void in

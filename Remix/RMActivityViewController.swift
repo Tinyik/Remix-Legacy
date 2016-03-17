@@ -84,7 +84,8 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
     
     func fetchOrdersInformation() {
         let query = AVQuery(className: "Orders")
-        query.whereKey("CustomerObjectId", equalTo: CURRENT_USER.objectId)
+        query.whereKey("CustomerObjectId", equalTo: AVObject(withoutDataWithObjectId: CURRENT_USER.objectId))
+
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
             if error == nil {
                 for order in orders {
@@ -392,7 +393,8 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
         let newOrder = AVObject(className: "Orders")
         newOrder.setObject(ongoingTransactionId, forKey: "ParentActivityObjectId")
         newOrder.setObject(ongoingTransactionPrice, forKey: "Amount")
-        newOrder.setObject(CURRENT_USER.objectId, forKey: "CustomerObjectId")
+        newOrder.setObject(AVObject(withoutDataWithObjectId: CURRENT_USER.objectId)
+, forKey: "CustomerObjectId")
         newOrder.setObject(false, forKey: "CheckIn")
         newOrder.setObject(ongoingTransactionRemarks, forKey: "Remarks")
         newOrder.setObject(true, forKey: "isVisibleToUsers")
@@ -401,10 +403,10 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
                 sharedOneSignalInstance.sendTag(self.ongoingTransactionId, value: "PaySuccess")
                 self.fetchOrdersInformation()
                 let c = CURRENT_USER.objectForKey("Credit") as! Int
-                CURRENT_USER.setObject(c+(self.activity.objectForKey("Duration") as! Int)*100, forKey: "Credit")
+                CURRENT_USER.setObject(c+(Int(self.activity.objectForKey("Duration") as! String)!)*2, forKey: "Credit")
                 CURRENT_USER.saveInBackground()
                 let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
-                notif.promptUserCreditUpdate(String((self.activity.objectForKey("Duration") as! Int)*100), inContext: "报名活动")
+                notif.promptUserCreditUpdate(String((Int(self.activity.objectForKey("Duration") as! String))!*2), inContext: "报名活动")
 
                 let alert = UIAlertController(title: "支付状态", message: "报名成功！Remix已经把你的基本信息发送给了活动主办方。请进入 \"我的订单\" 查看", preferredStyle: .Alert)
                 let cancel = UIAlertAction(title: "继续逛逛", style: .Cancel, handler: nil)

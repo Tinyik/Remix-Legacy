@@ -29,7 +29,7 @@ class WithdrawInputViewController: UIViewController {
                 newRequest.setObject(false, forKey: "isResponded")
                 newRequest.setObject(self.inputField.text, forKey: "TargetAccount")
                 newRequest.setObject(self.amount, forKey: "Amount")
-                newRequest.setObject(CURRENT_USER.objectId, forKey: "Submitter")
+                newRequest.setObject(AVObject(withoutDataWithObjectId: CURRENT_USER.objectId), forKey: "Submitter")
                 newRequest.setObject(self.activityObjectId, forKey: "ActivityObjectId")
                 newRequest.setObject(CURRENT_USER.mobilePhoneNumber, forKey: "Contact")
                 newRequest.saveInBackgroundWithBlock { (isSuccessful, error) -> Void in

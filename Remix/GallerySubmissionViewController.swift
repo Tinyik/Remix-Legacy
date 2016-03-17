@@ -175,7 +175,7 @@ class GallerySubmissionViewController: FormViewController {
                 }
             }
             selectedCities.insert("全国", atIndex: 0)
-            newGallery.setObject(CURRENT_USER.objectId, forKey: "Submitter")
+            newGallery.setObject(AVObject(withoutDataWithObjectId: CURRENT_USER.objectId), forKey: "Submitter")
             newGallery.setObject(CURRENT_USER.mobilePhoneNumber, forKey: "SubmitterContact")
             newGallery.setObject(selectedCities, forKey: "Cities")
             newGallery.setObject(attr["isRemixActivity"]! as! Bool, forKey: "isRemixActivity")
