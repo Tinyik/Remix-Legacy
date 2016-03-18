@@ -108,6 +108,8 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         fetchOrdersInformation()
         self.tableView.contentInset.top = 90
         
+        //Registering nib
+        self.tableView.registerNib(UINib(nibName: "MiddleCoverCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "MiddleCoverCell")
           }
     
     
@@ -657,12 +659,13 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             })
             return cell
         }else {
-            if (activities[indexPath.section][indexPath.row].objectForKey("isFeatured") as! Bool) == true {
+            let selectedActivity = activities[indexPath.section][indexPath.row]
+            if (selectedActivity.objectForKey("isFeatured") as! Bool) == true {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("fullCellReuseIdentifier", forIndexPath: indexPath) as! RMFullCoverCell
+                let cell = tableView.dequeueReusableCellWithIdentifier("MiddleCoverCell", forIndexPath: indexPath) as! RMFullCoverCell
                 cell.delegate = self
                 cell.parentViewController = self
-                if let price = activities[indexPath.section][indexPath.row].objectForKey("Price") as? Double {
+                if let price = selectedActivity.objectForKey("Price") as? Double {
                     if price != 0 {
                         let priceNumberFont = UIFont.systemFontOfSize(19)
                         let attrDic1 = [NSFontAttributeName:priceNumberFont]
@@ -678,23 +681,24 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                        
                     }
                 }
-                cell.titleLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Title") as? String
-                cell.orgLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Org") as? String
-                if let summary = activities[indexPath.section][indexPath.row].objectForKey("Summary") as? String{
+                cell.titleLabel.text = selectedActivity.objectForKey("Title") as? String
+                cell.orgLabel.text = selectedActivity.objectForKey("Org") as? String
+                if let summary = selectedActivity.objectForKey("Summary") as? String{
                     cell.orgLabel.text = cell.orgLabel.text! + summary
                 }
 
-                cell.timeLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Date") as? String
-                cell.likesNumberLabel.text = String(activities[indexPath.section][indexPath.row].objectForKey("LikesNumber") as! Int)
+                cell.timeLabel.text = selectedActivity.objectForKey("Date") as? String
+                cell.likesNumberLabel.text = String(selectedActivity.objectForKey("LikesNumber") as! Int)
                   cell.fullImageView.sd_setImageWithURL(coverImgURLs[indexPath.section][indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
-                let _objId = activities[indexPath.section][indexPath.row].objectId
+                let _objId = selectedActivity.objectId
                 cell.objectId = _objId
                 let query = AVQuery(className: "Organization")
-                query.whereKey("Name", equalTo: cell.orgLabel.text)
+                query.whereKey("Name", equalTo: selectedActivity.objectForKey("Org") as? String)
                 query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
                     if error == nil {
                         for org in organizations {
                             let url = NSURL(string: (org.objectForKey("Logo") as! AVFile).url)
+                            
                             cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                         }
                     }else{
@@ -720,7 +724,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! RMTableViewCell
         cell.delegate = self
         cell.parentViewController = self
-            if let price = activities[indexPath.section][indexPath.row].objectForKey("Price") as? Double {
+            if let price = selectedActivity.objectForKey("Price") as? Double {
                 if price != 0 {
                     let priceNumberFont = UIFont.systemFontOfSize(19)
                     let attrDic1 = [NSFontAttributeName:priceNumberFont]
@@ -735,16 +739,16 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                     
                 }
             }
-        cell.titleLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Title") as? String
-        cell.desLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Description") as? String
-        cell.orgLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Org") as? String
-        cell.timeLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Date") as? String
-        cell.likesNumberLabel.text = String(activities[indexPath.section][indexPath.row].objectForKey("LikesNumber") as! Int)
+        cell.titleLabel.text = selectedActivity.objectForKey("Title") as? String
+        cell.desLabel.text = selectedActivity.objectForKey("Description") as? String
+        cell.orgLabel.text = selectedActivity.objectForKey("Org") as? String
+        cell.timeLabel.text = selectedActivity.objectForKey("Date") as? String
+        cell.likesNumberLabel.text = String(selectedActivity.objectForKey("LikesNumber") as! Int)
         cell.themeImg.sd_setImageWithURL(coverImgURLs[indexPath.section][indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
-        let _objId = activities[indexPath.section][indexPath.row].objectId
+        let _objId = selectedActivity.objectId
         cell.objectId = _objId
             let query = AVQuery(className: "Organization")
-            query.whereKey("Name", equalTo: cell.orgLabel.text)
+            query.whereKey("Name", equalTo: selectedActivity.objectForKey("Org") as? String)
             query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
                 if error == nil {
                     for org in organizations {

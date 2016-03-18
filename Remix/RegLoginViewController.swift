@@ -209,6 +209,8 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
                 REMIX_CITY_NAME = CURRENT_USER.objectForKey("City") as! String
                 sharedOneSignalInstance.sendTag("City", value: REMIX_CITY_NAME)
                 sharedOneSignalInstance.sendTag("ObjectId", value: CURRENT_USER.objectId)
+                let identifierDictionary = DeviceInformation.appIdentifiers()
+                sharedOneSignalInstance.sendTag("AppVersion", value: identifierDictionary["shortString"]! + " Build " + identifierDictionary["buildString"]!)
                 let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
                 let vc1 = storyBoard.instantiateViewControllerWithIdentifier("MainVC")
                 let vc2 = storyBoard.instantiateViewControllerWithIdentifier("CategoryVC")

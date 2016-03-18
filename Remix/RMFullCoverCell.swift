@@ -10,22 +10,15 @@ import UIKit
 
 class RMFullCoverCell: MGSwipeTableCell {
    
-    
-   
-    
     @IBOutlet weak var priceTag: UILabel!
-    
-    
     @IBOutlet weak var fullImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    
     @IBOutlet weak var likesNumberLabel: UILabel!
     @IBOutlet weak var likeStatusIndicatorView: UIImageView!
     @IBOutlet weak var orgLogo: UIImageView!
-    
-    
     @IBOutlet weak var orgLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
+    
     var parentViewController: UIViewController!
     var likeButtonTitle = ""
     var likeImage = UIImage(named: "Like")

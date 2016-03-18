@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		180199541C79C14700A6C7E4 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180199531C79C14700A6C7E4 /* TrendingViewController.swift */; };
+		180199541C79C14700A6C7E4 /* RMSecondFilteredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180199531C79C14700A6C7E4 /* RMSecondFilteredViewController.swift */; };
 		180199561C79E25F00A6C7E4 /* TermsAndConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180199551C79E25F00A6C7E4 /* TermsAndConditionsViewController.swift */; };
 		180C08A01C8ADBC50025136D /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180C089F1C8ADBC50025136D /* File.swift */; };
 		18198D521C9447D300A7AD78 /* RemixPassView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18198D511C9447D300A7AD78 /* RemixPassView.xib */; };
@@ -32,6 +32,9 @@
 		183984FF1C92FE0300B8EB8B /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183984FE1C92FE0300B8EB8B /* QRCodeViewController.swift */; };
 		183985011C93C56400B8EB8B /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183985001C93C56400B8EB8B /* ScannerViewController.swift */; };
 		183CB2151C99BB4700D3D89E /* AVOSCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183CB2141C99BB4700D3D89E /* AVOSCloud.framework */; };
+		183FDCBE1C9C4460002D79EB /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDCBD1C9C4460002D79EB /* ContainerView.swift */; };
+		183FDCC21C9C59A4002D79EB /* MiddleCoverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183FDCC01C9C59A4002D79EB /* MiddleCoverCell.xib */; };
+		183FDCC71C9C5C6F002D79EB /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183FDCC51C9C5C6F002D79EB /* TableViewCell.xib */; };
 		1841F8771C7733A60046D57F /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F8711C7733A60046D57F /* libSocialWechat.a */; };
 		1841F8781C7733A60046D57F /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F8721C7733A60046D57F /* libWeChatSDK.a */; };
 		1841F87A1C7739020046D57F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F8791C7739020046D57F /* libiconv.tbd */; };
@@ -143,7 +146,7 @@
 		18BC02311C8E973300FBC162 /* UserHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18BC02301C8E973300FBC162 /* UserHeaderView.xib */; };
 		18BC02331C8EA5D500FBC162 /* UserFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18BC02321C8EA5D500FBC162 /* UserFooterView.xib */; };
 		18BC02351C8EA5E400FBC162 /* UserFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BC02341C8EA5E400FBC162 /* UserFooterView.swift */; };
-		18BCA02A1C6E3FE600DF3EC7 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BCA0291C6E3FE600DF3EC7 /* CommunityViewController.swift */; };
+		18BCA02A1C6E3FE600DF3EC7 /* RMFirstFilteredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BCA0291C6E3FE600DF3EC7 /* RMFirstFilteredViewController.swift */; };
 		18BCA02D1C6E489400DF3EC7 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BCA02C1C6E489400DF3EC7 /* LocationViewController.swift */; };
 		18BCA02F1C6E48D400DF3EC7 /* LocationFullCoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BCA02E1C6E48D400DF3EC7 /* LocationFullCoverCell.swift */; };
 		18BCA0311C6E48ED00DF3EC7 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BCA0301C6E48ED00DF3EC7 /* LocationTableViewCell.swift */; };
@@ -199,7 +202,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		180199531C79C14700A6C7E4 /* TrendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TrendingViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		180199531C79C14700A6C7E4 /* RMSecondFilteredViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RMSecondFilteredViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		180199551C79E25F00A6C7E4 /* TermsAndConditionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewController.swift; sourceTree = "<group>"; };
 		180C089F1C8ADBC50025136D /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		18198D511C9447D300A7AD78 /* RemixPassView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RemixPassView.xib; sourceTree = "<group>"; };
@@ -228,6 +231,9 @@
 		183984FE1C92FE0300B8EB8B /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		183985001C93C56400B8EB8B /* ScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		183CB2141C99BB4700D3D89E /* AVOSCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloud.framework; sourceTree = "<group>"; };
+		183FDCBD1C9C4460002D79EB /* ContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
+		183FDCC01C9C59A4002D79EB /* MiddleCoverCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MiddleCoverCell.xib; sourceTree = "<group>"; };
+		183FDCC51C9C5C6F002D79EB /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		1841F8711C7733A60046D57F /* libSocialWechat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialWechat.a; sourceTree = "<group>"; };
 		1841F8721C7733A60046D57F /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		1841F8731C7733A60046D57F /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
@@ -372,7 +378,7 @@
 		18BC02301C8E973300FBC162 /* UserHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserHeaderView.xib; sourceTree = "<group>"; };
 		18BC02321C8EA5D500FBC162 /* UserFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserFooterView.xib; sourceTree = "<group>"; };
 		18BC02341C8EA5E400FBC162 /* UserFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFooterView.swift; sourceTree = "<group>"; };
-		18BCA0291C6E3FE600DF3EC7 /* CommunityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CommunityViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		18BCA0291C6E3FE600DF3EC7 /* RMFirstFilteredViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RMFirstFilteredViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18BCA02C1C6E489400DF3EC7 /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LocationViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18BCA02E1C6E48D400DF3EC7 /* LocationFullCoverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationFullCoverCell.swift; sourceTree = "<group>"; };
 		18BCA0301C6E48ED00DF3EC7 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
@@ -520,6 +526,15 @@
 			path = NJKWebViewProgress;
 			sourceTree = "<group>";
 		};
+		183FDCC31C9C5C4E002D79EB /* CellNibs */ = {
+			isa = PBXGroup;
+			children = (
+				183FDCC01C9C59A4002D79EB /* MiddleCoverCell.xib */,
+				183FDCC51C9C5C6F002D79EB /* TableViewCell.xib */,
+			);
+			name = CellNibs;
+			sourceTree = "<group>";
+		};
 		1841F8701C7733A60046D57F /* Wechat */ = {
 			isa = PBXGroup;
 			children = (
@@ -665,7 +680,9 @@
 				189782511C63C7EF00458515 /* Main.storyboard */,
 				1824544F1C7FA16C00CF0CC6 /* VersionCheck.swift */,
 				18E239331C805E2D00363655 /* FloatingActivityView.xib */,
+				183FDCC31C9C5C4E002D79EB /* CellNibs */,
 				18E239311C805E1600363655 /* FloatingActivityView.swift */,
+				183FDCBD1C9C4460002D79EB /* ContainerView.swift */,
 				18198D551C944B0C00A7AD78 /* RemixPass */,
 				18E684B11C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift */,
 				18E620A51C8C194C00B85941 /* ActivitySubmissionViewController.swift */,
@@ -683,7 +700,6 @@
 				189F45001C88CF6800EE1B3B /* RMWebViewController.swift */,
 				1857B52A1C855A4500D00A9E /* ActivityInterface */,
 				18C79D7B1C8215E0004AAA44 /* OrdersVC */,
-				180199531C79C14700A6C7E4 /* TrendingViewController.swift */,
 				18D731B31C719B1800DECA1E /* GuideViewController.swift */,
 				18BCA03B1C6F822400DF3EC7 /* SearchResultVC */,
 				18BCA02B1C6E484900DF3EC7 /* LocationVC */,
@@ -836,7 +852,8 @@
 		1899E9C11C670F0100ADC2AC /* FirstVC */ = {
 			isa = PBXGroup;
 			children = (
-				18BCA0291C6E3FE600DF3EC7 /* CommunityViewController.swift */,
+				180199531C79C14700A6C7E4 /* RMSecondFilteredViewController.swift */,
+				18BCA0291C6E3FE600DF3EC7 /* RMFirstFilteredViewController.swift */,
 				1899E9BE1C66F75600ADC2AC /* RMFullCoverCell.swift */,
 				189782831C63CA6900458515 /* RMTableViewController.swift */,
 				1899E9B41C66360E00ADC2AC /* AdvertiseCell.swift */,
@@ -1176,10 +1193,12 @@
 				18BC02331C8EA5D500FBC162 /* UserFooterView.xib in Resources */,
 				187F037E1C8EB9E700328279 /* ActivityHeaderView.xib in Resources */,
 				18198D521C9447D300A7AD78 /* RemixPassView.xib in Resources */,
+				183FDCC71C9C5C6F002D79EB /* TableViewCell.xib in Resources */,
 				187745961C6ACB1D000427C7 /* UMSShareListController.xib in Resources */,
 				18984F8F1C8472A300821477 /* RMToolBarView.xib in Resources */,
 				187745931C6ACB1D000427C7 /* UMShareEditViewControlleriPad.xib in Resources */,
 				1877458F1C6ACB1D000427C7 /* UMSCommentDetailController.xib in Resources */,
+				183FDCC21C9C59A4002D79EB /* MiddleCoverCell.xib in Resources */,
 				187745921C6ACB1D000427C7 /* UMShareEditViewController.xib in Resources */,
 				18BC02311C8E973300FBC162 /* UserHeaderView.xib in Resources */,
 				1877458D1C6ACB1D000427C7 /* UMSocialLocalizable.strings in Resources */,
@@ -1313,7 +1332,7 @@
 				18AA6BE41C91433700BDD39B /* SettingsHeaderView.swift in Sources */,
 				189F45011C88CF6800EE1B3B /* RMWebViewController.swift in Sources */,
 				182454501C7FA16C00CF0CC6 /* VersionCheck.swift in Sources */,
-				180199541C79C14700A6C7E4 /* TrendingViewController.swift in Sources */,
+				180199541C79C14700A6C7E4 /* RMSecondFilteredViewController.swift in Sources */,
 				1857B52E1C855A8900D00A9E /* CommentCell.swift in Sources */,
 				1898CA941C69B599009D3261 /* TRStatusBarStyle.swift in Sources */,
 				1899E9C91C670FFB00ADC2AC /* GalleryTableViewCell.swift in Sources */,
@@ -1341,11 +1360,12 @@
 				181F2B1F1C69DB8A00FC237D /* LikedViewController.swift in Sources */,
 				18C97F6D1C8DE580000B4EC9 /* ActivityCell.swift in Sources */,
 				1898CA901C69B599009D3261 /* TransitionAnimationHelper.swift in Sources */,
-				18BCA02A1C6E3FE600DF3EC7 /* CommunityViewController.swift in Sources */,
+				18BCA02A1C6E3FE600DF3EC7 /* RMFirstFilteredViewController.swift in Sources */,
 				189782861C63DEAC00458515 /* CategoryViewController.swift in Sources */,
 				180C08A01C8ADBC50025136D /* File.swift in Sources */,
 				1898CA851C69B599009D3261 /* BlixtTransitionAnimation.swift in Sources */,
 				18C79D7D1C8215FF004AAA44 /* OrdersViewController.swift in Sources */,
+				183FDCBE1C9C4460002D79EB /* ContainerView.swift in Sources */,
 				18984F911C8473C400821477 /* RMToolBarView.swift in Sources */,
 				1898CA831C69B599009D3261 /* TRTabBarTransitionDelegate.swift in Sources */,
 				1898CA3D1C68AD15009D3261 /* ParallaxHeaderView.m in Sources */,
