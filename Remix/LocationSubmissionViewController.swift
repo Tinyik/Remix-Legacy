@@ -33,7 +33,7 @@ class LocationSubmissionViewController: FormViewController {
             
         }
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提交", style: .Plain, target: self, action: "submitLocation")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提交", style: .Plain, target: self, action: "submitLocation:")
         
         form +++
         Section("身份")
@@ -145,9 +145,10 @@ class LocationSubmissionViewController: FormViewController {
         
         return true
     }
-    func submitLocation() {
+    func submitLocation(sender: UIBarButtonItem) {
         let attr = self.form.values()
         if checkInformationIntegrity() {
+            sender.enabled = false
             let newActivity = AVObject(className: "Location")
             if attr["isCoordinator"]! as! Bool == true {
                
@@ -218,6 +219,7 @@ class LocationSubmissionViewController: FormViewController {
                     }
                 }
                 newActivity.saveInBackgroundWithBlock({ (isSuccessful, error) -> Void in
+                    sender.enabled = true
                     if error == nil {
                         sharedOneSignalInstance.sendTag(attr["Title"] as! String, value: "LocationSubmitted")
                         let c = CURRENT_USER.objectForKey("Credit") as! Int
@@ -241,6 +243,7 @@ class LocationSubmissionViewController: FormViewController {
                 })
             }else{
                 newActivity.saveInBackgroundWithBlock({ (isSuccessful, error) -> Void in
+                    sender.enabled = true
                     if error == nil {
                         sharedOneSignalInstance.sendTag(attr["Title"] as! String, value: "LocationSubmitted")
                         let c = CURRENT_USER.objectForKey("Credit") as! Int

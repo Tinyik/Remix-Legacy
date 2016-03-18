@@ -89,6 +89,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         cellZoomXScaleFactor = 1.1
         cellZoomYScaleFactor = 1.1
         cellZoomInitialAlpha = 0.5
+        self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.emptyDataSetDelegate = self
@@ -523,7 +524,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         if activities.count > 0 {
         if let isFeatured = activities[indexPath.section][indexPath.row].objectForKey("isFeatured") as? Bool  {
             if isFeatured == true {
-            return DEVICE_SCREEN_WIDTH
+            return DEVICE_SCREEN_WIDTH*0.893
             }
         }
         }
@@ -679,6 +680,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 }
                 cell.titleLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Title") as? String
                 cell.orgLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Org") as? String
+                if let summary = activities[indexPath.section][indexPath.row].objectForKey("Summary") as? String{
+                    cell.orgLabel.text = cell.orgLabel.text! + summary
+                }
+
                 cell.timeLabel.text = activities[indexPath.section][indexPath.row].objectForKey("Date") as? String
                 cell.likesNumberLabel.text = String(activities[indexPath.section][indexPath.row].objectForKey("LikesNumber") as! Int)
                   cell.fullImageView.sd_setImageWithURL(coverImgURLs[indexPath.section][indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))

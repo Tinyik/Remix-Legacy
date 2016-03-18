@@ -29,7 +29,7 @@ class GallerySubmissionViewController: FormViewController {
         self.navigationController?.navigationBar.barTintColor = FlatBlueDark()
         self.navigationController?.navigationBar.tintColor = .whiteColor()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提交", style: .Plain, target: self, action: "submitActivity")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提交", style: .Plain, target: self, action: "submitActivity:")
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: "popCurrentVC")
             self.navigationController?.navigationBar.translucent = false
         
@@ -163,9 +163,10 @@ class GallerySubmissionViewController: FormViewController {
         return true
     }
     
-    func submitActivity(){
+    func submitActivity(sender: UIBarButtonItem){
         let attr = form.values(includeHidden: false)
         if checkInformationIntegrity() {
+            sender.enabled = false
             var selectedCities: [String] = []
             let newGallery = AVObject(className: "Gallery")
             newGallery.setObject(false, forKey: "isVisibleToUsers")
@@ -205,6 +206,7 @@ class GallerySubmissionViewController: FormViewController {
                 let imageData = UIImageJPEGRepresentation(attr["Pic0"]! as! UIImage, 0.5)
                 let newImage = AVFile(name: "Pic.jpg", data: imageData!)
                 newImage.saveInBackgroundWithBlock { (isSuccessful, error) -> Void in
+                    sender.enabled = true
                     if isSuccessful {
                         newGallery.setObject(newImage, forKey: "Pic0")
                         newGallery.saveInBackgroundWithBlock({ (isSuccessful, error) -> Void in
@@ -243,6 +245,7 @@ class GallerySubmissionViewController: FormViewController {
                     }
                 }
                 newGallery.saveInBackgroundWithBlock({ (isSuccessful, error) -> Void in
+                    sender.enabled = true
                     if error == nil {
                         sharedOneSignalInstance.sendTag(attr["Title"] as! String, value: "GallerySubmitted")
                         let c = CURRENT_USER.objectForKey("Credit") as! Int

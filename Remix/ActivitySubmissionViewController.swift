@@ -31,7 +31,7 @@ class ActivitySubmissionViewController: FormViewController {
             self.navigationController?.view.addSubview(statusBarView)
         }
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提交", style: .Plain, target: self, action: "submitActivity")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提交", style: .Plain, target: self, action: "submitActivity:")
         if isModal == true {
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: "popCurrentVC")
             self.navigationController?.navigationBar.translucent = false
@@ -101,7 +101,7 @@ class ActivitySubmissionViewController: FormViewController {
                 $0.title = "活动频率, 如: 每周六， 每月五号"
                 $0.hidden = "$isRecurring == false"
             }
-            <<< TextRow("Duration") {
+            <<< IntRow("Duration") {
                 $0.title = "活动大致时长(分钟)"
                 $0.hidden = "$isCoordinator == false"
             }
@@ -209,7 +209,7 @@ class ActivitySubmissionViewController: FormViewController {
 
 
     
-    func submitActivity() {
+    func submitActivity(sender: UIBarButtonItem) {
 
         if checkInformationIntegrity() {
             let attr = form.values(includeHidden: false)
@@ -244,7 +244,7 @@ class ActivitySubmissionViewController: FormViewController {
                     newActivity.setObject(String(attr["URL"]! as! NSURL), forKey: "URL")
                     newActivity.setObject(attr["Price"]! as! Double, forKey: "Price")
                     newActivity.setObject(attr["Description"]! as! String, forKey: "Description")
-                    newActivity.setObject(attr["Duration"] as! String, forKey: "Duration")
+                    newActivity.setObject(String(attr["Duration"] as! Int), forKey: "Duration")
                     newActivity.setObject(AVUser.currentUser().mobilePhoneNumber, forKey: "Contact")
                     newActivity.setObject(AVUser.currentUser().objectForKey("LegalName") as! String, forKey: "ContactName")
                     newActivity.setObject(0, forKey: "LikesNumber")
@@ -281,7 +281,9 @@ class ActivitySubmissionViewController: FormViewController {
                 if attr["CoverImg"]! != nil {
                     let imageData = UIImageJPEGRepresentation(attr["CoverImg"]! as! UIImage, 0.5)
                     let newImage = AVFile(name: "CoverImg.jpg", data: imageData!)
+                    sender.enabled = false
                     newImage.saveInBackgroundWithBlock { (isSuccessful, error) -> Void in
+                        sender.enabled = true
                         if isSuccessful {
                             newActivity.setObject(newImage, forKey: "CoverImg")
                             newActivity.saveInBackgroundWithBlock({ (isSuccessful, error) -> Void in

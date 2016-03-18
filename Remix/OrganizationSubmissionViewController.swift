@@ -32,7 +32,7 @@ class OrganizationSubmissionViewController: FormViewController {
             self.navigationController?.view.addSubview(statusBarView)
         }
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提交", style: .Plain, target: self, action: "submitOrganization")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提交", style: .Plain, target: self, action: "submitOrganization:")
         if isModal == true {
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: "popCurrentVC")
             self.navigationController?.navigationBar.translucent = false
@@ -160,7 +160,7 @@ class OrganizationSubmissionViewController: FormViewController {
         return true
     }
     
-    func submitOrganization() {
+    func submitOrganization(sender: UIBarButtonItem) {
         let attr = form.values(includeHidden: false)
         if checkInformationIntegrity() {
             var selectedCities: [String] = []
@@ -202,8 +202,9 @@ class OrganizationSubmissionViewController: FormViewController {
                  newOrg.setObject(selectedCities, forKey: "Cities")
                  newOrg.setObject(0, forKey: "PageView")
                  newOrg.setObject(false, forKey: "isVisibleToUsers")
-            
+                 sender.enabled = false
                  newOrg.saveInBackgroundWithBlock({ (isSuccessful, error) -> Void in
+                    sender.enabled = true
                     if error == nil {
                         sharedOneSignalInstance.sendTag(attr["Name"] as! String, value: "OrgSubmitted")
                         let c = CURRENT_USER.objectForKey("Credit") as! Int
