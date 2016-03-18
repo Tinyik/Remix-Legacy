@@ -196,7 +196,7 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
     func emptyDataSet(scrollView: UIScrollView!, didTapButton button: UIButton!) {
         if isSearching == false{
             let subm = OrganizationSubmissionViewController()
-            let navi = UINavigationController(rootViewController: subm)
+            let navi = RMNavigationController(rootViewController: subm)
             self.presentViewController(navi, animated: true, completion: nil)
         }else{
               searchBar.text = ""

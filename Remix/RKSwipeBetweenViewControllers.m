@@ -150,7 +150,7 @@ CGFloat X_OFFSET = 8.0; //%%% for some reason there's a little bit of a glitchy 
 - (void)presentSettingsVCFromNaviController {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName: @"Main" bundle: [NSBundle mainBundle]];
     SettingsViewController *settingsVC = [storyboard instantiateViewControllerWithIdentifier: @"SettingsVC"];
-    UINavigationController *naviController = [[UINavigationController alloc]initWithRootViewController:settingsVC];
+    UINavigationController *naviController = [[RMNavigationController alloc]initWithRootViewController:settingsVC];
     [self presentViewController:naviController animated:YES completion:NULL];
 }
 

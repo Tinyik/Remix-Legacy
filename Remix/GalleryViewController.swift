@@ -32,7 +32,7 @@ class GalleryViewController: UITableViewController {
     
     func addGallery() {
         let subm = GallerySubmissionViewController()
-        let navi = UINavigationController(rootViewController: subm)
+        let navi = RMNavigationController(rootViewController: subm)
         self.presentViewController(navi, animated: true, completion: nil)
     }
 

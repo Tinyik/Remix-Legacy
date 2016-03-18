@@ -127,7 +127,7 @@ class WithdrawalRecordViewController: UITableViewController, DZNEmptyDataSetDele
     
     func emptyDataSet(scrollView: UIScrollView!, didTapButton button: UIButton!) {
         let subm = ActivitySubmissionViewController()
-        let navi = UINavigationController(rootViewController: subm)
+        let navi = RMNavigationController(rootViewController: subm)
         self.presentViewController(navi, animated: true, completion: nil)
         
     }

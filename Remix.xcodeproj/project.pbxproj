@@ -34,7 +34,25 @@
 		183CB2151C99BB4700D3D89E /* AVOSCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183CB2141C99BB4700D3D89E /* AVOSCloud.framework */; };
 		183FDCBE1C9C4460002D79EB /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDCBD1C9C4460002D79EB /* ContainerView.swift */; };
 		183FDCC21C9C59A4002D79EB /* MiddleCoverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183FDCC01C9C59A4002D79EB /* MiddleCoverCell.xib */; };
-		183FDCC71C9C5C6F002D79EB /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183FDCC51C9C5C6F002D79EB /* TableViewCell.xib */; };
+		183FDCC71C9C5C6F002D79EB /* RMFullCoverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183FDCC51C9C5C6F002D79EB /* RMFullCoverCell.xib */; };
+		183FDCE61C9C746D002D79EB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 183FDCC91C9C746D002D79EB /* Info.plist */; };
+		183FDCE71C9C746D002D79EB /* LCHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 183FDCCB1C9C746D002D79EB /* LCHttpClient.m */; };
+		183FDCE81C9C746D002D79EB /* LCUserFeedbackAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 183FDCCD1C9C746D002D79EB /* LCUserFeedbackAgent.m */; };
+		183FDCE91C9C746D002D79EB /* LCUserFeedbackImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183FDCCF1C9C746D002D79EB /* LCUserFeedbackImageViewController.m */; };
+		183FDCEA1C9C746D002D79EB /* LCUserFeedbackReply.m in Sources */ = {isa = PBXBuildFile; fileRef = 183FDCD11C9C746D002D79EB /* LCUserFeedbackReply.m */; };
+		183FDCEB1C9C746D002D79EB /* LCUserFeedbackReplyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 183FDCD41C9C746D002D79EB /* LCUserFeedbackReplyCell.m */; };
+		183FDCEC1C9C746D002D79EB /* LCUserFeedbackThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 183FDCD61C9C746D002D79EB /* LCUserFeedbackThread.m */; };
+		183FDCED1C9C746D002D79EB /* LCUserFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183FDCD91C9C746D002D79EB /* LCUserFeedbackViewController.m */; };
+		183FDCEE1C9C746D002D79EB /* LCUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 183FDCDB1C9C746D002D79EB /* LCUtils.m */; };
+		183FDCEF1C9C746D002D79EB /* feedback_add_image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 183FDCDE1C9C746D002D79EB /* feedback_add_image@2x.png */; };
+		183FDCF01C9C746D002D79EB /* feedback_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 183FDCDF1C9C746D002D79EB /* feedback_back@2x.png */; };
+		183FDCF11C9C746D002D79EB /* feedback_bg_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 183FDCE01C9C746D002D79EB /* feedback_bg_1@2x.png */; };
+		183FDCF21C9C746D002D79EB /* feedback_bg_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 183FDCE11C9C746D002D79EB /* feedback_bg_2@2x.png */; };
+		183FDCF31C9C746D002D79EB /* feedback_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 183FDCE21C9C746D002D79EB /* feedback_btn@2x.png */; };
+		183FDCF41C9C746D002D79EB /* feedback_btn_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 183FDCE31C9C746D002D79EB /* feedback_btn_new@2x.png */; };
+		183FDCF51C9C746D002D79EB /* feedback_warning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 183FDCE41C9C746D002D79EB /* feedback_warning@2x.png */; };
+		183FDCF61C9C746D002D79EB /* LeanCloudFeedback.strings in Resources */ = {isa = PBXBuildFile; fileRef = 183FDCE51C9C746D002D79EB /* LeanCloudFeedback.strings */; };
+		183FDCF81C9C78DB002D79EB /* RMNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDCF71C9C78DB002D79EB /* RMNavigationController.swift */; };
 		1841F8771C7733A60046D57F /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F8711C7733A60046D57F /* libSocialWechat.a */; };
 		1841F8781C7733A60046D57F /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F8721C7733A60046D57F /* libWeChatSDK.a */; };
 		1841F87A1C7739020046D57F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1841F8791C7739020046D57F /* libiconv.tbd */; };
@@ -233,7 +251,36 @@
 		183CB2141C99BB4700D3D89E /* AVOSCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloud.framework; sourceTree = "<group>"; };
 		183FDCBD1C9C4460002D79EB /* ContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
 		183FDCC01C9C59A4002D79EB /* MiddleCoverCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MiddleCoverCell.xib; sourceTree = "<group>"; };
-		183FDCC51C9C5C6F002D79EB /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		183FDCC51C9C5C6F002D79EB /* RMFullCoverCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMFullCoverCell.xib; sourceTree = "<group>"; };
+		183FDCC91C9C746D002D79EB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		183FDCCA1C9C746D002D79EB /* LCHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCHttpClient.h; sourceTree = "<group>"; };
+		183FDCCB1C9C746D002D79EB /* LCHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCHttpClient.m; sourceTree = "<group>"; };
+		183FDCCC1C9C746D002D79EB /* LCUserFeedbackAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCUserFeedbackAgent.h; sourceTree = "<group>"; };
+		183FDCCD1C9C746D002D79EB /* LCUserFeedbackAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCUserFeedbackAgent.m; sourceTree = "<group>"; };
+		183FDCCE1C9C746D002D79EB /* LCUserFeedbackImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCUserFeedbackImageViewController.h; sourceTree = "<group>"; };
+		183FDCCF1C9C746D002D79EB /* LCUserFeedbackImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCUserFeedbackImageViewController.m; sourceTree = "<group>"; };
+		183FDCD01C9C746D002D79EB /* LCUserFeedbackReply.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCUserFeedbackReply.h; sourceTree = "<group>"; };
+		183FDCD11C9C746D002D79EB /* LCUserFeedbackReply.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCUserFeedbackReply.m; sourceTree = "<group>"; };
+		183FDCD21C9C746D002D79EB /* LCUserFeedbackReply_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCUserFeedbackReply_Internal.h; sourceTree = "<group>"; };
+		183FDCD31C9C746D002D79EB /* LCUserFeedbackReplyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCUserFeedbackReplyCell.h; sourceTree = "<group>"; };
+		183FDCD41C9C746D002D79EB /* LCUserFeedbackReplyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCUserFeedbackReplyCell.m; sourceTree = "<group>"; };
+		183FDCD51C9C746D002D79EB /* LCUserFeedbackThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCUserFeedbackThread.h; sourceTree = "<group>"; };
+		183FDCD61C9C746D002D79EB /* LCUserFeedbackThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCUserFeedbackThread.m; sourceTree = "<group>"; };
+		183FDCD71C9C746D002D79EB /* LCUserFeedbackThread_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCUserFeedbackThread_Internal.h; sourceTree = "<group>"; };
+		183FDCD81C9C746D002D79EB /* LCUserFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCUserFeedbackViewController.h; sourceTree = "<group>"; };
+		183FDCD91C9C746D002D79EB /* LCUserFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCUserFeedbackViewController.m; sourceTree = "<group>"; };
+		183FDCDA1C9C746D002D79EB /* LCUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCUtils.h; sourceTree = "<group>"; };
+		183FDCDB1C9C746D002D79EB /* LCUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCUtils.m; sourceTree = "<group>"; };
+		183FDCDC1C9C746D002D79EB /* LeanCloudFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeanCloudFeedback.h; sourceTree = "<group>"; };
+		183FDCDE1C9C746D002D79EB /* feedback_add_image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedback_add_image@2x.png"; sourceTree = "<group>"; };
+		183FDCDF1C9C746D002D79EB /* feedback_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedback_back@2x.png"; sourceTree = "<group>"; };
+		183FDCE01C9C746D002D79EB /* feedback_bg_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedback_bg_1@2x.png"; sourceTree = "<group>"; };
+		183FDCE11C9C746D002D79EB /* feedback_bg_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedback_bg_2@2x.png"; sourceTree = "<group>"; };
+		183FDCE21C9C746D002D79EB /* feedback_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedback_btn@2x.png"; sourceTree = "<group>"; };
+		183FDCE31C9C746D002D79EB /* feedback_btn_new@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedback_btn_new@2x.png"; sourceTree = "<group>"; };
+		183FDCE41C9C746D002D79EB /* feedback_warning@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedback_warning@2x.png"; sourceTree = "<group>"; };
+		183FDCE51C9C746D002D79EB /* LeanCloudFeedback.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = LeanCloudFeedback.strings; sourceTree = "<group>"; };
+		183FDCF71C9C78DB002D79EB /* RMNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMNavigationController.swift; sourceTree = "<group>"; };
 		1841F8711C7733A60046D57F /* libSocialWechat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialWechat.a; sourceTree = "<group>"; };
 		1841F8721C7733A60046D57F /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		1841F8731C7733A60046D57F /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
@@ -363,7 +410,7 @@
 		189F45001C88CF6800EE1B3B /* RMWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMWebViewController.swift; sourceTree = "<group>"; };
 		18A4438F1C64EEAC00FEB149 /* OrgCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgCell.swift; sourceTree = "<group>"; };
 		18A443911C64F5BB00FEB149 /* OrgsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = OrgsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		18AA6BDF1C90949C00BDD39B /* WithdrawalRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawalRecordViewController.swift; sourceTree = "<group>"; };
+		18AA6BDF1C90949C00BDD39B /* WithdrawalRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = WithdrawalRecordViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18AA6BE11C91123400BDD39B /* RecordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordCell.swift; sourceTree = "<group>"; };
 		18AA6BE31C91433700BDD39B /* SettingsHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
 		18AA6BE71C91444600BDD39B /* SettingsHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsHeaderView.xib; sourceTree = "<group>"; };
@@ -391,11 +438,11 @@
 		18C79D7C1C8215FF004AAA44 /* OrdersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = OrdersViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18C79D7E1C83221A004AAA44 /* RKSwipeBetweenViewControllers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKSwipeBetweenViewControllers.h; sourceTree = "<group>"; };
 		18C79D7F1C83221A004AAA44 /* RKSwipeBetweenViewControllers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKSwipeBetweenViewControllers.m; sourceTree = "<group>"; };
-		18C79D851C83EDCF004AAA44 /* RMPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMPageViewController.swift; sourceTree = "<group>"; };
-		18C97F661C8DE132000B4EC9 /* ManagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagementViewController.swift; sourceTree = "<group>"; };
-		18C97F681C8DE14E000B4EC9 /* CandidatesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidatesViewController.swift; sourceTree = "<group>"; };
+		18C79D851C83EDCF004AAA44 /* RMPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RMPageViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		18C97F661C8DE132000B4EC9 /* ManagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ManagementViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		18C97F681C8DE14E000B4EC9 /* CandidatesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CandidatesViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18C97F6A1C8DE164000B4EC9 /* CandidateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateCell.swift; sourceTree = "<group>"; };
-		18C97F6C1C8DE580000B4EC9 /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
+		18C97F6C1C8DE580000B4EC9 /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ActivityCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18C9A1E51C67B99200A80A22 /* TTUITableViewZoomController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTUITableViewZoomController.h; sourceTree = "<group>"; };
 		18C9A1E61C67B99200A80A22 /* TTUITableViewZoomController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTUITableViewZoomController.m; sourceTree = "<group>"; };
 		18C9A1EF1C687CA000A80A22 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
@@ -530,9 +577,52 @@
 			isa = PBXGroup;
 			children = (
 				183FDCC01C9C59A4002D79EB /* MiddleCoverCell.xib */,
-				183FDCC51C9C5C6F002D79EB /* TableViewCell.xib */,
+				183FDCC51C9C5C6F002D79EB /* RMFullCoverCell.xib */,
 			);
 			name = CellNibs;
+			sourceTree = "<group>";
+		};
+		183FDCC81C9C746D002D79EB /* LeanCloudFeedback */ = {
+			isa = PBXGroup;
+			children = (
+				183FDCC91C9C746D002D79EB /* Info.plist */,
+				183FDCCA1C9C746D002D79EB /* LCHttpClient.h */,
+				183FDCCB1C9C746D002D79EB /* LCHttpClient.m */,
+				183FDCCC1C9C746D002D79EB /* LCUserFeedbackAgent.h */,
+				183FDCCD1C9C746D002D79EB /* LCUserFeedbackAgent.m */,
+				183FDCCE1C9C746D002D79EB /* LCUserFeedbackImageViewController.h */,
+				183FDCCF1C9C746D002D79EB /* LCUserFeedbackImageViewController.m */,
+				183FDCD01C9C746D002D79EB /* LCUserFeedbackReply.h */,
+				183FDCD11C9C746D002D79EB /* LCUserFeedbackReply.m */,
+				183FDCD21C9C746D002D79EB /* LCUserFeedbackReply_Internal.h */,
+				183FDCD31C9C746D002D79EB /* LCUserFeedbackReplyCell.h */,
+				183FDCD41C9C746D002D79EB /* LCUserFeedbackReplyCell.m */,
+				183FDCD51C9C746D002D79EB /* LCUserFeedbackThread.h */,
+				183FDCD61C9C746D002D79EB /* LCUserFeedbackThread.m */,
+				183FDCD71C9C746D002D79EB /* LCUserFeedbackThread_Internal.h */,
+				183FDCD81C9C746D002D79EB /* LCUserFeedbackViewController.h */,
+				183FDCD91C9C746D002D79EB /* LCUserFeedbackViewController.m */,
+				183FDCDA1C9C746D002D79EB /* LCUtils.h */,
+				183FDCDB1C9C746D002D79EB /* LCUtils.m */,
+				183FDCDC1C9C746D002D79EB /* LeanCloudFeedback.h */,
+				183FDCDD1C9C746D002D79EB /* resources */,
+			);
+			path = LeanCloudFeedback;
+			sourceTree = "<group>";
+		};
+		183FDCDD1C9C746D002D79EB /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				183FDCDE1C9C746D002D79EB /* feedback_add_image@2x.png */,
+				183FDCDF1C9C746D002D79EB /* feedback_back@2x.png */,
+				183FDCE01C9C746D002D79EB /* feedback_bg_1@2x.png */,
+				183FDCE11C9C746D002D79EB /* feedback_bg_2@2x.png */,
+				183FDCE21C9C746D002D79EB /* feedback_btn@2x.png */,
+				183FDCE31C9C746D002D79EB /* feedback_btn_new@2x.png */,
+				183FDCE41C9C746D002D79EB /* feedback_warning@2x.png */,
+				183FDCE51C9C746D002D79EB /* LeanCloudFeedback.strings */,
+			);
+			path = resources;
 			sourceTree = "<group>";
 		};
 		1841F8701C7733A60046D57F /* Wechat */ = {
@@ -574,6 +664,7 @@
 		187745711C6AC57C000427C7 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				183FDCC81C9C746D002D79EB /* LeanCloudFeedback */,
 				187745721C6ACB1D000427C7 /* UMSocial_Sdk_5.0 */,
 				18C9A1F31C687CB900A80A22 /* QuartzCore.framework */,
 				18C9A1F11C687CA600A80A22 /* Foundation.framework */,
@@ -685,6 +776,7 @@
 				183FDCBD1C9C4460002D79EB /* ContainerView.swift */,
 				18198D551C944B0C00A7AD78 /* RemixPass */,
 				18E684B11C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift */,
+				183FDCF71C9C78DB002D79EB /* RMNavigationController.swift */,
 				18E620A51C8C194C00B85941 /* ActivitySubmissionViewController.swift */,
 				184EDFA81C997BD9004F3D7D /* NotifView.swift */,
 				184EDFAA1C997BE7004F3D7D /* NotifView.xib */,
@@ -1192,24 +1284,33 @@
 				18AA6BE81C91444600BDD39B /* SettingsHeaderView.xib in Resources */,
 				18BC02331C8EA5D500FBC162 /* UserFooterView.xib in Resources */,
 				187F037E1C8EB9E700328279 /* ActivityHeaderView.xib in Resources */,
+				183FDCF61C9C746D002D79EB /* LeanCloudFeedback.strings in Resources */,
 				18198D521C9447D300A7AD78 /* RemixPassView.xib in Resources */,
-				183FDCC71C9C5C6F002D79EB /* TableViewCell.xib in Resources */,
+				183FDCC71C9C5C6F002D79EB /* RMFullCoverCell.xib in Resources */,
 				187745961C6ACB1D000427C7 /* UMSShareListController.xib in Resources */,
 				18984F8F1C8472A300821477 /* RMToolBarView.xib in Resources */,
 				187745931C6ACB1D000427C7 /* UMShareEditViewControlleriPad.xib in Resources */,
 				1877458F1C6ACB1D000427C7 /* UMSCommentDetailController.xib in Resources */,
+				183FDCF11C9C746D002D79EB /* feedback_bg_1@2x.png in Resources */,
 				183FDCC21C9C59A4002D79EB /* MiddleCoverCell.xib in Resources */,
+				183FDCEF1C9C746D002D79EB /* feedback_add_image@2x.png in Resources */,
 				187745921C6ACB1D000427C7 /* UMShareEditViewController.xib in Resources */,
+				183FDCF51C9C746D002D79EB /* feedback_warning@2x.png in Resources */,
+				183FDCE61C9C746D002D79EB /* Info.plist in Resources */,
+				183FDCF21C9C746D002D79EB /* feedback_bg_2@2x.png in Resources */,
 				18BC02311C8E973300FBC162 /* UserHeaderView.xib in Resources */,
 				1877458D1C6ACB1D000427C7 /* UMSocialLocalizable.strings in Resources */,
+				183FDCF41C9C746D002D79EB /* feedback_btn_new@2x.png in Resources */,
 				187745951C6ACB1D000427C7 /* UMSnsAccountViewController.xib in Resources */,
 				187745971C6ACB1D000427C7 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				1824544B1C7F96F500CF0CC6 /* AlipaySDK.bundle in Resources */,
 				189782581C63C7EF00458515 /* LaunchScreen.storyboard in Resources */,
+				183FDCF31C9C746D002D79EB /* feedback_btn@2x.png in Resources */,
 				18E684AF1C86EE4200C32C3D /* LCActionSheet.bundle in Resources */,
 				187745941C6ACB1D000427C7 /* UMSLoginViewController.xib in Resources */,
 				187745911C6ACB1D000427C7 /* UMSCommentInputControlleriPad.xib in Resources */,
 				187AE3321C66128C00B255FF /* Assets.xcassets in Resources */,
+				183FDCF01C9C746D002D79EB /* feedback_back@2x.png in Resources */,
 				18E239341C805E2D00363655 /* FloatingActivityView.xib in Resources */,
 				189782531C63C7EF00458515 /* Main.storyboard in Resources */,
 			);
@@ -1377,6 +1478,7 @@
 				1898CA5F1C6990E1009D3261 /* DAKeyboardControl.m in Sources */,
 				1898CA7F1C69B599009D3261 /* UIViewController+TRPresent.swift in Sources */,
 				18198D591C944D3100A7AD78 /* CreditCell.swift in Sources */,
+				183FDCEB1C9C746D002D79EB /* LCUserFeedbackReplyCell.m in Sources */,
 				18BC02351C8EA5E400FBC162 /* UserFooterView.swift in Sources */,
 				1898CA951C69B599009D3261 /* TRViewControllerAnimatedTransitioning.swift in Sources */,
 				18BCA02D1C6E489400DF3EC7 /* LocationViewController.swift in Sources */,
@@ -1385,6 +1487,7 @@
 				1899E9CD1C67108A00ADC2AC /* GalleryViewController.swift in Sources */,
 				1898CA8E1C69B599009D3261 /* SlideTransitionAnimation.swift in Sources */,
 				18B317C61C6B243900336A92 /* DeviceInformation.swift in Sources */,
+				183FDCED1C9C746D002D79EB /* LCUserFeedbackViewController.m in Sources */,
 				18C97F691C8DE14E000B4EC9 /* CandidatesViewController.swift in Sources */,
 				1899E9B51C66360E00ADC2AC /* AdvertiseCell.swift in Sources */,
 				1899E9BD1C663E3B00ADC2AC /* MGSwipeTableCell.m in Sources */,
@@ -1392,8 +1495,10 @@
 				18AA6BE21C91123400BDD39B /* RecordCell.swift in Sources */,
 				181F2B2E1C6A2D8D00FC237D /* NJKWebViewProgress.m in Sources */,
 				18C79D801C83221A004AAA44 /* RKSwipeBetweenViewControllers.m in Sources */,
+				183FDCE71C9C746D002D79EB /* LCHttpClient.m in Sources */,
 				184824FD1C8F023700CCB9CF /* UITextView+Placeholder.m in Sources */,
 				1857B5361C856BB400D00A9E /* ZCSAvatarCaptureController.m in Sources */,
+				183FDCE81C9C746D002D79EB /* LCUserFeedbackAgent.m in Sources */,
 				18E684B21C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift in Sources */,
 				1898CA931C69B599009D3261 /* TransitionTreasury.swift in Sources */,
 				18E684B51C87243300C32C3D /* UIScrollView+EmptyDataSet.m in Sources */,
@@ -1404,10 +1509,13 @@
 				1898CA811C69B599009D3261 /* UINavigationController+TRPushPop.swift in Sources */,
 				18E620AA1C8C591000B85941 /* FloatLabelTextField.swift in Sources */,
 				18C79D861C83EDCF004AAA44 /* RMPageViewController.swift in Sources */,
+				183FDCEC1C9C746D002D79EB /* LCUserFeedbackThread.m in Sources */,
 				18B317C41C6B183000336A92 /* OrgFilteredViewController.swift in Sources */,
 				184857141C63E5BC004E516A /* CTTableViewCell.swift in Sources */,
+				183FDCEA1C9C746D002D79EB /* LCUserFeedbackReply.m in Sources */,
 				184824FA1C8EFDBC00CCB9CF /* NotifInputViewController.swift in Sources */,
 				18E2392E1C802A1800363655 /* InfoCell.swift in Sources */,
+				183FDCF81C9C78DB002D79EB /* RMNavigationController.swift in Sources */,
 				1857B5301C85623900D00A9E /* CommentInputViewController.swift in Sources */,
 				1857B52C1C855A7000D00A9E /* CommentsTableViewController.swift in Sources */,
 				1898CA8A1C69B599009D3261 /* OMINTransitionAnimation.swift in Sources */,
@@ -1420,6 +1528,7 @@
 				18C9A1E71C67B99200A80A22 /* TTUITableViewZoomController.m in Sources */,
 				18A443921C64F5BB00FEB149 /* OrgsViewController.swift in Sources */,
 				18B317C11C6B06EC00336A92 /* GHWalkThroughView.m in Sources */,
+				183FDCE91C9C746D002D79EB /* LCUserFeedbackImageViewController.m in Sources */,
 				189782841C63CA6900458515 /* RMTableViewController.swift in Sources */,
 				1898CA8F1C69B599009D3261 /* TaaskyFlipTransitionAnimation.swift in Sources */,
 				1899E9CB1C67106600ADC2AC /* GalleryCell.swift in Sources */,
@@ -1434,6 +1543,7 @@
 				18C97F671C8DE132000B4EC9 /* ManagementViewController.swift in Sources */,
 				1898CA8C1C69B599009D3261 /* PopTipTransitionAnimation.swift in Sources */,
 				18BCA02F1C6E48D400DF3EC7 /* LocationFullCoverCell.swift in Sources */,
+				183FDCEE1C9C746D002D79EB /* LCUtils.m in Sources */,
 				1898CA861C69B599009D3261 /* DefaultPushTransitionAnimation.swift in Sources */,
 				18D731B41C719B1800DECA1E /* GuideViewController.swift in Sources */,
 				181F2B311C6A2D8D00FC237D /* RxWebViewNavigationViewController.m in Sources */,

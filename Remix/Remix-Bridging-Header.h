@@ -4,6 +4,7 @@
 
 //#import <BmobSDK/Bmob.h>
 #import <AVOSCloud/AVOSCloud.h>
+#import "LeanCloudFeedback.h"
 #import <BmobPay/BmobPay.h>
 #import <OneSignal/OneSignal.h>
 #import "UIScrollView+EmptyDataSet.h"

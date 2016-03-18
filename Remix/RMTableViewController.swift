@@ -85,6 +85,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         if CURRENT_USER.objectForKey("City") as! String == "全国" && launchedTimes == 1 {
             naviController.switchRemixCity()
         }
+    
         cellZoomAnimationDuration = 0.4
         cellZoomXScaleFactor = 1.1
         cellZoomYScaleFactor = 1.1
@@ -219,7 +220,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     func presentSettingsVC() {
         let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let settingsVC = storyBoard.instantiateViewControllerWithIdentifier("SettingsVC")
-        let navigationController = UINavigationController(rootViewController: settingsVC)
+        let navigationController = RMNavigationController(rootViewController: settingsVC)
         self.navigationController?.presentViewController(navigationController, animated: true, completion: nil)
 
     }
@@ -700,7 +701,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                             let url = NSURL(string: (organizations[0].objectForKey("Logo") as! AVFile).url)
                             cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                         }else{
-                            cell.orgLogo.image = UIImage(named:"SDPlaceholder")
+                            cell.orgLogo.image = UIImage(named:"Placeholder")
                         }
                     }else{
                         let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
@@ -756,7 +757,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                         let url = NSURL(string: (organizations[0].objectForKey("Logo") as! AVFile).url)
                         cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
                     }else{
-                        cell.orgLogo.image = UIImage(named:"SDPlaceholder")
+                        cell.orgLogo.image = UIImage(named:"Placeholder")
                     }
                     
                 }else{

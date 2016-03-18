@@ -114,7 +114,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
         let commentsVC = storyBoard.instantiateViewControllerWithIdentifier("CommentsVC") as! CommentsTableViewController
         commentsVC.presentingActivity = self.activity
         commentsVC.parentActivityVC = self
-        let naviController = UINavigationController(rootViewController: commentsVC)
+        let naviController = RMNavigationController(rootViewController: commentsVC)
         
         self.tr_presentViewController(naviController, method: TRPresentTransitionMethod.PopTip(visibleHeight: COMMENTS_TABLE_VIEW_VISIBLE_HEIGHT))
 
@@ -220,7 +220,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
     func presentSettingsVC() {
         let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let settingsVC = storyBoard.instantiateViewControllerWithIdentifier("SettingsVC")
-        let navigationController = UINavigationController(rootViewController: settingsVC)
+        let navigationController = RMNavigationController(rootViewController: settingsVC)
         self.navigationController?.presentViewController(navigationController, animated: true, completion: nil)
         
     }

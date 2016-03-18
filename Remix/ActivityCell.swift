@@ -73,7 +73,7 @@ class ActivityCell: UITableViewCell {
 
     func showGallerySubmission() {
         let gallerySubm = GallerySubmissionViewController()
-        let navi = UINavigationController(rootViewController: gallerySubm)
+        let navi = RMNavigationController(rootViewController: gallerySubm)
         self.parentViewController.presentViewController(navi, animated: true, completion: nil)
     }
 

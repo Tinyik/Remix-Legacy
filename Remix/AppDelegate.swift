@@ -19,8 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        
-        let image = UIImage(named: "back")
+        application.applicationSupportsShakeToEdit = true
         sharedOneSignalInstance = OneSignal(launchOptions: launchOptions, appId: "7a1e4c8b-51f0-49f1-b50a-72cc581121a0", handleNotification: nil, autoRegister: false)
         OneSignal.defaultClient().enableInAppAlertNotification(true)
        // Bmob.registerWithAppKey("08329e2e3a8d3cdde96bf91d7459e8ab")
@@ -184,9 +183,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
             }
         }else if url.scheme == "remix" && url.host == "join"{
-            let subm = OrganizationSubmissionViewController()
-            let navi = UINavigationController(rootViewController: subm)
-            self.window?.rootViewController?.presentViewController(navi, animated: true, completion: nil)
+            if AVUser.currentUser() != nil {
+                let subm = OrganizationSubmissionViewController()
+                let navi = RMNavigationController(rootViewController: subm)
+                self.window?.rootViewController?.presentViewController(navi, animated: true, completion: nil)
+            }else{
+                let alert = UIAlertController(title: "Remix提示", message: "请先登录Remix再提交组织信息。", preferredStyle: .Alert)
+                let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+                alert.addAction(action)
+                self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+
+            }
                 
         }else if url.scheme == "remix" && url.host?.characters.count > 0 && url.path?.characters.count == 0 && url.query == nil {
             if AVUser.currentUser() != nil {

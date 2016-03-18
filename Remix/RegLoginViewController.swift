@@ -31,6 +31,14 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            let alert = UIAlertController(title: "来, 我们聊聊", message: "摇一摇手机即可召唤Remix小哥。从反馈Bug到某个妹子的手机号, 你可以问我任何事。至于回不回答嘛..._(:з」∠)_", preferredStyle: .Alert)
+            let action = UIAlertAction(title: "我试试", style: .Default, handler: nil)
+            alert.addAction(action)
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        phoneNumberField.keyboardType = .PhonePad
+        captchaField.keyboardType = .NumberPad
         captchaField.delegate = self
         phoneNumberField.delegate = self
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide", name: UIKeyboardWillHideNotification, object: nil)
@@ -122,7 +130,7 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
     }
     
     func inputCaptcha() {
-        if phoneNumberField.text == "AppStoreDEMO" {
+        if phoneNumberField.text == "854632" {
             AVUser.logInWithUsernameInBackground("appstoredemo", password: "demo", block: { (user, error) -> Void in
                 if error == nil {
                     CURRENT_USER = user
@@ -251,6 +259,37 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
         }else{
              toolBar.frame.origin.y = self.view.bounds.size.height - 90.0
         }
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        LCUserFeedbackAgent.sharedInstance().countUnreadFeedbackThreadsWithBlock { (number, error) -> Void in
+            if error == nil {
+                if number != 0 {
+                    let agent = LCUserFeedbackAgent()
+                    agent.showConversations(self, title: nil, contact: nil)
+                }
+            }
+        }
+        
+        self.becomeFirstResponder()
+    }
+    override func viewDidDisappear(animated: Bool) {
+        self.resignFirstResponder()
+        super.viewDidDisappear(animated)
+    }
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
+       let alert = UIAlertController(title: "Remix小哥", message: "同学别急着摇...先花15秒注册一下好嘛( ´ ▽ ` )ﾉ 你看我脸都裂了。\n\n另外, 有人托我告诉你, 你笑起来真好看😳", preferredStyle: .Alert)
+       let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+        let action = UIAlertAction(title: "好的", style: .Default) { (action) -> Void in
+            self.startInput()
+        }
+        alert.addAction(cancel)
+        alert.addAction(action)
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 
    

@@ -86,7 +86,7 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
 
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let vc = storyboard.instantiateViewControllerWithIdentifier("ScannerVC")
-        let navi = UINavigationController(rootViewController: vc)
+        let navi = RMNavigationController(rootViewController: vc)
         self.presentViewController(navi, animated: true, completion: nil)
     }
     

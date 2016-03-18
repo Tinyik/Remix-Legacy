@@ -81,7 +81,7 @@ class CommentsTableViewController: UITableViewController, DZNEmptyDataSetSource,
         self.navigationController?.dismissViewControllerAnimated(true, completion: { () -> Void in
             let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
             let settingsVC = storyBoard.instantiateViewControllerWithIdentifier("SettingsVC")
-            let navigationController = UINavigationController(rootViewController: settingsVC)
+            let navigationController = RMNavigationController(rootViewController: settingsVC)
             self.parentActivityVC.navigationController!.presentViewController(navigationController, animated: true, completion: nil)
         })
         

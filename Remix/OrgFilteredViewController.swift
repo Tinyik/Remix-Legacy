@@ -246,7 +246,7 @@ class OrgFilteredViewController: UIViewController, UITableViewDataSource, UITabl
     func presentSettingsVC() {
         let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let settingsVC = storyBoard.instantiateViewControllerWithIdentifier("SettingsVC")
-        let navigationController = UINavigationController(rootViewController: settingsVC)
+        let navigationController = RMNavigationController(rootViewController: settingsVC)
         self.navigationController?.presentViewController(navigationController, animated: true, completion: nil)
         
     }

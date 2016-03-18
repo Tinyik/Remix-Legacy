@@ -27,7 +27,7 @@ class LocationViewController: UITableViewController {
     
     func addLocation() {
         let submVC = LocationSubmissionViewController()
-        let navigationController = UINavigationController(rootViewController: submVC)
+        let navigationController = RMNavigationController(rootViewController: submVC)
         self.presentViewController(navigationController, animated: true, completion: nil)
     }
     

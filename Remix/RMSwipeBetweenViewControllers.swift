@@ -47,20 +47,20 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
             if self.checkPersonalInfoIntegrity() {
                 if buttonIndex == 0 {
                     let submVC = ActivitySubmissionViewController()
-                    let navigationController = UINavigationController(rootViewController: submVC)
+                    let navigationController = RMNavigationController(rootViewController: submVC)
                     self.presentViewController(navigationController, animated: true, completion: nil)
                 }
                 
                 if buttonIndex == 1 {
                     let submVC = LocationSubmissionViewController()
-                    let navigationController = UINavigationController(rootViewController: submVC)
+                    let navigationController = RMNavigationController(rootViewController: submVC)
                     self.presentViewController(navigationController, animated: true, completion: nil)
                     
                 }
                 
                 if buttonIndex == 2 {
                     let submVC = GallerySubmissionViewController()
-                    let navigationController = UINavigationController(rootViewController: submVC)
+                    let navigationController = RMNavigationController(rootViewController: submVC)
                     self.presentViewController(navigationController, animated: true, completion: nil)
                 }
                 
@@ -68,7 +68,7 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
                     let sheet2 = LCActionSheet(title: "请选择组织入驻信息填写方式。", buttonTitles: ["App内直接填写", "下载PDF申请表"], redButtonIndex: -1, clicked: { (index) -> Void in
                         if index == 0 {
                             let submVC = OrganizationSubmissionViewController()
-                            let navigationController = UINavigationController(rootViewController: submVC)
+                            let navigationController = RMNavigationController(rootViewController: submVC)
                             self.presentViewController(navigationController, animated: true, completion: nil)
                         }
                         
@@ -196,6 +196,33 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
             self.rm_delegate2.refreshViewContentForCityChange()
             self.cityLabel.text = REMIX_CITY_NAME
             self.cityLabel.sizeToFit()
+        }
+    }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        LCUserFeedbackAgent.sharedInstance().countUnreadFeedbackThreadsWithBlock { (number, error) -> Void in
+            if error == nil {
+                if number != 0 {
+                    let agent = LCUserFeedbackAgent()
+                    agent.showConversations(self, title: nil, contact: nil)
+                }
+            }
+        }
+
+        self.becomeFirstResponder()
+    }
+    override func viewDidDisappear(animated: Bool) {
+        self.resignFirstResponder()
+        super.viewDidDisappear(animated)
+    }
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
+        print("lalala")
+        if motion == UIEventSubtype.MotionShake {
+            let agent = LCUserFeedbackAgent()
+            agent.showConversations(self, title: nil, contact: nil)
         }
     }
     
