@@ -49,12 +49,14 @@ class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNE
         
         let query = AVQuery(className: "Orders")
         query.whereKey("isVisibleToUsers", equalTo: true)
-        query.whereKey("CustomerObjectId", equalTo: AVObject(withoutDataWithObjectId: CURRENT_USER.objectId))
+        query.whereKey("CustomerObjectId", equalTo: AVUser(withoutDataWithObjectId: CURRENT_USER.objectId))
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
         
             if error == nil {
                 for order in orders {
-                    self.parentActivityIds.append(order.objectForKey("ParentActivityObjectId") as! String)
+                    if let o = order.objectForKey("ParentActivityObjectId") as? AVObject {
+                        self.parentActivityIds.append(o.objectId)
+                    }
                     self.orders.append(order as! AVObject)
                     
                 }
@@ -163,7 +165,7 @@ class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNE
             }
         }
         if selectedOrder.objectForKey("CheckIn") as! Bool == false {
-            cell.orderNoLabel.text = "订单号: " + selectedOrder.objectId
+            cell.orderNoLabel.text = "订单号: " + selectedOrder.objectId.substringFromIndex(selectedOrder.objectId.startIndex.advancedBy(17))
         }else{
             cell.orderNoLabel.textColor = FlatRed()
             cell.orderNoLabel.text = "已签到"

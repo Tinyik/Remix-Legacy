@@ -224,12 +224,15 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     func fetchOrdersInformation() {
         registeredActivitiesIds = []
         let query = AVQuery(className: "Orders")
-        query.whereKey("CustomerObjectId", equalTo: AVObject(withoutDataWithObjectId: CURRENT_USER.objectId))
+        query.whereKey("CustomerObjectId", equalTo: AVUser(withoutDataWithObjectId: CURRENT_USER.objectId))
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
             if error == nil {
                 for order in orders {
                     print(order.objectId)
-                    self.registeredActivitiesIds.append(order.objectForKey("ParentActivityObjectId") as! String)
+                    if let o = order.objectForKey("ParentActivityObjectId") as? AVObject {
+                        self.registeredActivitiesIds.append(o.objectId)
+                    }
+
                 }
                 self.setUpFloatingScrollView()
             }else{
@@ -461,9 +464,9 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             shouldAskToEnableNotif = false
         }
         
-        if let parentActivityId = headerAds[(sender.view?.tag)!].objectForKey("ParentActivityObjectId") as? String {
+        if let parentActivity = headerAds[(sender.view?.tag)!].objectForKey("ParentActivityObjectId") as? AVObject {
             let query = AVQuery(className: "Activity")
-            query.getObjectInBackgroundWithId(parentActivityId, block: { (activity, error) -> Void in
+            query.getObjectInBackgroundWithId(parentActivity.objectId, block: { (activity, error) -> Void in
                 if error == nil {
                     let activityView = RMActivityViewController(url: NSURL(string: activity.objectForKey("URL") as! String))
                     activityView.activity = activity

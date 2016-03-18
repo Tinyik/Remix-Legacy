@@ -42,7 +42,7 @@ class ManagementViewController: UITableViewController, DZNEmptyDataSetDelegate, 
         coverImgURLs = []
         parentActivities = []
         let query = AVQuery(className: "Activity")
-        query.whereKey("Submitter", equalTo: AVObject(withoutDataWithObjectId: CURRENT_USER.objectId))
+        query.whereKey("Submitter", equalTo: AVUser(withoutDataWithObjectId: CURRENT_USER.objectId))
         query.whereKey("isHeldBySubmitter", equalTo: true)
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
             if error == nil {
@@ -121,7 +121,10 @@ class ManagementViewController: UITableViewController, DZNEmptyDataSetDelegate, 
             cell.actionButton.hidden = false
             cell.activityStatus = "Invisible"
         }
-        cell.orderNoLabel.text = "活动唯一标识码: " + selectedActivity.objectId
+        let shortId = selectedActivity.objectId.substringFromIndex(selectedActivity.objectId.startIndex.advancedBy(17))
+        cell.orderNoLabel.text = "活动唯一标识码: " + shortId
+        selectedActivity.setObject(shortId, forKey: "ShortId")
+        selectedActivity.saveInBackground()
         return cell
     }
 

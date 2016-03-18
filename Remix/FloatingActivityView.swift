@@ -112,12 +112,14 @@ class FloatingActivityView: UIView, BmobPayDelegate {
     func fetchOrdersInformation() {
         registeredActivitiesIds = []
         let query = AVQuery(className: "Orders")
-        query.whereKey("CustomerObjectId", equalTo: AVObject(withoutDataWithObjectId: CURRENT_USER.objectId))
+        query.whereKey("CustomerObjectId", equalTo: AVUser(withoutDataWithObjectId: CURRENT_USER.objectId))
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
             if error == nil {
                 for order in orders {
                     print(order.objectId)
-                    self.registeredActivitiesIds.append(order.objectForKey("ParentActivityObjectId") as! String)
+                    if let o = order.objectForKey("ParentActivityObjectId") as? AVObject {
+                        self.registeredActivitiesIds.append(o.objectId)
+                    }
                 }
             }else{
                 let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
@@ -218,10 +220,10 @@ class FloatingActivityView: UIView, BmobPayDelegate {
     
     func paySuccess() {
         let newOrder = AVObject(className: "Orders")
-        newOrder.setObject(ongoingTransactionId, forKey: "ParentActivityObjectId")
+        newOrder.setObject(AVObject(withoutDataWithObjectId: ongoingTransactionId), forKey: "ParentActivityObjectId")
         newOrder.setObject(ongoingTransactionPrice, forKey: "Amount")
         newOrder.setObject(false, forKey: "CheckIn")
-        newOrder.setObject(AVObject(withoutDataWithObjectId: CURRENT_USER.objectId), forKey: "CustomerObjectId")
+        newOrder.setObject(AVUser(withoutDataWithObjectId: CURRENT_USER.objectId), forKey: "CustomerObjectId")
         newOrder.setObject(ongoingTransactionRemarks, forKey: "Remarks")
         newOrder.setObject(true, forKey: "isVisibleToUsers")
         newOrder.saveInBackgroundWithBlock { (isSuccessful, error) -> Void in

@@ -232,7 +232,7 @@ class OrganizationSubmissionViewController: FormViewController {
     func setUpParallaxHeaderView() {
         let manager = SDWebImageManager()
         let query = AVQuery(className: "UIRemoteConfig")
-        query.getObjectInBackgroundWithId("Cd3f1112") { (remix, error) -> Void in
+        query.getObjectInBackgroundWithId("56ea40b6f3609a00544ed773") { (remix, error) -> Void in
             if error == nil {
                 let url = NSURL(string: (remix.objectForKey("OrganizationSubm_Image") as! AVFile).url)
                 manager.downloadImageWithURL(url, options: .RetryFailed, progress: nil) { (image, error, type, bool, url) -> Void in

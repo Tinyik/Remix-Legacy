@@ -103,7 +103,7 @@ class CommentsTableViewController: UITableViewController, DZNEmptyDataSetSource,
         cell.commentContentLabel.text = activityComments[indexPath.row].objectForKey("Content") as? String
         let dateString = String(activityComments[indexPath.row].createdAt)
         cell.timeLabel.text = dateString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())[0]
-        let userId = activityComments[indexPath.row].objectForKey("UserObjectId") as! String
+        let userId = (activityComments[indexPath.row].objectForKey("UserObjectId") as! AVObject).objectId
         let query = AVQuery(className: "_User")
         query.getObjectInBackgroundWithId(userId) { (user, error) -> Void in
             if error == nil {

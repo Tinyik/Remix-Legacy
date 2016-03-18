@@ -237,7 +237,7 @@ class ActivitySubmissionViewController: FormViewController {
                     newActivity.setObject(false, forKey: "hasWithdrawn")
                     newActivity.setObject(false, forKey: "hasRequestedWithdrawal")
                     newActivity.setObject(true, forKey: "isHeldBySubmitter")
-                    newActivity.setObject(AVObject(withoutDataWithObjectId: AVUser.currentUser().objectId), forKey: "Submitter")
+                    newActivity.setObject(AVUser(withoutDataWithObjectId: AVUser.currentUser().objectId), forKey: "Submitter")
                     newActivity.setObject(attr["ItemName"]! as! String, forKey: "ItemName")
                     newActivity.setObject("主办方提交:" + (attr["Title"]! as! String), forKey: "Title")
                     newActivity.setObject(attr["Org"] as! String, forKey: "Org")
@@ -345,7 +345,7 @@ class ActivitySubmissionViewController: FormViewController {
                 newActivity.setObject(false, forKey: "hasWithdrawn")
                 newActivity.setObject(false, forKey: "hasRequestedWithdrawal")
                 newActivity.setObject(false, forKey: "isHeldBySubmitter")
-                newActivity.setObject(AVObject(withoutDataWithObjectId: AVUser.currentUser().objectId), forKey: "Submitter")
+                newActivity.setObject(AVUser(withoutDataWithObjectId: AVUser.currentUser().objectId), forKey: "Submitter")
                 newActivity.setObject("用户提交", forKey: "Title")
                 selectedCities.insert("全国", atIndex: 0)
                 newActivity.setObject(selectedCates, forKey: "Category")
@@ -419,7 +419,7 @@ class ActivitySubmissionViewController: FormViewController {
     func setUpParallaxHeaderView() {
             let manager = SDWebImageManager()
             let query = AVQuery(className: "UIRemoteConfig")
-            query.getObjectInBackgroundWithId("Cd3f1112") { (remix, error) -> Void in
+            query.getObjectInBackgroundWithId("56ea40b6f3609a00544ed773") { (remix, error) -> Void in
                 if error == nil {
                     let url = NSURL(string: (remix.objectForKey("ActivitySubm_Image") as! AVFile).url)
                     manager.downloadImageWithURL(url, options: .RetryFailed, progress: nil) { (image, error, type, bool, url) -> Void in

@@ -159,7 +159,7 @@ class LocationSubmissionViewController: FormViewController {
                     }
                 }
                 selectedCities.insert("全国", atIndex: 0)
-                newActivity.setObject(AVObject(withoutDataWithObjectId: AVUser.currentUser().objectId), forKey: "Submitter")
+                newActivity.setObject(AVUser(withoutDataWithObjectId: AVUser.currentUser().objectId), forKey: "Submitter")
                 newActivity.setObject("店主提交: " + (attr["Title"]! as! String), forKey: "Title")
                 newActivity.setObject(attr["Org"] as! String, forKey: "Org")
                 newActivity.setObject(String(attr["URL"]! as! NSURL), forKey: "URL")
@@ -193,7 +193,7 @@ class LocationSubmissionViewController: FormViewController {
                     }
                 }
                 selectedCities.insert("全国", atIndex: 0)
-                newActivity.setObject(AVObject(withoutDataWithObjectId: AVUser.currentUser().objectId), forKey: "Submitter")
+                newActivity.setObject(AVUser(withoutDataWithObjectId: AVUser.currentUser().objectId), forKey: "Submitter")
                 newActivity.setObject("用户提交: " + (attr["Title"]! as! String), forKey: "Title")
                 newActivity.setObject(attr["Org"] as! String, forKey: "Org")
                 newActivity.setObject(String(attr["URL"]! as! NSURL), forKey: "URL")
@@ -283,7 +283,7 @@ class LocationSubmissionViewController: FormViewController {
     func setUpParallaxHeaderView() {
         let manager = SDWebImageManager()
         let query = AVQuery(className: "UIRemoteConfig")
-        query.getObjectInBackgroundWithId("Cd3f1112") { (remix, error) -> Void in
+        query.getObjectInBackgroundWithId("56ea40b6f3609a00544ed773") { (remix, error) -> Void in
             if error == nil {
                 let url = NSURL(string: (remix.objectForKey("LocationSubm_Image") as! AVFile).url)
                 manager.downloadImageWithURL(url, options: .RetryFailed, progress: nil) { (image, error, type, bool, url) -> Void in

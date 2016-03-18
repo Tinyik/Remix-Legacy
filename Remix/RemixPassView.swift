@@ -16,7 +16,7 @@ class RemixPassView: UIView {
     @IBOutlet weak var creditLabel: UILabel!
     @IBOutlet weak var passNumberLabel: UILabel!
     var user: AVUser!
-//    let alphebat = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+
     func fetchUserInfo() {
         backgroundView.contentMode = .ScaleAspectFill
         holderLabel.textColor = UIColor(red: 1, green: 225/255, blue: 72/255, alpha: 1)
@@ -31,8 +31,8 @@ class RemixPassView: UIView {
         }else{
             holderLabel.text = user.objectForKey("LegalName") as? String
         }
-        let attributedString = NSMutableAttributedString(string: user.objectId)
-        attributedString.addAttribute(NSKernAttributeName, value: 10, range: NSMakeRange(0, user.objectId.characters.count))
+        let attributedString = NSMutableAttributedString(string: user.objectId.substringFromIndex(user.objectId.startIndex.advancedBy(14)))
+        attributedString.addAttribute(NSKernAttributeName, value: 10, range: NSMakeRange(0, user.objectId.substringFromIndex(user.objectId.startIndex.advancedBy(14)).characters.count))
         passNumberLabel.attributedText = attributedString
         creditLabel.text = String(user.objectForKey("Credit") as! Int)
         balanceLabel.text = "￥" + String(user.objectForKey("Balance") as! Int)

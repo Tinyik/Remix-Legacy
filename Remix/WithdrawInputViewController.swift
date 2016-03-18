@@ -29,8 +29,8 @@ class WithdrawInputViewController: UIViewController {
                 newRequest.setObject(false, forKey: "isResponded")
                 newRequest.setObject(self.inputField.text, forKey: "TargetAccount")
                 newRequest.setObject(self.amount, forKey: "Amount")
-                newRequest.setObject(AVObject(withoutDataWithObjectId: CURRENT_USER.objectId), forKey: "Submitter")
-                newRequest.setObject(self.activityObjectId, forKey: "ActivityObjectId")
+                newRequest.setObject(AVUser(withoutDataWithObjectId: CURRENT_USER.objectId), forKey: "Submitter")
+                newRequest.setObject(AVObject(withoutDataWithObjectId: self.activityObjectId), forKey: "ActivityObjectId")
                 newRequest.setObject(CURRENT_USER.mobilePhoneNumber, forKey: "Contact")
                 newRequest.saveInBackgroundWithBlock { (isSuccessful, error) -> Void in
                     if error == nil {
@@ -67,7 +67,7 @@ class WithdrawInputViewController: UIViewController {
             let alert = UIAlertController(title: "Remix提示", message: "你是否确认更改提款账户为: " + inputField.text! + "?", preferredStyle: .Alert)
             let action = UIAlertAction(title: "好的", style: .Default, handler: { (action) -> Void in
                 let query = AVQuery(className: "WithdrawalRequest")
-                query.whereKey("ActivityObjectId", equalTo: self.activityObjectId)
+                query.whereKey("ActivityObjectId", equalTo: AVObject(withoutDataWithObjectId: self.activityObjectId))
                 query.findObjectsInBackgroundWithBlock({ (requests, error) -> Void in
                     if error == nil {
                         if requests.count == 1 {

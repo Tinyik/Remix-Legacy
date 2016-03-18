@@ -19,13 +19,12 @@ class RemixPassViewController: UITableViewController, DZNEmptyDataSetDelegate, D
     func setUpParallaxHeaderView() {
         let headerView = UIView.loadFromNibNamed("RemixPassView") as! RemixPassView
         headerView.user = CURRENT_USER
-        headerView.fetchUserInfo()
         self.tableView.tableFooterView = UIView()
         self.tableView.emptyDataSetDelegate = self
         self.tableView.emptyDataSetSource = self
         let _headerView = ParallaxHeaderView.parallaxHeaderViewWithSubView(headerView) as! ParallaxHeaderView
         self.tableView.tableHeaderView = _headerView
-        
+        headerView.fetchUserInfo()
         _headerView.layoutHeaderViewForScrollViewOffset(tableView.contentOffset)
     }
     

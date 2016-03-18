@@ -84,13 +84,16 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
     
     func fetchOrdersInformation() {
         let query = AVQuery(className: "Orders")
-        query.whereKey("CustomerObjectId", equalTo: AVObject(withoutDataWithObjectId: CURRENT_USER.objectId))
+        query.whereKey("CustomerObjectId", equalTo: AVUser(withoutDataWithObjectId: CURRENT_USER.objectId))
 
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
             if error == nil {
                 for order in orders {
                     print(order.objectId)
-                    self.registeredActivitiesIds.append(order.objectForKey("ParentActivityObjectId") as! String)
+                    if let o = order.objectForKey("ParentActivityObjectId") as? AVObject {
+                        self.registeredActivitiesIds.append(o.objectId)
+                    }
+
                 }
             }else{
                 let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
@@ -391,9 +394,9 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
     
     func paySuccess() {
         let newOrder = AVObject(className: "Orders")
-        newOrder.setObject(ongoingTransactionId, forKey: "ParentActivityObjectId")
+        newOrder.setObject(AVObject(withoutDataWithObjectId: ongoingTransactionId), forKey: "ParentActivityObjectId")
         newOrder.setObject(ongoingTransactionPrice, forKey: "Amount")
-        newOrder.setObject(AVObject(withoutDataWithObjectId: CURRENT_USER.objectId)
+        newOrder.setObject(AVUser(withoutDataWithObjectId: CURRENT_USER.objectId)
 , forKey: "CustomerObjectId")
         newOrder.setObject(false, forKey: "CheckIn")
         newOrder.setObject(ongoingTransactionRemarks, forKey: "Remarks")
@@ -417,6 +420,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
                 alert.addAction(cancel)
                 self.presentViewController(alert, animated: true, completion: nil)
             }else {
+                print(error.description)
                 let alert = UIAlertController(title: "支付状态", message: "Something is wrong. 这是一个极小概率的错误。不过别担心，如果已经被扣款, 请联系Remix客服让我们为你解决。（181-4977-0476）", preferredStyle: .Alert)
                 let cancel = UIAlertAction(title: "稍后在说", style: .Cancel, handler: nil)
                 let action = UIAlertAction(title: "立即拨打", style: .Default) { (action) -> Void in

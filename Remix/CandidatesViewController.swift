@@ -204,13 +204,16 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
                     print("ORDER")
                     self.orders.append(order as! AVObject)
                     let query2 = AVQuery(className: "_User")
-                    query2.getObjectInBackgroundWithId(order.objectForKey("CustomerObjectId") as! String, block: { (user, error) -> Void in
-                        print("USER")
-                        if error == nil {
-                            self.customers.append(user as! AVUser)
-                            self.tableView.reloadData()
-                        }
-                    })
+                    if let u = order.objectForKey("CustomerObjectId") as? AVUser {
+                        query2.getObjectInBackgroundWithId(u.objectId, block: { (user, error) -> Void in
+                            print("USER")
+                            if error == nil {
+                                self.customers.append(user as! AVUser)
+                                self.tableView.reloadData()
+                            }
+                        })
+
+                    }
                     
                     self.revenue += order.objectForKey("Amount") as! Double
                 }
@@ -363,7 +366,7 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") as! CandidateCell
         cell.nameLabel.text = customers[indexPath.row].objectForKey("LegalName") as? String
-        cell.detailLabel.text = "订单号: " + orders[indexPath.row].objectId
+        cell.detailLabel.text = "订单号: " + orders[indexPath.row].objectId.substringFromIndex(orders[indexPath.row].objectId.startIndex.advancedBy(17))
         cell.detailLabel.textColor = FlatGrayDark()
         if orders[indexPath.row].objectForKey("CheckIn") as! Bool == false {
             cell.statusLabel.text = "未签到"

@@ -111,7 +111,7 @@ class GallerySubmissionViewController: FormViewController {
     func setUpParallaxHeaderView() {
         let manager = SDWebImageManager()
         let query = AVQuery(className: "UIRemoteConfig")
-        query.getObjectInBackgroundWithId("Cd3f1112") { (remix, error) -> Void in
+        query.getObjectInBackgroundWithId("56ea40b6f3609a00544ed773") { (remix, error) -> Void in
             if error == nil {
                 let url = NSURL(string: (remix.objectForKey("GallerySubm_Image") as! AVFile).url)
                 manager.downloadImageWithURL(url, options: .RetryFailed, progress: nil) { (image, error, type, bool, url) -> Void in
@@ -175,12 +175,12 @@ class GallerySubmissionViewController: FormViewController {
                 }
             }
             selectedCities.insert("全国", atIndex: 0)
-            newGallery.setObject(AVObject(withoutDataWithObjectId: CURRENT_USER.objectId), forKey: "Submitter")
+            newGallery.setObject(AVUser(withoutDataWithObjectId: CURRENT_USER.objectId), forKey: "Submitter")
             newGallery.setObject(CURRENT_USER.mobilePhoneNumber, forKey: "SubmitterContact")
             newGallery.setObject(selectedCities, forKey: "Cities")
             newGallery.setObject(attr["isRemixActivity"]! as! Bool, forKey: "isRemixActivity")
             if attr["isRemixActivity"]! as! Bool == true{
-                newGallery.setObject(attr["ParentActivityObjectId"]! as! String, forKey: "ParentActivityObjectId")
+                newGallery.setObject(AVObject(withoutDataWithObjectId: attr["ParentActivityObjectId"]! as! String), forKey: "ParentActivityObjectId")
             }else{
                 newGallery.setObject(attr["Org"]! as! String, forKey: "Org")
                 if let date = attr["Date"]! as? NSDate {

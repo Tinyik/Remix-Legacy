@@ -127,6 +127,7 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
                 if error == nil {
                     CURRENT_USER = user
                     self.view.removeKeyboardControl()
+                    self.phoneNumberField.resignFirstResponder()
                     REMIX_CITY_NAME = CURRENT_USER.objectForKey("City") as! String
                     sharedOneSignalInstance.sendTag("ObjectId", value: CURRENT_USER.objectId)
                     sharedOneSignalInstance.sendTag("City", value: REMIX_CITY_NAME)

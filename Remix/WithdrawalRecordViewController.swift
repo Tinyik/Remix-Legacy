@@ -31,7 +31,7 @@ class WithdrawalRecordViewController: UITableViewController, DZNEmptyDataSetDele
     func fetchCloudData() {
         records = []
         let query = AVQuery(className: "WithdrawalRequest")
-        query.whereKey("Submitter", equalTo: AVObject(withoutDataWithObjectId: CURRENT_USER.objectId))
+        query.whereKey("Submitter", equalTo: AVUser(withoutDataWithObjectId: CURRENT_USER.objectId))
         query.findObjectsInBackgroundWithBlock { (records, error) -> Void in
             if error == nil {
            

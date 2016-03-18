@@ -39,7 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
-            
             if appVersion == nil || appVersion != currentAppVersion {
                 
                 userDefaults.setValue(currentAppVersion, forKey: "appVersion")
@@ -188,21 +187,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if AVUser.currentUser() != nil {
                 let query = AVQuery(className: "Activity")
                 var activity = AVObject()
-                query.getObjectInBackgroundWithId(url.host!, block: { (_activity, error) -> Void in
+                query.whereKey("ShortId", equalTo: url.host!)
+                query.findObjectsInBackgroundWithBlock({ (activities, error) -> Void in
                     if error == nil {
-                        activity = _activity as! AVObject
-                        let activityView = RMActivityViewController(url: NSURL(string: activity.objectForKey("URL") as! String))
-                        activityView.activity = activity
-                        activityView.toolBar.likeButton.hidden = true
-                        if let vc = self.window?.rootViewController as? RMSwipeBetweenViewControllers {
-                            vc.pushViewController(activityView, animated: true)
+                        if activities.count == 1 {
+                            activity = activities[0] as! AVObject
+                            let activityView = RMActivityViewController(url: NSURL(string: activity.objectForKey("URL") as! String))
+                            activityView.activity = activity
+                            activityView.toolBar.likeButton.hidden = true
+                            if let vc = self.window?.rootViewController as? RMSwipeBetweenViewControllers {
+                                vc.pushViewController(activityView, animated: true)
+                            }else{
+                                let alert = UIAlertController(title: "Remix提示", message: "请重启Remix后再次打开此链接。", preferredStyle: .Alert)
+                                let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
+                                alert.addAction(action)
+                                self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+                            }
+
                         }else{
-                            let alert = UIAlertController(title: "Remix提示", message: "请重启Remix后再次打开此链接。", preferredStyle: .Alert)
+                            print("NOTONE")
+                            print(activities.count)
+                            let alert = UIAlertController(title: "Remix提示", message: "_(´ཀ`」 ∠)_ 这里没有找到你想要的活动😢，看看Remix别的活动吧~", preferredStyle: .Alert)
                             let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
                             alert.addAction(action)
                             self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
                         }
-
                         
                     }else{
                         let alert = UIAlertController(title: "Remix提示", message: "_(´ཀ`」 ∠)_ 这里没有找到你想要的活动😢，看看Remix别的活动吧~", preferredStyle: .Alert)
@@ -210,7 +219,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         alert.addAction(action)
                         self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
                     }
-                    
+
                 })
                 
                 
