@@ -183,6 +183,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 alert.addAction(action)
                 self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
             }
+        }else if url.scheme == "remix" && url.host == "join"{
+            let subm = OrganizationSubmissionViewController()
+            let navi = UINavigationController(rootViewController: subm)
+            self.window?.rootViewController?.presentViewController(navi, animated: true, completion: nil)
+                
         }else if url.scheme == "remix" && url.host?.characters.count > 0 && url.path?.characters.count == 0 && url.query == nil {
             if AVUser.currentUser() != nil {
                 let query = AVQuery(className: "Activity")
@@ -203,7 +208,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 alert.addAction(action)
                                 self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
                             }
-
+                            
                         }else{
                             print("NOTONE")
                             print(activities.count)
@@ -219,11 +224,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         alert.addAction(action)
                         self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
                     }
-
+                    
                 })
-                
-                
+
             }else{
+                
                 let alert = UIAlertController(title: "Remix提示", message: "这个活动这么精彩，赶紧登录Remix来报名吧~", preferredStyle: .Alert)
                 let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
                 alert.addAction(action)
