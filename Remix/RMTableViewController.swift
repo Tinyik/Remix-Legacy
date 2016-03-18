@@ -696,10 +696,11 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 query.whereKey("Name", equalTo: selectedActivity.objectForKey("Org") as? String)
                 query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
                     if error == nil {
-                        for org in organizations {
-                            let url = NSURL(string: (org.objectForKey("Logo") as! AVFile).url)
-                            
+                        if organizations.count == 1 {
+                            let url = NSURL(string: (organizations[0].objectForKey("Logo") as! AVFile).url)
                             cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
+                        }else{
+                            cell.orgLogo.image = UIImage(named:"SDPlaceholder")
                         }
                     }else{
                         let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
@@ -751,10 +752,13 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             query.whereKey("Name", equalTo: selectedActivity.objectForKey("Org") as? String)
             query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
                 if error == nil {
-                    for org in organizations {
-                        let url = NSURL(string: (org.objectForKey("Logo") as! AVFile).url)
+                    if organizations.count == 1 {
+                        let url = NSURL(string: (organizations[0].objectForKey("Logo") as! AVFile).url)
                         cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
+                    }else{
+                        cell.orgLogo.image = UIImage(named:"SDPlaceholder")
                     }
+                    
                 }else{
                     let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
                     snackBar.backgroundColor = FlatWatermelonDark()
