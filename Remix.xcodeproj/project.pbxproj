@@ -183,6 +183,7 @@
 		18C97F6D1C8DE580000B4EC9 /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C97F6C1C8DE580000B4EC9 /* ActivityCell.swift */; };
 		18C9A1E71C67B99200A80A22 /* TTUITableViewZoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C9A1E61C67B99200A80A22 /* TTUITableViewZoomController.m */; };
 		18C9A1F71C687DA200A80A22 /* UIImageView+BetterFace.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C9A1F61C687DA200A80A22 /* UIImageView+BetterFace.m */; };
+		18CE707D1C9D4609004610A5 /* RMTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18CE707C1C9D4609004610A5 /* RMTableViewCell.xib */; };
 		18D731B41C719B1800DECA1E /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D731B31C719B1800DECA1E /* GuideViewController.swift */; };
 		18E2392C1C8029D300363655 /* PersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2392B1C8029D300363655 /* PersonalInfoViewController.swift */; };
 		18E2392E1C802A1800363655 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2392D1C802A1800363655 /* InfoCell.swift */; };
@@ -450,6 +451,7 @@
 		18C9A1F31C687CB900A80A22 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		18C9A1F51C687DA200A80A22 /* UIImageView+BetterFace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+BetterFace.h"; sourceTree = "<group>"; };
 		18C9A1F61C687DA200A80A22 /* UIImageView+BetterFace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+BetterFace.m"; sourceTree = "<group>"; };
+		18CE707C1C9D4609004610A5 /* RMTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMTableViewCell.xib; sourceTree = "<group>"; };
 		18D731B31C719B1800DECA1E /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = GuideViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18E2392B1C8029D300363655 /* PersonalInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PersonalInfoViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18E2392D1C802A1800363655 /* InfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
@@ -577,6 +579,7 @@
 			isa = PBXGroup;
 			children = (
 				183FDCC01C9C59A4002D79EB /* MiddleCoverCell.xib */,
+				18CE707C1C9D4609004610A5 /* RMTableViewCell.xib */,
 				183FDCC51C9C5C6F002D79EB /* RMFullCoverCell.xib */,
 			);
 			name = CellNibs;
@@ -1286,6 +1289,7 @@
 				187F037E1C8EB9E700328279 /* ActivityHeaderView.xib in Resources */,
 				183FDCF61C9C746D002D79EB /* LeanCloudFeedback.strings in Resources */,
 				18198D521C9447D300A7AD78 /* RemixPassView.xib in Resources */,
+				18CE707D1C9D4609004610A5 /* RMTableViewCell.xib in Resources */,
 				183FDCC71C9C5C6F002D79EB /* RMFullCoverCell.xib in Resources */,
 				187745961C6ACB1D000427C7 /* UMSShareListController.xib in Resources */,
 				18984F8F1C8472A300821477 /* RMToolBarView.xib in Resources */,

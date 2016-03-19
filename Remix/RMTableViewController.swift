@@ -34,8 +34,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     
     @IBOutlet weak var filterButton_1: UIButton!
     @IBOutlet weak var filterButton_2: UIButton!
+    @IBOutlet weak var filterButton_3: UIButton!
     @IBOutlet weak var locationButton: UIButton!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var filterLabel_3: UILabel!
     @IBOutlet weak var filterLabel_2: UILabel!
     @IBOutlet weak var filterLabel_1: UILabel!
     var promoSnackbar: TTGSnackbar!
@@ -111,7 +113,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         
         //Registering nib
         self.tableView.registerNib(UINib(nibName: "MiddleCoverCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "MiddleCoverCell")
-          }
+        self.tableView.registerNib(UINib(nibName: "RMTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "RMTableViewCell")
+    
+    }
+    
     
     
     func setUpViews() {
@@ -155,10 +160,12 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 APPLICATION_UI_REMOTE_CONFIG = config
                 self.filterLabel_1.text = config.objectForKey("FilterLabel_1_Text") as? String
                 self.filterLabel_2.text = config.objectForKey("FilterLabel_2_Text") as? String
+                self.filterLabel_3.text = config.objectForKey("FilterLabel_3_Text") as? String
                 self.locationLabel.text = config.objectForKey("LocationLabel_Text") as? String
                 let url1 = NSURL(string: (config.objectForKey("FilterButton_1_Image") as? AVFile)!.url)
                 let url2 = NSURL(string: (config.objectForKey("FilterButton_2_Image") as? AVFile)!.url)
                 let url3 = NSURL(string: (config.objectForKey("LocationButton_Image") as? AVFile)!.url)
+                let url4 = NSURL(string: (config.objectForKey("FilterButton_3_Image") as? AVFile)!.url)
                 if config.objectForKey("shouldShowSnackbar") as! Bool == true {
                     if launchedTimes % 3 != 0 && launchedTimes != 2 && launchedTimes != 1 {
                         let url = config.objectForKey("SnackbarURL") as! String
@@ -182,6 +189,9 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 })
                 manager.downloadImageWithURL(url3, options: .RetryFailed, progress: nil, completed: { (image, error, type, isSuccessful, url) -> Void in
                     self.locationButton.setImage(image, forState: .Normal)
+                })
+                manager.downloadImageWithURL(url4, options: .RetryFailed, progress: nil, completed: { (image, error, type, isSuccessful, url) -> Void in
+                    self.filterButton_3.setImage(image, forState: .Normal)
                 })
             }else{
                 let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
@@ -527,7 +537,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         if activities.count > 0 {
         if let isFeatured = activities[indexPath.section][indexPath.row].objectForKey("isFeatured") as? Bool  {
             if isFeatured == true {
-            return DEVICE_SCREEN_WIDTH*0.893
+            return 335
             }
         }
         }
@@ -723,7 +733,12 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 return cell
             }
             
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! RMTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("RMTableViewCell", forIndexPath: indexPath) as! RMTableViewCell
+        if let summary = selectedActivity.objectForKey("Summary") as? String {
+            cell.summaryLabel.text = summary
+        }else{
+            cell.summaryLabel.text = ""
+        }
         cell.delegate = self
         cell.parentViewController = self
             if let price = selectedActivity.objectForKey("Price") as? Double {

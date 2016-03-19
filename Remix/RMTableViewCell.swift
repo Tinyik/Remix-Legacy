@@ -24,6 +24,7 @@ class RMTableViewCell: MGSwipeTableCell {
     
     @IBOutlet weak var orgLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var summaryLabel: UILabel!
     
     var parentViewController: UIViewController!
     var likeImage = UIImage(named: "Like")

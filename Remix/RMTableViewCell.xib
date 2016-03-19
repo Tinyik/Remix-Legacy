@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ir5-hX-Czz" customClass="RMTableViewCell" customModule="Remix" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="166"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ir5-hX-Czz" id="Mrq-Zn-jHx">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="165.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="如何抵抗上海35年来最冷寒冬？" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W7O-WG-0FU">
+                        <rect key="frame" x="19" y="16" width="196" height="43"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zM5-us-V7F">
+                        <rect key="frame" x="235" y="16.5" width="119" height="81.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="81.5" id="Fhy-Km-SYP"/>
+                            <constraint firstAttribute="width" constant="119" id="phY-Db-lGm"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BookyGreen" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHZ-qT-ZUk">
+                        <rect key="frame" x="51" y="134" width="111" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.59398009529999996" green="0.59706228650000004" blue="0.60482165399999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="c0M-SS-G5V">
+                        <rect key="frame" x="19" y="135" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="hv8-1T-KGT"/>
+                            <constraint firstAttribute="width" constant="20" id="pR1-4X-iLU"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BookyGreen" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nsg-Q5-3C5">
+                        <rect key="frame" x="193" y="135" width="103" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.57621133209999997" green="0.57621133209999997" blue="0.57621133209999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Unlike" translatesAutoresizingMaskIntoConstraints="NO" id="Lpj-GB-lTU">
+                        <rect key="frame" x="341" y="140" width="13" height="11"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="233" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1f3-nD-XKD">
+                        <rect key="frame" x="295" y="135" width="40" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.83137254900000002" green="0.20784313730000001" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="看展过程中导师介绍了达利不同阶段的故事，其中包括达利与情人的过往。导师提到达利是位炫妻狂魔" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Se5-kX-lm0">
+                        <rect key="frame" x="19" y="67.5" width="196" height="31.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.47468828909999999" green="0.47468828909999999" blue="0.47468828909999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x0U-Yz-uD7">
+                        <rect key="frame" x="19" y="107" width="86" height="20"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                        <color key="textColor" red="0.99897411619999998" green="0.30330631009999998" blue="0.25054658730000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="折扣" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uQJ-Uv-UXj">
+                        <rect key="frame" x="125" y="107" width="229" height="20"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                        <color key="textColor" red="0.89411764709999997" green="0.15807736033103612" blue="0.093267616615569343" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="desLabel" destination="Se5-kX-lm0" id="zZQ-9h-RWd"/>
+                <outlet property="likeStatusIndicatorView" destination="Lpj-GB-lTU" id="dRA-qk-3Cz"/>
+                <outlet property="likesNumberLabel" destination="1f3-nD-XKD" id="0Ke-EM-o2n"/>
+                <outlet property="orgLabel" destination="dHZ-qT-ZUk" id="VpS-03-ASV"/>
+                <outlet property="orgLogo" destination="c0M-SS-G5V" id="vjC-Xh-5hX"/>
+                <outlet property="priceTag" destination="x0U-Yz-uD7" id="G3u-Ez-jLz"/>
+                <outlet property="summaryLabel" destination="uQJ-Uv-UXj" id="KIt-qb-UEJ"/>
+                <outlet property="themeImg" destination="zM5-us-V7F" id="c44-Ed-Hrn"/>
+                <outlet property="timeLabel" destination="nsg-Q5-3C5" id="rDL-cc-EJ6"/>
+                <outlet property="titleLabel" destination="W7O-WG-0FU" id="zVV-R4-ngS"/>
+            </connections>
+            <point key="canvasLocation" x="252.5" y="279"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Placeholder" width="42" height="46"/>
+        <image name="Unlike" width="110" height="90"/>
+    </resources>
+</document>

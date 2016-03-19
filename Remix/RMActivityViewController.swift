@@ -39,9 +39,6 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let statusBarView = UIView(frame: CGRectMake(0,0,DEVICE_SCREEN_WIDTH,20))
-//        statusBarView.backgroundColor = FlatBlueDark()
-//        self.view.addSubview(statusBarView)
         self.navigationController?.navigationBar.translucent = true
         if shouldApplyWhiteTint == true {
         self.navigationController?.navigationBar.tintColor = .whiteColor()
@@ -62,6 +59,12 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
                 toolBar.registerButton.setTitle("报名： ￥" + String(price), forState: .Normal)
             }else{
                 toolBar.registerButton.setTitle("报名： 免费", forState: .Normal)
+            }
+        }
+        if let isOpen = activity.objectForKey("isRegistrationOpen") as? Bool {
+            if isOpen == false {
+                self.toolBar.registerButton.backgroundColor = .grayColor()
+                toolBar.registerButton.setTitle("暂不支持报名", forState: .Normal)
             }
         }
         toolBar.likeButton.addTarget(self, action: "likePresentingActivity", forControlEvents: .TouchUpInside)
