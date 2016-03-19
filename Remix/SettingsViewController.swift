@@ -228,7 +228,7 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
     
     override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if section == 2{
-            return "    Remix 1.0, by Tianyi Fang. \n    Visit fongtinyik.tumblr.com for more info."
+            return "Remix 1.0 Build 12 Public Testing Version.\n Copyright © 2016 Tianyi Fang.\n All rights reserved."
         }
         
         return nil
@@ -289,10 +289,18 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
             case 1:  let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let guideViewController = storyboard.instantiateViewControllerWithIdentifier("GuideViewController") as! GuideViewController
             self.presentViewController(guideViewController, animated: true, completion: nil)
-            case 2: AVUser.logOut()
-            let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-            let regLoginController = storyBoard.instantiateViewControllerWithIdentifier("RegLoginVC")
-            self.tr_presentViewController(regLoginController, method: TRPresentTransitionMethod.Fade)
+            case 2: let alert = UIAlertController(title: "Remix提示", message: "确认要登出当前Remix账户吗？", preferredStyle: .Alert)
+                    let action = UIAlertAction(title: "是", style: .Destructive, handler: { (action) -> Void in
+                        AVUser.logOut()
+                        let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+                        let regLoginController = storyBoard.instantiateViewControllerWithIdentifier("RegLoginVC")
+                        self.tr_presentViewController(regLoginController, method: TRPresentTransitionMethod.Fade)
+                    })
+                    let cancel = UIAlertAction(title: "否", style: .Cancel, handler: nil)
+                     alert.addAction(action)
+                     alert.addAction(cancel)
+                     self.presentViewController(alert, animated: true, completion: nil)
+                
                 
             default: break
             }
