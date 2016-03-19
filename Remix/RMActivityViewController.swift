@@ -397,7 +397,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
     
     func paySuccess() {
         let newOrder = AVObject(className: "Orders")
-        newOrder.setObject(AVObject(withoutDataWithObjectId: ongoingTransactionId), forKey: "ParentActivityObjectId")
+         newOrder.setObject(AVObject(withoutDataWithClassName: "Activity", objectId: ongoingTransactionId), forKey: "ParentActivityObjectId")
         newOrder.setObject(ongoingTransactionPrice, forKey: "Amount")
         newOrder.setObject(AVUser(withoutDataWithObjectId: CURRENT_USER.objectId)
 , forKey: "CustomerObjectId")

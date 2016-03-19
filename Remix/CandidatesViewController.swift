@@ -375,8 +375,13 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
             cell.statusLabel.text = "已签到"
             cell.statusLabel.textColor = FlatRed()
         }
-        let url = NSURL(string: (customers[indexPath.row].objectForKey("Avatar") as! AVFile).url)
-        cell.avatarView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "DefaultAvatar"))
+        if let avatar = customers[indexPath.row].objectForKey("Avatar") as? AVFile {
+            let url = NSURL(string: avatar.url)
+            cell.avatarView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "DefaultAvatar"))
+        }else{
+            cell.avatarView.image = UIImage(named: "DefaultAvatar")
+        }
+        
         return cell
     }
     
