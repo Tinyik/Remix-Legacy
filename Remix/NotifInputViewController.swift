@@ -23,7 +23,7 @@ class NotifInputViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func submitNotifRequest(sender: AnyObject) {
         let newRequest = AVObject(className: "NotificationRequest")
-        newRequest.setObject(AVObject(withoutDataWithObjectId: objectId), forKey: "ActivityObjectId")
+        newRequest.setObject(AVObject(withoutDataWithClassName: "Activity", objectId: objectId), forKey: "ActivityObjectId")
         newRequest.setObject(AVUser(withoutDataWithObjectId: CURRENT_USER.objectId), forKey: "Submitter")
         newRequest.setObject(notifInputView.text, forKey: "Message")
         if urlInputView.text != nil {

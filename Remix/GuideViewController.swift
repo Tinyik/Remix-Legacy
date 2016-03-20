@@ -20,7 +20,7 @@ class GuideViewController: UIViewController, GHWalkThroughViewDataSource, GHWalk
             }
 
     func numberOfPages() -> Int {
-        return 5
+        return 6
     }
     
     func configurePage(cell: GHWalkThroughPageCell!, atIndex index: Int) {
@@ -48,6 +48,9 @@ class GuideViewController: UIViewController, GHWalkThroughViewDataSource, GHWalk
         }
         if index == 4 {
             return UIImage(named: "as5")
+        }
+        if index == 5 {
+            return UIImage(named: "as6")
         }
         return nil
     }

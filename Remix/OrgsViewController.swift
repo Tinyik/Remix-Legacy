@@ -38,7 +38,6 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
         orgsCollectionView.dataSource = self
         orgsCollectionView.emptyDataSetDelegate = self
         orgsCollectionView.emptyDataSetSource = self
-        orgsCollectionView.contentInset.top = 40
         orgsCollectionView.alwaysBounceVertical = true
         refreshCtrl.addTarget(self, action: "refresh", forControlEvents: .ValueChanged)
         orgsCollectionView.addSubview(refreshCtrl)

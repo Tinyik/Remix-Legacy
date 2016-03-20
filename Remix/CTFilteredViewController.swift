@@ -238,7 +238,7 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
         if activities.count > 0 {
             if let isFeatured = activities[indexPath.section][indexPath.row].objectForKey("isFeatured") as? Bool  {
                 if isFeatured == true {
-                    return DEVICE_SCREEN_WIDTH
+                    return 335
                 }
             }
         }

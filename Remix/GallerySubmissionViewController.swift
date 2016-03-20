@@ -181,7 +181,7 @@ class GallerySubmissionViewController: FormViewController {
             newGallery.setObject(selectedCities, forKey: "Cities")
             newGallery.setObject(attr["isRemixActivity"]! as! Bool, forKey: "isRemixActivity")
             if attr["isRemixActivity"]! as! Bool == true{
-                newGallery.setObject(AVObject(withoutDataWithObjectId: attr["ParentActivityObjectId"]! as! String), forKey: "ParentActivityObjectId")
+                newGallery.setObject( AVObject(withoutDataWithClassName: "Activity", objectId: attr["ParentActivityObjectId"]! as! String), forKey: "ParentActivityObjectId")
             }else{
                 newGallery.setObject(attr["Org"]! as! String, forKey: "Org")
                 if let date = attr["Date"]! as? NSDate {
