@@ -282,8 +282,11 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
             cell.fullImageView.sd_setImageWithURL(coverImgURLs[indexPath.section][indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
             let _objId = activities[indexPath.section][indexPath.row].objectId
             cell.objectId = _objId
+            if let summary = activities[indexPath.section][indexPath.row].objectForKey("Summary") as? String{
+                cell.orgLabel.text = cell.orgLabel.text! + summary
+            }
             let query = AVQuery(className: "Organization")
-            query.whereKey("Name", equalTo: cell.orgLabel.text)
+            query.whereKey("Name", equalTo: activities[indexPath.section][indexPath.row].objectForKey("Org") as? String)
             query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
                 if error == nil {
                     for org in organizations {
@@ -424,7 +427,7 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
     
     func buttonTitleForEmptyDataSet(scrollView: UIScrollView!, forState state: UIControlState) -> NSAttributedString! {
         let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(16), NSForegroundColorAttributeName: FlatRed()]
-        return NSAttributedString(string: "向Remix推荐活动", attributes: attrDic)
+        return NSAttributedString(string: "向Remix提交活动", attributes: attrDic)
     }
     
     func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {

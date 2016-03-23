@@ -225,15 +225,15 @@ class LocationSubmissionViewController: FormViewController {
                         let c = CURRENT_USER.objectForKey("Credit") as! Int
                         CURRENT_USER.setObject(c+50, forKey: "Credit")
                         CURRENT_USER.saveInBackground()
-                        let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
-                        notif.promptUserCreditUpdate("50", inContext: "添加地点")
-
                         let alert = UIAlertController(title: "Remix提示", message: "地点添加成功。谢谢你对Remix的支持_(:з」∠)_。审核通过后我们将给你发送推送消息。", preferredStyle: .Alert)
                         let action = UIAlertAction(title: "好的", style: .Default, handler: { (action) -> Void in
                             self.popCurrentVC()
                         })
                         alert.addAction(action)
-                        self.presentViewController(alert, animated: true, completion: nil)
+                        let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
+                        notif.parentvc = self
+                        notif.promptUserCreditUpdate("50", withContext: "添加地点", andAlert: alert)
+
                         
                     }else{
                         let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
@@ -249,15 +249,14 @@ class LocationSubmissionViewController: FormViewController {
                         let c = CURRENT_USER.objectForKey("Credit") as! Int
                         CURRENT_USER.setObject(c+50, forKey: "Credit")
                         CURRENT_USER.saveInBackground()
-                        let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
-                        notif.promptUserCreditUpdate("50", inContext: "添加地点")
-
                         let alert = UIAlertController(title: "Remix提示", message: "地点添加成功。谢谢你对Remix的支持_(:з」∠)_。审核通过后我们将给你发送推送消息。", preferredStyle: .Alert)
                         let action = UIAlertAction(title: "好的", style: .Default, handler: { (action) -> Void in
                             self.popCurrentVC()
                         })
                         alert.addAction(action)
-                        self.presentViewController(alert, animated: true, completion: nil)
+                        let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
+                        notif.parentvc = self
+                        notif.promptUserCreditUpdate("50", withContext: "添加地点", andAlert: alert)
                     }else{
                         let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
                         snackBar.backgroundColor = FlatWatermelonDark()

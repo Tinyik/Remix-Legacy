@@ -46,7 +46,7 @@ class ManagementViewController: UITableViewController, DZNEmptyDataSetDelegate, 
         query.whereKey("isHeldBySubmitter", equalTo: true)
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
             if error == nil {
-                print("NOERROR")
+               
                 if self.refreshControl?.refreshing == true {
                     self.refreshControl?.endRefreshing()
                 }
@@ -86,7 +86,7 @@ class ManagementViewController: UITableViewController, DZNEmptyDataSetDelegate, 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuse") as! ActivityCell
-        print("lkjllskdf")
+       
         selectedActivity = parentActivities[indexPath.row]
         cell.themeImg.sd_setImageWithURL(coverImgURLs[indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
         cell.titleLabel.text = (selectedActivity.objectForKey("Title") as? String)?.stringByReplacingOccurrencesOfString("主办方提交:", withString: "")

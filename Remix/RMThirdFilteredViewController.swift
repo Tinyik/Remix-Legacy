@@ -1,30 +1,31 @@
 //
-//  CommunityViewController.swift
+//  RMThirdFilteredViewController.swift
 //  Remix
 //
-//  Created by fong tinyik on 2/13/16.
+//  Created by fong tinyik on 3/20/16.
 //  Copyright © 2016 fong tinyik. All rights reserved.
 //
 
 import UIKit
 import SDWebImage
 import TTGSnackbar
-class RMFirstFilteredViewController: CTFilteredViewController {
+
+class RMThirdFilteredViewController: CTFilteredViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = APPLICATION_UI_REMOTE_CONFIG.objectForKey("FilterLabel_1_Text") as? String
+        self.title = APPLICATION_UI_REMOTE_CONFIG.objectForKey("FilterLabel_3_Text") as? String
         
     }
     
     override func setUpParallaxHeaderView() {
         let headerView = ParallaxHeaderView.parallaxHeaderViewWithImage(UIImage(named: "SDPlaceholder"), forSize: CGSizeMake(UIScreen.mainScreen().bounds.width, 175)) as! ParallaxHeaderView
-        let url = NSURL(string: (APPLICATION_UI_REMOTE_CONFIG.objectForKey("Filter_1_HeaderImage") as? AVFile)!.url)
+        let url = NSURL(string: (APPLICATION_UI_REMOTE_CONFIG.objectForKey("Filter_3_HeaderImage") as? AVFile)!.url)
         let manager = SDWebImageManager()
         manager.downloadImageWithURL(url, options: .RetryFailed, progress: nil, completed: { (image, error, type, isSuccessful, url) -> Void in
             headerView.headerImage = image
         })
-
+        
         self.tableView.tableHeaderView = headerView
         
     }
@@ -40,7 +41,7 @@ class RMFirstFilteredViewController: CTFilteredViewController {
         var query = AVQuery(className: "Activity")
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.whereKey("isVisibleToUsers", equalTo: true)
-        query.whereKey("isVisibleOnFilterList_1", equalTo: true)
+        query.whereKey("isVisibleOnFilterList_3", equalTo: true)
         query.whereKey("isFloatingActivity", equalTo: false)
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
             if error == nil {
@@ -83,6 +84,7 @@ class RMFirstFilteredViewController: CTFilteredViewController {
             
         }
         
-            
+        
     }
 }
+

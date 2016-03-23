@@ -105,6 +105,9 @@
                                                 <constraint firstAttribute="width" constant="50" id="sO6-fL-fpQ"/>
                                             </constraints>
                                             <state key="normal" title="Button"/>
+                                            <connections>
+                                                <segue destination="W6f-z1-db5" kind="push" id="XZh-S9-JBa"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4bQ-9h-3t5">
                                             <rect key="frame" x="75" y="32" width="80" height="17"/>
@@ -337,15 +340,6 @@
         <!--Search Result View Controller-->
         <scene sceneID="TI8-YY-9jX">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Pkj-qr-wYD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="vYp-x9-N47">
-                    <connections>
-                        <outlet property="delegate" destination="Yje-yI-QXd" id="On0-l8-b0n"/>
-                        <outlet property="searchContentsController" destination="Yje-yI-QXd" id="OWb-wW-Kup"/>
-                        <outlet property="searchResultsDataSource" destination="Yje-yI-QXd" id="zno-iQ-frw"/>
-                        <outlet property="searchResultsDelegate" destination="Yje-yI-QXd" id="3JJ-2x-900"/>
-                    </connections>
-                </searchDisplayController>
                 <tableViewController storyboardIdentifier="SearchVC" id="Yje-yI-QXd" customClass="SearchResultViewController" customModule="Remix" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="zIf-qv-p4h">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
@@ -479,8 +473,17 @@
                         <segue destination="13U-HV-4RL" kind="push" identifier="showLabelFilteredVC" id="evX-3H-dHn"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pkj-qr-wYD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="vYp-x9-N47">
+                    <connections>
+                        <outlet property="delegate" destination="Yje-yI-QXd" id="On0-l8-b0n"/>
+                        <outlet property="searchContentsController" destination="Yje-yI-QXd" id="OWb-wW-Kup"/>
+                        <outlet property="searchResultsDataSource" destination="Yje-yI-QXd" id="zno-iQ-frw"/>
+                        <outlet property="searchResultsDelegate" destination="Yje-yI-QXd" id="3JJ-2x-900"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="927.5" y="-1765"/>
+            <point key="canvasLocation" x="985.5" y="-2409"/>
         </scene>
         <!--First Filtered View Controller-->
         <scene sceneID="yBa-Gy-B0C">
@@ -2689,6 +2692,45 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="veQ-3U-B0D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4293.5" y="1384.5"/>
+        </scene>
+        <!--Third Filtered View Controller-->
+        <scene sceneID="DOn-XW-Gay">
+            <objects>
+                <viewController storyboardIdentifier="ThirdFilteredVC" id="W6f-z1-db5" customClass="RMThirdFilteredViewController" customModule="Remix" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="koK-Yx-CnW"/>
+                        <viewControllerLayoutGuide type="bottom" id="9U5-yR-lmu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JaI-uF-U6R">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="139" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zs3-Ha-mVS">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="W6f-z1-db5" id="PIA-SK-M1x"/>
+                                    <outlet property="delegate" destination="W6f-z1-db5" id="wR4-CY-t3n"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9U5-yR-lmu" firstAttribute="top" secondItem="zs3-Ha-mVS" secondAttribute="bottom" id="8Dd-Pi-jAr"/>
+                            <constraint firstItem="zs3-Ha-mVS" firstAttribute="leading" secondItem="JaI-uF-U6R" secondAttribute="leading" id="iGD-2B-nri"/>
+                            <constraint firstItem="zs3-Ha-mVS" firstAttribute="top" secondItem="JaI-uF-U6R" secondAttribute="top" id="pg2-R4-7K3"/>
+                            <constraint firstAttribute="trailing" secondItem="zs3-Ha-mVS" secondAttribute="trailing" id="tH5-y9-BxF"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="PHh-4I-K1S"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="tableView" destination="zs3-Ha-mVS" id="Cp6-NM-WUv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J71-Sh-tU8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="854.5" y="-1546.5"/>
         </scene>
     </scenes>
     <resources>

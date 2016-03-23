@@ -95,8 +95,7 @@ class CandidateDetailViewController: UITableViewController, MFMessageComposeView
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         if let remark = order.objectForKey("Remarks") as? String {
-            print("sdfsdfsss")
-            print(remark)
+           
             return 3
         }
         return 2

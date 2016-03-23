@@ -201,12 +201,11 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
             }
             if error == nil {
                 for order in orders {
-                    print("ORDER")
                     self.orders.append(order as! AVObject)
                     let query2 = AVQuery(className: "_User")
                     if let u = order.objectForKey("CustomerObjectId") as? AVUser {
                         query2.getObjectInBackgroundWithId(u.objectId, block: { (user, error) -> Void in
-                            print("USER")
+                            
                             if error == nil {
                                 self.customers.append(user as! AVUser)
                                 self.tableView.reloadData()

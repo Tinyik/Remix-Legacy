@@ -17,6 +17,9 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IMe-ci-N1E">
+                    <rect key="frame" x="30" y="17" width="105" height="66"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.24089905104712039" green="0.24089905104712039" blue="0.24089905104712039" alpha="1" colorSpace="calibratedRGB"/>
             <nil key="simulatedStatusBarMetrics"/>

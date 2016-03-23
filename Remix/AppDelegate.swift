@@ -115,23 +115,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         
-        print(url.host)
-        print(url.path)
-        print(url.query)
-        //FIXMIE: URL Scheme
+       
         
         if url.scheme == "remix" && url.host?.containsString("www.") == true{
             
             if AVUser.currentUser() != nil {
                 if url.path != "" {
-                    print("NOTNILLPATH")
-                    print(url.path)
                     let targetURL = url.host! + url.path!
                     let webView = RxWebViewController(url: NSURL(string: "http://" + targetURL))
                     (self.window?.rootViewController as! RMSwipeBetweenViewControllers).pushViewController(webView, animated: true)
                 }else{
-                    print("NILPATH")
-                    print(url.host!)
+                
                     let webView = RxWebViewController(url: NSURL(string: "http://" + url.host!))
                     if let vc = self.window?.rootViewController as? RMSwipeBetweenViewControllers {
                         vc.pushViewController(webView, animated: true)
@@ -217,8 +211,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             }
                             
                         }else{
-                            print("NOTONE")
-                            print(activities.count)
+                           
                             let alert = UIAlertController(title: "Remix提示", message: "_(´ཀ`」 ∠)_ 这里没有找到你想要的活动😢，看看Remix别的活动吧~", preferredStyle: .Alert)
                             let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
                             alert.addAction(action)

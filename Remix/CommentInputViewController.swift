@@ -37,7 +37,7 @@ class CommentInputViewController: UIViewController {
                 alert.addAction(action)
                 self.presentViewController(alert, animated: true, completion: nil)
             }else{
-                print(error.description)
+               
                 let alert = UIAlertController(title: nil, message: "评论添加失败", preferredStyle: .Alert)
                 let action = UIAlertAction(title: "好吧", style: .Default, handler: { (action) -> Void in
                     self.navigationController?.popViewControllerAnimated(true)

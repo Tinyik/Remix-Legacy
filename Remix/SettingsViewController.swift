@@ -116,7 +116,7 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
     }
     
     func imageSelectionCancelled() {
-        print("Canc")
+        // Do Nothing
     }
     
     func popCurrentVC() {
@@ -132,9 +132,9 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
             let cell = tableView.dequeueReusableCellWithIdentifier("detailedIdentifier") as! DetailedSettingsCell
             if indexPath.row == 3 {
                 
-                cell.titleLabel.text = "向Remix推荐活动"
+                cell.titleLabel.text = "向Remix提交活动"
                 cell.titleLabel.textColor = FlatRed()
-                cell.detailsLabel.text = "审核通过后你的推荐将出现在首页。"
+                cell.detailsLabel.text = "审核通过后你提交的活动将出现在首页。"
                 cell.icon.image = UIImage(named: "SubmActivity")
                 return cell
             }else if indexPath.row == 1 {
@@ -151,7 +151,7 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
             }else if indexPath.row == 2{
                 cell.titleLabel.text = "我发起的活动"
                 cell.titleLabel.textColor = FlatRed()
-                cell.detailsLabel.text = "在这里你将能管理、联系活动报名者和提取报名费到你的账户。"
+                cell.detailsLabel.text = "在这里你将能管理、联系活动报名者或提现。"
                 cell.icon.image = UIImage(named: "MyActivity")
                 return cell
             }else if indexPath.row == 0 {
@@ -169,8 +169,11 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
             switch indexPath.row {
             case 0: cell.label.text = "告诉朋友"
                     cell.icon.image = UIImage(named: "Share")
-            case 1: cell.label.text = "反馈"
-                    cell.icon.image = UIImage(named: "Feedback")
+            case 1: let cell2 = tableView.dequeueReusableCellWithIdentifier("detailedIdentifier") as!   DetailedSettingsCell
+                    cell2.titleLabel.text = "邮件反馈"
+                    cell2.icon.image = UIImage(named: "Feedback")
+                    cell2.detailsLabel.text = "你也可以摇晃手机召唤Remix客服"
+                    return cell2
             case 2: cell.label.text = "入驻Remix"
                     cell.icon.image = UIImage(named: "Join")
             default: break
@@ -228,7 +231,10 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
     
     override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if section == 2{
-            return "Remix 1.0 Build 12 Public Testing Version.\n Copyright © 2016 Tianyi Fang.\n All rights reserved."
+            let identifierDictionary = DeviceInformation.appIdentifiers()
+            let shortString = identifierDictionary["shortString"]!
+            let buildString = identifierDictionary["buildString"]!
+            return "Remix \(shortString) Build \(buildString). Copyright © 2016 Tianyi Fang. All rights reserved."
         }
         
         return nil
@@ -257,7 +263,7 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
         if indexPath.section == 1 {
             switch indexPath.row {
                 //FIXME: Remix Official Website
-            case 0:  let url = "http://fongtinyik.tumblr.com"
+            case 0:  let url = APPLICATION_UI_REMOTE_CONFIG.objectForKey("ShareRemixURL") as! String
             let handler = UMSocialWechatHandler.setWXAppId("wx6e2c22b24588e0e1", appSecret: "e085edb726c5b92bf443f1e3da3f838e", url: url)
             UMSocialSnsService.presentSnsIconSheetView(self, appKey: "56ba8fa2e0f55a1071000931", shareText: "马上下载Remix来发现魔都最in学生活动与地点(●'◡'●)ﾉ♥", shareImage: UIImage(named: "Icon"), shareToSnsNames: [UMShareToWechatSession,UMShareToWechatTimeline, UMShareToQQ, UMShareToQzone, UMShareToTwitter], delegate: nil)
             case 1: if MFMailComposeViewController.canSendMail() {

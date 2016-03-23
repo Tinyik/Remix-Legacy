@@ -77,7 +77,7 @@ class LocationTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColl
     }
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         for photoURL in photoURLs {
-            print(photoURLs.count)
+          
             photos.append(MWPhoto(URL: photoURL)!)
         }
         let browser = MWPhotoBrowser(delegate: self)

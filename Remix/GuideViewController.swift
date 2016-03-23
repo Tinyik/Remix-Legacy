@@ -57,7 +57,7 @@ class GuideViewController: UIViewController, GHWalkThroughViewDataSource, GHWalk
 
     func walkthroughDidDismissView(walkthroughView: GHWalkThroughView!) {
          let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    print("Dismiss")
+   
         if CURRENT_USER == nil {
         let rootVC = storyboard.instantiateViewControllerWithIdentifier("RegLoginVC") as! RegLoginViewController
         self.dismissViewControllerAnimated(true, completion: nil)

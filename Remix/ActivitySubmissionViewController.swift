@@ -24,7 +24,7 @@ class ActivitySubmissionViewController: FormViewController {
         URLFloatLabelRow.defaultCellSetup = { cell, row in cell.textField.textColor = FlatRed() }
         TextAreaRow.defaultCellSetup = { cell, row in cell.textView.alpha = 0.7 }
         self.navigationController?.hidesNavigationBarHairline = true
-        self.title = "提交活动至Remix"
+        self.title = "添加活动"
         if isModal == true {
             let statusBarView = UIView(frame: CGRectMake(0,0,DEVICE_SCREEN_WIDTH,20))
             statusBarView.backgroundColor = FlatBlueDark()
@@ -214,7 +214,7 @@ class ActivitySubmissionViewController: FormViewController {
         if checkInformationIntegrity() {
             let attr = form.values(includeHidden: false)
             if attr["isCoordinator"]! as! Bool == true {
-                print(attr)
+                
                 var selectedCates: [String] = []
                 var selectedCities: [String] = []
                 let newActivity = AVObject(className: "Activity")
@@ -292,8 +292,7 @@ class ActivitySubmissionViewController: FormViewController {
                                     let c = CURRENT_USER.objectForKey("Credit") as! Int
                                     CURRENT_USER.setObject(c+50, forKey: "Credit")
                                     CURRENT_USER.saveInBackground()
-                                    let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
-                                    notif.promptUserCreditUpdate("50", inContext: "组织活动")
+                                    AVOSCloud.requestSmsCodeWithPhoneNumber(CURRENT_USER.mobilePhoneNumber, templateName: "SubmActivity_Success", variables: nil, callback: nil)
                                     let alert = UIAlertController(title: "Remix提示", message: "活动添加成功。谢谢你对Remix的支持_(:з」∠)_。审核通过后我们将给你发送推送消息。你可以在 \"个人中心 - 我发起的活动\"中查看审核状态并管理活动报名者。", preferredStyle: .Alert)
                                     let cancel = UIAlertAction(title: "好的", style: .Cancel, handler: { (action) -> Void in
                                         self.popCurrentVC()
@@ -304,7 +303,10 @@ class ActivitySubmissionViewController: FormViewController {
                                     })
                                     alert.addAction(action)
                                     alert.addAction(cancel)
-                                    self.presentViewController(alert, animated: true, completion: nil)
+                                    let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
+                                    notif.parentvc = self
+                                    notif.promptUserCreditUpdate("50", withContext: "组织活动", andAlert: alert)
+
 
                                 }else{
                                     let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
@@ -390,14 +392,15 @@ class ActivitySubmissionViewController: FormViewController {
                         let c = CURRENT_USER.objectForKey("Credit") as! Int
                         CURRENT_USER.setObject(c+50, forKey: "Credit")
                         CURRENT_USER.saveInBackground()
-                        let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
-                        notif.promptUserCreditUpdate("50", inContext: "添加活动")
+                        AVOSCloud.requestSmsCodeWithPhoneNumber(CURRENT_USER.mobilePhoneNumber, templateName: "User_SubmActivity_Success", variables: nil, callback: nil)
                         let alert = UIAlertController(title: "Remix提示", message: "活动添加成功。谢谢你对Remix的支持_(:з」∠)_。审核通过后我们将给你发送推送消息。", preferredStyle: .Alert)
                         let action = UIAlertAction(title: "好的", style: .Default, handler: { (action) -> Void in
                             self.popCurrentVC()
                         })
                         alert.addAction(action)
-                        self.presentViewController(alert, animated: true, completion: nil)
+                        let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
+                        notif.parentvc = self
+                        notif.promptUserCreditUpdate("50", withContext: "添加活动", andAlert: alert)
                         
                     }else{
                         let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)

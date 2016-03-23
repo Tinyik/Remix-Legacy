@@ -92,7 +92,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
             if error == nil {
                 for order in orders {
-                    print(order.objectId)
+                    
                     if let o = order.objectForKey("ParentActivityObjectId") as? AVObject {
                         self.registeredActivitiesIds.append(o.objectId)
                     }
@@ -127,10 +127,10 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
  
         if registeredActivitiesIds.contains(activity.objectId) {
             let alert = UIAlertController(title: "报名提示", message: "你已报名了这个活动，请进入我的订单查看。", preferredStyle: .Alert)
-            let action = UIAlertAction(title: "立即查看", style: .Default, handler: { (action) -> Void in
+            let action = UIAlertAction(title: "立即查看", style: .Cancel, handler: { (action) -> Void in
                 self.presentSettingsVC()
             })
-            let cancel = UIAlertAction(title: "继续逛逛", style: .Cancel, handler: nil)
+            let cancel = UIAlertAction(title: "继续逛逛", style: .Default, handler: nil)
             alert.addAction(action)
             alert.addAction(cancel)
             self.presentViewController(alert, animated: true, completion: nil)
@@ -236,7 +236,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
     func likePresentingActivity() {
         isLiked = !isLiked
         if isLiked == true {
-            print("TRUE")
+            
             fetchLikedActivitiesList()
             if likedActivitiesIds.contains(activity.objectId) == false {
                 likedActivitiesIds.append(activity.objectId)
@@ -298,8 +298,8 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
                 
             }
         }
-        print("LIKED")
-        print(self.likedActivitiesIds)
+       
+        
         CURRENT_USER.setObject(self.likedActivitiesIds, forKey: "LikedActivities")
         CURRENT_USER.saveInBackgroundWithBlock { (isSuccessful, error) -> Void in
             if error == nil {
@@ -412,19 +412,21 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
                 let c = CURRENT_USER.objectForKey("Credit") as! Int
                 CURRENT_USER.setObject(c+(Int(self.activity.objectForKey("Duration") as! String)!)*2, forKey: "Credit")
                 CURRENT_USER.saveInBackground()
-                let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
-                notif.promptUserCreditUpdate(String((Int(self.activity.objectForKey("Duration") as! String))!*2), inContext: "报名活动")
-
+                let smsDict = ["Org": self.activity.objectForKey("Org") as! String, "Date": self.activity.objectForKey("Date") as! String, "Price": String(self.ongoingTransactionPrice), "Contact": self.activity.objectForKey("Contact") as! String]
+                AVOSCloud.requestSmsCodeWithPhoneNumber(CURRENT_USER.mobilePhoneNumber, templateName: "Registration_Success", variables: smsDict, callback: nil)
                 let alert = UIAlertController(title: "支付状态", message: "报名成功！Remix已经把你的基本信息发送给了活动主办方。请进入 \"我的订单\" 查看", preferredStyle: .Alert)
-                let cancel = UIAlertAction(title: "继续逛逛", style: .Cancel, handler: nil)
-                let action = UIAlertAction(title: "立即查看", style: .Default) { (action) -> Void in
+                let cancel = UIAlertAction(title: "继续逛逛", style: .Default, handler: nil)
+                let action = UIAlertAction(title: "立即查看", style: .Cancel) { (action) -> Void in
                     self.presentSettingsVC()
                 }
                 alert.addAction(action)
                 alert.addAction(cancel)
-                self.presentViewController(alert, animated: true, completion: nil)
+                let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
+                notif.parentvc = self
+                notif.promptUserCreditUpdate(String((Int(self.activity.objectForKey("Duration") as! String))!*2), withContext: "报名活动", andAlert: alert)
+
             }else {
-                print(error.description)
+                
                 let alert = UIAlertController(title: "支付状态", message: "Something is wrong. 这是一个极小概率的错误。不过别担心，如果已经被扣款, 请联系Remix客服让我们为你解决。（181-4977-0476）", preferredStyle: .Alert)
                 let cancel = UIAlertAction(title: "稍后在说", style: .Cancel, handler: nil)
                 let action = UIAlertAction(title: "立即拨打", style: .Default) { (action) -> Void in

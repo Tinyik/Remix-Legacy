@@ -199,7 +199,6 @@ class GalleryViewController: UITableViewController {
         }
         
         if let URLString = galleryObjects[indexPath.section][indexPath.row].objectForKey("URL") as? String {
-            print(URLString)
             let webView = RxWebViewController(url: NSURL(string: URLString))
             self.navigationController?.pushViewController(webView, animated: true)
         }else{

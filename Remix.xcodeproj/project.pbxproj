@@ -78,6 +78,7 @@
 		184EDFA91C997BD9004F3D7D /* NotifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184EDFA81C997BD9004F3D7D /* NotifView.swift */; };
 		184EDFAB1C997BE7004F3D7D /* NotifView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184EDFAA1C997BE7004F3D7D /* NotifView.xib */; };
 		1854897C1C67288200A8E5C1 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1854897B1C67288200A8E5C1 /* ImageIO.framework */; };
+		18561B311C9EF9BB00F7133A /* RMThirdFilteredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18561B301C9EF9BB00F7133A /* RMThirdFilteredViewController.swift */; };
 		1857B52C1C855A7000D00A9E /* CommentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1857B52B1C855A7000D00A9E /* CommentsTableViewController.swift */; };
 		1857B52E1C855A8900D00A9E /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1857B52D1C855A8900D00A9E /* CommentCell.swift */; };
 		1857B5301C85623900D00A9E /* CommentInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1857B52F1C85623900D00A9E /* CommentInputViewController.swift */; };
@@ -312,6 +313,7 @@
 		184EDFA81C997BD9004F3D7D /* NotifView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifView.swift; sourceTree = "<group>"; };
 		184EDFAA1C997BE7004F3D7D /* NotifView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotifView.xib; sourceTree = "<group>"; };
 		1854897B1C67288200A8E5C1 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		18561B301C9EF9BB00F7133A /* RMThirdFilteredViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMThirdFilteredViewController.swift; sourceTree = "<group>"; };
 		1857B52B1C855A7000D00A9E /* CommentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewController.swift; sourceTree = "<group>"; };
 		1857B52D1C855A8900D00A9E /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		1857B52F1C85623900D00A9E /* CommentInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CommentInputViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -780,9 +782,9 @@
 				18198D551C944B0C00A7AD78 /* RemixPass */,
 				18E684B11C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift */,
 				183FDCF71C9C78DB002D79EB /* RMNavigationController.swift */,
-				18E620A51C8C194C00B85941 /* ActivitySubmissionViewController.swift */,
 				184EDFA81C997BD9004F3D7D /* NotifView.swift */,
 				184EDFAA1C997BE7004F3D7D /* NotifView.xib */,
+				18E620A51C8C194C00B85941 /* ActivitySubmissionViewController.swift */,
 				183984FA1C92FA4600B8EB8B /* OrganizationSubmissionViewController.swift */,
 				184825001C8FF6F400CCB9CF /* GallerySubmissionViewController.swift */,
 				18E620AD1C8D5F9600B85941 /* LocationSubmissionViewController.swift */,
@@ -948,6 +950,7 @@
 			isa = PBXGroup;
 			children = (
 				180199531C79C14700A6C7E4 /* RMSecondFilteredViewController.swift */,
+				18561B301C9EF9BB00F7133A /* RMThirdFilteredViewController.swift */,
 				18BCA0291C6E3FE600DF3EC7 /* RMFirstFilteredViewController.swift */,
 				1899E9BE1C66F75600ADC2AC /* RMFullCoverCell.swift */,
 				189782831C63CA6900458515 /* RMTableViewController.swift */,
@@ -1514,6 +1517,7 @@
 				18E620AA1C8C591000B85941 /* FloatLabelTextField.swift in Sources */,
 				18C79D861C83EDCF004AAA44 /* RMPageViewController.swift in Sources */,
 				183FDCEC1C9C746D002D79EB /* LCUserFeedbackThread.m in Sources */,
+				18561B311C9EF9BB00F7133A /* RMThirdFilteredViewController.swift in Sources */,
 				18B317C41C6B183000336A92 /* OrgFilteredViewController.swift in Sources */,
 				184857141C63E5BC004E516A /* CTTableViewCell.swift in Sources */,
 				183FDCEA1C9C746D002D79EB /* LCUserFeedbackReply.m in Sources */,

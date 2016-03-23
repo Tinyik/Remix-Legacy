@@ -22,7 +22,7 @@ class ActivityHeaderView: UIView {
     
     
     override func awakeFromNib() {
-        print("AWAKE")
+       
         blurredCoverView.contentMode = .ScaleAspectFill
         blurredCoverView.clipsToBounds = true
         blurredCoverView.image = UIImage(named: "DefaultAvatar")

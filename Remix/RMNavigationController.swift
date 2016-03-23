@@ -31,7 +31,7 @@ class RMNavigationController: UINavigationController {
         return true
     }
     override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
-        print("zaza")
+       
         if motion == UIEventSubtype.MotionShake {
             let agent = LCUserFeedbackAgent()
             agent.showConversations(self, title: nil, contact: nil)

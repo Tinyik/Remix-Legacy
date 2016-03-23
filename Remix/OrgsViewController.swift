@@ -209,21 +209,20 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func askToEnableNotifications() {
-        print("asking..")
+       
         let userDefault = NSUserDefaults.standardUserDefaults()
         sharedOneSignalInstance.IdsAvailable { (userId, pushToken) -> Void in
             if pushToken != nil {
                 userDefault.setBool(true, forKey: "isRegisteredForNotif")
-                print(pushToken)
+               
             }else{
                 userDefault.setBool(false, forKey: "isRegisteredForNotif")
-                print("nil token")
+                
             }
             
         }
         if let key = userDefault.objectForKey("isRegisteredForNotif") as? Bool {
-            print("KEYNOTNIL")
-            print(key)
+           
             if key == false {
                 let alert = UIAlertController(title: "推送设置", message: "Remix需要你允许推送消息才能及时传递当前城市学生圈的最新消息。想要现在允许推送消息吗？(●'◡'●)ﾉ♥", preferredStyle: .Alert)
                 let buttonOK = UIAlertAction(title: "好的", style: .Default) { (action) -> Void in
