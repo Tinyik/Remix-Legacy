@@ -112,7 +112,7 @@ class FloatingActivityView: UIView, BmobPayDelegate {
     func fetchOrdersInformation() {
         registeredActivitiesIds = []
         let query = AVQuery(className: "Orders")
-        query.whereKey("CustomerObjectId", equalTo: AVUser(withoutDataWithObjectId: CURRENT_USER.objectId))
+        query.whereKey("CustomerObjectId", equalTo: AVUser(outDataWithObjectId: CURRENT_USER.objectId))
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
             if error == nil {
                 for order in orders {
@@ -220,10 +220,10 @@ class FloatingActivityView: UIView, BmobPayDelegate {
     
     func paySuccess() {
         let newOrder = AVObject(className: "Orders")
-        newOrder.setObject(AVObject(withoutDataWithClassName: "Activity", objectId: ongoingTransactionId), forKey: "ParentActivityObjectId")
+        newOrder.setObject(AVObject(outDataWithClassName: "Activity", objectId: ongoingTransactionId), forKey: "ParentActivityObjectId")
         newOrder.setObject(ongoingTransactionPrice, forKey: "Amount")
         newOrder.setObject(false, forKey: "CheckIn")
-        newOrder.setObject(AVUser(withoutDataWithObjectId: CURRENT_USER.objectId), forKey: "CustomerObjectId")
+        newOrder.setObject(AVUser(outDataWithObjectId: CURRENT_USER.objectId), forKey: "CustomerObjectId")
         newOrder.setObject(ongoingTransactionRemarks, forKey: "Remarks")
         newOrder.setObject(true, forKey: "isVisibleToUsers")
         newOrder.saveInBackgroundWithBlock { (isSuccessful, error) -> Void in

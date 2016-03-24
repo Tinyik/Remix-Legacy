@@ -16,7 +16,7 @@ let DEVICE_SCREEN_WIDTH = UIScreen.mainScreen().bounds.width
 let DEVICE_SCREEN_HEIGHT = UIScreen.mainScreen().bounds.height
 let COMMENTS_TABLE_VIEW_VISIBLE_HEIGHT: CGFloat = 450
 var APPLICATION_UI_REMOTE_CONFIG: AVObject!
-var APP_VERSION_AVAILABILITY: String!
+var APP_VERSION_AVAILABILITY = "Available"
 var CURRENT_USER: AVUser!
 var REMIX_CITY_NAME: String!
 
@@ -191,9 +191,15 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         query2.whereKey("Version", equalTo: identifierDictionary["shortString"]!)
         query2.whereKey("Build", equalTo: identifierDictionary["buildString"]!)
         query2.findObjectsInBackgroundWithBlock { (versions, error) -> Void in
-            if versions.count > 0 {
-                APP_VERSION_AVAILABILITY = versions[0].objectForKey("Status") as! String
-                self.checkVersionAvailability()
+            if error == nil {
+                if versions.count > 0 {
+                    APP_VERSION_AVAILABILITY = versions[0].objectForKey("Status") as! String
+                    self.checkVersionAvailability()
+                }
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
             }
         }
     }
@@ -260,7 +266,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     func fetchOrdersInformation() {
         registeredActivitiesIds = []
         let query = AVQuery(className: "Orders")
-        query.whereKey("CustomerObjectId", equalTo: AVUser(withoutDataWithObjectId: CURRENT_USER.objectId))
+        query.whereKey("CustomerObjectId", equalTo: AVUser(outDataWithObjectId: CURRENT_USER.objectId))
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
             if error == nil {
                 for order in orders {
@@ -430,7 +436,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                                 
                             }
                             
-                            
+//                            self.activities = self.activities.sort({($0[0].objectForKey("InternalDate") as! NSDate).compare($1[0].objectForKey("InternalDate") as! NSDate) == NSComparisonResult.OrderedDescending})
+//                            for var activityList in self.activities {
+//                                activityList = activityList.sort({($0.objectForKey("InternalDate") as! NSDate).compare($1.objectForKey("InternalDate") as! NSDate) == NSComparisonResult.OrderedAscending})
+//                            }
                         }else{
                             
                             self.floatingActivities.append(activity as! AVObject)

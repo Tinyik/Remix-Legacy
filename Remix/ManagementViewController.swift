@@ -42,7 +42,7 @@ class ManagementViewController: UITableViewController, DZNEmptyDataSetDelegate, 
         coverImgURLs = []
         parentActivities = []
         let query = AVQuery(className: "Activity")
-        query.whereKey("Submitter", equalTo: AVUser(withoutDataWithObjectId: CURRENT_USER.objectId))
+        query.whereKey("Submitter", equalTo: AVUser(outDataWithObjectId: CURRENT_USER.objectId))
         query.whereKey("isHeldBySubmitter", equalTo: true)
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
             if error == nil {

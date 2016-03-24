@@ -49,7 +49,7 @@ class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNE
         
         let query = AVQuery(className: "Orders")
         query.whereKey("isVisibleToUsers", equalTo: true)
-        query.whereKey("CustomerObjectId", equalTo: AVUser(withoutDataWithObjectId: CURRENT_USER.objectId))
+        query.whereKey("CustomerObjectId", equalTo: AVUser(outDataWithObjectId: CURRENT_USER.objectId))
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
         
             if error == nil {

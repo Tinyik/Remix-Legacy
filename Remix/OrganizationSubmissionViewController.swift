@@ -188,7 +188,7 @@ class OrganizationSubmissionViewController: FormViewController {
 
                     }else{
                         if attr[key]! != nil {
-                            newOrg.setObject(key as! String, forKey: "Nature")
+                            newOrg.setObject(key, forKey: "Nature")
                         }
                     }
                 

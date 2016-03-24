@@ -88,7 +88,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
     
     func fetchOrdersInformation() {
         let query = AVQuery(className: "Orders")
-        query.whereKey("CustomerObjectId", equalTo: AVUser(withoutDataWithObjectId: CURRENT_USER.objectId))
+        query.whereKey("CustomerObjectId", equalTo: AVUser(outDataWithObjectId: CURRENT_USER.objectId))
 
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
             if error == nil {
@@ -388,8 +388,10 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
         manager.downloadImageWithURL(coverImageURL, options: .RetryFailed, progress: nil, completed: { (coverImage, error, cache, finished, url) -> Void in
             if error == nil {
                 let url = self.activity.objectForKey("URL") as! String
-                let handler = UMSocialWechatHandler.setWXAppId("wx6e2c22b24588e0e1", appSecret: "e085edb726c5b92bf443f1e3da3f838e", url: url)
-                UMSocialSnsService.presentSnsIconSheetView(self, appKey: "56ba8fa2e0f55a1071000931", shareText: shareText, shareImage: coverImage, shareToSnsNames: [UMShareToWechatSession,UMShareToWechatTimeline, UMShareToQQ, UMShareToQzone, UMShareToTwitter], delegate: nil)
+                let wechatHandler = UMSocialWechatHandler.setWXAppId("wx6e2c22b24588e0e1", appSecret: "e085edb726c5b92bf443f1e3da3f838e", url: url)
+                let qzoneHandler = UMSocialQQHandler.setQQWithAppId("1105117489", appKey: "ZlV9H7DoremTqZBy", url: url)
+            
+                UMSocialSnsService.presentSnsIconSheetView(self, appKey: "56ba8fa2e0f55a1071000931", shareText: shareText, shareImage: coverImage, shareToSnsNames: [UMShareToWechatSession,UMShareToWechatTimeline, UMShareToQQ, UMShareToQzone], delegate: nil)
             }
         })
 
@@ -399,9 +401,9 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
     func paySuccess() {
         let newOrder = AVObject(className: "Orders")
 
-         newOrder.setObject(AVObject(withoutDataWithClassName: "Activity", objectId: ongoingTransactionId), forKey: "ParentActivityObjectId")
+         newOrder.setObject(AVObject(outDataWithClassName: "Activity", objectId: ongoingTransactionId), forKey: "ParentActivityObjectId")
         newOrder.setObject(ongoingTransactionPrice, forKey: "Amount")
-        newOrder.setObject(AVUser(withoutDataWithObjectId: CURRENT_USER.objectId)
+        newOrder.setObject(AVUser(outDataWithObjectId: CURRENT_USER.objectId)
 , forKey: "CustomerObjectId")
         newOrder.setObject(false, forKey: "CheckIn")
         newOrder.setObject(ongoingTransactionRemarks, forKey: "Remarks")

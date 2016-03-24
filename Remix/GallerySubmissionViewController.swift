@@ -176,12 +176,12 @@ class GallerySubmissionViewController: FormViewController {
                 }
             }
             selectedCities.insert("全国", atIndex: 0)
-            newGallery.setObject(AVUser(withoutDataWithObjectId: CURRENT_USER.objectId), forKey: "Submitter")
+            newGallery.setObject(AVUser(outDataWithObjectId: CURRENT_USER.objectId), forKey: "Submitter")
             newGallery.setObject(CURRENT_USER.mobilePhoneNumber, forKey: "SubmitterContact")
             newGallery.setObject(selectedCities, forKey: "Cities")
             newGallery.setObject(attr["isRemixActivity"]! as! Bool, forKey: "isRemixActivity")
             if attr["isRemixActivity"]! as! Bool == true{
-                newGallery.setObject( AVObject(withoutDataWithClassName: "Activity", objectId: attr["ParentActivityObjectId"]! as! String), forKey: "ParentActivityObjectId")
+                newGallery.setObject( AVObject(outDataWithClassName: "Activity", objectId: attr["ParentActivityObjectId"]! as! String), forKey: "ParentActivityObjectId")
             }else{
                 newGallery.setObject(attr["Org"]! as! String, forKey: "Org")
                 if let date = attr["Date"]! as? NSDate {
