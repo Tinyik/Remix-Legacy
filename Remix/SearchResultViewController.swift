@@ -268,20 +268,23 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
 
     }
     
-    func reloadRowForActivity(activity: AVObject) {
+    func reloadRowForActivity(activity: AVObject, isFloating: Bool) {
         fetchLikedActivitiesList()
-        let query = AVQuery(className: "Activity")
-        query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
-        query.getObjectInBackgroundWithId(activity.objectId) { (activity, error) -> Void in
-            if error == nil {
-                self.activities[self.indexPathForSelectedActivity.row] = activity
-                self.tableView.reloadRowsAtIndexPaths([self.indexPathForSelectedActivity], withRowAnimation: .Automatic)
-            }else{
-                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
-                snackBar.backgroundColor = FlatWatermelonDark()
-                snackBar.show()
+        if isFloating == false {
+            let query = AVQuery(className: "Activity")
+            query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
+            query.getObjectInBackgroundWithId(activity.objectId) { (activity, error) -> Void in
+                if error == nil {
+                    self.activities[self.indexPathForSelectedActivity.row] = activity
+                    self.tableView.reloadRowsAtIndexPaths([self.indexPathForSelectedActivity], withRowAnimation: .Automatic)
+                }else{
+                    let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                    snackBar.backgroundColor = FlatWatermelonDark()
+                    snackBar.show()
+                }
+                
             }
-
+            
         }
     }
     

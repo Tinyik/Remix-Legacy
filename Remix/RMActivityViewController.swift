@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 import TTGSnackbar
 protocol RMActivityViewControllerDelegate{
-    func reloadRowForActivity(activity: AVObject)
+    func reloadRowForActivity(activity: AVObject, isFloating: Bool)
 }
 
 class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate, BmobPayDelegate, ModalTransitionDelegate {
@@ -18,6 +18,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
     var tr_presentTransition: TRViewControllerTransitionDelegate?
     var delegate: RMActivityViewControllerDelegate!
     var activity: AVObject!
+    var isFloating = false
     var shouldApplyWhiteTint = true
     var isLiked: Bool = false {
         didSet {
@@ -249,7 +250,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
                         activity.incrementKey("LikesNumber", byAmount: 1)
                         activity.saveInBackgroundWithBlock({ (isSuccessful, error) -> Void in
                             if error == nil {
-                                self.delegate.reloadRowForActivity(self.activity)
+                                self.delegate.reloadRowForActivity(self.activity, isFloating: self.isFloating)
                             }else{
                                 let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
                                 snackBar.backgroundColor = FlatWatermelonDark()
@@ -279,7 +280,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
                         activity.incrementKey("LikesNumber", byAmount: -1)
                         activity.saveInBackgroundWithBlock({ (isSuccessful, error) -> Void in
                             if error == nil {
-                                 self.delegate.reloadRowForActivity(self.activity)
+                                self.delegate.reloadRowForActivity(self.activity, isFloating: self.isFloating)
                             }else{
                                 let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
                                 snackBar.backgroundColor = FlatWatermelonDark()
@@ -303,7 +304,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
         CURRENT_USER.setObject(self.likedActivitiesIds, forKey: "LikedActivities")
         CURRENT_USER.saveInBackgroundWithBlock { (isSuccessful, error) -> Void in
             if error == nil {
-                self.delegate.reloadRowForActivity(self.activity)
+               self.delegate.reloadRowForActivity(self.activity, isFloating: self.isFloating)
             }else{
                 let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
                 snackBar.backgroundColor = FlatWatermelonDark()

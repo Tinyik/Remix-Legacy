@@ -490,6 +490,14 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
        
             let activityView = RMActivityViewController(url: targetURL)
             activityView.activity = floatingActivities[(sender.view?.tag)!]
+            activityView.delegate = self
+            activityView.isFloating = true
+        if likedActivitiesIds.contains(floatingActivities[(sender.view?.tag)!].objectId) {
+            activityView.isLiked = true
+        }else{
+            activityView.isLiked = false
+        }
+        
             self.navigationController?.pushViewController(activityView, animated: true)
     }
     
@@ -532,21 +540,28 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         
     }
     
-    func reloadRowForActivity(activity: AVObject) {
+    func reloadRowForActivity(activity: AVObject, isFloating: Bool) {
         fetchLikedActivitiesList()
-        let query = AVQuery(className: "Activity")
-        query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
-        query.getObjectInBackgroundWithId(activity.objectId) { (activity, error) -> Void in
-            if error == nil {
-                self.activities[self.indexPathForSelectedActivity.section][self.indexPathForSelectedActivity.row] = activity
-                self.tableView.reloadRowsAtIndexPaths([self.indexPathForSelectedActivity], withRowAnimation: .Automatic)
-            }else{
-                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
-                snackBar.backgroundColor = FlatWatermelonDark()
-                snackBar.show()
+            let query = AVQuery(className: "Activity")
+            query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
+            query.getObjectInBackgroundWithId(activity.objectId) { (activity, error) -> Void in
+                if error == nil {
+                    if isFloating == false{
+                        self.activities[self.indexPathForSelectedActivity.section][self.indexPathForSelectedActivity.row] = activity
+                        self.tableView.reloadRowsAtIndexPaths([self.indexPathForSelectedActivity], withRowAnimation: .Automatic)
+                    }else{
+                        let index = self.floatingActivities.indexOf({$0.objectId == activity.objectId})
+                        self.floatingActivities[self.floatingActivities.startIndex.advancedBy(index!)] = activity
+                    }
+                }else{
+                    let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                    snackBar.backgroundColor = FlatWatermelonDark()
+                    snackBar.show()
+                }
+                
             }
 
-        }
+
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
