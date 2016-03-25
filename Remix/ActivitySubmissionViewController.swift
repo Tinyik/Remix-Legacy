@@ -259,6 +259,7 @@ class ActivitySubmissionViewController: FormViewController {
                         let monthName = formatter.monthSymbols[monthNumber-1]
                         let dateString = monthName + " " + String(day) + " " + String(year)
                         newActivity.setObject(dateString, forKey: "Date")
+                        newActivity.setObject(date, forKey: "InternalDate")
                         
                     }
                 }else{
@@ -370,7 +371,7 @@ class ActivitySubmissionViewController: FormViewController {
                         let monthName = formatter.monthSymbols[monthNumber-1]
                         let dateString = monthName + " " + String(day) + " " + String(year)
                         newActivity.setObject(dateString, forKey: "Date")
-                        
+                        newActivity.setObject(date, forKey: "InternalDate")
                     }
                     
                 }else{

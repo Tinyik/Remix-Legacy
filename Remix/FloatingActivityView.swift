@@ -93,13 +93,13 @@ class FloatingActivityView: UIView, BmobPayDelegate {
                     }
                     
                 }else{
-                    let alert = UIAlertController(title: "提示", message: "这个活动太火爆啦！参与活动人数已满(Ｔ▽Ｔ)再看看别的活动吧~下次记得早早下手哦。", preferredStyle: .Alert)
+                    let alert = UIAlertController(title: "提示", message: "Sorry.._(:qゝ∠)_此活动暂时不支持在Remix报名或报名人数已达上限。", preferredStyle: .Alert)
                     let action = UIAlertAction(title: "好吧", style: .Default, handler: nil)
                     alert.addAction(action)
                     self.parentViewController.presentViewController(alert, animated: true, completion: nil)
                 }
             }else{
-                let alert = UIAlertController(title: "提示", message: "这个活动太火爆啦！参与活动人数已满(Ｔ▽Ｔ)再看看别的活动吧~下次记得早早下手哦。", preferredStyle: .Alert)
+                let alert = UIAlertController(title: "提示", message: "Sorry.._(:qゝ∠)_此活动暂时不支持在Remix报名或报名人数已达上限。", preferredStyle: .Alert)
                 let action = UIAlertAction(title: "好吧", style: .Default, handler: nil)
                 alert.addAction(action)
                 self.parentViewController.presentViewController(alert, animated: true, completion: nil)
