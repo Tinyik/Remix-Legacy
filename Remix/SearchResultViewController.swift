@@ -45,6 +45,8 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
         trendingLabelsCollectionView.dataSource = self
         self.navigationController?.navigationBar.tintColor = .whiteColor()
         self.title = "搜索"
+        self.tableView.registerNib(UINib(nibName: "MiddleCoverCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "MiddleCoverCell")
+        self.tableView.registerNib(UINib(nibName: "RMTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "RMTableViewCell")
        fetchTrendingLabels()
     }
 
@@ -155,7 +157,7 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if (activities[indexPath.row].objectForKey("isFeatured") as! Bool) == true {
-            let cell = tableView.dequeueReusableCellWithIdentifier("fullCellReuseIdentifier", forIndexPath: indexPath) as! RMFullCoverCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("MiddleCoverCell", forIndexPath: indexPath) as! RMFullCoverCell
             cell.delegate = self
             cell.parentViewController = self
             if let price = activities[indexPath.row].objectForKey("Price") as? Double {
@@ -181,8 +183,11 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
             cell.fullImageView.sd_setImageWithURL(coverImgURLs[indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
             let _objId = activities[indexPath.row].objectId
             cell.objectId = _objId
+            if let summary = activities[indexPath.row].objectForKey("Summary") as? String{
+                cell.orgLabel.text = cell.orgLabel.text! + summary
+            }
             let query = AVQuery(className: "Organization")
-            query.whereKey("Name", equalTo: cell.orgLabel.text)
+            query.whereKey("Name", equalTo: activities[indexPath.row].objectForKey("Org") as? String)
             query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
                 if error == nil {
                     for org in organizations {
@@ -205,7 +210,13 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
             return cell
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! RMTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("RMTableViewCell", forIndexPath: indexPath) as! RMTableViewCell
+        if let summary = activities[indexPath.row].objectForKey("Summary") as? String {
+            cell.summaryLabel.text = summary
+        }else{
+            cell.summaryLabel.text = ""
+        }
+
         cell.delegate = self
         cell.parentViewController = self
         if let price = activities[indexPath.row].objectForKey("Price") as? Double {
@@ -257,20 +268,23 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
 
     }
     
-    func reloadRowForActivity(activity: AVObject) {
+    func reloadRowForActivity(activity: AVObject, isFloating: Bool) {
         fetchLikedActivitiesList()
-        let query = AVQuery(className: "Activity")
-        query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
-        query.getObjectInBackgroundWithId(activity.objectId) { (activity, error) -> Void in
-            if error == nil {
-                self.activities[self.indexPathForSelectedActivity.row] = activity
-                self.tableView.reloadRowsAtIndexPaths([self.indexPathForSelectedActivity], withRowAnimation: .Automatic)
-            }else{
-                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
-                snackBar.backgroundColor = FlatWatermelonDark()
-                snackBar.show()
+        if isFloating == false {
+            let query = AVQuery(className: "Activity")
+            query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
+            query.getObjectInBackgroundWithId(activity.objectId) { (activity, error) -> Void in
+                if error == nil {
+                    self.activities[self.indexPathForSelectedActivity.row] = activity
+                    self.tableView.reloadRowsAtIndexPaths([self.indexPathForSelectedActivity], withRowAnimation: .Automatic)
+                }else{
+                    let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                    snackBar.backgroundColor = FlatWatermelonDark()
+                    snackBar.show()
+                }
+                
             }
-
+            
         }
     }
     
@@ -278,7 +292,7 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
         if activities.count > 0  {
             if let isFeatured = activities[indexPath.row].objectForKey("isFeatured") as? Bool  {
                 if isFeatured == true {
-                    return DEVICE_SCREEN_WIDTH
+                    return 335
                 }
             }
         }
@@ -406,7 +420,7 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
     
     func buttonTitleForEmptyDataSet(scrollView: UIScrollView!, forState state: UIControlState) -> NSAttributedString! {
         let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(16), NSForegroundColorAttributeName: FlatRed()]
-        return NSAttributedString(string: "向Remix推荐活动", attributes: attrDic)
+        return NSAttributedString(string: "向Remix提交活动", attributes: attrDic)
     }
     
     func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {

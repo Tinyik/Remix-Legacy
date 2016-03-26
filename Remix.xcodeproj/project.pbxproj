@@ -10,6 +10,9 @@
 		180199541C79C14700A6C7E4 /* RMSecondFilteredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180199531C79C14700A6C7E4 /* RMSecondFilteredViewController.swift */; };
 		180199561C79E25F00A6C7E4 /* TermsAndConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180199551C79E25F00A6C7E4 /* TermsAndConditionsViewController.swift */; };
 		180C08A01C8ADBC50025136D /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180C089F1C8ADBC50025136D /* File.swift */; };
+		181936721CA3CBC4003D6328 /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1819366E1CA3CBC4003D6328 /* libSocialQQ.a */; };
+		181936731CA3CBC4003D6328 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1819366F1CA3CBC4003D6328 /* TencentOpenAPI.framework */; };
+		181936741CA3CBC4003D6328 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 181936701CA3CBC4003D6328 /* TencentOpenApi_IOS_Bundle.bundle */; };
 		18198D521C9447D300A7AD78 /* RemixPassView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18198D511C9447D300A7AD78 /* RemixPassView.xib */; };
 		18198D541C9449C900A7AD78 /* RemixPassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18198D531C9449C900A7AD78 /* RemixPassView.swift */; };
 		18198D571C944B1F00A7AD78 /* RemixPassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18198D561C944B1F00A7AD78 /* RemixPassViewController.swift */; };
@@ -78,6 +81,7 @@
 		184EDFA91C997BD9004F3D7D /* NotifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184EDFA81C997BD9004F3D7D /* NotifView.swift */; };
 		184EDFAB1C997BE7004F3D7D /* NotifView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184EDFAA1C997BE7004F3D7D /* NotifView.xib */; };
 		1854897C1C67288200A8E5C1 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1854897B1C67288200A8E5C1 /* ImageIO.framework */; };
+		18561B311C9EF9BB00F7133A /* RMThirdFilteredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18561B301C9EF9BB00F7133A /* RMThirdFilteredViewController.swift */; };
 		1857B52C1C855A7000D00A9E /* CommentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1857B52B1C855A7000D00A9E /* CommentsTableViewController.swift */; };
 		1857B52E1C855A8900D00A9E /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1857B52D1C855A8900D00A9E /* CommentCell.swift */; };
 		1857B5301C85623900D00A9E /* CommentInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1857B52F1C85623900D00A9E /* CommentInputViewController.swift */; };
@@ -224,6 +228,10 @@
 		180199531C79C14700A6C7E4 /* RMSecondFilteredViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RMSecondFilteredViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		180199551C79E25F00A6C7E4 /* TermsAndConditionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewController.swift; sourceTree = "<group>"; };
 		180C089F1C8ADBC50025136D /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		1819366E1CA3CBC4003D6328 /* libSocialQQ.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialQQ.a; sourceTree = "<group>"; };
+		1819366F1CA3CBC4003D6328 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
+		181936701CA3CBC4003D6328 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
+		181936711CA3CBC4003D6328 /* UMSocialQQHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialQQHandler.h; sourceTree = "<group>"; };
 		18198D511C9447D300A7AD78 /* RemixPassView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RemixPassView.xib; sourceTree = "<group>"; };
 		18198D531C9449C900A7AD78 /* RemixPassView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemixPassView.swift; sourceTree = "<group>"; };
 		18198D561C944B1F00A7AD78 /* RemixPassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemixPassViewController.swift; sourceTree = "<group>"; };
@@ -248,7 +256,7 @@
 		183984FA1C92FA4600B8EB8B /* OrganizationSubmissionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationSubmissionViewController.swift; sourceTree = "<group>"; };
 		183984FC1C92FC6A00B8EB8B /* QRCoder.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QRCoder.framework; path = "Pods/../build/Debug-iphoneos/QRCoder.framework"; sourceTree = "<group>"; };
 		183984FE1C92FE0300B8EB8B /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
-		183985001C93C56400B8EB8B /* ScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
+		183985001C93C56400B8EB8B /* ScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ScannerViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		183CB2141C99BB4700D3D89E /* AVOSCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloud.framework; sourceTree = "<group>"; };
 		183FDCBD1C9C4460002D79EB /* ContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
 		183FDCC01C9C59A4002D79EB /* MiddleCoverCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MiddleCoverCell.xib; sourceTree = "<group>"; };
@@ -294,8 +302,8 @@
 		184824F91C8EFDBC00CCB9CF /* NotifInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifInputViewController.swift; sourceTree = "<group>"; };
 		184824FB1C8F023700CCB9CF /* UITextView+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Placeholder.h"; sourceTree = "<group>"; };
 		184824FC1C8F023700CCB9CF /* UITextView+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Placeholder.m"; sourceTree = "<group>"; };
-		184824FE1C8F48FB00CCB9CF /* WithdrawInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawInputViewController.swift; sourceTree = "<group>"; };
-		184825001C8FF6F400CCB9CF /* GallerySubmissionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GallerySubmissionViewController.swift; sourceTree = "<group>"; };
+		184824FE1C8F48FB00CCB9CF /* WithdrawInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = WithdrawInputViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		184825001C8FF6F400CCB9CF /* GallerySubmissionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = GallerySubmissionViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		184857131C63E5BC004E516A /* CTTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTTableViewCell.swift; sourceTree = "<group>"; };
 		184857171C63EB26004E516A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		184857191C63EB30004E516A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -312,6 +320,7 @@
 		184EDFA81C997BD9004F3D7D /* NotifView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifView.swift; sourceTree = "<group>"; };
 		184EDFAA1C997BE7004F3D7D /* NotifView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotifView.xib; sourceTree = "<group>"; };
 		1854897B1C67288200A8E5C1 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		18561B301C9EF9BB00F7133A /* RMThirdFilteredViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMThirdFilteredViewController.swift; sourceTree = "<group>"; };
 		1857B52B1C855A7000D00A9E /* CommentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewController.swift; sourceTree = "<group>"; };
 		1857B52D1C855A8900D00A9E /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		1857B52F1C85623900D00A9E /* CommentInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CommentInputViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -481,10 +490,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				181936721CA3CBC4003D6328 /* libSocialQQ.a in Frameworks */,
 				183984FD1C92FC6A00B8EB8B /* QRCoder.framework in Frameworks */,
 				18E620A41C8C160E00B85941 /* Eureka.framework in Frameworks */,
 				1824544E1C7F977A00CF0CC6 /* AlipaySDK.bundle in Frameworks */,
 				182454411C7F833800CF0CC6 /* PassKit.framework in Frameworks */,
+				181936731CA3CBC4003D6328 /* TencentOpenAPI.framework in Frameworks */,
 				18E684C81C88662900C32C3D /* OneSignal.framework in Frameworks */,
 				1841F87C1C7739150046D57F /* libstdc++.tbd in Frameworks */,
 				1841F87A1C7739020046D57F /* libiconv.tbd in Frameworks */,
@@ -537,6 +548,17 @@
 				18E684B41C87243300C32C3D /* UIScrollView+EmptyDataSet.m */,
 			);
 			name = EmptyDataSet;
+			sourceTree = "<group>";
+		};
+		1819366D1CA3CBC4003D6328 /* TencentOpenAPI */ = {
+			isa = PBXGroup;
+			children = (
+				1819366E1CA3CBC4003D6328 /* libSocialQQ.a */,
+				1819366F1CA3CBC4003D6328 /* TencentOpenAPI.framework */,
+				181936701CA3CBC4003D6328 /* TencentOpenApi_IOS_Bundle.bundle */,
+				181936711CA3CBC4003D6328 /* UMSocialQQHandler.h */,
+			);
+			path = TencentOpenAPI;
 			sourceTree = "<group>";
 		};
 		18198D551C944B0C00A7AD78 /* RemixPass */ = {
@@ -667,6 +689,7 @@
 		187745711C6AC57C000427C7 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				1899E9B61C663E1500ADC2AC /* Extern Classes */,
 				183FDCC81C9C746D002D79EB /* LeanCloudFeedback */,
 				187745721C6ACB1D000427C7 /* UMSocial_Sdk_5.0 */,
 				18C9A1F31C687CB900A80A22 /* QuartzCore.framework */,
@@ -700,6 +723,7 @@
 		187745721C6ACB1D000427C7 /* UMSocial_Sdk_5.0 */ = {
 			isa = PBXGroup;
 			children = (
+				1819366D1CA3CBC4003D6328 /* TencentOpenAPI */,
 				1841F8701C7733A60046D57F /* Wechat */,
 				187745731C6ACB1D000427C7 /* UMSocialLocalizable.strings */,
 				187745751C6ACB1D000427C7 /* Header */,
@@ -770,7 +794,6 @@
 			isa = PBXGroup;
 			children = (
 				1824543F1C7F827600CF0CC6 /* Remix.entitlements */,
-				1899E9B61C663E1500ADC2AC /* Extern Classes */,
 				189782511C63C7EF00458515 /* Main.storyboard */,
 				1824544F1C7FA16C00CF0CC6 /* VersionCheck.swift */,
 				18E239331C805E2D00363655 /* FloatingActivityView.xib */,
@@ -780,9 +803,9 @@
 				18198D551C944B0C00A7AD78 /* RemixPass */,
 				18E684B11C86FCA600C32C3D /* RMSwipeBetweenViewControllers.swift */,
 				183FDCF71C9C78DB002D79EB /* RMNavigationController.swift */,
-				18E620A51C8C194C00B85941 /* ActivitySubmissionViewController.swift */,
 				184EDFA81C997BD9004F3D7D /* NotifView.swift */,
 				184EDFAA1C997BE7004F3D7D /* NotifView.xib */,
+				18E620A51C8C194C00B85941 /* ActivitySubmissionViewController.swift */,
 				183984FA1C92FA4600B8EB8B /* OrganizationSubmissionViewController.swift */,
 				184825001C8FF6F400CCB9CF /* GallerySubmissionViewController.swift */,
 				18E620AD1C8D5F9600B85941 /* LocationSubmissionViewController.swift */,
@@ -942,12 +965,14 @@
 				1899E9B71C663E3B00ADC2AC /* Remix-Bridging-Header.h */,
 			);
 			name = "Extern Classes";
+			path = Remix;
 			sourceTree = "<group>";
 		};
 		1899E9C11C670F0100ADC2AC /* FirstVC */ = {
 			isa = PBXGroup;
 			children = (
 				180199531C79C14700A6C7E4 /* RMSecondFilteredViewController.swift */,
+				18561B301C9EF9BB00F7133A /* RMThirdFilteredViewController.swift */,
 				18BCA0291C6E3FE600DF3EC7 /* RMFirstFilteredViewController.swift */,
 				1899E9BE1C66F75600ADC2AC /* RMFullCoverCell.swift */,
 				189782831C63CA6900458515 /* RMTableViewController.swift */,
@@ -1300,6 +1325,7 @@
 				183FDCEF1C9C746D002D79EB /* feedback_add_image@2x.png in Resources */,
 				187745921C6ACB1D000427C7 /* UMShareEditViewController.xib in Resources */,
 				183FDCF51C9C746D002D79EB /* feedback_warning@2x.png in Resources */,
+				181936741CA3CBC4003D6328 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				183FDCE61C9C746D002D79EB /* Info.plist in Resources */,
 				183FDCF21C9C746D002D79EB /* feedback_bg_2@2x.png in Resources */,
 				18BC02311C8E973300FBC162 /* UserHeaderView.xib in Resources */,
@@ -1514,6 +1540,7 @@
 				18E620AA1C8C591000B85941 /* FloatLabelTextField.swift in Sources */,
 				18C79D861C83EDCF004AAA44 /* RMPageViewController.swift in Sources */,
 				183FDCEC1C9C746D002D79EB /* LCUserFeedbackThread.m in Sources */,
+				18561B311C9EF9BB00F7133A /* RMThirdFilteredViewController.swift in Sources */,
 				18B317C41C6B183000336A92 /* OrgFilteredViewController.swift in Sources */,
 				184857141C63E5BC004E516A /* CTTableViewCell.swift in Sources */,
 				183FDCEA1C9C746D002D79EB /* LCUserFeedbackReply.m in Sources */,
@@ -1720,6 +1747,7 @@
 					"$(PROJECT_DIR)/Remix",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/UMSocial_Sdk_5.0/TencentOpenAPI",
 				);
 				INFOPLIST_FILE = Remix/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1729,6 +1757,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/UMSocial_Sdk_5.0",
 					"$(PROJECT_DIR)/UMSocial_Sdk_5.0/Wechat",
+					"$(PROJECT_DIR)/UMSocial_Sdk_5.0/TencentOpenAPI",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fongtinyik.remix;
@@ -1754,6 +1783,7 @@
 					"$(PROJECT_DIR)/Remix",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/UMSocial_Sdk_5.0/TencentOpenAPI",
 				);
 				INFOPLIST_FILE = Remix/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1763,6 +1793,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/UMSocial_Sdk_5.0",
 					"$(PROJECT_DIR)/UMSocial_Sdk_5.0/Wechat",
+					"$(PROJECT_DIR)/UMSocial_Sdk_5.0/TencentOpenAPI",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fongtinyik.remix;

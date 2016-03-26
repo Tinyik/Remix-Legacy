@@ -155,10 +155,16 @@ class OrgIntroViewController: UIViewController, MWPhotoBrowserDelegate, MFMailCo
     }
     
     @IBAction func contactUs() {
-        let composer = MFMailComposeViewController()
-        composer.mailComposeDelegate = self
-        composer.setToRecipients(emailRecipient)
-        self.presentViewController(composer, animated: true, completion: nil)
+        if MFMailComposeViewController.canSendMail() {
+            let composer = MFMailComposeViewController()
+            composer.mailComposeDelegate = self
+            composer.setToRecipients(emailRecipient)
+            self.presentViewController(composer, animated: true, completion: nil)
+        }else{
+            let snackBar = TTGSnackbar.init(message: "请先在 \"系统设置-邮件、通讯录、日历\" 中添加邮箱。", duration: .Middle)
+            snackBar.backgroundColor = FlatWatermelonDark()
+            snackBar.show()
+        }
     }
     
     @IBAction func dialPhone() {

@@ -26,8 +26,26 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
         self.cityLabel.sizeToFit()
     }
     
+    func updateLaunchedTimes() {
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        hasPromptedToEnableNotif = userDefaults.boolForKey("hasPromptedToEnableNotif")
+        if hasPromptedToEnableNotif == nil {
+            hasPromptedToEnableNotif = false
+        }
+        launchedTimes = userDefaults.integerForKey("LaunchedTimes")
+        if launchedTimes == nil {
+            userDefaults.setObject(0, forKey: "LaunchedTimes")
+        }else{
+            launchedTimes = userDefaults.integerForKey("LaunchedTimes")
+            launchedTimes = launchedTimes! + 1
+            userDefaults.setObject(launchedTimes, forKey: "LaunchedTimes")
+        }
+        
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateLaunchedTimes()
         let image = UIImage(named: "SplashLogo")
         let bgColor = FlatBlueDark()
         let splashView = CBZSplashView(icon: image, backgroundColor: bgColor)
@@ -41,9 +59,9 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
     }
     
     override func recommendActivityAndLocation() {
-        print("Clikced")
+       
         
-        let sheet = LCActionSheet(title: "添加活动或地点至Remix。审核通过后其他用户将看到你的推荐。", buttonTitles: ["添加一条活动", "推荐一家店或地点", "添加往期活动报道", "🔥立即入驻Remix🔥"], redButtonIndex: 3) { (buttonIndex) -> Void in
+        let sheet = LCActionSheet(title: "添加活动或地点至Remix。审核通过后其他用户将看到你添加的活动。", buttonTitles: ["添加一条活动", "推荐一家店或地点", "添加往期活动报道", "🔥立即入驻Remix🔥"], redButtonIndex: 3) { (buttonIndex) -> Void in
             if self.checkPersonalInfoIntegrity() {
                 if buttonIndex == 0 {
                     let submVC = ActivitySubmissionViewController()
@@ -143,8 +161,7 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
                 }
                 let sheet = LCActionSheet(title: "请选择你所在的城市。Remix团队将积极更新并尽快支持更多城市。", buttonTitles: self.cityNameArray + ["全国", "申请开通城市"], redButtonIndex: self.cityNameArray.count + 1, delegate: self)
                 sheet.show()
-                print("COUNT")
-                print(self.cityNameArray)
+               
             }else{
                 let alert = UIAlertController(title: "Remix提示", message: "切换城市失败，请检查你的网络连接后重试", preferredStyle: .Alert)
                 let action = UIAlertAction(title: "好的", style: .Default, handler: nil)
@@ -179,6 +196,7 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
             self.cityLabel.sizeToFit()
         }else if buttonIndex == cityNameArray.count + 1{
             //Apply for new city...
+            UIApplication.sharedApplication().openURL(NSURL(string: "http://jsform.com/f/szicjm")!)
             
         }else if buttonIndex != cityNameArray.count + 2{
             REMIX_CITY_NAME = cityNameArray[buttonIndex]
@@ -219,7 +237,7 @@ class RMSwipeBetweenViewControllers: RKSwipeBetweenViewControllers, MFMailCompos
         return true
     }
     override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
-        print("lalala")
+       
         if motion == UIEventSubtype.MotionShake {
             let agent = LCUserFeedbackAgent()
             agent.showConversations(self, title: nil, contact: nil)

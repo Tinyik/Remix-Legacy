@@ -40,7 +40,7 @@ class LikedViewController: CTFilteredViewController {
     
         fetchLikedActivitiesList()
         
-        print(likedActivitiesIds)
+      
         for likedActivityId in likedActivitiesIds {
             query.getObjectInBackgroundWithId(likedActivityId, block: { (activity, error) -> Void in
                 if error == nil {

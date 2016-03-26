@@ -146,20 +146,26 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
-    func reloadRowForActivity(activity: AVObject) {
+    func reloadRowForActivity(activity: AVObject, isFloating: Bool) {
         fetchLikedActivitiesList()
-        let query = AVQuery(className: "Activity")
-        query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
-        query.getObjectInBackgroundWithId(activity.objectId) { (activity, error) -> Void in
-            if error == nil {
-                self.activities[self.indexPathForSelectedActivity.section][self.indexPathForSelectedActivity.row] = activity
-                self.tableView.reloadRowsAtIndexPaths([self.indexPathForSelectedActivity], withRowAnimation: .Automatic)
-            }else{
-                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
-                snackBar.backgroundColor = FlatWatermelonDark()
-                snackBar.show()
+        if isFloating == false {
+            let query = AVQuery(className: "Activity")
+            query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
+            query.getObjectInBackgroundWithId(activity.objectId) { (activity, error) -> Void in
+                if error == nil {
+                    self.activities[self.indexPathForSelectedActivity.section][self.indexPathForSelectedActivity.row] = activity
+                    self.tableView.reloadRowsAtIndexPaths([self.indexPathForSelectedActivity],withRowAnimation: .Automatic)
+                    
+                }else{
+                    let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                    snackBar.backgroundColor = FlatWatermelonDark()
+                    snackBar.show()
+                }
+                
             }
+
         }
+        
     }
   
     
@@ -238,7 +244,7 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
         if activities.count > 0 {
             if let isFeatured = activities[indexPath.section][indexPath.row].objectForKey("isFeatured") as? Bool  {
                 if isFeatured == true {
-                    return DEVICE_SCREEN_WIDTH
+                    return 335
                 }
             }
         }
@@ -282,8 +288,11 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
             cell.fullImageView.sd_setImageWithURL(coverImgURLs[indexPath.section][indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
             let _objId = activities[indexPath.section][indexPath.row].objectId
             cell.objectId = _objId
+            if let summary = activities[indexPath.section][indexPath.row].objectForKey("Summary") as? String{
+                cell.orgLabel.text = cell.orgLabel.text! + summary
+            }
             let query = AVQuery(className: "Organization")
-            query.whereKey("Name", equalTo: cell.orgLabel.text)
+            query.whereKey("Name", equalTo: activities[indexPath.section][indexPath.row].objectForKey("Org") as? String)
             query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
                 if error == nil {
                     for org in organizations {
@@ -424,7 +433,7 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
     
     func buttonTitleForEmptyDataSet(scrollView: UIScrollView!, forState state: UIControlState) -> NSAttributedString! {
         let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(16), NSForegroundColorAttributeName: FlatRed()]
-        return NSAttributedString(string: "向Remix推荐活动", attributes: attrDic)
+        return NSAttributedString(string: "向Remix提交活动", attributes: attrDic)
     }
     
     func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {

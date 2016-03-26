@@ -20,7 +20,6 @@ class PersonalInfoViewController: UITableViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        print("WILLAPPEAR")
         self.tableView.reloadData()
     }
     

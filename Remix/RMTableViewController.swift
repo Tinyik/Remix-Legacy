@@ -16,6 +16,7 @@ let DEVICE_SCREEN_WIDTH = UIScreen.mainScreen().bounds.width
 let DEVICE_SCREEN_HEIGHT = UIScreen.mainScreen().bounds.height
 let COMMENTS_TABLE_VIEW_VISIBLE_HEIGHT: CGFloat = 450
 var APPLICATION_UI_REMOTE_CONFIG: AVObject!
+var APP_VERSION_AVAILABILITY = "Available"
 var CURRENT_USER: AVUser!
 var REMIX_CITY_NAME: String!
 
@@ -57,27 +58,9 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     var trackingAreas: [UIButton]! = []
     var indexPathForSelectedActivity: NSIndexPath!
     
-    func updateLaunchedTimes() {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        hasPromptedToEnableNotif = userDefaults.boolForKey("hasPromptedToEnableNotif")
-        if hasPromptedToEnableNotif == nil {
-            hasPromptedToEnableNotif = false
-        }
-        launchedTimes = userDefaults.integerForKey("LaunchedTimes")
-        if launchedTimes == nil {
-            userDefaults.setObject(0, forKey: "LaunchedTimes")
-        }else{
-            launchedTimes = userDefaults.integerForKey("LaunchedTimes")
-            launchedTimes = launchedTimes! + 1
-            userDefaults.setObject(launchedTimes, forKey: "LaunchedTimes")
-        }
-        print("LAUNCHEDTIMES")
-        print(launchedTimes)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateLaunchedTimes()
         //Just to get around the not-in-hierarchy issue by adding a bit of delay here.
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             if launchedTimes % 3 == 0 || launchedTimes == 2 {
@@ -95,6 +78,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.adTableView.scrollEnabled = false
         self.tableView.emptyDataSetDelegate = self
         self.tableView.emptyDataSetSource = self
         self.tableView.tableFooterView = UIView()
@@ -152,12 +136,15 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         }
     }
     
+    
     func loadRemoteUIConfigurations() {
         let query = AVQuery(className: "UIRemoteConfig")
         query.getObjectInBackgroundWithId("56ea40b6f3609a00544ed773") { (config, error) -> Void in
             self.setUpTapTrackingArea() //FIXME: I don't know why but in viewDidLoad() keywindow? always return nil.
             if error == nil {
                 APPLICATION_UI_REMOTE_CONFIG = config
+                // Check Version availability
+                
                 self.filterLabel_1.text = config.objectForKey("FilterLabel_1_Text") as? String
                 self.filterLabel_2.text = config.objectForKey("FilterLabel_2_Text") as? String
                 self.filterLabel_3.text = config.objectForKey("FilterLabel_3_Text") as? String
@@ -199,7 +186,48 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 snackBar.show()
             }
         }
+        let identifierDictionary = DeviceInformation.appIdentifiers()
+        let query2 = AVQuery(className: "AppVersions")
+        query2.whereKey("Version", equalTo: identifierDictionary["shortString"]!)
+        query2.whereKey("Build", equalTo: identifierDictionary["buildString"]!)
+        query2.findObjectsInBackgroundWithBlock { (versions, error) -> Void in
+            if error == nil {
+                if versions.count > 0 {
+                    APP_VERSION_AVAILABILITY = versions[0].objectForKey("Status") as! String
+                    self.checkVersionAvailability()
+                }
+            }else{
+                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
+            }
+        }
     }
+    
+    func checkVersionAvailability() {
+        switch APP_VERSION_AVAILABILITY {
+        case "Expired": let alert = UIAlertController(title: "Remix过期提示", message: "该测试版本Remix已过期, 请从Apple官方渠道更新Remix或致电181-4977-0476获取技术支持。", preferredStyle: .Alert)
+        let action = UIAlertAction(title: "退出Remix", style: .Destructive, handler: { (action) -> Void in
+            exit(0)
+        })
+        alert.addAction(action)
+        self.presentViewController(alert, animated: true, completion: nil)
+        case "Update": if launchedTimes % 3 == 1 {
+            let alert = UIAlertController(title: "Remix提示", message: "新版本的Remix已经发布啦，想要现在立即更新吗？", preferredStyle: .Alert)
+            let action = UIAlertAction(title: "立即更新", style: .Default, handler: { (action) -> Void in
+                UIApplication.sharedApplication().openURL(NSURL(string: APPLICATION_UI_REMOTE_CONFIG.objectForKey("Appstore") as! String)!)
+            })
+            let cancel = UIAlertAction(title: "稍后在说", style: .Cancel, handler: nil)
+            alert.addAction(action)
+            alert.addAction(cancel)
+            self.presentViewController(alert, animated: true, completion: nil)
+
+                      }
+        default: break
+        }
+        
+    }
+
     
     func configurePageControl() {
        
@@ -238,11 +266,11 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     func fetchOrdersInformation() {
         registeredActivitiesIds = []
         let query = AVQuery(className: "Orders")
-        query.whereKey("CustomerObjectId", equalTo: AVUser(withoutDataWithObjectId: CURRENT_USER.objectId))
+        query.whereKey("CustomerObjectId", equalTo: AVUser(outDataWithObjectId: CURRENT_USER.objectId))
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
             if error == nil {
                 for order in orders {
-                    print(order.objectId)
+                   
                     if let o = order.objectForKey("ParentActivityObjectId") as? AVObject {
                         self.registeredActivitiesIds.append(o.objectId)
                     }
@@ -315,7 +343,6 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         let query = AVQuery(className: "HeaderPromotion")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
-        print(REMIX_CITY_NAME)
         query.findObjectsInBackgroundWithBlock { (ads, error) -> Void in
             if error == nil {
                 if self.isRefreshing == true {
@@ -396,7 +423,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                                 self.monthNameStrings.append(monthName)
                                 self.activities.append([activity as! AVObject])
                                 self.coverImgURLs.append([imageURL])
-                                print(self.monthNameStrings)
+                               
                             } else {
                                 
                                 if let index = self.activities.indexOf({
@@ -409,9 +436,12 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                                 
                             }
                             
-                            
+//                            self.activities = self.activities.sort({($0[0].objectForKey("InternalDate") as! NSDate).compare($1[0].objectForKey("InternalDate") as! NSDate) == NSComparisonResult.OrderedDescending})
+//                            for var activityList in self.activities {
+//                                activityList = activityList.sort({($0.objectForKey("InternalDate") as! NSDate).compare($1.objectForKey("InternalDate") as! NSDate) == NSComparisonResult.OrderedAscending})
+//                            }
                         }else{
-                            print("NO")
+                            
                             self.floatingActivities.append(activity as! AVObject)
                         }
                     }
@@ -469,6 +499,14 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
        
             let activityView = RMActivityViewController(url: targetURL)
             activityView.activity = floatingActivities[(sender.view?.tag)!]
+            activityView.delegate = self
+            activityView.isFloating = true
+        if likedActivitiesIds.contains(floatingActivities[(sender.view?.tag)!].objectId) {
+            activityView.isLiked = true
+        }else{
+            activityView.isLiked = false
+        }
+        
             self.navigationController?.pushViewController(activityView, animated: true)
     }
     
@@ -506,27 +544,33 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     }
     
     func refreshViewContentForCityChange() {
-        print("Refreshing...")
-        //self.refreshControl?.beginRefreshing()
+     
         self.refresh()
         
     }
     
-    func reloadRowForActivity(activity: AVObject) {
+    func reloadRowForActivity(activity: AVObject, isFloating: Bool) {
         fetchLikedActivitiesList()
-        let query = AVQuery(className: "Activity")
-        query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
-        query.getObjectInBackgroundWithId(activity.objectId) { (activity, error) -> Void in
-            if error == nil {
-                self.activities[self.indexPathForSelectedActivity.section][self.indexPathForSelectedActivity.row] = activity
-                self.tableView.reloadRowsAtIndexPaths([self.indexPathForSelectedActivity], withRowAnimation: .Automatic)
-            }else{
-                let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
-                snackBar.backgroundColor = FlatWatermelonDark()
-                snackBar.show()
+            let query = AVQuery(className: "Activity")
+            query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
+            query.getObjectInBackgroundWithId(activity.objectId) { (activity, error) -> Void in
+                if error == nil {
+                    if isFloating == false{
+                        self.activities[self.indexPathForSelectedActivity.section][self.indexPathForSelectedActivity.row] = activity
+                        self.tableView.reloadRowsAtIndexPaths([self.indexPathForSelectedActivity], withRowAnimation: .Automatic)
+                    }else{
+                        let index = self.floatingActivities.indexOf({$0.objectId == activity.objectId})
+                        self.floatingActivities[self.floatingActivities.startIndex.advancedBy(index!)] = activity
+                    }
+                }else{
+                    let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
+                    snackBar.backgroundColor = FlatWatermelonDark()
+                    snackBar.show()
+                }
+                
             }
 
-        }
+
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -558,8 +602,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         if tableView == adTableView {
             return 1
         }
-        print("MONTHNAME")
-        print(monthNameStrings.count)
+        
         return monthNameStrings.count
     }
     
@@ -648,7 +691,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             query.findObjectsInBackgroundWithBlock({ (promotions, error) -> Void in
                 if error == nil {
                     if promotions.count > 0{
-                        print("PROMO")
+                       
                         for promotion in promotions {
                             self.bannerAds.append(promotion as! AVObject)
                         }
@@ -719,14 +762,12 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                         snackBar.show()
                     }
                 })
-                print("sdfsdf")
-                print(likedActivitiesIds)
-                print(_objId)
+               
                 if likedActivitiesIds.contains(_objId) {
-                    print("CONTIAN")
+                    
                     cell.isLiked = true
                 }else{
-                    print("NOTCONTAIN")
+                    
                     cell.isLiked = false
                 }
                 
@@ -874,27 +915,28 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     }
     
     func askToEnableNotifications() {
-        print("asking..")
+    
         let userDefault = NSUserDefaults.standardUserDefaults()
         sharedOneSignalInstance.IdsAvailable { (userId, pushToken) -> Void in
             if pushToken != nil {
                 userDefault.setBool(true, forKey: "isRegisteredForNotif")
-                print(pushToken)
+               
             }else{
                 userDefault.setBool(false, forKey: "isRegisteredForNotif")
-                print("nil token")
+              
             }
             
         }
         if let key = userDefault.objectForKey("isRegisteredForNotif") as? Bool {
-            print("KEYNOTNIL")
-            print(key)
+            
             if key == false {
                 let alert = UIAlertController(title: "推送设置", message: "Remix需要你允许推送消息才能及时传递当前城市学生圈的最新消息。想要现在允许推送消息吗？(●'◡'●)ﾉ♥", preferredStyle: .Alert)
                 let buttonOK = UIAlertAction(title: "好的", style: .Default) { (action) -> Void in
                     self.promptToEnableNotifications()
                 }
-                let buttonCancel = UIAlertAction(title: "不了谢谢", style: .Default, handler: nil)
+                let buttonCancel = UIAlertAction(title: "不了谢谢", style: .Default, handler: { (action) -> Void in
+                    self.checkVersionAvailability()
+                })
                 alert.addAction(buttonCancel)
                 alert.addAction(buttonOK)
                 self.presentViewController(alert, animated: true, completion: nil)
@@ -904,7 +946,10 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
             let buttonOK = UIAlertAction(title: "好的", style: .Default) { (action) -> Void in
                 self.promptToEnableNotifications()
             }
-            let buttonCancel = UIAlertAction(title: "不了谢谢", style: .Default, handler: nil)
+            let buttonCancel = UIAlertAction(title: "不了谢谢", style: .Default, handler: { (action) -> Void in
+                self.checkVersionAvailability()
+            })
+
             alert.addAction(buttonCancel)
             alert.addAction(buttonOK)
             self.presentViewController(alert, animated: true, completion: nil)
@@ -915,7 +960,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
            }
     
     func promptToEnableNotifications() {
-        
+        self.checkVersionAvailability()
         if hasPromptedToEnableNotif == false {
             sharedOneSignalInstance.registerForPushNotifications()
             let userDefaults = NSUserDefaults.standardUserDefaults()
@@ -951,7 +996,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(15)]
-        return NSAttributedString(string: "快点击左上角向Remix推荐活动，成为邦主吧！如果你想离开这里, 你也可以：", attributes: attrDic)
+        return NSAttributedString(string: "快点击左上角向Remix提交活动，成为邦主吧！如果你想离开这里, 你也可以：", attributes: attrDic)
     }
     
     func buttonTitleForEmptyDataSet(scrollView: UIScrollView!, forState state: UIControlState) -> NSAttributedString! {

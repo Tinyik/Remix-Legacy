@@ -152,7 +152,12 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
             controller.setMessageBody(bodyTitle, isHTML: false)
             self.presentViewController(controller, animated: true, completion: nil)
             
+        }else{
+            let snackBar = TTGSnackbar.init(message: "请先在 \"系统设置-邮件、通讯录、日历\" 中添加邮箱。", duration: .Middle)
+            snackBar.backgroundColor = FlatWatermelonDark()
+            snackBar.show()
         }
+
     }
     
     func sendGroupEmails() {
@@ -165,7 +170,12 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
             controller.setToRecipients(recipients)
             controller.mailComposeDelegate = self
             self.presentViewController(controller, animated: true, completion: nil)
+        }else{
+            let snackBar = TTGSnackbar.init(message: "请先在 \"系统设置-邮件、通讯录、日历\" 中添加邮箱。", duration: .Middle)
+            snackBar.backgroundColor = FlatWatermelonDark()
+            snackBar.show()
         }
+
     }
     
     func sendGroupMessages() {
@@ -194,19 +204,18 @@ class CandidatesViewController: UITableViewController, MFMailComposeViewControll
         customers = []
         revenue = 0
         let query = AVQuery(className: "Orders")
-        query.whereKey("ParentActivityObjectId", equalTo: AVObject(withoutDataWithObjectId: objectId))
+        query.whereKey("ParentActivityObjectId", equalTo: AVObject(outDataWithClassName: "Activity", objectId: objectId))
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
             if self.refreshControl?.refreshing == true {
                 self.refreshControl?.endRefreshing()
             }
             if error == nil {
                 for order in orders {
-                    print("ORDER")
                     self.orders.append(order as! AVObject)
                     let query2 = AVQuery(className: "_User")
                     if let u = order.objectForKey("CustomerObjectId") as? AVUser {
                         query2.getObjectInBackgroundWithId(u.objectId, block: { (user, error) -> Void in
-                            print("USER")
+                            
                             if error == nil {
                                 self.customers.append(user as! AVUser)
                                 self.tableView.reloadData()

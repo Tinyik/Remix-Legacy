@@ -56,7 +56,7 @@ class LocationViewController: UITableViewController {
                         
                         
                     }
-                    print(self.photoURLArray)
+                    
                     self.tableView.reloadData()
                 }
             }else{
@@ -105,10 +105,6 @@ class LocationViewController: UITableViewController {
         if locationObjects[indexPath.row].objectForKey("isFeatured") as! Bool == false {
             let cell = tableView.dequeueReusableCellWithIdentifier("locationTVCIdentifier") as! LocationTableViewCell
             cell.photoURLs = photoURLArray[indexPath.row]
-            print("ARRAY")
-            print(photoURLArray[indexPath.row])
-            print("ARRAY")
-            //   print(photoURLArray[indexPath.row][0])
             cell.parentViewController = self
             cell.titleLabel.text = locationObjects[indexPath.row].objectForKey("Title") as! String
             cell.desLabel.text = locationObjects[indexPath.row].objectForKey("Description") as? String

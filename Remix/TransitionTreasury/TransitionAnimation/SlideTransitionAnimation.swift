@@ -55,7 +55,7 @@ public class SlideTransitionAnimation: NSObject, TRViewControllerAnimatedTransit
         let toVCEndPositionX: CGFloat = 0
         
         tabBarTransitionDirection = TabBarTransitionDirection.TransitionDirection(fromVCIndex, toVCIndex: toVCIndex)
-        print(tabBarTransitionDirection)
+       
         
         if tabBarTransitionDirection == .Left {
             swap(&fromVCEndPositionX, &toVCStartPositionX)

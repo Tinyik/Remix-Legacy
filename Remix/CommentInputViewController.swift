@@ -24,8 +24,8 @@ class CommentInputViewController: UIViewController {
 
     @IBAction func addComment() {
         let newComment = AVObject(className: "Comments")
-        newComment.setObject(AVObject(withoutDataWithObjectId: presentingActivity.objectId), forKey: "ParentActivityObjectId")
-        newComment.setObject(AVUser(withoutDataWithObjectId: CURRENT_USER.objectId), forKey: "UserObjectId")
+        newComment.setObject( AVObject(outDataWithClassName: "Activity", objectId: presentingActivity.objectId), forKey: "ParentActivityObjectId")
+        newComment.setObject(AVUser(outDataWithObjectId: CURRENT_USER.objectId), forKey: "UserObjectId")
         newComment.setObject(inputTextView.text, forKey: "Content")
         newComment.setObject(true, forKey: "isVisibleToUsers")
         newComment.saveInBackgroundWithBlock { (isSuccessful, error) -> Void in
@@ -37,7 +37,7 @@ class CommentInputViewController: UIViewController {
                 alert.addAction(action)
                 self.presentViewController(alert, animated: true, completion: nil)
             }else{
-                print(error.description)
+               
                 let alert = UIAlertController(title: nil, message: "评论添加失败", preferredStyle: .Alert)
                 let action = UIAlertAction(title: "好吧", style: .Default, handler: { (action) -> Void in
                     self.navigationController?.popViewControllerAnimated(true)

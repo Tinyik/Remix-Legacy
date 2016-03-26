@@ -26,7 +26,7 @@ class RMSecondFilteredViewController: CTFilteredViewController {
             headerView.headerImage = image
         })
         
-        headerView.headerTitleLabel.text = APPLICATION_UI_REMOTE_CONFIG.objectForKey("FilterLabel_2_Text") as? String
+        
         self.tableView.tableHeaderView = headerView
         
     }

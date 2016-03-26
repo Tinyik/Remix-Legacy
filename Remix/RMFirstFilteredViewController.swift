@@ -26,7 +26,7 @@ class RMFirstFilteredViewController: CTFilteredViewController {
         })
 
         self.tableView.tableHeaderView = headerView
-        headerView.headerTitleLabel.text = APPLICATION_UI_REMOTE_CONFIG.objectForKey("FilterLabel_1_Text") as? String
+        
     }
     
     override func fetchCloudData() {

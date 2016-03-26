@@ -174,7 +174,7 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
             }
 
         }else{
-            print(error.description)
+           
             let alert = UIAlertController(title: nil, message: "诶？手机号格式好像有错误😣", preferredStyle: .Alert)
             let okButton = UIAlertAction(title: "重试", style: .Cancel, handler: nil)
             alert.addAction(okButton)
@@ -206,6 +206,7 @@ class RegLoginViewController: UIViewController, ModalTransitionDelegate, UITextF
                 CURRENT_USER = _user
                 if _user.objectForKey("City") == nil {
                     CURRENT_USER.setObject("全国", forKey: "City")
+                    AVOSCloud.requestSmsCodeWithPhoneNumber(CURRENT_USER.mobilePhoneNumber, templateName: "Hello", variables: nil, callback: nil)
                 }
                 if _user.objectForKey("Credit") == nil {
                     CURRENT_USER.setObject(0, forKey: "Credit")

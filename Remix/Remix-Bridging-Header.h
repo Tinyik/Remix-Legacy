@@ -26,6 +26,7 @@
 #import "GHWalkThroughView.h"
 #import <MWPhotoBrowser/MWPhotoBrowser.h>
 #import "UMSocialWechatHandler.h"
+#import "UMSocialQQHandler.h"
 #import "LCActionSheet.h"
 #import "UITextView+Placeholder.h"
 #import <ChameleonFramework/Chameleon.h>

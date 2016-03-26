@@ -49,7 +49,7 @@ class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNE
         
         let query = AVQuery(className: "Orders")
         query.whereKey("isVisibleToUsers", equalTo: true)
-        query.whereKey("CustomerObjectId", equalTo: AVUser(withoutDataWithObjectId: CURRENT_USER.objectId))
+        query.whereKey("CustomerObjectId", equalTo: AVUser(outDataWithObjectId: CURRENT_USER.objectId))
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
         
             if error == nil {
@@ -60,8 +60,7 @@ class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNE
                     self.orders.append(order as! AVObject)
                     
                 }
-                print("ddd")
-                print(self.parentActivityIds.count)
+                
                 self.findParentActivities()
             }
         }
@@ -72,19 +71,18 @@ class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNE
         // Both visible and invisible activities should be processed.
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
             if error == nil {
-                print(self.parentActivityIds)
+               
                 for activity in activities {
                     
                     if self.parentActivityIds.contains(activity.objectId) {
                         self.coverImgURLs.append(NSURL(string: (activity.objectForKey("CoverImg") as! AVFile).url)!)
                         self.parentActivities.append(activity as! AVObject)
-                        print("Added")
+                        
                     }else{
-                        print("NOTCONTAIN")
+                        
                     }
                 }
-                print("READY")
-                print(self.parentActivities.count)
+                
              self.tableView.reloadData()
             }else{
                 let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)
@@ -133,7 +131,7 @@ class OrdersViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNE
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        print(parentActivities.count)
+       
         return parentActivities.count
     }
     

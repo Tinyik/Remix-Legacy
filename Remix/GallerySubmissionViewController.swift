@@ -176,12 +176,12 @@ class GallerySubmissionViewController: FormViewController {
                 }
             }
             selectedCities.insert("全国", atIndex: 0)
-            newGallery.setObject(AVUser(withoutDataWithObjectId: CURRENT_USER.objectId), forKey: "Submitter")
+            newGallery.setObject(AVUser(outDataWithObjectId: CURRENT_USER.objectId), forKey: "Submitter")
             newGallery.setObject(CURRENT_USER.mobilePhoneNumber, forKey: "SubmitterContact")
             newGallery.setObject(selectedCities, forKey: "Cities")
             newGallery.setObject(attr["isRemixActivity"]! as! Bool, forKey: "isRemixActivity")
             if attr["isRemixActivity"]! as! Bool == true{
-                newGallery.setObject(AVObject(withoutDataWithObjectId: attr["ParentActivityObjectId"]! as! String), forKey: "ParentActivityObjectId")
+                newGallery.setObject( AVObject(outDataWithClassName: "Activity", objectId: attr["ParentActivityObjectId"]! as! String), forKey: "ParentActivityObjectId")
             }else{
                 newGallery.setObject(attr["Org"]! as! String, forKey: "Org")
                 if let date = attr["Date"]! as? NSDate {
@@ -251,15 +251,15 @@ class GallerySubmissionViewController: FormViewController {
                         let c = CURRENT_USER.objectForKey("Credit") as! Int
                         CURRENT_USER.setObject(c+50, forKey: "Credit")
                         CURRENT_USER.saveInBackground()
-                        let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
-                        notif.promptUserCreditUpdate("50", inContext: "添加报道")
-
                         let alert = UIAlertController(title: "Remix提示", message: "活动报道添加成功。谢谢你对Remix的支持_(:з」∠)_。审核通过后我们将给你发送推送消息。", preferredStyle: .Alert)
                         let action = UIAlertAction(title: "好的", style: .Default, handler: { (action) -> Void in
                             self.popCurrentVC()
                         })
                         alert.addAction(action)
-                        self.presentViewController(alert, animated: true, completion: nil)
+                        let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
+                        notif.parentvc = self
+                        notif.promptUserCreditUpdate("50", withContext: "添加报道", andAlert: alert)
+
                         
                     }else{
                         let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)

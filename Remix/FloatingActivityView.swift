@@ -39,13 +39,13 @@ class FloatingActivityView: UIView, BmobPayDelegate {
     
     
     @IBAction func prepareForFloatingActivityRegistration() {
-        print(activity.objectId)
+        
         if registeredActivitiesIds.contains(activity.objectId) {
             let alert = UIAlertController(title: "报名提示", message: "你已报名了这个活动，请进入我的订单查看。", preferredStyle: .Alert)
-            let action = UIAlertAction(title: "立即查看", style: .Default, handler: { (action) -> Void in
+            let action = UIAlertAction(title: "立即查看", style: .Cancel, handler: { (action) -> Void in
                 self.parentViewController.presentSettingsVC()
             })
-            let cancel = UIAlertAction(title: "继续逛逛", style: .Cancel, handler: nil)
+            let cancel = UIAlertAction(title: "继续逛逛", style: .Default, handler: nil)
             alert.addAction(action)
             alert.addAction(cancel)
             self.parentViewController.presentViewController(alert, animated: true, completion: nil)
@@ -93,13 +93,13 @@ class FloatingActivityView: UIView, BmobPayDelegate {
                     }
                     
                 }else{
-                    let alert = UIAlertController(title: "提示", message: "这个活动太火爆啦！参与活动人数已满(Ｔ▽Ｔ)再看看别的活动吧~下次记得早早下手哦。", preferredStyle: .Alert)
+                    let alert = UIAlertController(title: "提示", message: "Sorry.._(:qゝ∠)_此活动暂时不支持在Remix报名或报名人数已达上限。", preferredStyle: .Alert)
                     let action = UIAlertAction(title: "好吧", style: .Default, handler: nil)
                     alert.addAction(action)
                     self.parentViewController.presentViewController(alert, animated: true, completion: nil)
                 }
             }else{
-                let alert = UIAlertController(title: "提示", message: "这个活动太火爆啦！参与活动人数已满(Ｔ▽Ｔ)再看看别的活动吧~下次记得早早下手哦。", preferredStyle: .Alert)
+                let alert = UIAlertController(title: "提示", message: "Sorry.._(:qゝ∠)_此活动暂时不支持在Remix报名或报名人数已达上限。", preferredStyle: .Alert)
                 let action = UIAlertAction(title: "好吧", style: .Default, handler: nil)
                 alert.addAction(action)
                 self.parentViewController.presentViewController(alert, animated: true, completion: nil)
@@ -112,11 +112,11 @@ class FloatingActivityView: UIView, BmobPayDelegate {
     func fetchOrdersInformation() {
         registeredActivitiesIds = []
         let query = AVQuery(className: "Orders")
-        query.whereKey("CustomerObjectId", equalTo: AVUser(withoutDataWithObjectId: CURRENT_USER.objectId))
+        query.whereKey("CustomerObjectId", equalTo: AVUser(outDataWithObjectId: CURRENT_USER.objectId))
         query.findObjectsInBackgroundWithBlock { (orders, error) -> Void in
             if error == nil {
                 for order in orders {
-                    print(order.objectId)
+                    
                     if let o = order.objectForKey("ParentActivityObjectId") as? AVObject {
                         self.registeredActivitiesIds.append(o.objectId)
                     }
@@ -220,10 +220,10 @@ class FloatingActivityView: UIView, BmobPayDelegate {
     
     func paySuccess() {
         let newOrder = AVObject(className: "Orders")
-        newOrder.setObject(AVObject(withoutDataWithClassName: "Activity", objectId: ongoingTransactionId), forKey: "ParentActivityObjectId")
+        newOrder.setObject(AVObject(outDataWithClassName: "Activity", objectId: ongoingTransactionId), forKey: "ParentActivityObjectId")
         newOrder.setObject(ongoingTransactionPrice, forKey: "Amount")
         newOrder.setObject(false, forKey: "CheckIn")
-        newOrder.setObject(AVUser(withoutDataWithObjectId: CURRENT_USER.objectId), forKey: "CustomerObjectId")
+        newOrder.setObject(AVUser(outDataWithObjectId: CURRENT_USER.objectId), forKey: "CustomerObjectId")
         newOrder.setObject(ongoingTransactionRemarks, forKey: "Remarks")
         newOrder.setObject(true, forKey: "isVisibleToUsers")
         newOrder.saveInBackgroundWithBlock { (isSuccessful, error) -> Void in
@@ -232,17 +232,19 @@ class FloatingActivityView: UIView, BmobPayDelegate {
                 let c = CURRENT_USER.objectForKey("Credit") as! Int
                 CURRENT_USER.setObject(c+(Int(self.activity.objectForKey("Duration") as! String)!)*2, forKey: "Credit")
                 CURRENT_USER.saveInBackground()
-                let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
-                notif.promptUserCreditUpdate(String((Int(self.activity.objectForKey("Duration") as! String))!*2), inContext: "报名活动")
                 self.fetchOrdersInformation()
-                let alert = UIAlertController(title: "支付状态", message: "报名成功！Remix已经把你的基本信息发送给了活动主办方。请进入 \"我的订单\" 查看", preferredStyle: .Alert)
-                let cancel = UIAlertAction(title: "继续逛逛", style: .Cancel, handler: nil)
-                let action = UIAlertAction(title: "立即查看", style: .Default) { (action) -> Void in
+                let smsDict = ["Org": self.activity.objectForKey("Org") as! String, "Date": self.activity.objectForKey("Date") as! String, "Price": String(self.ongoingTransactionPrice), "Contact": self.activity.objectForKey("Contact") as! String]
+                AVOSCloud.requestSmsCodeWithPhoneNumber(CURRENT_USER.mobilePhoneNumber, templateName: "Registration_Success", variables: smsDict, callback: nil)
+                let alert = UIAlertController(title: "支付状态", message: "报名成功！Remix已经把你的基本信息发送给了活动主办方。请进入 \"我的订单\" 查看。", preferredStyle: .Alert)
+                let cancel = UIAlertAction(title: "继续逛逛", style: .Default, handler: nil)
+                let action = UIAlertAction(title: "立即查看", style: .Cancel) { (action) -> Void in
                     self.parentViewController.presentSettingsVC()
                 }
                 alert.addAction(action)
                 alert.addAction(cancel)
-                self.parentViewController.presentViewController(alert, animated: true, completion: nil)
+                let notif = UIView.loadFromNibNamed("NotifView") as! NotifView
+                notif.parentvc = self.parentViewController
+                notif.promptUserCreditUpdate(String((Int(self.activity.objectForKey("Duration") as! String))!*2), withContext: "报名活动", andAlert: alert)
             }else {
                 let alert = UIAlertController(title: "支付状态", message: "Something is wrong. 这是一个极小概率的错误。不过别担心，如果已经被扣款, 请联系Remix客服让我们为你解决。（181-4977-0476）", preferredStyle: .Alert)
                 let cancel = UIAlertAction(title: "稍后在说", style: .Cancel, handler: nil)

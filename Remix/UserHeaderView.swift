@@ -16,7 +16,7 @@ class UserHeaderView: UIView {
     
     var user: AVUser!
     override func awakeFromNib() {
-        print("AWAKE")
+       
         blurredAvatarView.contentMode = .ScaleAspectFill
         blurredAvatarView.clipsToBounds = true
         avatarView.image = UIImage(named: "DefaultAvatar")

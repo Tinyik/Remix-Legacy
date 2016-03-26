@@ -53,7 +53,8 @@ class RemixPassViewController: UITableViewController, DZNEmptyDataSetDelegate, D
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         
         let attrDic = [NSFontAttributeName: UIFont.systemFontOfSize(17)]
-        return NSAttributedString(string: "\n\n\n\n\n\n\n\n\n\n\n\n你的REMIX PASS还没有任何积分记录。   (・_・ヾ\n", attributes: attrDic)
+        //你的REMIX PASS还没有任何积分记录。
+        return NSAttributedString(string: "\n\n\n\n\n\n\n\n\n\n\n\nREMIX PASS 积分记录功能将在下一版本推出。   (・_・ヾ\n", attributes: attrDic)
     }
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
