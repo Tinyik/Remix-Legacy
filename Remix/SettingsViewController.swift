@@ -277,7 +277,12 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
                 composer.setSubject(subjectString as String)
                 composer.setToRecipients(["fongtinyik@gmail.com", "remixapp@163.com"])
                 self.presentViewController(composer, animated: true, completion: nil)
-                }
+                  }else{
+                let snackBar = TTGSnackbar.init(message: "请先在 \"系统设置-邮件、通讯录、日历\" 中添加邮箱。", duration: .Middle)
+                snackBar.backgroundColor = FlatWatermelonDark()
+                snackBar.show()
+                  }
+
             case 2 : let subm = OrganizationSubmissionViewController()
                      subm.isModal = false
                      self.navigationController?.pushViewController(subm, animated: true)

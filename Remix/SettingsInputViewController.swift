@@ -85,12 +85,7 @@ class SettingsInputViewController: UIViewController, SettingInputViewDelegate, U
         CURRENT_USER.setObject(inputField.text, forKey: editingKey)
         CURRENT_USER.saveInBackgroundWithBlock { (isSuccessful, error) -> Void in
             if isSuccessful == true {
-                let alert = UIAlertController(title: "提示", message: "保存成功", preferredStyle: .Alert)
-                let action = UIAlertAction(title: "好的", style: .Default, handler: { (alert) -> Void in
-                    self.navigationController?.popViewControllerAnimated(true)
-                })
-                alert.addAction(action)
-                self.presentViewController(alert, animated: true, completion: nil)
+                self.navigationController?.popViewControllerAnimated(true)
 
             }else{
                 let alert = UIAlertController(title: "提示", message: "保存失败，请检查输入和网络设置。", preferredStyle: .Alert)
