@@ -581,7 +581,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         if activities.count > 0 {
         if let isFeatured = activities[indexPath.section][indexPath.row].objectForKey("isFeatured") as? Bool  {
             if isFeatured == true {
-            return 335
+                return 359
             }
         }
         }

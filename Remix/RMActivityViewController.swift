@@ -53,7 +53,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
         self.view.addSubview(containerView)
         toolBar.likeButton.contentHorizontalAlignment = .Fill
         toolBar.likeButton.contentVerticalAlignment = .Fill
-        toolBar.likesNumberLabel.text = String(activity.objectForKey("LikesNumber") as! Int) + "人已喜欢"
+        toolBar.likesNumberLabel.text = (DEVICE_SCREEN_WIDTH >= 375) ? String(activity.objectForKey("LikesNumber") as! Int) + "人已喜欢" : "" // show if same as or wider than iphone 6
         toolBar.registerButton.addTarget(self, action: "prepareForActivityRegistration", forControlEvents: .TouchUpInside)
         if let price = activity.objectForKey("Price") as? Double {
             if price != 0 {
