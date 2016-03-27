@@ -1406,10 +1406,10 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xpE-wy-sP2" userLabel="Scroll Content">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pvq-fx-ye4">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pvq-fx-ye4">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="215"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="215" id="ekO-d5-L9w"/>
+                                                    <constraint firstAttribute="width" secondItem="pvq-fx-ye4" secondAttribute="height" multiplier="75:43" id="j7v-b7-WCP"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6Xg-qE-21V">
@@ -1432,10 +1432,10 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                                             </textView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wl1-xM-vdr">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wl1-xM-vdr">
                                                 <rect key="frame" x="0.0" y="301" width="375" height="215"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="215" id="HcN-lk-QK5"/>
+                                                    <constraint firstAttribute="width" secondItem="Wl1-xM-vdr" secondAttribute="height" multiplier="75:43" id="Z5n-ri-1bz"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CU0-QX-8lG">
