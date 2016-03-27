@@ -21,9 +21,9 @@ class OrganizationSubmissionViewController: FormViewController {
         super.viewDidLoad()
         setUpParallaxHeaderView()
         SwitchRow.defaultCellSetup = { cell, row in cell.switchControl!.onTintColor = FlatRed() }
-        TextFloatLabelRow.defaultCellSetup = { cell, row in cell.textField.textColor = FlatRed() }
-        URLFloatLabelRow.defaultCellSetup = { cell, row in cell.textField.textColor = FlatRed() }
-        TextAreaRow.defaultCellSetup = { cell, row in cell.textView.alpha = 0.7 }
+//        TextFloatLabelRow.defaultCellSetup = { cell, row in cell.textField.textColor = FlatRed() }
+//        URLFloatLabelRow.defaultCellSetup = { cell, row in cell.textField.textColor = FlatRed() }
+//        TextAreaRow.defaultCellSetup = { cell, row in cell.textView.alpha = 0.7 }
         self.navigationController?.hidesNavigationBarHairline = true
         self.title = "入驻Remix"
         if isModal == true {
