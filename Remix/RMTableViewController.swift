@@ -131,6 +131,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
         for button in trackingAreas {
             button.hidden = false
         }
@@ -579,20 +580,28 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
 
     }
     
+    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         if tableView == adTableView {
             return DEVICE_SCREEN_WIDTH*0.4
         }
+        
         if activities.count > 0 {
-        if let isFeatured = activities[indexPath.section][indexPath.row].objectForKey("isFeatured") as? Bool  {
-            if isFeatured == true {
-                return 359
+            if let isFeatured = activities[indexPath.section][indexPath.row].objectForKey("isFeatured") as? Bool  {
+                if isFeatured == true {
+                    return UITableViewAutomaticDimension
+                }
             }
-        }
         }
         return 166
     }
+    
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        // don't know about the adTableView, so the first value might need to change in the future
+        return (tableView == adTableView) ? 0 : 350
+    }
+    
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
