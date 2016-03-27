@@ -14,7 +14,7 @@ import TTGSnackbar
 class OrganizationSubmissionViewController: FormViewController {
 
     var cities: [String] = []
-    let orgNatures = ["公益性学生组织", "公益性社会组织", "社会企业", "学生公司"]
+    let orgNatures = ["公益性学生组织", "公益性社会组织", "社会企业", "校内组织", "学生公司"]
     var isModal = true
     
     override func viewDidLoad() {
