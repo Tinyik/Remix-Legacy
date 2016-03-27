@@ -363,9 +363,15 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                 let screenWidth = UIScreen.mainScreen().bounds.width
                 self.headerScrollView.contentSize = CGSizeMake(screenWidth*CGFloat((ads.count)), self.headerScrollView.frame.height)
                 self.headerScrollView.userInteractionEnabled = true
+                
                 for var i = 0; i < ads.count; ++i {
                     let headerImageView = UIImageView(frame: CGRectMake(screenWidth*CGFloat(i),0,screenWidth,self.headerScrollView.frame.height ))
-                    headerImageView.contentMode = .ScaleAspectFill
+                    
+                    // easy fix;
+                    // to avoid the extra top & bottom margins requires a more complicated solution,
+                    // which includes calculating the total height of several top elements in this view
+                    headerImageView.contentMode = .ScaleAspectFit
+                    
                     headerImageView.clipsToBounds = true
                     headerImageView.tag = i
                     headerImageView.userInteractionEnabled = true
