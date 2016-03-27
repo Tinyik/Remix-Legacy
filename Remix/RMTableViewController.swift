@@ -298,42 +298,62 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
 
         }
 
-            let elementWidth: CGFloat = 170 + 12
-            self.floatingScrollView.contentSize = CGSizeMake(elementWidth*CGFloat(floatingActivities.count) + 12, self.floatingScrollView.frame.height)
-            self.floatingScrollView.userInteractionEnabled = true
+        // children
+        let elementMargin: CGFloat = 10
+        let elementWidth: CGFloat = (DEVICE_SCREEN_WIDTH - 3 * elementMargin) / 2.2 // 2 & a bit of the 3rd
+        
+        self.floatingScrollView.contentSize = CGSizeMake(elementMargin + (elementWidth + elementMargin) * CGFloat(floatingActivities.count), self.floatingScrollView.frame.height)
+        self.floatingScrollView.userInteractionEnabled = true
+        
+        for var i = 0; i < floatingActivities.count; ++i {
+            let fView = FloatingActivityView.loadFromNibNamed("FloatingActivityView") as! FloatingActivityView
+            fView.tag = i
+            fView.activity = self.floatingActivities[i]
+            fView.registeredActivitiesIds = self.registeredActivitiesIds
+            fView.parentViewController = self
+            fView.frame = CGRectMake(elementMargin + (elementWidth + elementMargin) * CGFloat(i), 0, elementWidth, 185)
             
-            for var i = 0; i < floatingActivities.count; ++i {
-                let fView = FloatingActivityView.loadFromNibNamed("FloatingActivityView") as! FloatingActivityView
-                fView.tag = i
-                fView.activity = self.floatingActivities[i]
-                fView.registeredActivitiesIds = self.registeredActivitiesIds
-                fView.parentViewController = self
-                fView.frame = CGRectMake(5 + elementWidth*CGFloat(i), 0, elementWidth, 185)
-                fView.imageView.sd_setImageWithURL(imageURLs[i], placeholderImage: UIImage(named: "SDPlaceholder"))
-                let tap = UITapGestureRecognizer(target: self, action: "handleFloatingViewSelection:")
-                fView.addGestureRecognizer(tap)
-                fView.titleLabel.text = self.floatingActivities[i].objectForKey("Title") as! String
-                
-                if let price = self.floatingActivities[i].objectForKey("Price") as? Double {
-                    if price != 0 {
-                        let priceNumberFont = UIFont.systemFontOfSize(17)
-                        let attrDic1 = [NSFontAttributeName:priceNumberFont]
-                        let priceString = NSMutableAttributedString(string: String(price), attributes: attrDic1)
-                        let currencyFont = UIFont.systemFontOfSize(13)
-                        let attrDic2 = [NSFontAttributeName:currencyFont]
-                        let currencyString = NSMutableAttributedString(string: "元", attributes: attrDic2)
-                        priceString.appendAttributedString(currencyString)
-                        fView.priceTag.attributedText = priceString
-                 
-                    }else{
-                        fView.priceTag.text = "免费"
-                        fView.payButton.setImage(UIImage(named: "RegisterButton"), forState: .Normal)
-                    }
-
+            fView.imageView.sd_setImageWithURL(imageURLs[i], placeholderImage: UIImage(named: "SDPlaceholder"))
+            let tap = UITapGestureRecognizer(target: self, action: "handleFloatingViewSelection:")
+            fView.addGestureRecognizer(tap)
+            fView.titleLabel.text = self.floatingActivities[i].objectForKey("Title") as! String
+            
+            if let price = self.floatingActivities[i].objectForKey("Price") as? Double {
+                if price != 0 {
+                    let priceNumberFont = UIFont.systemFontOfSize(17)
+                    let attrDic1 = [NSFontAttributeName:priceNumberFont]
+                    let priceString = NSMutableAttributedString(string: String(price), attributes: attrDic1)
+                    let currencyFont = UIFont.systemFontOfSize(13)
+                    let attrDic2 = [NSFontAttributeName:currencyFont]
+                    let currencyString = NSMutableAttributedString(string: "元", attributes: attrDic2)
+                    priceString.appendAttributedString(currencyString)
+                    fView.priceTag.attributedText = priceString
+             
+                }else{
+                    fView.priceTag.text = "免费"
+                    fView.payButton.setImage(UIImage(named: "RegisterButton"), forState: .Normal)
                 }
-                
-                self.floatingScrollView.addSubview(fView)
+
             }
+            
+            
+            // heights
+            var contentRect = CGRectZero
+            for view in fView.subviews {
+                view.layoutIfNeeded()
+                contentRect = CGRectUnion(contentRect, view.frame)
+            }
+            
+            let h = contentRect.size.height
+            if h > self.floatingScrollView.frame.size.height {
+                self.floatingScrollView.frame.size.height = h
+            }
+            self.floatingScrollView.contentSize.height = h
+            fView.frame.size.height = h
+            fView.frame.origin.y += (self.floatingScrollView.frame.size.height - h) / 2
+            
+            self.floatingScrollView.addSubview(fView)
+        }
             
         
     }
