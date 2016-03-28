@@ -31,6 +31,7 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
             }
         }
     }
+    var numLikes: Int = 0
     var registeredActivitiesIds: [String] = []
     var likedActivitiesIds: [String] = []
     var ongoingTransactionId: String!
@@ -53,7 +54,10 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
         self.view.addSubview(containerView)
         toolBar.likeButton.contentHorizontalAlignment = .Fill
         toolBar.likeButton.contentVerticalAlignment = .Fill
-        toolBar.likesNumberLabel.text = (DEVICE_SCREEN_WIDTH >= 375) ? String(activity.objectForKey("LikesNumber") as! Int) + "人已喜欢" : "" // show if same as or wider than iphone 6
+        
+        numLikes = activity.objectForKey("LikesNumber") as! Int
+        toolBar.likesNumberLabel.text = (DEVICE_SCREEN_WIDTH >= 375) ? "\(numLikes)人已喜欢" : "\(numLikes)"
+        
         toolBar.registerButton.addTarget(self, action: "prepareForActivityRegistration", forControlEvents: .TouchUpInside)
         if let price = activity.objectForKey("Price") as? Double {
             if price != 0 {
@@ -241,7 +245,8 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
             fetchLikedActivitiesList()
             if likedActivitiesIds.contains(activity.objectId) == false {
                 likedActivitiesIds.append(activity.objectId)
-                toolBar.likesNumberLabel.text = String(Int(toolBar.likesNumberLabel.text!.stringByReplacingOccurrencesOfString("人已喜欢", withString: ""))!+1) + "人已喜欢"
+                numLikes += 1
+                toolBar.likesNumberLabel.text = (DEVICE_SCREEN_WIDTH >= 375) ? "\(numLikes)人已喜欢" : "\(numLikes)"
                 sharedOneSignalInstance.sendTag(self.activity.objectId, value: "Liked")
                 let query = AVQuery(className: "Activity")
                 query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
@@ -272,7 +277,8 @@ class RMActivityViewController: RxWebViewController, UIGestureRecognizerDelegate
             fetchLikedActivitiesList()
             if likedActivitiesIds.contains(activity.objectId) == true {
                 likedActivitiesIds.removeAtIndex(likedActivitiesIds.indexOf(activity.objectId)!)
-                toolBar.likesNumberLabel.text = String(Int(toolBar.likesNumberLabel.text!.stringByReplacingOccurrencesOfString("人已喜欢", withString: ""))!-1) + "人已喜欢"
+                numLikes -= 1
+                toolBar.likesNumberLabel.text = (DEVICE_SCREEN_WIDTH >= 375) ? "\(numLikes)人已喜欢" : "\(numLikes)"
                 let query = AVQuery(className: "Activity")
                 query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
                 query.getObjectInBackgroundWithId(activity.objectId, block: { (activity, error) -> Void in

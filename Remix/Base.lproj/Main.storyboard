@@ -199,7 +199,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Nv-gL-53h">
+                                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Nv-gL-53h">
                                             <rect key="frame" x="0.0" y="29" width="375" height="185"/>
                                             <color key="backgroundColor" red="0.98568390052356025" green="0.98568390052356025" blue="0.98568390052356025" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
