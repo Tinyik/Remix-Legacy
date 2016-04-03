@@ -433,6 +433,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("isVisibleOnMainList", equalTo: true)
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
+        query.orderByDescending("InternalDate")
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
             if error == nil {
                 if activities.count > 0 {
@@ -463,10 +464,6 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
                                 
                             }
                             
-//                            self.activities = self.activities.sort({($0[0].objectForKey("InternalDate") as! NSDate).compare($1[0].objectForKey("InternalDate") as! NSDate) == NSComparisonResult.OrderedDescending})
-//                            for var activityList in self.activities {
-//                                activityList = activityList.sort({($0.objectForKey("InternalDate") as! NSDate).compare($1.objectForKey("InternalDate") as! NSDate) == NSComparisonResult.OrderedAscending})
-//                            }
                         }else{
                             
                             self.floatingActivities.append(activity as! AVObject)

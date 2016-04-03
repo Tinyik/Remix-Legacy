@@ -909,8 +909,8 @@
                                 <rect key="frame" x="0.0" y="52" width="375" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="deV-tO-kfL">
-                                <rect key="frame" x="0.0" y="98" width="375" height="569"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="deV-tO-kfL">
+                                <rect key="frame" x="0.0" y="301" width="375" height="569"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Kzx-XD-w6a">
                                     <size key="itemSize" width="115" height="116"/>
@@ -929,13 +929,17 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wHD-iT-wyt">
                                                     <rect key="frame" x="21" y="8" width="72" height="72"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LJd-Qz-k1t">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LJd-Qz-k1t">
                                                             <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
+                                                        <constraint firstItem="LJd-Qz-k1t" firstAttribute="top" secondItem="wHD-iT-wyt" secondAttribute="top" id="CZO-GO-EiN"/>
+                                                        <constraint firstAttribute="bottom" secondItem="LJd-Qz-k1t" secondAttribute="bottom" id="Dhw-vT-p8e"/>
+                                                        <constraint firstItem="LJd-Qz-k1t" firstAttribute="leading" secondItem="wHD-iT-wyt" secondAttribute="leading" id="GDu-Dd-H1g"/>
                                                         <constraint firstAttribute="width" constant="72" id="XRD-96-7dD"/>
+                                                        <constraint firstAttribute="trailing" secondItem="LJd-Qz-k1t" secondAttribute="trailing" id="b9c-st-Jau"/>
                                                         <constraint firstAttribute="height" constant="72" id="eP0-uX-Nyf"/>
                                                     </constraints>
                                                 </view>
@@ -966,13 +970,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="deV-tO-kfL" firstAttribute="top" secondItem="ma0-Ks-Gu5" secondAttribute="bottom" constant="2" id="2dK-dK-yGo"/>
                             <constraint firstItem="ma0-Ks-Gu5" firstAttribute="top" secondItem="LMy-P4-RqW" secondAttribute="bottom" constant="32" id="30X-rG-prn"/>
                             <constraint firstItem="ma0-Ks-Gu5" firstAttribute="leading" secondItem="BTg-Gi-wQc" secondAttribute="leading" id="3tP-5K-IUB"/>
-                            <constraint firstAttribute="trailing" secondItem="deV-tO-kfL" secondAttribute="trailing" id="Pmm-DD-st1"/>
-                            <constraint firstItem="deV-tO-kfL" firstAttribute="leading" secondItem="BTg-Gi-wQc" secondAttribute="leading" id="RaK-6j-Zgk"/>
-                            <constraint firstItem="3Zo-5I-iEJ" firstAttribute="top" secondItem="deV-tO-kfL" secondAttribute="bottom" id="mJ6-Yh-Bkj"/>
+                            <constraint firstItem="deV-tO-kfL" firstAttribute="top" secondItem="ma0-Ks-Gu5" secondAttribute="bottom" constant="2" id="JCw-Zv-pFn"/>
+                            <constraint firstItem="deV-tO-kfL" firstAttribute="trailing" secondItem="ma0-Ks-Gu5" secondAttribute="trailing" id="sg1-bo-FK9"/>
                             <constraint firstAttribute="trailing" secondItem="ma0-Ks-Gu5" secondAttribute="trailing" id="xlM-6I-3ne"/>
+                            <constraint firstItem="deV-tO-kfL" firstAttribute="bottom" secondItem="3Zo-5I-iEJ" secondAttribute="top" id="y8l-gf-GXr"/>
+                            <constraint firstItem="deV-tO-kfL" firstAttribute="leading" secondItem="ma0-Ks-Gu5" secondAttribute="leading" id="zud-Lq-lhb"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -984,7 +988,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hN2-gM-1bZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1898.5" y="621.5"/>
+            <point key="canvasLocation" x="1886.5" y="381.5"/>
         </scene>
         <!--Terms And Conditions View Controller-->
         <scene sceneID="Xe1-N3-Uit">

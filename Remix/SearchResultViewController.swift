@@ -289,14 +289,20 @@ class SearchResultViewController: UITableViewController, UICollectionViewDataSou
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if activities.count > 0  {
+        
+        if activities.count > 0 {
             if let isFeatured = activities[indexPath.row].objectForKey("isFeatured") as? Bool  {
                 if isFeatured == true {
-                    return 335
+                    return UITableViewAutomaticDimension
                 }
             }
         }
         return 166
+    }
+    
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+       
+        return 350
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {

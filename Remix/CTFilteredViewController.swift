@@ -93,7 +93,8 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
         let query = AVQuery(className: "Activity")
         query.whereKey("Category", containedIn: [filterName])
         query.whereKey("isVisibleToUsers", equalTo: true)
-        query.whereKey("isFloatingActivity", equalTo: false)
+       // query.whereKey("isFloatingActivity", equalTo: false)
+        query.orderByDescending("InternalDate")
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
         query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
             
@@ -241,14 +242,20 @@ class CTFilteredViewController: UIViewController, UITableViewDataSource, UITable
     }
     
      func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
         if activities.count > 0 {
             if let isFeatured = activities[indexPath.section][indexPath.row].objectForKey("isFeatured") as? Bool  {
                 if isFeatured == true {
-                    return 335
+                    return UITableViewAutomaticDimension
                 }
             }
         }
         return 166
+    }
+    
+     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        // don't know about the adTableView, so the first value might need to change in the future
+        return 350
     }
     
 
