@@ -905,12 +905,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="minimal" placeholder="输入组织名称或微信公众号来搜索" translatesAutoresizingMaskIntoConstraints="NO" id="ma0-Ks-Gu5">
-                                <rect key="frame" x="0.0" y="52" width="375" height="44"/>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="输入组织名称或微信公众号来搜索" translatesAutoresizingMaskIntoConstraints="NO" id="ma0-Ks-Gu5">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="deV-tO-kfL">
-                                <rect key="frame" x="0.0" y="206" width="375" height="461"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JQR-oe-W6V">
+                                <rect key="frame" x="28" y="120" width="319" height="29"/>
+                                <segments>
+                                    <segment title="全部"/>
+                                    <segment title="学生组织"/>
+                                    <segment title="企业"/>
+                                    <segment title="社团"/>
+                                </segments>
+                                <color key="tintColor" red="0.17257410287857056" green="0.21834245324134827" blue="0.44677489995956421" alpha="1" colorSpace="calibratedRGB"/>
+                            </segmentedControl>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="deV-tO-kfL">
+                                <rect key="frame" x="0.0" y="168" width="375" height="499"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Kzx-XD-w6a">
                                     <size key="itemSize" width="115" height="116"/>
@@ -967,18 +977,20 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JQR-oe-W6V">
-                                <rect key="frame" x="28" y="113" width="319" height="29"/>
-                                <segments>
-                                    <segment title="全部"/>
-                                    <segment title="学生组织"/>
-                                    <segment title="企业"/>
-                                    <segment title="社团"/>
-                                </segments>
-                                <color key="tintColor" red="0.17257410287857056" green="0.21834245324134827" blue="0.44677489995956421" alpha="1" colorSpace="calibratedRGB"/>
-                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="deV-tO-kfL" firstAttribute="leading" secondItem="BTg-Gi-wQc" secondAttribute="leading" id="6gT-KH-gAJ"/>
+                            <constraint firstAttribute="trailing" secondItem="deV-tO-kfL" secondAttribute="trailing" id="Auq-p2-GSm"/>
+                            <constraint firstItem="ma0-Ks-Gu5" firstAttribute="top" secondItem="LMy-P4-RqW" secondAttribute="bottom" constant="44" id="EJo-k7-7AE"/>
+                            <constraint firstItem="JQR-oe-W6V" firstAttribute="top" secondItem="ma0-Ks-Gu5" secondAttribute="bottom" constant="12" id="EmE-pk-TUn"/>
+                            <constraint firstAttribute="trailing" secondItem="ma0-Ks-Gu5" secondAttribute="trailing" id="Fg6-hT-iSc"/>
+                            <constraint firstAttribute="trailing" secondItem="JQR-oe-W6V" secondAttribute="trailing" constant="28" id="WQt-66-NL2"/>
+                            <constraint firstItem="3Zo-5I-iEJ" firstAttribute="top" secondItem="deV-tO-kfL" secondAttribute="bottom" id="aCl-RS-B3N"/>
+                            <constraint firstItem="deV-tO-kfL" firstAttribute="top" secondItem="JQR-oe-W6V" secondAttribute="bottom" constant="20" id="aYu-AU-uTJ"/>
+                            <constraint firstItem="JQR-oe-W6V" firstAttribute="leading" secondItem="BTg-Gi-wQc" secondAttribute="leading" constant="28" id="hYp-Md-e6K"/>
+                            <constraint firstItem="ma0-Ks-Gu5" firstAttribute="leading" secondItem="BTg-Gi-wQc" secondAttribute="leading" id="msN-aW-gxt"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
