@@ -19,6 +19,7 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     @IBOutlet weak var orgsCollectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var filterControl: UISegmentedControl!
     
     var organizationName = ""
     var delegate: OrganizationViewDelegate!
@@ -26,13 +27,19 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
     var isSearching: Bool! = false
     var logoURLs: [NSURL] = []
     var names: [String] = []
+    var orgs: [AVObject] = []
+    var filteredOrgs: [AVObject] = []
+    var filterValue = ""
+    var isFilterOn = false
     let refreshCtrl = UIRefreshControl()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.returnKeyType = .Search
         searchBar.showsCancelButton = true
         searchBar.tintColor = FlatBlueDark()
+        filterControl.selectedSegmentIndex = 0
+        filterControl.addTarget(self, action: "filterChanged:", forControlEvents: .ValueChanged)
         searchBar.delegate = self
         orgsCollectionView.delegate = self
         orgsCollectionView.dataSource = self
@@ -45,12 +52,19 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     }
     
+    func filterChanged(sender: UISegmentedControl) {
+        filteredOrgs = []
+        filterValue = sender.titleForSegmentAtIndex(sender.selectedSegmentIndex)!
+        isFilterOn = sender.selectedSegmentIndex == 0 ? false :true
+        orgsCollectionView.reloadData()
+        print(filterValue)
+    }
     
     
     func fetchCloudData() {
         logoURLs = []
         names = []
-        
+        orgs = []
         let query = AVQuery(className: "Organization")
         query.whereKey("isVisibleToUsers", equalTo: true)
         query.whereKey("Cities", containedIn: [REMIX_CITY_NAME])
@@ -63,6 +77,7 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
                     let name = org.objectForKey("Name") as! String
                     let logoFile = org.objectForKey("Logo") as! AVFile
                     let logoURL = NSURL(string: logoFile.url)!
+                    self.orgs.append(org as! AVObject)
                     self.names.append(name)
                     self.logoURLs.append(logoURL)
                 }
@@ -106,7 +121,14 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return names.count
+        if isFilterOn == false {
+            
+           return names.count
+        }else{
+             print(orgs.filter({($0.objectForKey("Nature") as! String).hasSuffix(filterValue)}).count)
+            return orgs.filter({($0.objectForKey("Nature") as! String).hasSuffix(filterValue)}).count
+        }
+        
     }
     
     
@@ -114,8 +136,15 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         let cell = orgsCollectionView.dequeueReusableCellWithReuseIdentifier("reuseIdentifier", forIndexPath: indexPath) as! OrgCell
         if logoURLs.count > indexPath.row {
-            cell.logoImageView.sd_setImageWithURL(logoURLs[indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
-            cell.orgNameLabel.text = names[indexPath.row]
+            if isFilterOn == false {
+                cell.logoImageView.sd_setImageWithURL(logoURLs[indexPath.row], placeholderImage: UIImage(named: "SDPlaceholder"))
+                cell.orgNameLabel.text = names[indexPath.row]
+            }else{
+                let filteredOrgs = orgs.filter({($0.objectForKey("Nature") as! String).hasSuffix(filterValue)})
+                let url = NSURL(string: (filteredOrgs[indexPath.row].objectForKey("Logo") as! AVFile).url)
+                cell.logoImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
+                cell.orgNameLabel.text = filteredOrgs[indexPath.row].objectForKey("Name") as? String
+            }
         }
         
         

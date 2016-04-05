@@ -18,6 +18,7 @@ class CommentInputViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.text = presentingActivity.objectForKey("Title") as? String
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "添加评论", style: .Plain, target: self, action: #selector(addComment))
         inputTextView.placeholder = "请在此输入你的评论"
         // Do any additional setup after loading the view.
     }

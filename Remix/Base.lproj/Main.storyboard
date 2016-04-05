@@ -905,12 +905,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="输入组织名称或微信公众号来搜索" translatesAutoresizingMaskIntoConstraints="NO" id="ma0-Ks-Gu5">
+                            <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="minimal" placeholder="输入组织名称或微信公众号来搜索" translatesAutoresizingMaskIntoConstraints="NO" id="ma0-Ks-Gu5">
                                 <rect key="frame" x="0.0" y="52" width="375" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="deV-tO-kfL">
-                                <rect key="frame" x="0.0" y="301" width="375" height="569"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="deV-tO-kfL">
+                                <rect key="frame" x="0.0" y="206" width="375" height="501"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Kzx-XD-w6a">
                                     <size key="itemSize" width="115" height="116"/>
@@ -967,20 +967,22 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JQR-oe-W6V">
+                                <rect key="frame" x="28" y="113" width="319" height="29"/>
+                                <segments>
+                                    <segment title="全部"/>
+                                    <segment title="学生组织"/>
+                                    <segment title="企业"/>
+                                    <segment title="社团"/>
+                                </segments>
+                                <color key="tintColor" red="0.17257410287857056" green="0.21834245324134827" blue="0.44677489995956421" alpha="1" colorSpace="calibratedRGB"/>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="ma0-Ks-Gu5" firstAttribute="top" secondItem="LMy-P4-RqW" secondAttribute="bottom" constant="32" id="30X-rG-prn"/>
-                            <constraint firstItem="ma0-Ks-Gu5" firstAttribute="leading" secondItem="BTg-Gi-wQc" secondAttribute="leading" id="3tP-5K-IUB"/>
-                            <constraint firstItem="deV-tO-kfL" firstAttribute="top" secondItem="ma0-Ks-Gu5" secondAttribute="bottom" constant="2" id="JCw-Zv-pFn"/>
-                            <constraint firstItem="deV-tO-kfL" firstAttribute="trailing" secondItem="ma0-Ks-Gu5" secondAttribute="trailing" id="sg1-bo-FK9"/>
-                            <constraint firstAttribute="trailing" secondItem="ma0-Ks-Gu5" secondAttribute="trailing" id="xlM-6I-3ne"/>
-                            <constraint firstItem="deV-tO-kfL" firstAttribute="bottom" secondItem="3Zo-5I-iEJ" secondAttribute="top" id="y8l-gf-GXr"/>
-                            <constraint firstItem="deV-tO-kfL" firstAttribute="leading" secondItem="ma0-Ks-Gu5" secondAttribute="leading" id="zud-Lq-lhb"/>
-                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="filterControl" destination="JQR-oe-W6V" id="KQg-kO-g7h"/>
                         <outlet property="orgsCollectionView" destination="deV-tO-kfL" id="UmC-vW-iPB"/>
                         <outlet property="searchBar" destination="ma0-Ks-Gu5" id="0HQ-Iu-ZvY"/>
                         <segue destination="J8Y-aY-87W" kind="push" identifier="showOrgHomepage" id="ccW-gV-vuD"/>
@@ -1390,7 +1392,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nnb-09-Or4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2469.5" y="334.5"/>
+            <point key="canvasLocation" x="2463.5" y="381.5"/>
         </scene>
         <!--Org Intro View Controller-->
         <scene sceneID="Gyn-66-DOs">

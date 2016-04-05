@@ -188,6 +188,8 @@
 		18C9A1E71C67B99200A80A22 /* TTUITableViewZoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C9A1E61C67B99200A80A22 /* TTUITableViewZoomController.m */; };
 		18C9A1F71C687DA200A80A22 /* UIImageView+BetterFace.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C9A1F61C687DA200A80A22 /* UIImageView+BetterFace.m */; };
 		18CE707D1C9D4609004610A5 /* RMTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18CE707C1C9D4609004610A5 /* RMTableViewCell.xib */; };
+		18CEC6F11CB15C130003B2CF /* OrgTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEC6EF1CB15C130003B2CF /* OrgTableViewCell.swift */; };
+		18CEC6F21CB15C130003B2CF /* OrgTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18CEC6F01CB15C130003B2CF /* OrgTableViewCell.xib */; };
 		18D731B41C719B1800DECA1E /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D731B31C719B1800DECA1E /* GuideViewController.swift */; };
 		18E2392C1C8029D300363655 /* PersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2392B1C8029D300363655 /* PersonalInfoViewController.swift */; };
 		18E2392E1C802A1800363655 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2392D1C802A1800363655 /* InfoCell.swift */; };
@@ -461,6 +463,8 @@
 		18C9A1F51C687DA200A80A22 /* UIImageView+BetterFace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+BetterFace.h"; sourceTree = "<group>"; };
 		18C9A1F61C687DA200A80A22 /* UIImageView+BetterFace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+BetterFace.m"; sourceTree = "<group>"; };
 		18CE707C1C9D4609004610A5 /* RMTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMTableViewCell.xib; sourceTree = "<group>"; };
+		18CEC6EF1CB15C130003B2CF /* OrgTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgTableViewCell.swift; sourceTree = "<group>"; };
+		18CEC6F01CB15C130003B2CF /* OrgTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrgTableViewCell.xib; sourceTree = "<group>"; };
 		18D731B31C719B1800DECA1E /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = GuideViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18E2392B1C8029D300363655 /* PersonalInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PersonalInfoViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18E2392D1C802A1800363655 /* InfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
@@ -1010,6 +1014,8 @@
 			isa = PBXGroup;
 			children = (
 				18A4438F1C64EEAC00FEB149 /* OrgCell.swift */,
+				18CEC6EF1CB15C130003B2CF /* OrgTableViewCell.swift */,
+				18CEC6F01CB15C130003B2CF /* OrgTableViewCell.xib */,
 				18A443911C64F5BB00FEB149 /* OrgsViewController.swift */,
 				18B317C31C6B183000336A92 /* OrgFilteredViewController.swift */,
 				1841F87D1C774F890046D57F /* OrgIntroViewController.swift */,
@@ -1328,6 +1334,7 @@
 				181936741CA3CBC4003D6328 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				183FDCE61C9C746D002D79EB /* Info.plist in Resources */,
 				183FDCF21C9C746D002D79EB /* feedback_bg_2@2x.png in Resources */,
+				18CEC6F21CB15C130003B2CF /* OrgTableViewCell.xib in Resources */,
 				18BC02311C8E973300FBC162 /* UserHeaderView.xib in Resources */,
 				1877458D1C6ACB1D000427C7 /* UMSocialLocalizable.strings in Resources */,
 				183FDCF41C9C746D002D79EB /* feedback_btn_new@2x.png in Resources */,
@@ -1488,6 +1495,7 @@
 				183984FF1C92FE0300B8EB8B /* QRCodeViewController.swift in Sources */,
 				18BC022D1C8E90E300FBC162 /* CandidateDetailViewController.swift in Sources */,
 				1898CA911C69B599009D3261 /* TRTransitionAnimations.swift in Sources */,
+				18CEC6F11CB15C130003B2CF /* OrgTableViewCell.swift in Sources */,
 				181F2B1F1C69DB8A00FC237D /* LikedViewController.swift in Sources */,
 				18C97F6D1C8DE580000B4EC9 /* ActivityCell.swift in Sources */,
 				1898CA901C69B599009D3261 /* TransitionAnimationHelper.swift in Sources */,
