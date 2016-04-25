@@ -26,6 +26,10 @@ var hasPromptedToEnableNotif: Bool!
 var sharedOneSignalInstance: OneSignal!
 var launchedTimes: Int!
 var shouldAskToEnableNotif = true
+
+enum Helper {
+    case NewOrder, StatusChange
+}
 class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelegate, UISearchBarDelegate, PKPaymentAuthorizationViewControllerDelegate, BmobPayDelegate, RMActivityViewControllerDelegate, RMSwipeBetweenViewControllersDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -70,7 +74,7 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         if CURRENT_USER.objectForKey("City") as! String == "全国" && launchedTimes == 1 {
             naviController.switchRemixCity()
         }
-    
+        
         cellZoomAnimationDuration = 0.4
         cellZoomXScaleFactor = 1.1
         cellZoomYScaleFactor = 1.1
@@ -98,10 +102,20 @@ class RMTableViewController: TTUITableViewZoomController, MGSwipeTableCellDelega
         //Registering nib
         self.tableView.registerNib(UINib(nibName: "MiddleCoverCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "MiddleCoverCell")
         self.tableView.registerNib(UINib(nibName: "RMTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "RMTableViewCell")
+        
+       
     
     }
     
+    func callHelperMethods(type: Helper, phoneNumbers: [String], isSuccessful: Bool!, remark: String!) {
+        if type == .StatusChange {
+            RemixHelper.activityStatusChangeNotification(phoneNumbers, isSuccessful: isSuccessful, remark: remark)
+
+        }else if type == .NewOrder {
+            RemixHelper.newOrderNotification(phoneNumbers)
+        }
     
+    }
     
     func setUpViews() {
         

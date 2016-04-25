@@ -30,6 +30,7 @@
 		1824544D1C7F96F500CF0CC6 /* BmobPay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1824544A1C7F96F500CF0CC6 /* BmobPay.framework */; };
 		1824544E1C7F977A00CF0CC6 /* AlipaySDK.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 182454481C7F96F500CF0CC6 /* AlipaySDK.bundle */; };
 		182454501C7FA16C00CF0CC6 /* VersionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824544F1C7FA16C00CF0CC6 /* VersionCheck.swift */; };
+		182F415E1CC3DAA000E3E8BA /* RemixHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182F415D1CC3DAA000E3E8BA /* RemixHelper.swift */; };
 		183984FB1C92FA4600B8EB8B /* OrganizationSubmissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183984FA1C92FA4600B8EB8B /* OrganizationSubmissionViewController.swift */; };
 		183984FD1C92FC6A00B8EB8B /* QRCoder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183984FC1C92FC6A00B8EB8B /* QRCoder.framework */; };
 		183984FF1C92FE0300B8EB8B /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183984FE1C92FE0300B8EB8B /* QRCodeViewController.swift */; };
@@ -255,6 +256,7 @@
 		182454491C7F96F500CF0CC6 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		1824544A1C7F96F500CF0CC6 /* BmobPay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BmobPay.framework; sourceTree = "<group>"; };
 		1824544F1C7FA16C00CF0CC6 /* VersionCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionCheck.swift; sourceTree = "<group>"; };
+		182F415D1CC3DAA000E3E8BA /* RemixHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemixHelper.swift; sourceTree = "<group>"; };
 		183984FA1C92FA4600B8EB8B /* OrganizationSubmissionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationSubmissionViewController.swift; sourceTree = "<group>"; };
 		183984FC1C92FC6A00B8EB8B /* QRCoder.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QRCoder.framework; path = "Pods/../build/Debug-iphoneos/QRCoder.framework"; sourceTree = "<group>"; };
 		183984FE1C92FE0300B8EB8B /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
@@ -800,6 +802,7 @@
 				1824543F1C7F827600CF0CC6 /* Remix.entitlements */,
 				189782511C63C7EF00458515 /* Main.storyboard */,
 				1824544F1C7FA16C00CF0CC6 /* VersionCheck.swift */,
+				182F415D1CC3DAA000E3E8BA /* RemixHelper.swift */,
 				18E239331C805E2D00363655 /* FloatingActivityView.xib */,
 				183FDCC31C9C5C4E002D79EB /* CellNibs */,
 				18E239311C805E1600363655 /* FloatingActivityView.swift */,
@@ -1548,6 +1551,7 @@
 				18E620AA1C8C591000B85941 /* FloatLabelTextField.swift in Sources */,
 				18C79D861C83EDCF004AAA44 /* RMPageViewController.swift in Sources */,
 				183FDCEC1C9C746D002D79EB /* LCUserFeedbackThread.m in Sources */,
+				182F415E1CC3DAA000E3E8BA /* RemixHelper.swift in Sources */,
 				18561B311C9EF9BB00F7133A /* RMThirdFilteredViewController.swift in Sources */,
 				18B317C41C6B183000336A92 /* OrgFilteredViewController.swift in Sources */,
 				184857141C63E5BC004E516A /* CTTableViewCell.swift in Sources */,

@@ -162,9 +162,14 @@ class GalleryViewController: UITableViewController {
         query.whereKey("Name", equalTo: cell.orgLabel.text)
         query.findObjectsInBackgroundWithBlock({ (organizations, error) -> Void in
             if error == nil {
-                for org in organizations {
-                    let url = NSURL(string: (org.objectForKey("Logo") as! AVFile).url)
-                    cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
+                if organizations.count == 1 {
+                    for org in organizations {
+                        let url = NSURL(string: (org.objectForKey("Logo") as! AVFile).url)
+                        cell.orgLogo.sd_setImageWithURL(url, placeholderImage: UIImage(named: "SDPlaceholder"))
+                    }
+
+                }else{
+                    cell.orgLogo.image = UIImage(named: "Placeholder")
                 }
             }else{
                 let snackBar = TTGSnackbar.init(message: "获取数据失败。请检查网络连接后重试。", duration: .Middle)

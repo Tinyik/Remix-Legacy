@@ -158,7 +158,8 @@ class OrgsViewController: UIViewController, UICollectionViewDataSource, UICollec
             askToEnableNotifications()
             shouldAskToEnableNotif = false
         }
-        self.organizationName = names[indexPath.row]
+        let filteredOrgs = orgs.filter({($0.objectForKey("Nature") as! String).hasSuffix(filterValue)})
+        self.organizationName = isFilterOn == true ? filteredOrgs[indexPath.row].objectForKey("Name") as! String : names[indexPath.row]
         collectionView.deselectItemAtIndexPath(indexPath, animated: true)
         self.performSegueWithIdentifier("showOrgHomepage", sender: nil)
         
